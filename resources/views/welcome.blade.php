@@ -20,7 +20,9 @@
         <nav class="bg-black text-white">
             <div class="container mx-auto flex flex-col md:flex-row md:justify-between content-center p-5">
                 <div class="flex items-center justify-between">
-                    <img class="max-w-28" src="https://seeklogo.com/images/N/NVIDIA-logo-BA019CBFAA-seeklogo.com.png" alt="">
+                    <a href="{{ url('/') }}">
+                        <img class="max-w-28" src="https://seeklogo.com/images/N/NVIDIA-logo-BA019CBFAA-seeklogo.com.png" alt="">
+                    </a>
                     <button class="nav-hamburger flex flex-col gap-1 md:hidden">
                         <div class="w-[30px] h-[0.25rem] bg-white rounded-full"></div>
                         <div class="w-[30px] h-[0.25rem] bg-white rounded-full"></div>
@@ -184,16 +186,16 @@
                         <p class="text-lg">Reach out to Northwest Nurses today to learn more about our exciting opportunities.</p>
                         <p class="mt-5">info@northwestnurses.com</p>
                     </div>
-                    <div class="grow flex flex-col 2xl:flex-row 2xl:justify-evenly gap-8">
-                        <div>
+                    <div class="grow flex flex-col 2xl:flex-row 2xl:justify-between gap-8">
+                        <div class="2xl:flex-1">
                             <h3 class="font-bold">For Employers</h3>
                             <p class="mt-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro quidem veritatis aliquam aut excepturi provident numquam quis pariatur nostrum. Nam ea consequuntur a aut molestiae veritatis quasi quidem voluptatibus consectetur?</p>
                         </div>
-                        <div>
+                        <div class="2xl:flex-1">
                             <h3 class="font-bold">For Applicants</h3>
                             <p class="mt-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro quidem veritatis aliquam aut excepturi provident numquam quis pariatur nostrum. Nam ea consequuntur a aut molestiae veritatis quasi quidem voluptatibus consectetur? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo, optio in sed reiciendis, voluptas minima cupiditate quasi nihil enim cumque exercitationem est autem? Voluptatum itaque aliquid et, quidem deleniti aspernatur.</p>
                         </div>
-                        <div>
+                        <div class="2xl:flex-1">
                             <h3 class="font-bold">About</h3>
                             <p class="mt-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro quidem veritatis aliquam aut excepturi provident numquam quis pariatur nostrum. Nam ea consequuntur a aut molestiae veritatis quasi quidem voluptatibus consectetur?</p>
                         </div>
