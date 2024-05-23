@@ -103,6 +103,11 @@
                     </div>
                 </div>
                 @endfor
+                <div class="flex flex-row justify-center items-center lg:max-w-screen-sm gap-3">
+                    <button class="bg-black hover:opacity-75 text-white py-2 px-5 rounded-full">Prev</button>
+                    <p>1 - 10 of 5,330</p>
+                    <button class="bg-black hover:opacity-75 text-white py-2 px-5 rounded-full">Next</button>
+                </div>
             </div>
             <div class="job-info-section">
                 <div class="sticky top-0 mx-auto max-w-screen-md bg-white border-2 border-gray-300 gap-5 rounded-xl overflow-hidden">
