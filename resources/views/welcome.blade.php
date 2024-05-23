@@ -183,7 +183,7 @@
             </div>
         </div>
         <footer class="bg-black text-white w-full py-12">
-            <div class="container mx-auto px-3 md:px-0 xl:px-20">
+            <div class="container mx-auto px-3 md:px-0">
                 <img class="max-w-[150px]" src="https://seeklogo.com/images/N/NVIDIA-logo-BA019CBFAA-seeklogo.com.png" alt="">
                 <div class="flex flex-col lg:flex-row lg:justify-start lg:items-start mt-3 gap-10">
                     <div class="md:min-w-96">
