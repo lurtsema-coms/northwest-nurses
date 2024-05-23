@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Northwest Nurses</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -28,10 +28,10 @@
                     </button>
                 </div>
                 <div class="navbar-list flex flex-col items-start md:flex-row md:items-end md:gap-10">
-                    <a class="text-md py-2" href="#">Find Jobs</a>
-                    <a class="text-md py-2" href="#">About Us</a>
-                    <a class="text-md py-2" href="#">Contact Jobs</a>
-                    <button class="text-md mt-1 py-2 rounded-full md:bg-primary md:px-5 flex flex-row justify-center align-center gap-2" type="submit"><p>Account</p><span class="material-symbols-outlined"><span class="material-symbols-outlined">arrow_drop_down</span></button>
+                    <a class="text-md py-2 hover:opacity-75" href="#">Find Jobs</a>
+                    <a class="text-md py-2 hover:opacity-75" href="#">About Us</a>
+                    <a class="text-md py-2 hover:opacity-75" href="#">Contact Jobs</a>
+                    <button class="text-md mt-1 py-2 rounded-full md:bg-primary md:px-5 hover:opacity-75 flex flex-row justify-center align-center gap-2" type="submit"><p>Account</p><span class="material-symbols-outlined"><span class="material-symbols-outlined">arrow_drop_down</span></button>
                 </div>
             </div>
         </nav>
@@ -48,7 +48,7 @@
                             </select>
                             <input class="py-3 grow border-none text-lg focus:outline-none focus:ring-0 text-primary" type="text" placeholder="Job title or company">
                             <div class="py-3 search-btn-wrapper px-3 rounded-b-2xl md:rounded-bl-none md:rounded-r-2xl bg-white flex items-center content-center ">
-                                <button class=" bg-primary text-white text-lg px-5 py-2 rounded-full flex-grow flex flex-row justify-center align-center gap-2" type="submit"><p>Search</p> <span class="material-symbols-outlined">search</span></button>
+                                <button class="bg-primary hover:opacity-75 text-white text-lg px-5 py-2 rounded-full flex-grow flex flex-row justify-center align-center gap-2" type="submit"><p>Search</p> <span class="material-symbols-outlined">search</span></button>
                             </div>
                         </div>
                         <div class="search-filter mt-5 flex flex-col md:flex-row md:justify-center content-center gap-3">
@@ -97,7 +97,7 @@
                     </div>
                     <div class="job-list-card-footer flex flex-wrap flex-col sm:flex-row justify-between gap-5">
                         <p class="font-bold text-primary align-middle text-lg">$3,0492 - $5,839 weekly</p>
-                        <button class="bg-primary text-white px-5 py-2 rounded-full whitespace-nowrap">View Job</button>
+                        <button class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full whitespace-nowrap">View Job</button>
                     </div>
                 </div>
                 @endfor
@@ -113,7 +113,7 @@
                             <h2 class="font-bold text-2xl text-primary">$3,0492 - $5,839 weekly</h2>
                             <div class="flex flex-col sm:flex-row justify-between mt-5 gap-5">
                                 <p class="text-gray-500">Job Contact | Job ID: 09201903901</p>
-                                <button class="bg-primary text-white px-5 py-2 rounded-full">Apply Now</button>
+                                <button class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full">Apply Now</button>
                             </div>
                         </div>
                         <hr class="border-t-2 border-gray-300">
