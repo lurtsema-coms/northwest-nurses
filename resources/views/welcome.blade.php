@@ -42,7 +42,7 @@
                 <div class="top-search-bar flex flex-col content-center items-center px-4 md:px-5">
                     <form action="" class="search-form container max-w-screen-lg flex flex-col align-center justify-center">
                         <div class="form-top flex flex-col md:flex-row align-center justify-center">
-                            <select class="p-5 py-3 text-primary text-lg font-semibold rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl border-none focus:outline-none focus:ring-0" name="" id="">
+                            <select class="p-5 py-3 min-w-[300px] text-primary text-lg font-semibold rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl border-none focus:outline-none focus:ring-0" name="" id="">
                                 <option value="" selected disabled>Location</option>
                                 <option value="">Quezon City</option>
                                 <option value="">Makati City</option>
