@@ -10,6 +10,7 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
         <!-- Styles -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -20,13 +21,13 @@
             <div class="container mx-auto flex flex-col md:flex-row md:justify-between content-center p-5">
                 <div class="flex items-center justify-between">
                     <img class="max-w-28" src="https://seeklogo.com/images/N/NVIDIA-logo-BA019CBFAA-seeklogo.com.png" alt="">
-                    <button class="flex flex-col gap-1 md:hidden">
+                    <button class="nav-hamburger flex flex-col gap-1 md:hidden">
                         <div class="w-[30px] h-[0.25rem] bg-white rounded-full"></div>
                         <div class="w-[30px] h-[0.25rem] bg-white rounded-full"></div>
                         <div class="w-[30px] h-[0.25rem] bg-white rounded-full"></div>
                     </button>
                 </div>
-                <div class="flex flex-col items-start md:flex-row md:items-end md:gap-10">
+                <div class="navbar-list flex flex-col items-start md:flex-row md:items-end md:gap-10">
                     <a class="text-md py-2" href="#">Find Jobs</a>
                     <a class="text-md py-2" href="#">About Us</a>
                     <a class="text-md py-2" href="#">Contact Jobs</a>
@@ -204,5 +205,21 @@
                 </div>
             </div>
         </footer>
+        <script>
+            $(window).resize(function() {
+                const viewPortWidth = $(window).width();
+                if (viewPortWidth > 768) {
+                    $('.navbar-list').show();
+                }
+            });
+
+            $('.nav-hamburger').on('click', function() {
+                $('.navbar-list').slideToggle();
+            });
+
+            $('.navbar-list a').on('click', function() {
+                $('.navbar-list').slideToggle();
+            });
+        </script>
     </body>
 </html>
