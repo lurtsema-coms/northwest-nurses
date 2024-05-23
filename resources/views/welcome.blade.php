@@ -206,19 +206,24 @@
             </div>
         </footer>
         <script>
-            $(window).resize(function() {
-                const viewPortWidth = $(window).width();
-                if (viewPortWidth > 768) {
-                    $('.navbar-list').show();
-                }
-            });
-
-            $('.nav-hamburger').on('click', function() {
-                $('.navbar-list').slideToggle();
-            });
-
-            $('.navbar-list a').on('click', function() {
-                $('.navbar-list').slideToggle();
+            $(document).ready(function() {
+                $(window).resize(function() {
+                    const viewPortWidth = $(window).width();
+                    if (viewPortWidth > 768) {
+                        $('.navbar-list').show();
+                    }
+                });
+    
+                $('.nav-hamburger').on('click', function() {
+                    $('.navbar-list').slideToggle();
+                });
+    
+                $('.navbar-list a').on('click', function() {
+                    const viewPortWidth = $(window).width();
+                    if (viewPortWidth <= 768) {
+                        $('.navbar-list').slideToggle();
+                    }
+                });
             });
         </script>
     </body>
