@@ -17,7 +17,7 @@
 
     </head>
     <body class="antialiased bg-slate-50">
-        <nav class="bg-black text-white">
+        <nav class="bg-dark text-white">
             <div class="container mx-auto flex flex-col md:flex-row md:justify-between content-center p-5">
                 <div class="flex items-center justify-between">
                     <a href="{{ url('/') }}">
@@ -37,9 +37,11 @@
                 </div>
             </div>
         </nav>
-        <div class="search-section overflow-hidden">
-            <div class="search-section-container relative py-36 bg-[url('https://dailymedia.case.edu/wp-content/uploads/2020/01/16155303/nurse_smiling.jpg')] bg-cover bg-top">
-                <div class="top-search-bar flex flex-col content-center items-center px-4 md:px-5">
+        <div class="search-section overflow-hidden relative">
+            <div class="z-[-1] bg-custom-gradient-y absolute inset-0"></div>
+            <img class="absolute z-[-2] min-h-full min-w-full object-cover" src="https://dailymedia.case.edu/wp-content/uploads/2020/01/16155303/nurse_smiling.jpg" alt="">
+            <div class="search-section-container min-h-96 md:min-h-[500px] relative flex flex-col justify-center md:justify-end">
+                <div class="top-search-bar flex flex-col justify-end items-center px-4 md:px-5 md:mt-16 md:pb-10">
                     <form action="" class="search-form container max-w-screen-lg flex flex-col align-center justify-center">
                         <div class="form-top flex flex-col md:flex-row align-center justify-center">
                             <select class="p-5 py-3 min-w-[300px] text-primary text-lg font-semibold rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl border-none focus:outline-none focus:ring-0" name="" id="">
@@ -52,20 +54,6 @@
                             <div class="py-3 search-btn-wrapper px-3 rounded-b-2xl md:rounded-bl-none md:rounded-r-2xl bg-white flex items-center content-center ">
                                 <button class="bg-primary hover:opacity-75 text-white text-lg px-5 py-2 rounded-full flex-grow flex flex-row justify-center align-center gap-2" type="submit"><p>Search</p> <span class="material-symbols-outlined">search</span></button>
                             </div>
-                        </div>
-                        <div class="search-filter mt-5 flex flex-col md:flex-row md:justify-center content-center gap-3">
-                            <select class="rounded-full text-primary font-semibold border-none focus:outline-none focus:ring-0" name="" id="">
-                                <option value="">Date Posted</option>
-                            </select>
-                            <select class="rounded-full text-primary font-semibold border-none focus:outline-none focus:ring-0" name="" id="">
-                                <option value="">Remote</option>
-                            </select>
-                            <select class="rounded-full text-primary font-semibold border-none focus:outline-none focus:ring-0" name="" id="">
-                                <option value="">Job Type</option>
-                            </select>
-                            <select class="rounded-full text-primary font-semibold border-none focus:outline-none focus:ring-0" name="" id="">
-                                <option value="">Location</option>
-                            </select>
                         </div>
                     </form>
                 </div>
