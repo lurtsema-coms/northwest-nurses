@@ -11,13 +11,15 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
         <!-- Styles -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     </head>
     <body class="antialiased bg-slate-50">
-        <nav class="bg-black text-white">
+        <nav class="bg-dark text-white">
             <div class="container mx-auto flex flex-col md:flex-row md:justify-between content-center p-5">
                 <div class="flex items-center justify-between">
                     <a href="{{ url('/') }}">
@@ -37,9 +39,11 @@
                 </div>
             </div>
         </nav>
-        <div class="search-section overflow-hidden">
-            <div class="search-section-container relative py-36 md:pt-96 md:pb-10 bg-[url('https://dailymedia.case.edu/wp-content/uploads/2020/01/16155303/nurse_smiling.jpg')] bg-cover bg-top">
-                <div class="top-search-bar flex flex-col justify-end items-center px-4 md:px-5">
+        <div class="search-section overflow-hidden relative">
+            <div class="z-[-1] bg-custom-gradient-y absolute inset-0"></div>
+            <img class="absolute z-[-2] min-h-full min-w-full object-cover" src="https://dailymedia.case.edu/wp-content/uploads/2020/01/16155303/nurse_smiling.jpg" alt="">
+            <div class="search-section-container min-h-96 md:min-h-[500px] relative flex flex-col justify-center md:justify-end">
+                <div class="top-search-bar flex flex-col justify-end items-center px-4 md:px-5 md:mb-8">
                     <h1 class="text-4xl font-bold font-roboto text-center text-white md:text-5xl mb-5">Your Gateway to Exceptional Travel Nursing Opportunities</h1>
                     <form action="" class="search-form container max-w-screen-lg flex flex-col align-center justify-center">
                         <div class="form-top flex flex-col md:flex-row align-center justify-center">
@@ -58,6 +62,47 @@
                 </div>
             </div>
         </div>
+        <div>
+            <!-- Slider main container -->
+            <div class="swiper">
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                <!-- Slides -->
+                    <div class="swiper-slide min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
+                        <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT7y_xzKCa_ladoAzMu1OKA55QXbum2TLUVw&s" alt="">
+                        <label class="bg-white py-1 px-4 mx-2 rounded-full text-nowrap">Medical Surgical</label>
+                    </div>
+                    <div class="swiper-slide min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
+                        <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX67GcRC75x4TvckqTl72WXzMM5yUTF1QExQ&s" alt="">
+                        <label class="bg-white py-1 px-4 mx-2 rounded-full text-nowrap">Medical Surgical</label>
+                    </div>
+                    <div class="swiper-slide min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
+                        <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9vzG0TMHpg4jp3Zeu0TEExmq1E9MgUa2FOg&s" alt="">
+                        <label class="bg-white py-1 px-4 mx-2 rounded-full text-nowrap">Medical Surgical</label>
+                    </div>
+                    <div class="swiper-slide min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
+                        <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="https://media.post.rvohealth.io/wp-content/uploads/2021/06/Female_Registered_Nurse_1200x628-facebook-1200x628.jpg" alt="">
+                        <label class="bg-white py-1 px-4 mx-2 rounded-full text-nowrap">Medical Surgical</label>
+                    </div>
+                    <div class="swiper-slide min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
+                        <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="https://www.intelycare.com/wp-content/uploads/2023/04/types-of-nurses.jpeg" alt="">
+                        <label class="bg-white py-1 px-4 mx-2 rounded-full text-nowrap">Medical Surgical</label>
+                    </div>
+                    <div class="swiper-slide min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
+                        <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="https://www.forbes.com/advisor/wp-content/uploads/2023/04/nurse-helping-patient.jpeg.jpg" alt="">
+                        <label class="bg-white py-1 px-4 mx-2 rounded-full text-nowrap">Medical Surgical</label>
+                    </div>
+                    <div class="swiper-slide min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
+                        <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCwTDbwCM1U7_bDNg1j5n4o46kmjJrE-OPcTjHE-HTXbJYjbBjG0tYgHjph_mGcdJt7H0&usqp=CAU" alt="">
+                        <label class="bg-white py-1 px-4 mx-2 rounded-full text-nowrap">Medical Surgical</label>
+                    </div>
+                </div>
+            
+                <!-- If we need navigation buttons -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
         <div class="container mx-auto px-3 flex flex-col py-10 gap-5">
             <div class="photo-carousel"></div>
             <div class="flex flex-col items-center">
@@ -69,28 +114,33 @@
                 <button class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full whitespace-nowrap">See all services</button>
             </div>
         </div>
-        <div class="flex flex-col md:flex-row md:justify-evenly md:items-stretch w-full">
-            <div class="flex-1 min-h-[300px] relative ">
-                <img class="h-full w-full absolute object-cover top-0" src="https://cdn-cmdne.nitrocdn.com/hNJckCstFVQjUckKaelcVKoVJrzdTVkW/assets/images/optimized/rev-ce006a7/www.provocollege.edu/wp-content/uploads/2023/02/shutterstock_1724802532-scaled.jpg" alt="Sample Image">
-            </div>
-            <div class="bg-primary text-white p-10 m-0 md:w-1/2 flex flex-col">
-                <h2 class="text-3xl font-bold mb-3">Why Us?</h2>
-                <p class="text-md leading-5 mb-3">When you choose Northwest Nurses, you're joining a community of satisfied healthcare professionals who trust us for:</p>
-                <div class="flex flex-col xl:flex-row gap-5">
-                    <div class="my-2">
-                        <p class="font-bold">Industry-Leading Technology:</p>
-                        <p>Northwest Nurses uses cutting-edge technology to streamline processes and enhance your experience. Our user-friendly platform makes it easy to search for jobs, submit applications, and communicate with your recruiter, all from the convenience of your computer or mobile device.</p>
+        <div class="bg-primary">
+            <div class="container mx-auto">
+                <div class="flex flex-col md:flex-row md:justify-evenly md:items-stretch w-full">
+                    <div class="flex-1 min-h-[300px] relative overflow-hidden">
+                        <div class="bg-custom-gradient-x absolute inset-0 z-10 "></div>
+                        <img class="min-w-full min-h-full absolute object-cover top-0" src="https://cdn-cmdne.nitrocdn.com/hNJckCstFVQjUckKaelcVKoVJrzdTVkW/assets/images/optimized/rev-ce006a7/www.provocollege.edu/wp-content/uploads/2023/02/shutterstock_1724802532-scaled.jpg" alt="Sample Image">
                     </div>
-                    <div class="my-2">
-                        <p class="font-bold">Personalized Support:</p>
-                        <p>At Northwest Nurses, your success is our top priority. Our team of experienced recruiters provides personalized support every step of the way, from matching you with the perfect job to assisting with onboarding and beyond.</p>
+                    <div class="bg-primary text-white p-10 m-0 md:w-1/2 flex flex-col">
+                        <h2 class="text-3xl font-bold mb-3">Why Us?</h2>
+                        <p class="text-md leading-5 mb-3">When you choose Northwest Nurses, you're joining a community of satisfied healthcare professionals who trust us for:</p>
+                        <div class="flex flex-col xl:flex-row gap-5">
+                            <div class="my-2">
+                                <p class="font-bold pb-3">Industry-Leading Technology:</p>
+                                <p>Northwest Nurses uses cutting-edge technology to streamline processes and enhance your experience. Our user-friendly platform makes it easy to search for jobs, submit applications, and communicate with your recruiter, all from the convenience of your computer or mobile device.</p>
+                            </div>
+                            <div class="my-2">
+                                <p class="font-bold pb-3">Personalized Support:</p>
+                                <p>At Northwest Nurses, your success is our top priority. Our team of experienced recruiters provides personalized support every step of the way, from matching you with the perfect job to assisting with onboarding and beyond.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="container mx-auto px-3 flex flex-col justify-center items-center py-10 gap-5">
-            <h1 class="text-3xl text-center font-extrabold">Most Recent Job Posting</h1>
-            <div class="grid gap-5 lg:grid-cols-2 2xl:grid-cols-3">
+            <h1 class="text-3xl text-center font-extrabold">Most Recent Job Postings</h1>
+            <div class="grid gap-5 md:grid-cols-2 2xl:grid-cols-3">
                 @php
                     $photoLinks = [
                         'https://www.redfin.com/blog/wp-content/uploads/2023/09/Sitka-alaska.jpg',
@@ -147,8 +197,8 @@
         </div>
         
         
-        <footer class="bg-black text-white w-full py-12">
-            <div class="container mx-auto px-3 md:px-0">
+        <footer class="bg-dark text-white w-full py-12">
+            <div class="container mx-auto px-3">
                 <img class="max-w-[150px]" src="https://seeklogo.com/images/N/NVIDIA-logo-BA019CBFAA-seeklogo.com.png" alt="">
                 <div class="flex flex-col lg:flex-row lg:justify-start lg:items-start mt-3 gap-10">
                     <div class="md:min-w-96">
@@ -178,6 +228,44 @@
             </div>
         </footer>
         <script>
+            const swiper = new Swiper(".swiper", {
+            effect: "coverflow",
+            grabCursor: true,
+            centeredSlides: true,
+            autoplay: {
+                delay: 3000, 
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            coverflowEffect: {
+                rotate: 0,
+                stretch: 0,
+                depth: 100,
+                modifier: 0,
+                slideShadows: true,
+            },
+            breakpoints: {
+                300: {
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                },
+                400: {
+                    slidesPerView: 2,
+                    spaceBetween: 0,
+                },
+                700: {
+                    slidesPerView: 3,
+                    spaceBetween: 0,
+                },
+                1200: {
+                    slidesPerView: 5,
+                    spaceBetween: 0,
+                },
+            },
+        });
             $(document).ready(function() {
                 $(window).resize(function() {
                     const viewPortWidth = $(window).width();
