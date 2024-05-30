@@ -16,12 +16,12 @@
     </head>
     <body class="font-sans text-gray-900 antialiased flex m-auto min-h-screen">
         <div class="w-full max-w-7xl flex flex-row justify-center m-auto bg-white shadow-md overflow-hidden h-[35rem]">
-            <div class=" w-full flex-1 px-14 py-4 m-auto ">
+            <div class=" w-full flex-1 px-14 py-4 m-auto  ">
                 {{ $slot }}
             </div>
-            <div class="w-full flex-1  bg-primary">
-                <div>
-                    <span>dajskldasjdlksajkld</span>
+            <div class="w-full flex-1 bg-faded-primary hidden sm:block  bg-contain bg-no-repeat bg-center">
+                <div class="">
+                    <span></span>
                 </div>
             </div>
         </div>

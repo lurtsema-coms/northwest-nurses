@@ -24,6 +24,7 @@ export default {
                     "linear-gradient(to right, #1d5d72, rgba(29, 93, 114, 0.5) 50%, #1d5d72)",
                 "custom-gradient-y":
                     "linear-gradient(to top, #1d5d72, transparent 70%, transparent)",
+                "faded-primary": "#1d5d72e3",
             },
         },
     },

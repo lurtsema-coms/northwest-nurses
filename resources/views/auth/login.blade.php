@@ -7,7 +7,7 @@
 
         <div class="mb-6">
             <h1 class="text-4xl font-bold text-cyan-600 ">LOGIN</h1>
-            <span class="font-bold">Doesn't have an account yet? <a href="#" class="text-cyan-600 underline font-bold">Sign Up</a></span>
+            <span class="font-bold">Doesn't have an account yet? <a href="/register" class="text-cyan-600 underline font-bold">Sign Up</a></span>
         </div>
         
         <!-- Email Address -->
