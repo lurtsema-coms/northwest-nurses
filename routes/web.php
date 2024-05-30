@@ -18,6 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('/find-jobs', function () {
     return view('find-jobs');
 });
@@ -25,6 +26,14 @@ Route::get('/find-jobs', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/job-info', function () {
+    return view('components.find-job-page.job-info');
+});
+
+Route::get('/my-jobs', function () {
+    return view('applicants.my-jobs');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
