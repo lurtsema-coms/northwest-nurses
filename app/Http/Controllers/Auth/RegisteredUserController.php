@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\ApplicantDetail;
+use App\Models\EmployerDetail;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -30,18 +32,38 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request, $role): RedirectResponse
     {
-        dd($request->all(), $role);
+        // dd($request->all(), $role);
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
-            'name' => $request->name,
             'email' => $request->email,
+            'contact_number' => $request->contact_number,
+            'address' => $request->address,
+            'role' => $role,
             'password' => Hash::make($request->password),
+            'created_at' => now()
+
         ]);
+
+        if ($role == 'applicant'){
+            ApplicantDetail::create([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'user_id' => $user->id,
+                'birthdate' => $request->birthdate,
+                'created_at' => now()
+            ]);
+        }
+        else if ($role == 'employer'){
+            EmployerDetail::create([
+                'user_id' => $user->id,
+                'name' => $request->company_name,
+                'website' => $request->company_website,
+            ]);
+        }
 
         event(new Registered($user));
 

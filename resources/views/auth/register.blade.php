@@ -68,12 +68,12 @@
                     <div class="flex gap-5">
                         <div class="mt-4 flex-grow">
                             <x-input-label for="home_address" :value="__('Home Address')" />
-                            <x-text-input id="home_address" class="block mt-1 w-full" type="text" name="home_address"  required/>
+                            <x-text-input id="home_address" class="block mt-1 w-full" type="text" name="address"  required/>
                             <x-input-error :messages="$errors->get('home_address')" class="mt-2" />
                         </div>
                         <div class="mt-4 ">
-                            <x-input-label for="birthday" :value="__('Date of Birth')" />
-                            <x-text-input id="birthday" class="block mt-1 w-full" type="date" name="birthday"  required/>
+                            <x-input-label for="birthdate" :value="__('Date of Birth')" />
+                            <x-text-input id="birthdate" class="block mt-1 w-full" type="date" name="birthdate"  required/>
                             <x-input-error :messages="$errors->get('birthday')" class="mt-2" />
                         </div>
                     </div>
@@ -126,19 +126,19 @@
                     <div class="flex gap-5">
                         <div class="mt-4 flex-grow">
                             <x-input-label for="company_number" :value="__('Company Contact Number')" />
-                            <x-text-input id="company_number" class="block mt-1 w-full" type="text" name="company_number" required/>
+                            <x-text-input id="company_number" class="block mt-1 w-full" type="text" name="contact_number" required/>
                             <x-input-error :messages="$errors->get('company_number')" class="mt-2" />
                         </div>
                         <div class="mt-4 flex-grow">
                             <x-input-label for="contact_email" :value="__('Contact Email')" />
-                            <x-text-input id="contact_email" class="block mt-1 w-full" type="email" name="contact_email"  required/>
+                            <x-text-input id="contact_email" class="block mt-1 w-full" type="email" name="email"  required/>
                             <x-input-error :messages="$errors->get('contact_email')" class="mt-2" />
                         </div>
                     </div>
 					<div>
 						<div class="flex-grow mt-4">
                             <x-input-label for="company_address" :value="__(' Company Address')" />
-                            <x-text-input id="company_address" class="block mt-1 w-full" type="text" name="company_address" required autofocus/>
+                            <x-text-input id="company_address" class="block mt-1 w-full" type="text" name="address" required autofocus/>
                             <x-input-error :messages="$errors->get('company_address')" class="mt-2" />
                         </div>
 					</div>
