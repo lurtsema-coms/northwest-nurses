@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained();
             $table->string('first_name');
             $table->string('last_name');
+            $table->date('birthdate');
             $table->timestamps();
         });
     }

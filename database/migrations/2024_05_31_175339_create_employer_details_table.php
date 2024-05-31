@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('employer_details', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained();
-            $table->string('email');
-            $table->text('link');
+            $table->string('name');
+            $table->text('website');
             $table->timestamps();
         });
     }
