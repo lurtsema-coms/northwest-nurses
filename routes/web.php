@@ -23,6 +23,10 @@ Route::get('/find-jobs', function () {
     return view('find-jobs');
 });
 
+route::get('/backend-layout', function(){
+    return view('layouts.backend-layout');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
