@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Auth\EmailVerificationPromptController;
+use App\Http\Controllers\Auth\EmailVerificationNotificationController;
+use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,9 +30,9 @@ route::get('/backend-layout', function(){
     return view('layouts.backend-layout');
 });
 
-Route::get('/dashboard', function () {
+Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->name('dashboard');
 
 Route::get('/job-info', function () {
     return view('components.find-job-page.job-info');
@@ -44,5 +47,17 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/email/verify', [EmailVerificationPromptController::class, '__invoke'])
+    ->middleware('auth')
+    ->name('verification.notice');
+
+Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
+    ->middleware(['auth', 'throttle:6,1'])
+    ->name('verification.send');
+
+Route::get('/email/verify/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
+    ->middleware(['auth', 'signed'])
+    ->name('verification.verify');
 
 require __DIR__ . '/auth.php';

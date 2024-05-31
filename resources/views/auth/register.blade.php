@@ -31,8 +31,8 @@
                     <img id="employerImage" src="{{ asset('img/employer.png') }}" alt="" class=" w-80 object-contain mx-auto hidden">
                 </div>
                 <div class="p-3 flex justify-center text-center gap-5 ">
-                    <x-primary-button id="applicantButton" class="bg-white text-dark rounded-bl-none rounded-tr-none focus:outline-none focus:ring-2 focus:ring-white ring-offset-2 ring-offset-cyan-800 ring-2 ring-white cursor-not-allowed" disabled>Applicant</x-primary-button>
-                    <x-primary-button id="employerButton" class="bg-white text-dark rounded-bl-none rounded-tr-none">Employer</x-primary-button>
+                    <x-primary-button id="applicantButton" class="bg-white text-slate-950 rounded-bl-none rounded-tr-none focus:outline-none focus:ring-2 focus:ring-white ring-offset-2 ring-offset-cyan-800 ring-2 ring-white cursor-not-allowed" disabled>Applicant</x-primary-button>
+                    <x-primary-button id="employerButton" class="bg-white text-slate-950 rounded-bl-none rounded-tr-none">Employer</x-primary-button>
                 </div>
             </div>
             <div class="w-full flex-1 px-14 py-4 m-auto" id="applicantForm">
