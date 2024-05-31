@@ -26,31 +26,31 @@
 <div>
     <div class="swiper">
         <div class="swiper-wrapper">
-            <div class="swiper-slide min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
+            <div class="swiper-slide cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
                 <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT7y_xzKCa_ladoAzMu1OKA55QXbum2TLUVw&s" alt="">
                 <label class="bg-white py-1 px-4 mx-2 rounded-full text-nowrap">Medical Surgical</label>
             </div>
-            <div class="swiper-slide min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
+            <div class="swiper-slide cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
                 <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX67GcRC75x4TvckqTl72WXzMM5yUTF1QExQ&s" alt="">
                 <label class="bg-white py-1 px-4 mx-2 rounded-full text-nowrap">Medical Surgical</label>
             </div>
-            <div class="swiper-slide min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
+            <div class="swiper-slide cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
                 <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9vzG0TMHpg4jp3Zeu0TEExmq1E9MgUa2FOg&s" alt="">
                 <label class="bg-white py-1 px-4 mx-2 rounded-full text-nowrap">Medical Surgical</label>
             </div>
-            <div class="swiper-slide min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
+            <div class="swiper-slide cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
                 <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="https://media.post.rvohealth.io/wp-content/uploads/2021/06/Female_Registered_Nurse_1200x628-facebook-1200x628.jpg" alt="">
                 <label class="bg-white py-1 px-4 mx-2 rounded-full text-nowrap">Medical Surgical</label>
             </div>
-            <div class="swiper-slide min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
+            <div class="swiper-slide cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
                 <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="https://www.intelycare.com/wp-content/uploads/2023/04/types-of-nurses.jpeg" alt="">
                 <label class="bg-white py-1 px-4 mx-2 rounded-full text-nowrap">Medical Surgical</label>
             </div>
-            <div class="swiper-slide min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
+            <div class="swiper-slide cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
                 <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="https://www.forbes.com/advisor/wp-content/uploads/2023/04/nurse-helping-patient.jpeg.jpg" alt="">
                 <label class="bg-white py-1 px-4 mx-2 rounded-full text-nowrap">Medical Surgical</label>
             </div>
-            <div class="swiper-slide min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
+            <div class="swiper-slide cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
                 <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCwTDbwCM1U7_bDNg1j5n4o46kmjJrE-OPcTjHE-HTXbJYjbBjG0tYgHjph_mGcdJt7H0&usqp=CAU" alt="">
                 <label class="bg-white py-1 px-4 mx-2 rounded-full text-nowrap">Medical Surgical</label>
             </div>
@@ -157,24 +157,25 @@
 @section('scripts')
 <script>
     const swiper = new Swiper(".swiper", {
-        effect: "coverflow",
+        // effect: "coverflow",
         grabCursor: true,
         centeredSlides: true,
-        autoplay: {
-            delay: 3000, 
-            disableOnInteraction: false,
-        },
+        allowTouchMove: false,
+        // autoplay: {
+        //     delay: 5000, 
+        //     disableOnInteraction: false,
+        // },
         navigation: {
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
         },
-        coverflowEffect: {
-            rotate: 0,
-            stretch: 0,
-            depth: 100,
-            modifier: 0,
-            slideShadows: true,
-        },
+        // coverflowEffect: {
+        //     rotate: 0,
+        //     stretch: 0,
+        //     depth: 100,
+        //     modifier: 0,
+        //     slideShadows: true,
+        // },
         breakpoints: {
             300: {
                 slidesPerView: 1,
