@@ -31,50 +31,50 @@
                     <img id="employerImage" src="{{ asset('img/employer.png') }}" alt="" class=" w-80 object-contain mx-auto hidden">
                 </div>
                 <div class="p-3 flex justify-center text-center gap-5 ">
-                    <x-primary-button id="applicantButton" class="bg-white text-dark rounded-bl-none rounded-tr-none focus:outline-none focus:ring-2 focus:ring-white ring-offset-2 ring-offset-cyan-800 ring-2 ring-white cursor-not-allowed" disabled>Applicant</x-primary-button>
-                    <x-primary-button id="employerButton" class="bg-white text-dark rounded-bl-none rounded-tr-none">Employer</x-primary-button>
+                    <x-primary-button id="applicantButton" class="bg-white text-slate-950 rounded-bl-none rounded-tr-none focus:outline-none focus:ring-2 focus:ring-white ring-offset-2 ring-offset-cyan-800 ring-2 ring-white cursor-not-allowed" disabled>Applicant</x-primary-button>
+                    <x-primary-button id="employerButton" class="bg-white text-slate-950 rounded-bl-none rounded-tr-none">Employer</x-primary-button>
                 </div>
             </div>
             <div class="w-full flex-1 px-14 py-4 m-auto" id="applicantForm">
-                <form method="POST" action="{{ route('register') }}">
+                <form method="POST" action="{{ route('user.store','applicant') }}">
                     @csrf
                     <!-- Name -->
                     <div class="flex gap-5">
                         <div class="flex-grow">
-                            <x-input-label for="name" :value="__('First Name')" />
-                            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                            <x-input-label for="first_name" :value="__('First Name')" />
+                            <x-text-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" required autofocus/>
+                            <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
                         </div>
                         <div class="flex-grow">
-                            <x-input-label for="name" :value="__(' Last Name')" />
-                            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                            <x-input-label for="last_name" :value="__(' Last Name')" />
+                            <x-text-input id="last_name" class="block mt-1 w-full" type="text" name="last_name"  required autofocus/>
+                            <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
                         </div>
                     </div>
 
                     <div class="flex gap-5">
                         <div class="mt-4 flex-grow">
-                            <x-input-label for="email" :value="__('Contact Number')" />
-                            <x-text-input id="email" class="block mt-1 w-full" type="text" name="email" :value="old('email')" required autocomplete="username" />
-                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                            <x-input-label for="contact_number" :value="__('Contact Number')" />
+                            <x-text-input id="contact_number" class="block mt-1 w-full" type="text" name="contact_number" required/>
+                            <x-input-error :messages="$errors->get('contact_number')" class="mt-2" />
                         </div>
                         <div class="mt-4 flex-grow">
                             <x-input-label for="email" :value="__('Email')" />
-                            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+                            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required/>
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
                     </div>
 
                     <div class="flex gap-5">
                         <div class="mt-4 flex-grow">
-                            <x-input-label for="email" :value="__('Home Address')" />
-                            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                            <x-input-label for="home_address" :value="__('Home Address')" />
+                            <x-text-input id="home_address" class="block mt-1 w-full" type="text" name="address"  required/>
+                            <x-input-error :messages="$errors->get('home_address')" class="mt-2" />
                         </div>
                         <div class="mt-4 ">
-                            <x-input-label for="email" :value="__('Date of Birth')" />
-                            <x-text-input id="email" class="block mt-1 w-full" type="date" name="email" :value="old('email')" required autocomplete="username" />
-                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                            <x-input-label for="birthdate" :value="__('Date of Birth')" />
+                            <x-text-input id="birthdate" class="block mt-1 w-full" type="date" name="birthdate"  required/>
+                            <x-input-error :messages="$errors->get('birthday')" class="mt-2" />
                         </div>
                     </div>
 
@@ -108,38 +108,38 @@
                 </form>
             </div>
             <div class=" w-full flex-1 px-14 py-4 m-auto hidden" id="employerForm">
-                <form method="POST" action="{{ route('register') }}">
+                <form method="POST" action="{{ route('user.store','employer') }}">
                     @csrf
                     <!-- Name -->
                     <div class="flex gap-5">
                         <div class="flex-grow">
-                            <x-input-label for="name" :value="__('Company Name')" />
-                            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                            <x-input-label for="company_name" :value="__('Company Name')" />
+                            <x-text-input id="company_name" class="block mt-1 w-full" type="text" name="company_name" required autofocus/>
+                            <x-input-error :messages="$errors->get('company_name')" class="mt-2" />
                         </div>
                         <div class="flex-grow">
-                            <x-input-label for="name" :value="__('Company Website')" />
-                            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                            <x-input-label for="company_website" :value="__('Company Website')" />
+                            <x-text-input id="company_website" class="block mt-1 w-full" type="text" name="company_website" required autofocus/>
+                            <x-input-error :messages="$errors->get('company_website')" class="mt-2" />
                         </div>
                     </div>
                     <div class="flex gap-5">
                         <div class="mt-4 flex-grow">
-                            <x-input-label for="email" :value="__('Company Contact Number')" />
-                            <x-text-input id="email" class="block mt-1 w-full" type="text" name="email" :value="old('email')" required autocomplete="username" />
-                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                            <x-input-label for="company_number" :value="__('Company Contact Number')" />
+                            <x-text-input id="company_number" class="block mt-1 w-full" type="text" name="contact_number" required/>
+                            <x-input-error :messages="$errors->get('company_number')" class="mt-2" />
                         </div>
                         <div class="mt-4 flex-grow">
-                            <x-input-label for="email" :value="__('Contact Email')" />
-                            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                            <x-input-label for="contact_email" :value="__('Contact Email')" />
+                            <x-text-input id="contact_email" class="block mt-1 w-full" type="email" name="email"  required/>
+                            <x-input-error :messages="$errors->get('contact_email')" class="mt-2" />
                         </div>
                     </div>
 					<div>
 						<div class="flex-grow mt-4">
-                            <x-input-label for="name" :value="__(' Company Address')" />
-                            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                            <x-input-label for="company_address" :value="__(' Company Address')" />
+                            <x-text-input id="company_address" class="block mt-1 w-full" type="text" name="address" required autofocus/>
+                            <x-input-error :messages="$errors->get('company_address')" class="mt-2" />
                         </div>
 					</div>
                     <div class="flex gap-5">

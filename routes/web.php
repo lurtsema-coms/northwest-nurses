@@ -6,6 +6,9 @@ use App\Http\Controllers\Employers\EmpPostJobController;
 use App\Http\Controllers\Employers\EmpProfileController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Auth\EmailVerificationPromptController;
+use App\Http\Controllers\Auth\EmailVerificationNotificationController;
+use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -28,9 +31,13 @@ Route::get('/find-jobs', function () {
     return view('find-jobs');
 });
 
-Route::get('/dashboard', function () {
+route::get('/backend-layout', function(){
+    return view('layouts.backend-layout');
+});
+
+Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->name('dashboard');
 
 Route::get('/job-info', function () {
     return view('components.find-job-page.job-info');
@@ -51,5 +58,23 @@ Route::get('/employer-dashboard', [EmpDashboardController::class, 'index'])->nam
 Route::get('/employer-job', [EmpPostJobController::class, 'index'])->name('employer.job');
 Route::get('/employer-profile', [EmpProfileController::class, 'index'])->name('employer.profile');
 
+
+// Employer
+Route::get('/employer-dashboard', [EmpDashboardController::class, 'index'])->name('employer.dashboard');
+Route::get('/employer-job', [EmpPostJobController::class, 'index'])->name('employer.job');
+Route::get('/employer-profile', [EmpProfileController::class, 'index'])->name('employer.profile');
+
+
+Route::get('/email/verify', [EmailVerificationPromptController::class, '__invoke'])
+    ->middleware('auth')
+    ->name('verification.notice');
+
+Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
+    ->middleware(['auth', 'throttle:6,1'])
+    ->name('verification.send');
+
+Route::get('/email/verify/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
+    ->middleware(['auth', 'signed'])
+    ->name('verification.verify');
 
 require __DIR__ . '/auth.php';
