@@ -1,7 +1,13 @@
 <?php
 
+use App\Http\Controllers\Employers\DashboardController;
+use App\Http\Controllers\Employers\EmpDashboardController;
+use App\Http\Controllers\Employers\EmpPostJobController;
+use App\Http\Controllers\Employers\EmpProfileController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,13 +24,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::get('/find-jobs', function () {
     return view('find-jobs');
-});
-
-route::get('/backend-layout', function(){
-    return view('layouts.backend-layout');
 });
 
 Route::get('/dashboard', function () {
@@ -44,5 +45,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// Employer
+Route::get('/employer-dashboard', [EmpDashboardController::class, 'index'])->name('employer.dashboard');
+Route::get('/employer-job', [EmpPostJobController::class, 'index'])->name('employer.job');
+Route::get('/employer-profile', [EmpProfileController::class, 'index'])->name('employer.profile');
+
 
 require __DIR__ . '/auth.php';
