@@ -1,4 +1,4 @@
-<div class="hidden min-h-screen w-72 shrink-0 md:block" id="sidebar">
+<div class="hidden min-h-dvh w-72 shrink-0 md:block" id="sidebar">
     <div class="w-full h-16 flex relative" id="logo">
         <p class="m-auto text-slate-600 text-md font-bold">Northwest Nurses</p>
         <div class="css-o2c9dn absolute bottom-0"></div>
@@ -6,7 +6,7 @@
     <div class="py-10 pl-7" id="sidebar-links">
         <div class="space-y-3">
             <div class="flex items-center w-full border shadow-sm py-2 px-3 rounded-xl text-slate-500 space-x-2 text-sm cursor-pointer hover:bg-slate-300 url-links {{ Route::is('employer.dashboard') ? 'bg-slate-300' : 'bg-white'  }}" id="dashboard-link" hx-boost="true" TESTf="{{ Request::segment(1) }}"
-                hx-trigger="click" hx-get="{{ route('employer.dashboard') }}" hx-target="#target-content" hx-push-url="true"
+                hx-trigger="click" hx-get="{{ route('employer.dashboard') }}" hx-target="#target-content" hx-push-url="true" hx-on:click="removeBgColor(); addBgColorLink(event)"
                 >
                 <div class="p-1 rounded-lg bg-cyan-600">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 text-white">
@@ -16,8 +16,8 @@
                 </div>
                 <span class="font-medium">Dashboard</span>
             </div>
-            <div class="flex items-center w-full border shadow-sm py-2 px-3 rounded-xl text-slate-500 bg-white space-x-2 text-sm cursor-pointer hover:bg-slate-300 url-links {{ Route::is('employer.job') ? 'bg-slate-300' : 'bg-white'  }}" id="job-link"
-                    hx-get="{{ route('employer.job') }}" hx-target="#target-content" hx-push-url="true" 
+            <div class="flex items-center w-full border shadow-sm py-2 px-3 rounded-xl text-slate-500 space-x-2 text-sm cursor-pointer hover:bg-slate-300 url-links {{ Route::is('employer.job') ? 'bg-slate-300' : 'bg-white'  }}" id="job-link"
+                    hx-get="{{ route('employer.job') }}" hx-target="#target-content" hx-push-url="true" hx-on:click="removeBgColor(); addBgColorLink(event)"
                 >
                 <div class="p-1 rounded-lg bg-cyan-600">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 text-white">
@@ -61,13 +61,3 @@
             </div>
     </div>
 </div>
-
-<script>
-    function removeBgColor() {
-        // console.log('hey')
-        var links = document.querySelectorAll('.url-links');
-        links.forEach(function(link) {
-            link.classList.remove('bg-slate-300');
-        });
-    }
-</script>

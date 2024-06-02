@@ -21,10 +21,8 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <style>
-            .css-o2c9dn {
-                height: 1px;
-                width: 100%;
-                background: linear-gradient(90deg, rgba(224, 225, 226, 0) 0%, rgb(211, 211, 211) 49.52%, rgba(224, 225, 226, 0) 100%);
+            *{
+                font-family: Figtree;
             }
         </style>
     </head>
@@ -32,7 +30,7 @@
         <div class="flex overflow-hidden sm:overflow-visible">
             @yield('sidebar')
             {{-- Main Content --}}
-            <div class="flex-1 pl-7">
+            <div class="flex-1 pl-7 min-w-72">
                 {{-- Top Bar --}}
                 @yield('topbar')
                 {{-- Body Content --}}
@@ -122,6 +120,17 @@
                     }
 
             });
+
+            // Sidebar active links
+            function removeBgColor(event) {
+                $('.url-links').removeClass('bg-slate-300');
+                $('.url-links').addClass('bg-white');
+            }
+
+            function addBgColorLink(event){
+                event.currentTarget.classList.remove('bg-white')
+                event.currentTarget.classList.add('bg-slate-300')
+            }
 
         </script>
 
