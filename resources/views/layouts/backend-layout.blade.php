@@ -34,7 +34,7 @@
                 {{-- Top Bar --}}
                 @yield('topbar')
                 {{-- Body Content --}}
-                <div class="w-full max-w-[112.5rem] text-slate-500 py-10 pr-7 md:pl-0" id="target-content">
+                <div class="m-auto w-full max-w-[112.5rem] text-slate-500 py-10 pr-7 md:pl-0" id="target-content">
                     @yield('main-section')
                 </div>
             </div>

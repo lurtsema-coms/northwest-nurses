@@ -49,7 +49,9 @@
     </div>
 </div>
 <br>
-<div class="bg-white p-10 rounded-3xl shadow-sm">
-    <div id="chart">
+<div class="bg-white p-10 rounded-3xl shadow-sm overflow-x-auto">
+    <div class="min-w-[40rem]">
+        <div id="chart">
+        </div>
     </div>
 </div>
