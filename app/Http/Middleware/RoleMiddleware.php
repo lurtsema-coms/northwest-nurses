@@ -16,7 +16,6 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, $role): Response
     {
-        dd($role);
         if (!Auth::check()) {
             return redirect('/');
         }
