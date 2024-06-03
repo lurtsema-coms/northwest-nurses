@@ -43,8 +43,15 @@
                             <a class="text-md py-2 hover:opacity-75 md:px-5" href="/login">Login</a>
                         @endguest
                         @auth
+                        @role('applicant')
                         <a class="text-md py-2 hover:opacity-75 md:px-5" href="#">Profile</a>
+                        @endrole
+                        @role('employer')
+                        <a class="text-md py-2 hover:opacity-75 md:px-5" href="/employer-dashboard">Dashboard</a>
+                        @endrole
+                        @role('applicant')
                         <a class="text-md py-2 hover:opacity-75 md:px-5" href="/my-jobs">My Jobs</a>
+                        @endrole
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
                             <button type="submit" class="text-md py-2 hover:opacity-75 md:px-5" href="/logout">Logout</button>
