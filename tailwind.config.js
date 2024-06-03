@@ -27,6 +27,15 @@ export default {
                 "custom-gradient-y":
                     "linear-gradient(to top, #1d5d72, transparent 70%, transparent)",
             },
+            keyframes: {
+                fadeIn: {
+                    '0%': { opacity: 0 },
+                    '100%': { opacity: 1 },
+                },
+            },
+            animation: {
+                'fade-in': 'fadeIn 0.3s ease',
+            },
         },
     },
 
