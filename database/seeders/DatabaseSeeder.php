@@ -14,18 +14,31 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        \App\Models\User::factory()->create([
+        $employer = \App\Models\User::factory()->create([
             'email' => 'test@employer.com',
             'contact_number' => '1234567890',
             'address' => '123 Employer St, Employertown, CA 90210',
             'role' => 'employer',
         ]);
 
-        \App\Models\User::factory()->create([
+        $employerDetail = \App\Models\EmployerDetail::create([
+            'user_id' => $employer->id,
+            'name' => 'Employer',
+            'website' => 'https://www.employer.com',
+        ]);
+
+        $applicant = \App\Models\User::factory()->create([
             'email' => 'test@applicant.com',
             'contact_number' => '1234567890',
             'address' => '123 Applicant St, Applicantown, CA 90210',
             'role' => 'applicant',
+        ]);
+
+        $applicantDetail = \App\Models\ApplicantDetail::create([
+            'user_id' => $applicant->id,
+            'first_name' => 'Applicant',
+            'last_name' => 'Test',
+            'birthdate' => '2000-01-01',
         ]);
     }
 }

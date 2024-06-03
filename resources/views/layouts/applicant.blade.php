@@ -6,6 +6,7 @@
 
         <title>{{ config('app.name', 'Northwest Nurses') }}: @yield('title')</title>
 
+        <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}" type="image/x-icon">
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
@@ -43,8 +44,15 @@
                             <a class="text-md py-2 hover:opacity-75 md:px-5" href="/login">Login</a>
                         @endguest
                         @auth
+                        @role('applicant')
                         <a class="text-md py-2 hover:opacity-75 md:px-5" href="#">Profile</a>
+                        @endrole
+                        @role('employer')
+                        <a class="text-md py-2 hover:opacity-75 md:px-5" href="/employer-dashboard">Dashboard</a>
+                        @endrole
+                        @role('applicant')
                         <a class="text-md py-2 hover:opacity-75 md:px-5" href="/my-jobs">My Jobs</a>
+                        @endrole
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
                             <button type="submit" class="text-md py-2 hover:opacity-75 md:px-5" href="/logout">Logout</button>
