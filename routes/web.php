@@ -45,10 +45,6 @@ Route::get('/job-info', function () {
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
     // employer route group
     Route::middleware('role:employer')->group(function () {
         Route::get('/employer-dashboard', [EmpDashboardController::class, 'index'])->name('employer.dashboard');
@@ -59,8 +55,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //applicant route group
     Route::middleware('role:applicant')->group(function () {
         Route::get('/my-jobs', function () {
-            return view('applicants.my-jobs');
+            return view('applicant.my-jobs');
         })->name('applicant.my_jobs');
+        Route::get('/my-profile', [EmpProfileController::class, 'index'])->name('applicant.profile');
     });
 });
 
