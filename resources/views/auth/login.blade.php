@@ -6,7 +6,7 @@
         @csrf
 
         <div class="mb-6">
-            <h1 class="text-4xl font-bold text-cyan-600 ">LOGIN</h1>
+            <h1 class="text-4xl font-bold text-cyan-600 mb-5 text-center sm:text-start">LOGIN</h1>
             <span class="font-bold">Doesn't have an account yet? <a href="/register" class="text-cyan-600 underline font-bold">Sign Up</a></span>
         </div>
         
@@ -34,7 +34,7 @@
                 <span class="ms-2 text-sm text-cyan-600">{{ __('Remember me') }}</span>
             </label>
             @if (Route::has('password.request'))
-                <a class="underline text-sm text-cyan-600 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
+                <a class="underline text-sm text-cyan-600 hover:text-cyan-900 dark:hover:text-cyan-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-cyan-500 dark:focus:ring-offset-cyan-500" href="{{ route('password.request') }}">
                     {{ __('Forgot your password?') }}
                 </a>
             @endif
