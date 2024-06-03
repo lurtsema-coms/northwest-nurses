@@ -6,6 +6,7 @@
 
         <title>{{ config('app.name', 'Northwest Nurses') }}: @yield('title')</title>
 
+        <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}" type="image/x-icon">
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
