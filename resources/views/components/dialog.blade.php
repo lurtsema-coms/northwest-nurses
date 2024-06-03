@@ -1,4 +1,4 @@
-<div class="fixed top-0 left-0 min-h-screen min-w-screen inset-0 bg-gray-600 bg-opacity-75 transition-opacity">
+<div class="fixed top-0 left-0 min-h-screen min-w-screen inset-0 bg-black bg-opacity-75 transition-opacity">
     <div class="flex h-full w-full text-black">
         <div class="m-auto w-full max-w-lg bg-white relative shadow-xl rounded-lg py-10 px-6">
             {{-- Icon --}}

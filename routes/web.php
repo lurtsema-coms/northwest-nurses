@@ -49,7 +49,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::middleware('role:employer')->group(function () {
         Route::get('/employer-dashboard', [EmpDashboardController::class, 'index'])->name('employer.dashboard');
         Route::get('/employer-job', [EmpPostJobController::class, 'index'])->name('employer.job');
-        Route::get('/employer-profile', [EmpProfileController::class, 'index'])->name('employer.profile');
+        Route::get('/employer-profile/{id}', [EmpProfileController::class, 'index'])->name('employer.profile');
+        Route::post('/employer-profile/update/{id}', [EmpProfileController::class, 'update'])->name('employer.profile.update');
     });
 
     //applicant route group
