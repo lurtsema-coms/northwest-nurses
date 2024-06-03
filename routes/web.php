@@ -35,9 +35,9 @@ route::get('/backend-layout', function () {
     return view('layouts.backend-layout');
 });
 
-Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');
 
 Route::get('/job-info', function () {
     return view('components.find-job-page.job-info');
