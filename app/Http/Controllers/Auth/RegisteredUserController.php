@@ -35,8 +35,25 @@ class RegisteredUserController extends Controller
         // dd($request->all(), $role);
         $request->validate([
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'address' => ['required'],
+            'contact_number' => ['required'],
+            'contact_number' => ['required'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+
+        if ($role == 'applicant'){
+            $request->validate([
+                'first_name' => ['required'],
+                'last_name' => ['required'],
+                'birthdate' => ['required'],
+            ]);
+        }
+        else if ($role == 'employer'){
+            $request->validate([
+                'company_name' => ['required'],
+                'company_website' => ['required'],
+            ]);
+        }
 
         $user = User::create([
             'email' => $request->email,
@@ -45,7 +62,6 @@ class RegisteredUserController extends Controller
             'role' => $role,
             'password' => Hash::make($request->password),
             'created_at' => now()
-
         ]);
 
         if ($role == 'applicant'){
