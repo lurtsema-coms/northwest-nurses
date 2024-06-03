@@ -57,7 +57,7 @@
                 </div>
             </div>
         </div>
-        <div class="w-full max-w-7xl flex flex-row justify-center m-auto bg-white shadow-md overflow-hidden h-[35rem]">
+        <div class="w-full max-w-7xl flex flex-col sm:flex-row justify-center m-auto bg-white shadow-md overflow-hidden sm:h-[35rem]">
             <div class=" max-w-[520px] flex flex-col bg-primary bg-contain bg-no-repeat bg-center p-3">
                 <div class ="p-3 mt-5">
                     <h1 id="applicantTitle" class="text-4xl font-bold text-slate-50 ">Applicant</h1>
@@ -71,28 +71,28 @@
                     <img id="employerImage" src="{{ asset('img/employer.png') }}" alt="" class=" w-80 object-contain mx-auto hidden">
                 </div>
                 <div class="p-3 flex justify-center text-center gap-5 ">
-                    <x-primary-button id="applicantButton" class="bg-white text-slate-950 rounded-bl-none rounded-tr-none focus:outline-none focus:ring-2 focus:ring-white ring-offset-2 ring-offset-cyan-800 ring-2 ring-white cursor-not-allowed" disabled>Applicant</x-primary-button>
-                    <x-primary-button id="employerButton" class="bg-white text-slate-950 rounded-bl-none rounded-tr-none">Employer</x-primary-button>
+                    <button id="applicantButton" class="bg-white text-lg px-4 py-2  border border-transparent rounded-md font-semibold text-slate-950 rounded-bl-none rounded-tr-none focus:outline-none focus:ring-2 focus:ring-white ring-offset-2 ring-offset-cyan-800 ring-2 ring-white cursor-not-allowed" disabled>Applicant</button>
+                    <button id="employerButton" class="bg-white text-lg px-4 py-2  border border-transparent rounded-md font-semibold text-slate-950 rounded-bl-none rounded-tr-none">Employer</button>
                 </div>
             </div>
             <div class="w-full flex-1 px-14 py-4 m-auto" id="applicantForm">
                 <form method="POST" action="{{ route('user.store','applicant') }}" id="submitApplicantForm">
                     @csrf
                     <!-- Name -->
-                    <div class="flex gap-5">
+                    <div class="flex flex-col sm:flex-row sm:gap-5">
                         <div class="flex-grow">
                             <x-input-label for="first_name" :value="__('First Name')" />
                             <x-text-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" required autofocus/>
                             <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
                         </div>
-                        <div class="flex-grow">
+                        <div class="mt-4 sm:mt-0 flex-grow">
                             <x-input-label for="last_name" :value="__(' Last Name')" />
                             <x-text-input id="last_name" class="block mt-1 w-full" type="text" name="last_name"  required autofocus/>
                             <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
                         </div>
                     </div>
 
-                    <div class="flex gap-5">
+                    <div class="flex flex-col sm:flex-row sm:gap-5">
                         <div class="mt-4 flex-grow">
                             <x-input-label for="contact_number" :value="__('Contact Number')" />
                             <x-text-input id="contact_number" class="block mt-1 w-full" type="text" name="contact_number" required/>
@@ -105,7 +105,7 @@
                         </div>
                     </div>
 
-                    <div class="flex gap-5">
+                    <div class="flex flex-col sm:flex-row sm:gap-5">
                         <div class="mt-4 flex-grow">
                             <x-input-label for="home_address" :value="__('Home Address')" />
                             <x-text-input id="home_address" class="block mt-1 w-full" type="text" name="address"  required/>
@@ -118,7 +118,7 @@
                         </div>
                     </div>
 
-                    <div class="flex gap-5">
+                    <div class="flex flex-col sm:flex-row sm:gap-5">
                         <div class="mt-4 flex-grow">
                             <x-input-label for="password" :value="__('Password')" />
                             <x-text-input id="password" class="block mt-1 w-full"
@@ -128,7 +128,7 @@
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         </div>
                         <!-- Confirm Password -->
-                        <div class="mt-4 flex-grow  ">
+                        <div class="mt-4 flex-col sm:flex-row flex-grow  ">
                             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
                             <x-text-input id="password_confirmation" class="block mt-1 w-full"
                                             type="password"
@@ -138,7 +138,7 @@
                     </div>
 
                     <div class="flex items-center justify-end mt-4">
-                        <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
+                        <a class="underline text-sm text-cyan-600 dark:text-cyan-400 hover:text-cyan-900 dark:hover:text-cyan-500 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 dark:focus:ring-offset-cyan-500" href="{{ route('login') }}">
                             {{ __('Already registered?') }}
                         </a>
                         <x-primary-button class="ms-4 submit-applicant">
@@ -151,19 +151,19 @@
                 <form method="POST" action="{{ route('user.store','employer') }}" id="submitEmployerForm">
                     @csrf
                     <!-- Name -->
-                    <div class="flex gap-5">
+                    <div class="flex flex-col sm:flex-row sm:gap-5">
                         <div class="flex-grow">
                             <x-input-label for="company_name" :value="__('Company Name')" />
                             <x-text-input id="company_name" class="block mt-1 w-full" type="text" name="company_name" required autofocus/>
                             <x-input-error :messages="$errors->get('company_name')" class="mt-2" />
                         </div>
-                        <div class="flex-grow">
+                        <div class="mt-4 sm:mt-0 flex-grow">
                             <x-input-label for="company_website" :value="__('Company Website')" />
                             <x-text-input id="company_website" class="block mt-1 w-full" type="text" name="company_website" required autofocus/>
                             <x-input-error :messages="$errors->get('company_website')" class="mt-2" />
                         </div>
                     </div>
-                    <div class="flex gap-5">
+                    <div class="flex flex-col sm:flex-row sm:gap-5">
                         <div class="mt-4 flex-grow">
                             <x-input-label for="company_number" :value="__('Company Contact Number')" />
                             <x-text-input id="company_number" class="block mt-1 w-full" type="text" name="contact_number" required/>
@@ -182,7 +182,7 @@
                             <x-input-error :messages="$errors->get('address')" class="mt-2" />
                         </div>
 					</div>
-                    <div class="flex gap-5">
+                    <div class="flex flex-col sm:flex-row sm:gap-5">
                         <div class="mt-4 flex-grow">
                             <x-input-label for="password" :value="__('Password')" />
                             <x-text-input id="password" class="block mt-1 w-full"
@@ -192,7 +192,7 @@
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         </div>
                         <!-- Confirm Password -->
-                        <div class="mt-4 flex-grow  ">
+                        <div class="mt-4 flex-col sm:flex-row flex-grow  ">
                             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
                             <x-text-input id="password_confirmation" class="block mt-1 w-full"
                                             type="password"
@@ -202,7 +202,7 @@
                     </div>
 
                     <div class="flex items-center justify-end mt-4">
-                        <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
+                        <a class="underline text-sm text-cyan-600 dark:text-cyan-400 hover:text-cyan-900 dark:hover:text-cyan-500 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 dark:focus:ring-offset-cyan-500" href="{{ route('login') }}">
                             {{ __('Already registered?') }}
                         </a>
                         <x-primary-button class="ms-4 submit-employer">
