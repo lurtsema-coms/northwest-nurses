@@ -57,7 +57,7 @@ Route::middleware(['auth', 'verfied'])->group(function () {
     });
 
     //applicant route group
-    Route::middleware('role:employer')->group(function () {
+    Route::middleware('role:applicant')->group(function () {
         Route::get('/my-jobs', function () {
             return view('applicants.my-jobs');
         })->name('applicant.my_jobs');
