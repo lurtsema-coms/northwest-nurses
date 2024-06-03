@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Employers;
 
 use App\Http\Controllers\Controller;
+use App\Models\EmployerDetail;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class EmpProfileController extends Controller
@@ -13,13 +15,20 @@ class EmpProfileController extends Controller
     public function index(Request $request)
     {
         $data = [];
-        $data['user'] = auth()->user();
+        $data['module_title'] = 'Profile';
+        $data['user'] = User::where('users.id', auth()->user()->id)
+            ->leftJoin('employer_details as employer', 'employer.user_id', 'users.id')
+            ->select('users.*',
+                'employer.name as company_name',
+                'employer.website as company_website',
+            )
+        ->first();
+        
 
-        // dd($data['user']);
         if ($request->header('HX-Request')) {
-            return view('components.employer.emp-profile')->render() . view('components.employer.module-title', ['module_title' => 'Profile']);
+            return view('components.employer.emp-profile', $data)->render() . view('components.employer.module-title', $data);
         } else {
-            return view('layouts.employer.profile', ['module_title' => 'Profile']);
+            return view('layouts.employer.profile', $data);
         }
     }
 
@@ -60,7 +69,26 @@ class EmpProfileController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $input = $request->all();
+
+        User::find($id)
+            ->update([
+                'email' => $input['company_email'],
+                'contact_number' => $input['company_contact_number'],
+                'address' => $input['company_address'],
+                'updated_at' => date('Y-m-d H:i:s')
+            ]
+        );
+
+        EmployerDetail::where('user_id', $id)
+            ->update([
+                'name' => $input['company_name'],
+                'website' => $input['company_website'],
+                'updated_at' => date('Y-m-d H:i:s')
+            ]
+        );
+
+        return 'success';
     }
 
     /**
