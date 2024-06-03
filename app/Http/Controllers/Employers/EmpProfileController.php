@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Employers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class EmpProfileController extends Controller
 {
@@ -13,6 +12,10 @@ class EmpProfileController extends Controller
      */
     public function index(Request $request)
     {
+        $data = [];
+        $data['user'] = auth()->user();
+
+        // dd($data['user']);
         if ($request->header('HX-Request')) {
             return view('components.employer.emp-profile')->render() . view('components.employer.module-title', ['module_title' => 'Profile']);
         } else {

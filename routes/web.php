@@ -53,19 +53,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/my-jobs', function () {
         return view('applicants.my-jobs');
     })->middleware('verified');
+
+    // Employer
+    Route::get('/employer-dashboard', [EmpDashboardController::class, 'index'])->name('employer.dashboard');
+    Route::get('/employer-job', [EmpPostJobController::class, 'index'])->name('employer.job');
+    Route::get('/employer-profile', [EmpProfileController::class, 'index'])->name('employer.profile');
 });
-
-// Employer
-Route::get('/employer-dashboard', [EmpDashboardController::class, 'index'])->name('employer.dashboard');
-Route::get('/employer-job', [EmpPostJobController::class, 'index'])->name('employer.job');
-Route::get('/employer-profile', [EmpProfileController::class, 'index'])->name('employer.profile');
-
-
-// Employer
-Route::get('/employer-dashboard', [EmpDashboardController::class, 'index'])->name('employer.dashboard');
-Route::get('/employer-job', [EmpPostJobController::class, 'index'])->name('employer.job');
-Route::get('/employer-profile', [EmpProfileController::class, 'index'])->name('employer.profile');
-
 
 Route::get('/email/verify', [EmailVerificationPromptController::class, '__invoke'])
     ->middleware('auth')
