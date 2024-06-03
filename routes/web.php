@@ -44,20 +44,24 @@ Route::get('/job-info', function () {
 });
 
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verfied'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    //applicant
-    Route::get('/my-jobs', function () {
-        return view('applicants.my-jobs');
-    })->middleware('verified');
+    // employer route group
+    Route::middleware('role:employer')->group(function () {
+        Route::get('/employer-dashboard', [EmpDashboardController::class, 'index'])->name('employer.dashboard');
+        Route::get('/employer-job', [EmpPostJobController::class, 'index'])->name('employer.job');
+        Route::get('/employer-profile', [EmpProfileController::class, 'index'])->name('employer.profile');
+    });
 
-    // Employer
-    Route::get('/employer-dashboard', [EmpDashboardController::class, 'index'])->name('employer.dashboard');
-    Route::get('/employer-job', [EmpPostJobController::class, 'index'])->name('employer.job');
-    Route::get('/employer-profile', [EmpProfileController::class, 'index'])->name('employer.profile');
+    //applicant route group
+    Route::middleware('role:employer')->group(function () {
+        Route::get('/my-jobs', function () {
+            return view('applicants.my-jobs');
+        })->name('applicant.my_jobs');
+    });
 });
 
 Route::get('/email/verify', [EmailVerificationPromptController::class, '__invoke'])
