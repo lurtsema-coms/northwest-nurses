@@ -8,10 +8,7 @@
     @include('components.employer.topbar')
 @endsection
 
-@section('module-section')
-Patrick
-@endsection
-
 @section('main-section')
     @include('components.employer.dashboard')
 @endsection
+

@@ -21,8 +21,14 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <style>
-            *{
-                font-family: Figtree;
+            .htmx-indicator{
+                display:none;
+            }
+            .htmx-request .htmx-indicator{
+                display:inline;
+            }
+            .htmx-request.htmx-indicator{
+                display:inline;
             }
         </style>
     </head>
@@ -34,8 +40,11 @@
                 {{-- Top Bar --}}
                 @yield('topbar')
                 {{-- Body Content --}}
-                <div class="m-auto w-full max-w-[112.5rem] text-slate-500 py-10 pr-7 md:pl-0" id="target-content">
-                    @yield('main-section')
+                <div class="m-auto w-full max-w-[112.5rem] text-slate-500 py-10 pr-7 md:pl-0">
+                    @include('layouts.skeleton')
+                    <div id="target-content">
+                        @yield('main-section')
+                    </div>
                 </div>
             </div>
         </div>
