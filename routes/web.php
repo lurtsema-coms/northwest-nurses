@@ -31,7 +31,7 @@ Route::get('/find-jobs', function () {
     return view('find-jobs');
 });
 
-route::get('/backend-layout', function(){
+route::get('/backend-layout', function () {
     return view('layouts.backend-layout');
 });
 
@@ -43,14 +43,16 @@ Route::get('/job-info', function () {
     return view('components.find-job-page.job-info');
 });
 
-Route::get('/my-jobs', function () {
-    return view('applicants.my-jobs');
-});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    //applicant
+    Route::get('/my-jobs', function () {
+        return view('applicants.my-jobs');
+    })->middleware('verified');
 });
 
 // Employer

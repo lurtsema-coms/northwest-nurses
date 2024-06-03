@@ -39,9 +39,17 @@
                     <a class="text-md py-2 hover:opacity-75" href="#">Contact Us</a>
                     <button class="account-nav-btn text-md mt-1 py-2 rounded-full md:bg-primary md:px-5 hover:opacity-75 flex flex-row justify-center align-center gap-2" type="submit"><p>Account</p><span class="material-symbols-outlined"><span class="material-symbols-outlined">arrow_drop_down</span></button>
                     <div class="account-nav-list flex flex-col pl-5 md:absolute z-10 right-0 top-[100%] md:mt-6 md:mr-4 bg-dark md:py-1 md:px-0" style="display: none">
+                        @guest
+                            <a class="text-md py-2 hover:opacity-75 md:px-5" href="/login">Login</a>
+                        @endguest
+                        @auth
                         <a class="text-md py-2 hover:opacity-75 md:px-5" href="#">Profile</a>
                         <a class="text-md py-2 hover:opacity-75 md:px-5" href="/my-jobs">My Jobs</a>
-                        <a class="text-md py-2 hover:opacity-75 md:px-5" href="#">Logout</a>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="text-md py-2 hover:opacity-75 md:px-5" href="/logout">Logout</button>
+                        </form>
+                        @endauth
                     </div>
                 </div>
             </div>
