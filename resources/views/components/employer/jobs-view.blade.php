@@ -1,7 +1,7 @@
-<div class="min-h-96 relative bg-white p-5 shadow-sm border rounded-2xl">
-    <div class="font-medium text-sm text-sky-600 flex absolute -top-9 left-0">
+<div class="min-h-96 mx-auto max-w-5xl relative bg-white py-7 px-10 shadow-sm border rounded-2xl">
+    <div class="font-medium text-sky-600 flex absolute -top-9 left-0">
         <span class="flex items-center space-x-2 hover:opacity-70 cursor-pointer"
-            hx-get="{{ route('employer.job') }}" hx-target="#target-content" hx-push-url="true"
+            hx-get="{{ route('employer.job') }}" hx-target="#target-content" hx-push-url="true" hx-on::after-request="$('input').val()"
         >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -9,63 +9,159 @@
             <span>Back to Jobs</span>
         </span>
     </div>
-    <form action="">
+    <form action="{{ route('employer.job.add-jobs') }}" method="POST" enctype="multipart/form-data">
+        @csrf
         <div class="w-full max-w-[45.5rem]">
             <div class="font-medium text-slate-600 mb-3">Upload Image</div>
             
             <div class="flex items-center justify-center w-full">
-                <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600" draggable="true">
+                <label for="dropzone-file" id="dropzone-parent" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600" draggable="true">
                     <div class="flex flex-col items-center justify-center pt-5 pb-6" id="img-content">
                         <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
                         </svg>
-                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                        <p class="mb-2 text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
                         <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, and JPG (MAX. 600x400)</p>
                     </div>
-                    <input id="dropzone-file" type="file" class="hidden" />
+                    <input id="dropzone-file" type="file" class="-z-10" name="img_link" required>
                 </label>
             </div> 
+        </div>
+
+        <div class="mt-10 space-y-5 text-slate-500">
+            <div class="flex flex-wrap gap-5">
+                <div class="flex flex-col w-full max-w-[28.9rem] space-y-2">
+                    <span class="font-medium">Job Title</span>
+                    <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="job_title" value="" required>
+                </div>
+            </div>
+            <div class="font-medium">
+                Job Details
+            </div>
+            <div class="flex flex-wrap gap-5">
+                <div class="flex flex-col flex-1 space-y-2">
+                    <span class="font-medium">Profession</span>
+                    <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="profession" value="" required>
+                </div>
+                <div class="flex flex-col flex-1 space-y-2">
+                    <span class="font-medium">Pay</span>
+                    <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="pay" value="" required>
+                </div>
+                <div class="flex flex-col flex-1 space-y-2">
+                    <span class="font-medium">Assignment Length</span>
+                    <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="assignment_length" value="" required>
+                </div>
+            </div>
+            <div class="flex flex-wrap gap-5">
+                <div class="flex flex-col flex-1 space-y-2">
+                    <span class="font-medium">Schedule</span>
+                    <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="schedule" value="" required>
+                </div>
+                <div class="flex flex-col flex-1 space-y-2">
+                    <span class="font-medium">Openings</span>
+                    <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="number" name="openings" value="" required>
+                </div>
+                <div class="flex flex-col flex-1 space-y-2">
+                    <span class="font-medium">Start Date</span>
+                    <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="date" name="start_date" value="" required>
+                </div>
+            </div>
+            <div class="flex flex-wrap gap-5">
+                <div class="flex flex-col flex-1 space-y-2">
+                    <span class="font-medium">Experience</span>
+                    <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="experience" value="" required>
+                </div>
+                <div class="flex flex-col flex-1 space-y-2">
+                    <span class="font-medium">Address</span>
+                    <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="address" value="" required>
+                </div>
+            </div>
+            <div class="flex flex-wrap gap-5">
+                <div class="flex flex-col flex-1 space-y-2">
+                    <span class="font-medium">Question 1</span>
+                    <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="question_1" value="" required>
+                </div>
+                <div class="flex flex-col flex-1 space-y-2">
+                    <span class="font-medium">Question 2 (Optional)</span>
+                    <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="question_2" value="">
+                </div>
+                <div class="flex flex-col flex-1 space-y-2">
+                    <span class="font-medium">Question 3 (Optional)</span>
+                    <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="question_3" value="">
+                </div>
+            </div>
+            <div class="flex flex-wrap gap-5">
+                <div class="flex flex-col flex-1 space-y-2">
+                    <span class="font-medium">Job Description</span>
+                    <textarea class="px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" name="job_description" id="" rows="7" required></textarea>
+                </div>
+            </div>
+            <div class="flex flex-wrap gap-5">
+                <div class="flex flex-col flex-1 space-y-2">
+                    <span class="font-medium">Responsibilities</span>
+                    <textarea class="px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" name="responsibilities" id="" rows="7" required></textarea>
+                </div>
+            </div>
+            <div class="flex flex-wrap gap-5">
+                <div class="flex flex-col flex-1 space-y-2">
+                    <span class="font-medium">Requirements</span>
+                    <textarea class="px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" name="requirements" id="" rows="7" required></textarea>
+                </div>
+            </div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div class="text-end">
+                <button class="bg-cyan-600 text-white border h-10 px-4 rounded-md hover:opacity-70" type="submit">Save</button>
+            </div>
         </div>
     </form>
 </div>
 
 <script>
-    const dropzone = document.getElementById('dropzone-file').parentElement;
 
-    dropzone.addEventListener('dragover', (event) => {
-        event.preventDefault();
-    });
+    $(document).ready(function() {
 
-    dropzone.addEventListener('drop', (event) => {
-        event.preventDefault();
+        $('input,textarea').attr('required', false)
 
-        const files = event.dataTransfer.files;
-        updateImgFile(files);
-    });
-
-
-    $('#dropzone-file').on('change', function(event){
-        const files = event.target.files;
+        let dropzone = document.getElementById('dropzone-parent');
         
-        updateImgFile(files);
-    });
+        dropzone.addEventListener('dragover', (event) => {
+            event.preventDefault();
+        });
 
-    function updateImgFile(files){
-        if (files && files[0]) {
-            const reader = new FileReader();
+        dropzone.addEventListener('drop', (event) => {
+            event.preventDefault();
 
-            reader.onload = function(e) {
-            const uploadedFileContainer = $('#img-content');
-            uploadedFileContainer.empty();
+            let files = event.dataTransfer.files;
+            updateImgFile(files);
+        });
+
+
+        $('#dropzone-file').on('change', function(event){
+            let files = event.target.files;
             
-            const img = document.createElement('img');
-            img.classList.add('h-52', 'w-full', 'max-w-80', 'object-contain'); 
-            img.src = e.target.result;
-            
-            uploadedFileContainer.append(img);
-            };
+            updateImgFile(files);
+        });
 
-            reader.readAsDataURL(files[0]);
+        function updateImgFile(files){
+            if (files && files[0]) {
+                let reader = new FileReader();
+
+                reader.onload = function(e) {
+                let uploadedFileContainer = $('#img-content');
+                uploadedFileContainer.empty();
+                
+                let img = document.createElement('img');
+                img.classList.add('h-52', 'w-full', 'max-w-80', 'object-contain'); 
+                img.src = e.target.result;
+                
+                uploadedFileContainer.append(img);
+                };
+
+                reader.readAsDataURL(files[0]);
+            }
         }
-    }
+
+    })
 </script>

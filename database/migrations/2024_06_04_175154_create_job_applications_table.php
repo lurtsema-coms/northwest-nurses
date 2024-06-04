@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('answer_2')->nullable();
             $table->text('answer_3')->nullable();
             $table->integer('created_by')->length(10)->unsigned();
-            $table->integer('updated_by')->length(10)->unsigned();
+            $table->integer('updated_by')->length(10)->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

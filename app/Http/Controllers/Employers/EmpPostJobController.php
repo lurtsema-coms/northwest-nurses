@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Employers;
 
 use App\Http\Controllers\Controller;
+use App\Models\JobPosting;
 use Illuminate\Http\Request;
 
 class EmpPostJobController extends Controller
@@ -45,7 +46,32 @@ class EmpPostJobController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+
+        $job_posting = new JobPosting([
+            'job_title' => $input['job_title'],
+            'profession' => $input['profession'],
+            'pay' => $input['pay'],
+            'assignment_length' => $input['assignment_length'],
+            'schedule' => $input['schedule'],
+            'openings' => $input['openings'],
+            'start_date' => $input['start_date'],
+            'experience' => $input['experience'],
+            'address' => $input['address'],
+            'question_1' => $input['question_1'],
+            'question_2' => $input['question_2'],
+            'question_3' => $input['question_3'],
+            'job_description' => $input['job_description'],
+            'responsibilities' => $input['responsibilities'],
+            'requirements' => $input['requirements'],
+            'img_link' => 'path',
+            'status' => 'ACTIVE',
+            'created_by' => auth()->user()->id,
+        ]);
+
+        $job_posting->save();
+
+        return redirect(route('employer.job'));
     }
 
     /**

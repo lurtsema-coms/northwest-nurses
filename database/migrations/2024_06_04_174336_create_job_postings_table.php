@@ -26,11 +26,12 @@ return new class extends Migration
             $table->text('job_description');
             $table->text('responsibilities');
             $table->text('requirements');
+            $table->string('job_title');
             $table->text('question_1')->nullable();
             $table->text('question_2')->nullable();
             $table->text('question_3')->nullable();
             $table->integer('created_by')->length(10)->unsigned();
-            $table->integer('updated_by')->length(10)->unsigned();
+            $table->integer('updated_by')->length(10)->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
