@@ -1,5 +1,36 @@
 @extends('layouts.applicant')
 @section('content')
+<div class="modal-center modal-applicant fixed inset-0 h-screen w-full bg-black bg-opacity-75  p-4 z-10 overflow-y-auto hidden">
+    <form action="">
+        <div class="modal-box m-auto w-full max-w-3xl bg-white shadow-lg rounded-lg animate-fade-in p-10">
+            <div class="modal-content flex flex-col p-3">
+                <div class="mb-4">
+                    <h1 class="text-xl font-bold text-center mb-2">Want to apply to this job?</h1>
+                    <p class="p-2 text-center">The employer wants to know more about you.</p>
+                    <p class="p-2 text-center italic text-gray-400">Please answer the questions with honesty to the best of your knowledge and belief.</p>
+                </div>
+                <div class="flex flex-col gap-10">
+                    <div class="space-y-3">
+                        <label for="answer_1" class="font-semibold">1. This is a sample question?</label>
+                        <textarea name="answer_1" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
+                    </div>
+                    <div class="space-y-3">
+                        <label for="answer_1" class="font-semibold">2. This is another sample question?</label>
+                        <textarea name="answer_1" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
+                    </div>
+                    <div class="space-y-3">
+                        <label for="answer_1" class="font-semibold">3. Yet another sample question, innit?</label>
+                        <textarea name="answer_1" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
+                    </div>
+                </div>
+                <div class="flex flex-row gap-10 justify-center p-2 mt-5">
+                    <button class="cancel-btn" type="button">Cancel</button>
+                    <button class="submit-applicant-btn font-semibold py-2 px-5 bg-cyan-800 text-white rounded-full" type="submit">Apply</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 <div class="search-section overflow-hidden relative">
     <div class="z-[-1] bg-custom-gradient-y absolute inset-0"></div>
     <img class="absolute z-[-2] min-h-full min-w-full object-cover md:translate-y-[-25%]" src="{{ asset('img/landing-page/image-no-filter.jpg') }}" alt="">
@@ -109,6 +140,14 @@
                 spaceBetween: 0,
             },
         },
+    });
+
+    $(".cancel-btn").click(function() {
+        $(".modal-center").addClass("hidden");
+    });
+
+    $(document).on('click', '#apply-now-btn', function() {
+        $(".modal-center").removeClass("hidden");
     });
 </script>
 @endsection
