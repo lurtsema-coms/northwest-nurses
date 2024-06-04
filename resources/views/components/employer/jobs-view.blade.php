@@ -11,7 +11,7 @@
     </div>
     <form action="{{ route('employer.job.add-jobs') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <div class="w-full max-w-[45.5rem]">
+        <div class="w-full">
             <div class="font-medium text-slate-600 mb-3">Upload Image <span class="text-red-400">*</span></div>
             
             <div class="flex items-center justify-center w-full">
