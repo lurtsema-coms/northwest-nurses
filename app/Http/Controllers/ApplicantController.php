@@ -34,7 +34,6 @@ class ApplicantController extends Controller
             'address' => ['required'],
             'contact_number' => ['required'],
             'contact_number' => ['required'],
-            'password' => ['required', 'confirmed', 'min:8'],
             'first_name' => ['required'],
             'last_name' => ['required'],
             'birthdate' => ['required'],
@@ -46,7 +45,6 @@ class ApplicantController extends Controller
             'email' => $request->email,
             'contact_number' => $request->contact_number,
             'address' => $request->address,
-            'password' => Hash::make($request->password),
         ]);
 
         $user->applicantDetail->update([

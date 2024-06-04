@@ -30,7 +30,7 @@
 				</div>
 				<div class="mt-4 flex-grow">
 					<x-input-label for="email" :value="__('Email')" />
-					<x-text-input value="{{ $email }}" id="email" class="block mt-1 w-full" type="email" name="email" required/>
+					<x-text-input value="{{ $email }}" id="email" class="block mt-1 w-full" type="email" name="email" readonly required/>
 					<x-input-error :messages="$errors->get('email')" class="mt-2" />
 				</div>
 			</div>
@@ -41,32 +41,23 @@
 					<x-text-input value="{{ $address }}" id="home_address" class="block mt-1 w-full" type="text" name="address"  required/>
 					<x-input-error :messages="$errors->get('address')" class="mt-2" />
 				</div>
-				<div class="mt-4 ">
-					<x-input-label for="birthdate" :value="__('Date of Birth')" />
-					<x-text-input value="{{ $birthdate }}" id="birthdate" class="block mt-1 w-full" type="date" name="birthdate"  required/>
-					<x-input-error :messages="$errors->get('birthdate')" class="mt-2" />
-				</div>
 			</div>
-
 			<div class="flex flex-col sm:flex-row sm:gap-5">
-				<div class="mt-4 flex-grow">
-					<x-input-label for="password" :value="__('Password')" />
-					<x-text-input id="password" class="block mt-1 w-full"
-									type="password"
-									name="password"
-									required autocomplete="new-password" />
-					<x-input-error :messages="$errors->get('password')" class="mt-2" />
+				<div class="mt-4 flex-grow ">
+						<x-input-label for="sex" :value="__('Sex')" />
+						<select value="{{ $sex }}" name="sex" id="sex" class="block mt-1 w-full border-cyan-600 focus:border-cyan-600 dark:focus:border-cyan-600 focus:ring-cyan-600 dark:focus:ring-cyan-600 rounded-md shadow-sm" required>
+								<option disabled value="">None selected</option>
+								<option value="male">Male</option>
+								<option value="female">Female</option>
+						</select>
+						<x-input-error :messages="$errors->get('sex')" class="mt-2" />
 				</div>
-				<!-- Confirm Password -->
-				<div class="mt-4 flex-col sm:flex-row flex-grow  ">
-					<x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-					<x-text-input id="password_confirmation" class="block mt-1 w-full"
-									type="password"
-									name="password_confirmation" required autocomplete="new-password" />
-					<x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+				<div class="mt-4 flex-grow ">
+						<x-input-label for="birthdate" :value="__('Date of Birth')" />
+						<x-text-input value="{{ $birthdate }}" id="birthdate" class="block mt-1 w-full" type="date" name="birthdate"  required/>
+						<x-input-error :messages="$errors->get('birthdate')" class="mt-2" />
 				</div>
-			</div>
-
+		</div>
 			<div class="flex items-center justify-end mt-4">
 				<x-primary-button class="ms-4 submit-applicant">
 					{{ __('Save') }}
