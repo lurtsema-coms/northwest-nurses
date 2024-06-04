@@ -45,13 +45,13 @@ class RegisteredUserController extends Controller
             $request->validate([
                 'first_name' => ['required'],
                 'last_name' => ['required'],
+                'sex' => ['required'],
                 'birthdate' => ['required'],
             ]);
         }
         else if ($role == 'employer'){
             $request->validate([
                 'company_name' => ['required'],
-                'company_website' => ['required'],
             ]);
         }
 
@@ -70,6 +70,7 @@ class RegisteredUserController extends Controller
                 'last_name' => $request->last_name,
                 'user_id' => $user->id,
                 'birthdate' => $request->birthdate,
+                'sex' => $request->sex,
                 'created_at' => now()
             ]);
         }

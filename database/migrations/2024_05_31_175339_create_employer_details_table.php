@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class)->constrained();
             $table->string('name');
-            $table->text('website');
+            $table->text('website')->nullable();
             $table->timestamps();
         });
     }

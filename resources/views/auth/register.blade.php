@@ -64,7 +64,8 @@
                     <h1 id="employerTitle" class="text-4xl font-bold text-slate-50 hidden">Employer</h1>
                 </div>
                 <div>
-                    <p class="p-3 text-slate-50">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi repudiandae delectus vero doloremque, minus accusantium? Iste, maxime quam. Consectetur architecto ipsam impedit quod dolor sequi neque in, reiciendis ratione quasi.</p>
+                    <p class="p-3 text-slate-50" id="applicantDes">Whether you're a seasoned nurse, an allied health expert, or a physician, we're here to support your career journey. Register today to access exclusive job opportunities, personalized support, and resources tailored to your unique skills and aspirations!</p>
+                    <p class="p-3 text-slate-50 hidden"id="employerDes">Gain access to a vast network of qualified and passionate healthcare professionals ready to meet your staffing needs. Let us help you deliver outstanding patient care by connecting you with top talent in the industry!</p>
                 </div>
                 <div class="p-3 ">
                     <img id="applicantImage" src="{{ asset('img/applicant.png') }}" alt="" class=" w-80 object-contain mx-auto">
@@ -111,7 +112,19 @@
                             <x-text-input id="home_address" class="block mt-1 w-full" type="text" name="address"  required/>
                             <x-input-error :messages="$errors->get('address')" class="mt-2" />
                         </div>
-                        <div class="mt-4 ">
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row sm:gap-5">
+                        <div class="mt-4 flex-grow ">
+                            <x-input-label for="sex" :value="__('Sex')" />
+                            <select name="sex" id="sex" class="block mt-1 w-full border-cyan-600 focus:border-cyan-600 dark:focus:border-cyan-600 focus:ring-cyan-600 dark:focus:ring-cyan-600 rounded-md shadow-sm" required>
+                                <option selected disabled value="">None selected</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                            <x-input-error :messages="$errors->get('sex')" class="mt-2" />
+                        </div>
+                        <div class="mt-4 flex-grow ">
                             <x-input-label for="birthdate" :value="__('Date of Birth')" />
                             <x-text-input id="birthdate" class="block mt-1 w-full" type="date" name="birthdate"  required/>
                             <x-input-error :messages="$errors->get('birthdate')" class="mt-2" />
@@ -158,8 +171,8 @@
                             <x-input-error :messages="$errors->get('company_name')" class="mt-2" />
                         </div>
                         <div class="mt-4 sm:mt-0 flex-grow">
-                            <x-input-label for="company_website" :value="__('Company Website')" />
-                            <x-text-input id="company_website" class="block mt-1 w-full" type="text" name="company_website" required autofocus/>
+                            <x-input-label for="company_website" :value="__('Company Website Link')" />
+                            <x-text-input id="company_website" class="block mt-1 w-full" type="text" name="company_website" placeholder="Not Required" autofocus/>
                             <x-input-error :messages="$errors->get('company_website')" class="mt-2" />
                         </div>
                     </div>
@@ -170,7 +183,7 @@
                             <x-input-error :messages="$errors->get('company_number')" class="mt-2" />
                         </div>
                         <div class="mt-4 flex-grow">
-                            <x-input-label for="contact_email" :value="__('Contact Email')" />
+                            <x-input-label for="contact_email" :value="__('Contact Email')" /> 
                             <x-text-input id="contact_email" class="block mt-1 w-full" type="email" name="email"  required/>
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
@@ -236,6 +249,7 @@
                     toggleItemState("#applicantTitle", "#employerTitle");
                     toggleItemState("#applicantImage", "#employerImage");
                     toggleItemState("#applicantForm", "#employerForm");
+                    toggleItemState("#applicantDes", "#employerDes");
 					clearFormInputs("#employerForm");
                 });
 
@@ -244,6 +258,7 @@
                     toggleItemState("#employerTitle", "#applicantTitle");
                     toggleItemState("#employerImage", "#applicantImage");
                     toggleItemState("#employerForm", "#applicantForm");
+                    toggleItemState("#employerDes", "#applicantDes");
 					clearFormInputs("#applicantForm");
                 });
 
