@@ -112,7 +112,7 @@ class EmpProfileController extends Controller
             );
         }
 
-        return '<p class="font-bold mb-4 text-green-500">Edited Successfully</p>';
+        return '<p class="font-medium mb-4 text-green-500">Edited Successfully</p>';
     }
 
     /**
