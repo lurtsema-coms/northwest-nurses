@@ -1,6 +1,44 @@
 @extends('layouts.applicant')
 @section('title', 'My Profile')
 @section('content')
+
+
+<div class="modal-center change-password fixed inset-0 h-screen w-full bg-black bg-opacity-75  p-4 z-10 overflow-y-auto hidden">
+	<div class="modal-box m-auto w-full max-w-lg bg-white shadow-lg rounded-lg animate-fade-in">
+		<div class="modal-content flex flex-col p-3">
+			<form method="POST" action="{{ route('applicant.update.password', auth()->user()->id) }}">
+				@csrf
+				<div>
+					<img src="{{ asset('img/change.png') }}" alt="" class=" w-80 object-contain mx-auto ">
+				</div>
+				<div class="mb-4">
+					<h1 class="text-xl font-bold text-center mb-2">Change Account Password</h1>
+					<p class="p-2 text-center"> To change your account password, type your current password and the password you want to change. Ensure that your new password is more than "8 characters". </p>
+					<p class="p-2 text-center italic text-gray-400"> You will be logged out after changing password. </p>
+				</div>
+				<div class="p-5">
+					<div class="flex-grow">
+						<x-input-label for="current_password" :value="__('Current Password:')"/>
+						<x-text-input  id="current_password" class="block mt-1 w-full" type="password" name="current_password" required/>
+					</div>
+					<div class="flex-grow mt-4">
+						<x-input-label for="new_password" :value="__('New Password:')" />
+						<x-text-input  id="new_password" class="block mt-1 w-full" type="password" name="new_password" required/>
+					</div>
+					<div class="flex-grow mt-4">
+						<x-input-label for="confirmation_password" :value="__('Current Password:')"/>
+						<x-text-input  id="confirmation_password" class="block mt-1 w-full" type="password" name="confirmation_password" required/>
+					</div>
+				</div>
+				<div class="flex flex-row gap-10 justify-center p-2 ">
+					<button class="btn-close-password">Cancel</button>
+					<button class="font-semibold py-2 px-4 bg-cyan-800 text-white ">Confirm</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
 <div class="container mx-auto my-10">
 	<h1 class="text-3xl text-center font-bold my-10">My Profile</h1>
 	<div class="mx-3 lg:mx-auto py-10 px-5 md:px-16 shadow-md max-w-screen-lg rounded-lg">
@@ -30,7 +68,7 @@
 				</div>
 				<div class="mt-4 flex-grow">
 					<x-input-label for="email" :value="__('Email')" />
-					<x-text-input value="{{ $email }}" id="email" class="block mt-1 w-full" type="email" name="email" required/>
+					<x-text-input value="{{ $email }}" id="email" class="block mt-1 w-full" type="email" name="email" readonly required/>
 					<x-input-error :messages="$errors->get('email')" class="mt-2" />
 				</div>
 			</div>
@@ -41,32 +79,28 @@
 					<x-text-input value="{{ $address }}" id="home_address" class="block mt-1 w-full" type="text" name="address"  required/>
 					<x-input-error :messages="$errors->get('address')" class="mt-2" />
 				</div>
-				<div class="mt-4 ">
-					<x-input-label for="birthdate" :value="__('Date of Birth')" />
-					<x-text-input value="{{ $birthdate }}" id="birthdate" class="block mt-1 w-full" type="date" name="birthdate"  required/>
-					<x-input-error :messages="$errors->get('birthdate')" class="mt-2" />
-				</div>
 			</div>
-
 			<div class="flex flex-col sm:flex-row sm:gap-5">
-				<div class="mt-4 flex-grow">
-					<x-input-label for="password" :value="__('Password')" />
-					<x-text-input id="password" class="block mt-1 w-full"
-									type="password"
-									name="password"
-									required autocomplete="new-password" />
-					<x-input-error :messages="$errors->get('password')" class="mt-2" />
+				<div class="mt-4 flex-grow ">
+						<x-input-label for="sex" :value="__('Sex')" />
+						<select value="{{ $sex }}" name="sex" id="sex" class="block mt-1 w-full border-cyan-600 focus:border-cyan-600 dark:focus:border-cyan-600 focus:ring-cyan-600 dark:focus:ring-cyan-600 rounded-md shadow-sm" required>
+								<option disabled value="">None selected</option>
+								<option value="male">Male</option>
+								<option value="female">Female</option>
+						</select>
+						<x-input-error :messages="$errors->get('sex')" class="mt-2" />
 				</div>
-				<!-- Confirm Password -->
-				<div class="mt-4 flex-col sm:flex-row flex-grow  ">
-					<x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-					<x-text-input id="password_confirmation" class="block mt-1 w-full"
-									type="password"
-									name="password_confirmation" required autocomplete="new-password" />
-					<x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+				<div class="mt-4 flex-grow ">
+						<x-input-label for="birthdate" :value="__('Date of Birth')" />
+						<x-text-input value="{{ $birthdate }}" id="birthdate" class="block mt-1 w-full" type="date" name="birthdate"  required/>
+						<x-input-error :messages="$errors->get('birthdate')" class="mt-2" />
 				</div>
 			</div>
-
+			<div class="flex flex-col sm:flex-row sm:gap-5 mt-4 ">
+				<div class="mt-4 flex-grow ">
+					<button class="change-password-modal font-semibold py-2 px-4 bg-gray-50 border border-solid border-gray-400 rounded-md" type="button">Change Password</button>
+				</div>
+			</div>
 			<div class="flex items-center justify-end mt-4">
 				<x-primary-button class="ms-4 submit-applicant">
 					{{ __('Save') }}
@@ -74,11 +108,76 @@
 			</div>
 		</form>
 		@if (session('success'))
-		<div id="update-success" class="max-w-xs bg-teal-500 text-sm text-white rounded-xl shadow-lg" role="alert">
+		<div class="max-w-xs bg-teal-500 text-sm text-white rounded-xl shadow-lg update-success" role="alert">
 			<div class="flex p-4">
 			{{ session('success') }}
 			<div class="ms-auto">
-				<button type="button" class="inline-flex flex-shrink-0 justify-center items-center size-5 rounded-lg text-white hover:text-white opacity-50 hover:opacity-100 focus:outline-none focus:opacity-100" data-hs-remove-element="#update-success">
+				<button type="button" class="inline-flex flex-shrink-0 justify-center items-center size-5 rounded-lg text-white hover:text-white opacity-50 hover:opacity-100 focus:outline-none focus:opacity-100" data-hs-remove-element=".update-success">
+				<span class="sr-only">Close</span>
+				<svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M18 6 6 18"></path>
+					<path d="m6 6 12 12"></path>
+				</svg>
+				</button>
+			</div>
+			</div>
+		</div>
+		@endif
+		@if (session('successPassword'))
+				<button type="button" class="inline-flex flex-shrink-0 justify-center items-center size-5 rounded-lg text-white hover:text-white opacity-50 hover:opacity-100 focus:outline-none focus:opacity-100" data-hs-remove-element=".update-success">
+		<div class="max-w-xs bg-teal-500 text-sm text-white rounded-xl shadow-lg update-success" role="alert">
+			<div class="flex p-4">
+			{{ session('successPassword') }}
+			<div class="ms-auto">
+				<button type="button" class="inline-flex flex-shrink-0 justify-center items-center size-5 rounded-lg text-white hover:text-white opacity-50 hover:opacity-100 focus:outline-none focus:opacity-100" data-hs-remove-element=".update-success">
+				<span class="sr-only">Close</span>
+				<svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M18 6 6 18"></path>
+					<path d="m6 6 12 12"></path>
+				</svg>
+				</button>
+			</div>
+			</div>
+		</div>
+		@endif
+		@if (session('error'))
+		<div class="max-w-xs bg-red-500 text-sm text-white rounded-xl shadow-lg update-success" role="alert">
+			<div class="flex p-4">
+			{{ session('error') }}
+			<div class="ms-auto">
+				<button type="button" class="inline-flex flex-shrink-0 justify-center items-center size-5 rounded-lg text-white hover:text-white opacity-50 hover:opacity-100 focus:outline-none focus:opacity-100" data-hs-remove-element=".update-success">
+				<span class="sr-only">Close</span>
+				<svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M18 6 6 18"></path>
+					<path d="m6 6 12 12"></path>
+				</svg>
+				</button>
+			</div>
+			</div>
+		</div>
+		@endif
+		@if ($errors->has('new_password'))
+		<div class="max-w-xs bg-red-500 text-sm text-white rounded-xl shadow-lg update-success" role="alert">
+			<div class="flex p-4">
+			{{$errors->first('new_password') }}
+			<div class="ms-auto">
+				<button type="button" class="inline-flex flex-shrink-0 justify-center items-center size-5 rounded-lg text-white hover:text-white opacity-50 hover:opacity-100 focus:outline-none focus:opacity-100" data-hs-remove-element=".update-success">
+				<span class="sr-only">Close</span>
+				<svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M18 6 6 18"></path>
+					<path d="m6 6 12 12"></path>
+				</svg>
+				</button>
+			</div>
+			</div>
+		</div>
+		@endif
+		@if ($errors->has('confirmation_password'))
+		<div class="max-w-xs bg-red-500 text-sm text-white rounded-xl shadow-lg update-success" role="alert">
+			<div class="flex p-4">
+			{{ $errors->first('confirmation_password') }}
+			<div class="ms-auto">
+				<button type="button" class="inline-flex flex-shrink-0 justify-center items-center size-5 rounded-lg text-white hover:text-white opacity-50 hover:opacity-100 focus:outline-none focus:opacity-100" data-hs-remove-element=".update-success">
 				<span class="sr-only">Close</span>
 				<svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 					<path d="M18 6 6 18"></path>
@@ -91,5 +190,36 @@
 		@endif
 	</div>
 </div>
+@section('scripts')
+	<script>
 
+		$(document).ready(function(){
+			$('.change-password-modal').on('click', function(){
+				event.preventDefault();
+				$('.change-password').show();
+			});
+			$('.btn-close-password').on('click', function(){
+				$('.change-password').hide();
+			});
+
+			if ("{{ session('successPassword') }}"){
+				setTimeout(function(){
+					const form = document.createElement('form');
+					form.method = 'POST';
+					form.action = "{{ route('logout') }}";
+					// Include CSRF token for enhanced security
+					const csrfInput = document.createElement('input');
+					csrfInput.type = 'hidden';
+					csrfInput.name = '_token';
+					csrfInput.value = "{{ csrf_token() }}";
+					form.appendChild(csrfInput);
+
+					document.body.appendChild(form);
+					form.submit();
+				}, 2000);
+			}
+		});
+
+	</script>
+@endsection
 @endsection

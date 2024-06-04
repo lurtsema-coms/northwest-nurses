@@ -34,7 +34,6 @@ class ApplicantController extends Controller
             'address' => ['required'],
             'contact_number' => ['required'],
             'contact_number' => ['required'],
-            'password' => ['required', 'confirmed', 'min:8'],
             'first_name' => ['required'],
             'last_name' => ['required'],
             'birthdate' => ['required'],
@@ -46,7 +45,6 @@ class ApplicantController extends Controller
             'email' => $request->email,
             'contact_number' => $request->contact_number,
             'address' => $request->address,
-            'password' => Hash::make($request->password),
         ]);
 
         $user->applicantDetail->update([
@@ -56,5 +54,25 @@ class ApplicantController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Profile updated successfully');
+    }
+
+    public function updatePassword(Request $request, $id)
+    {
+        $user = User::find($id);
+        if (Hash::check($request->all()['current_password'], $user->password)) {
+
+            $request->validate([
+
+                'new_password' => 'required|min:8',
+                'confirmation_password' => 'required|min:8|same:new_password'
+            ]);
+
+            $user->password = Hash::make($request->get('new_password'));
+            $user->save();
+
+            return redirect()->back()->with('successPassword', 'Password updated, you will be logged-out.');
+        } else {
+            return redirect()->back()->with('error', 'Incorrect Current Password.');
+        }
     }
 }

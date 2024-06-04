@@ -58,6 +58,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/my-jobs', [ApplicantController::class, 'myJobs'])->name('applicant.my_jobs');
         Route::get('/my-profile', [ApplicantController::class, 'myProfile'])->name('applicant.profile');
         Route::put('/my-profile/update/{id}', [ApplicantController::class, 'updateMyProfile'])->name('applicant.profile.update');
+        Route::post('/my-profile/update-password/{id}', [ApplicantController::class, 'updatePassword'])->name('applicant.update.password');
+
     });
 });
 

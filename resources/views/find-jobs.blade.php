@@ -1,17 +1,48 @@
 @extends('layouts.applicant')
 @section('content')
+<div class="modal-center modal-applicant fixed inset-0 h-screen w-full bg-black bg-opacity-75  p-4 z-10 overflow-y-auto hidden">
+    <form action="">
+        <div class="modal-box m-auto w-full max-w-3xl bg-white shadow-lg rounded-lg animate-fade-in p-10">
+            <div class="modal-content flex flex-col p-3">
+                <div class="mb-4">
+                    <h1 class="text-xl font-bold text-center mb-2">Want to apply to this job?</h1>
+                    <p class="p-2 text-center">The employer wants to know more about you.</p>
+                    <p class="p-2 text-center italic text-gray-400">Please answer the questions with honesty to the best of your knowledge and belief.</p>
+                </div>
+                <div class="flex flex-col gap-10">
+                    <div class="space-y-3">
+                        <label for="answer_1" class="font-semibold">1. This is a sample question?</label>
+                        <textarea name="answer_1" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
+                    </div>
+                    <div class="space-y-3">
+                        <label for="answer_1" class="font-semibold">2. This is another sample question?</label>
+                        <textarea name="answer_1" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
+                    </div>
+                    <div class="space-y-3">
+                        <label for="answer_1" class="font-semibold">3. Yet another sample question, innit?</label>
+                        <textarea name="answer_1" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
+                    </div>
+                </div>
+                <div class="flex flex-row gap-10 justify-center p-2 mt-5">
+                    <button class="cancel-btn" type="button">Cancel</button>
+                    <button class="submit-applicant-btn font-semibold py-2 px-5 bg-cyan-800 text-white rounded-full" type="submit">Apply</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 <div class="search-section overflow-hidden relative">
     <div class="z-[-1] bg-custom-gradient-y absolute inset-0"></div>
     <img class="absolute z-[-2] min-h-full min-w-full object-cover md:translate-y-[-25%]" src="{{ asset('img/landing-page/image-no-filter.jpg') }}" alt="">
     <div class="search-section-container min-h-96 md:min-h-[500px] relative flex flex-col justify-center md:justify-end">
         <div class="top-search-bar flex flex-col justify-end items-center px-4 md:px-5 md:mt-16 md:pb-10">
-            <form action="" class="search-form container max-w-screen-lg flex flex-col align-center justify-center">
+            <form action="" class="search-form container max-w-screen-lg flex flex-col align-center justify-center md:mb-5">
                 <div class="form-top flex flex-col md:flex-row align-center justify-center">
                     <select class="p-5 py-3 min-w-[300px] text-primary text-lg font-semibold rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl border-none focus:outline-none focus:ring-0" name="" id="">
                         <option value="" selected disabled>Location</option>
-                        <option value="">Quezon City</option>
-                        <option value="">Makati City</option>
-                        <option value="">Mandaluyong City</option>
+                        @foreach (config('global.us_states') as $location)
+                        <option value="">{{ $location }}</option>
+                        @endforeach
                     </select>
                     <input class="py-3 grow border-none text-lg focus:outline-none focus:ring-0 text-primary" type="text" placeholder="Job title or company">
                     <div class="py-3 search-btn-wrapper px-3 rounded-b-2xl md:rounded-bl-none md:rounded-r-2xl bg-white flex items-center content-center ">
@@ -25,7 +56,7 @@
 <div class="container mx-auto px-3 flex flex-col lg:flex-row lg:justify-around py-10 gap-5">
     <div class="job-listing grow md:mx-0 flex flex-col gap-5">
         @for ($i = 0; $i < 10; $i++)
-        <div class="job-list-card lg:max-w-screen-sm bg-white border-2 border-gray-300 p-5 gap-5 rounded-xl">
+        <div class="job-list-card lg:max-w-screen-sm bg-white border-2 border-gray-300 p-5 gap-5 rounded-xl shadow-md">
             <div class="job-list-card-header grow flex flex-row pb-3 justify-between gap-5">
                 <div>
                     <h2 class="font-bold text-2xl">ANCHORAGE, ALASKA</h2>
@@ -52,7 +83,7 @@
                 <p class="font-bold text-primary align-middle text-lg">$3,0492 - $5,839 weekly</p>
                 <button 
                     hx-get="/job-info"
-                    hx-target="#job-info-section"
+                    hx-target=".job-info-section"
                     class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full whitespace-nowrap">
                     View Job
                 </button>
@@ -109,6 +140,14 @@
                 spaceBetween: 0,
             },
         },
+    });
+
+    $(".cancel-btn").click(function() {
+        $(".modal-center").addClass("hidden");
+    });
+
+    $(document).on('click', '#apply-now-btn', function() {
+        $(".modal-center").removeClass("hidden");
     });
 </script>
 @endsection

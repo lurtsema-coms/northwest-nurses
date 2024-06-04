@@ -1,4 +1,4 @@
-<div class="sticky top-0 mx-auto max-w-screen-md bg-white border-2 border-gray-300 gap-5 rounded-xl overflow-hidden">
+<div class="sticky top-0 mx-auto max-w-screen-md bg-white border-2 border-gray-300 gap-5 rounded-xl overflow-hidden shadow-md">
   <div class="w-full max-h-64 overflow-hidden">
       <img class="w-full" src="https://www.shutterstock.com/image-photo/aerial-view-sunset-over-downtown-600nw-2000550491.jpg" alt="">
   </div>
@@ -8,7 +8,12 @@
           <h2 class="font-bold text-2xl text-primary">${{ rand(200, 500) }} - ${{rand(501, 999)}} weekly</h2>
           <div class="flex flex-col sm:flex-row justify-between mt-5 gap-5">
               <p class="text-gray-500">Job Contact | Job ID: {{ rand(0, 9) }}{{ rand(0, 9) }}{{ rand(0, 9) }}{{ rand(0, 9) }}{{ rand(0, 9) }}{{ rand(0, 9) }}{{ rand(0, 9) }}{{ rand(0, 9) }}{{ rand(0, 9) }}</p>
-              <button class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full">Apply Now</button>
+              @auth
+                <button id="apply-now-btn" class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full">Apply Now</button>
+              @endauth
+              @guest
+                <a href="/login" class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full">Login to Apply</a>
+              @endguest
           </div>
       </div>
       <hr class="border-t-2 border-gray-300">

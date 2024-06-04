@@ -5,14 +5,14 @@
     <img class="absolute z-[-2] min-h-full min-w-full object-cover md:translate-y-[-25%]" src="{{ asset('img/landing-page/image-no-filter.jpg') }}" alt="">
     <div class="search-section-container min-h-96 md:min-h-[500px] relative flex flex-col justify-center md:justify-end">
         <div class="top-search-bar flex flex-col justify-end items-center px-4 md:px-5 md:mb-8">
-            <h1 class="text-4xl font-bold text-center text-white md:text-5xl mb-5">Your Gateway to Exceptional Travel Nursing Opportunities</h1>
-            <form action="" class="search-form container max-w-screen-lg flex flex-col align-center justify-center">
+            <h1 class="text-4xl font-bold text-center text-white md:text-5xl mb-5 md:mb-10">Your Gateway to Exceptional Travel Nursing Opportunities</h1>
+            <form action="" class="search-form container max-w-screen-lg flex flex-col align-center justify-center md:mb-5">
                 <div class="form-top flex flex-col md:flex-row align-center justify-center">
                     <select class="p-5 py-3 min-w-[300px] text-primary text-lg font-semibold rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl border-none focus:outline-none focus:ring-0" name="" id="">
                         <option value="" selected disabled>Location</option>
-                        <option value="">Quezon City</option>
-                        <option value="">Makati City</option>
-                        <option value="">Mandaluyong City</option>
+                        @foreach (config('global.us_states') as $location)
+                        <option value="">{{ $location }}</option>
+                        @endforeach
                     </select>
                     <input class="py-3 grow border-none text-lg focus:outline-none focus:ring-0 text-primary" type="text" placeholder="Job title or company">
                     <div class="py-3 search-btn-wrapper px-3 rounded-b-2xl md:rounded-bl-none md:rounded-r-2xl bg-white flex items-center content-center ">
@@ -129,7 +129,7 @@
         </div>
         @endforeach
     </div>
-    <button class="bg-primary mt-3 hover:opacity-75 text-white px-5 py-2 rounded-full whitespace-nowrap">More Jobs</button>
+    <a href="/find-jobs" class="bg-primary mt-3 hover:opacity-75 text-white px-5 py-2 rounded-full whitespace-nowrap">More Jobs</a>
 </div>
 <div class="bg-primary text-white">
     <div class="container mx-auto px-3 flex flex-col justify-center items-center py-10 gap-5">
@@ -154,7 +154,7 @@
                 </p>
             </div>
         </div>
-    <button class="bg-white mt-3 hover:opacity-75 text-primary font-bold px-5 py-2 rounded-full whitespace-nowrap">More Jobs</button>
+    <a href="#" class="bg-white mt-3 hover:opacity-75 text-primary font-bold px-5 py-2 rounded-full whitespace-nowrap">Search jobs now</a>
     </div>
 
 </div>
@@ -166,10 +166,11 @@
         grabCursor: true,
         centeredSlides: true,
         allowTouchMove: false,
-        // autoplay: {
-        //     delay: 5000, 
-        //     disableOnInteraction: false,
-        // },
+        autoplay: {
+            delay: 1000, 
+            disableOnInteraction: false,
+        },
+        loop: true,
         navigation: {
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
