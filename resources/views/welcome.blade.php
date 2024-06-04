@@ -74,7 +74,7 @@
             <p class="text-left w-full"><span class="font-bold">Allied Health</span>: Join the forefront of healthcare innovation as an allied health professional. From radiologic technologists to physical therapists, our allied health positions allow you to utilize your specialized skills in diverse settings.</p>
             <p class="text-left w-full"><span class="font-bold">Per Diem Jobs</span>: Enjoy the flexibility of per diem work with Northwest Nurses. Whether you're looking to supplement your income or prefer a more flexible schedule, our per diem positions offer rewarding experiences without long-term commitment. </p>
         </div>
-        <button class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full whitespace-nowrap">See all services</button>
+        <button class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full whitespace-nowrap">See All Services</button>
     </div>
 </div>
 <div class="bg-primary">
@@ -133,7 +133,7 @@
 </div>
 <div class="bg-primary text-white">
     <div class="container mx-auto px-3 flex flex-col justify-center items-center py-10 gap-5">
-        <h1 class="text-3xl text-center font-bold">How it works</h1>
+        <h1 class="text-3xl text-center font-bold">How It Works</h1>
         <div class="my-5 flex flex-col gap-10 justify-center items-center lg:flex-row lg:justify-between">
             <div class="flex flex-1 flex-col justify-start items-center gap-5">
                 <h4 class="border border-slate-50 px-5 py-1 rounded-full">Step 1: Register</h4>
@@ -154,7 +154,7 @@
                 </p>
             </div>
         </div>
-    <a href="#" class="bg-white mt-3 hover:opacity-75 text-primary font-bold px-5 py-2 rounded-full whitespace-nowrap">Search jobs now</a>
+    <a href="#" class="bg-white mt-3 hover:opacity-75 text-primary font-bold px-5 py-2 rounded-full whitespace-nowrap">Search Jobs Now</a>
     </div>
 
 </div>
