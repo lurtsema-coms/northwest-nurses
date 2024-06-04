@@ -38,12 +38,12 @@
                     <a class="text-md py-2 hover:opacity-75" href="/find-jobs">Find Jobs</a>
                     <a class="text-md py-2 hover:opacity-75" href="#">About Us</a>
                     <a class="text-md py-2 hover:opacity-75" href="#">Contact Us</a>
+                    @guest
+                    <a href="/login" class="account-nav-btn text-md mt-1 py-2 rounded-full md:bg-primary md:px-5 hover:opacity-75 flex flex-row justify-center align-center gap-2" type="submit"><p>Login</p></a>
+                    @endguest
+                    @auth
                     <button class="account-nav-btn text-md mt-1 py-2 rounded-full md:bg-primary md:px-5 hover:opacity-75 flex flex-row justify-center align-center gap-2" type="submit"><p>Account</p><span class="material-symbols-outlined"><span class="material-symbols-outlined">arrow_drop_down</span></button>
                     <div class="account-nav-list flex flex-col pl-5 md:absolute z-10 right-0 top-[100%] md:mt-6 md:mr-4 bg-dark md:py-1 md:px-0" style="display: none">
-                        @guest
-                            <a class="text-md py-2 hover:opacity-75 md:px-5" href="/login">Login</a>
-                        @endguest
-                        @auth
                         @role('applicant')
                         <a class="text-md py-2 hover:opacity-75 md:px-5" href="/my-profile">Profile</a>
                         @endrole
@@ -57,8 +57,8 @@
                             @csrf
                             <button type="submit" class="text-md py-2 hover:opacity-75 md:px-5" href="/logout">Logout</button>
                         </form>
-                        @endauth
                     </div>
+                    @endauth
                 </div>
             </div>
         </nav>        
