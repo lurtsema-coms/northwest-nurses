@@ -7,6 +7,7 @@ export default {
         "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
         "./storage/framework/views/*.php",
         "./resources/views/**/*.blade.php",
+        "node_modules/preline/dist/*.js",
     ],
 
     theme: {
@@ -19,7 +20,6 @@ export default {
                 primary: "#1d5d72",
                 dark: "#0d0d0d",
                 "bg-custom-faded-primary ": "#1d5d72",
-
             },
             backgroundImage: {
                 "custom-gradient-x":
@@ -29,15 +29,15 @@ export default {
             },
             keyframes: {
                 fadeIn: {
-                    '0%': { opacity: 0 },
-                    '100%': { opacity: 1 },
+                    "0%": { opacity: 0 },
+                    "100%": { opacity: 1 },
                 },
             },
             animation: {
-                'fade-in': 'fadeIn 0.3s ease',
+                "fade-in": "fadeIn 0.3s ease",
             },
         },
     },
 
-    plugins: [forms],
+    plugins: [forms, require("preline/plugin")],
 };
