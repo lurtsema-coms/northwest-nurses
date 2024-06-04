@@ -15,14 +15,15 @@ return new class extends Migration
         Schema::create('job_applications', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(JobPosting::class)->constrained();
-            $table->string('status')->length(10);
-            $table->timestamp('created_at');
+            $table->string('status');
+            $table->json('status_history');
             $table->text('answer_1')->nullable();
             $table->text('answer_2')->nullable();
             $table->text('answer_3')->nullable();
             $table->integer('created_by')->length(10)->unsigned();
             $table->integer('updated_by')->length(10)->unsigned();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

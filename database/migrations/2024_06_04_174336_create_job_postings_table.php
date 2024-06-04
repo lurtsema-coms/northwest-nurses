@@ -13,16 +13,17 @@ return new class extends Migration
     {
         Schema::create('job_postings', function (Blueprint $table) {
             $table->id();
-            $table->string('address');
-            $table->string('img_link');
+            $table->string('status');
+            $table->text('address');
+            $table->text('img_link');
             $table->string('profession');
-            $table->integer('pay');
-            $table->integer('assignment_length')->length(10);
+            $table->string('pay');
+            $table->string('assignment_length');
             $table->string('schedule');
-            $table->integer('openings');
-            $table->timestamp('start_date');
+            $table->integer('openings')->unsigned();
+            $table->date('start_date');
             $table->text('experience');
-            $table->string('job_description');
+            $table->text('job_description');
             $table->text('responsibilities');
             $table->text('requirements');
             $table->text('question_1')->nullable();
@@ -31,6 +32,7 @@ return new class extends Migration
             $table->integer('created_by')->length(10)->unsigned();
             $table->integer('updated_by')->length(10)->unsigned();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
