@@ -39,6 +39,7 @@ class DatabaseSeeder extends Seeder
             'first_name' => 'Applicant',
             'last_name' => 'Test',
             'birthdate' => '2000-01-01',
+            'sex' => 'male',
         ]);
     }
 }
