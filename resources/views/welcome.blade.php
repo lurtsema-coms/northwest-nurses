@@ -2,7 +2,7 @@
 @section('content')
 <div class="search-section overflow-hidden relative">
     <div class="z-[-1] bg-custom-gradient-y absolute inset-0"></div>
-    <img class="absolute z-[-2] min-h-full min-w-full object-cover" src="https://dailymedia.case.edu/wp-content/uploads/2020/01/16155303/nurse_smiling.jpg" alt="">
+    <img class="absolute z-[-2] min-h-full min-w-full object-cover translate-y-[-20%]" src="{{ asset('img/landing-page/Image 1.png') }}" alt="">
     <div class="search-section-container min-h-96 md:min-h-[500px] relative flex flex-col justify-center md:justify-end">
         <div class="top-search-bar flex flex-col justify-end items-center px-4 md:px-5 md:mb-8">
             <h1 class="text-4xl font-bold text-center text-white md:text-5xl mb-5">Your Gateway to Exceptional Travel Nursing Opportunities</h1>
@@ -27,25 +27,37 @@
     <div class="swiper">
         <div class="swiper-wrapper">
             <div class="swiper-slide opacity-75 hover:opacity-100 cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
-                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT7y_xzKCa_ladoAzMu1OKA55QXbum2TLUVw&s" alt="">
+                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-01.jpg') }}" alt="">
             </div>
             <div class="swiper-slide opacity-75 hover:opacity-100 cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
-                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX67GcRC75x4TvckqTl72WXzMM5yUTF1QExQ&s" alt="">
+                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-02.jpg') }}" alt="">
             </div>
             <div class="swiper-slide opacity-75 hover:opacity-100 cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
-                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9vzG0TMHpg4jp3Zeu0TEExmq1E9MgUa2FOg&s" alt="">
+                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-03.jpg') }}" alt="">
             </div>
             <div class="swiper-slide opacity-75 hover:opacity-100 cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
-                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="https://media.post.rvohealth.io/wp-content/uploads/2021/06/Female_Registered_Nurse_1200x628-facebook-1200x628.jpg" alt="">
+                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-04.jpg') }}" alt="">
             </div>
             <div class="swiper-slide opacity-75 hover:opacity-100 cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
-                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="https://www.intelycare.com/wp-content/uploads/2023/04/types-of-nurses.jpeg" alt="">
+                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-05.jpg') }}" alt="">
             </div>
             <div class="swiper-slide opacity-75 hover:opacity-100 cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
-                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="https://www.forbes.com/advisor/wp-content/uploads/2023/04/nurse-helping-patient.jpeg.jpg" alt="">
+                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-06.jpg') }}" alt="">
             </div>
             <div class="swiper-slide opacity-75 hover:opacity-100 cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
-                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCwTDbwCM1U7_bDNg1j5n4o46kmjJrE-OPcTjHE-HTXbJYjbBjG0tYgHjph_mGcdJt7H0&usqp=CAU" alt="">
+                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-07.jpg') }}" alt="">
+            </div>
+            <div class="swiper-slide opacity-75 hover:opacity-100 cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
+                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-08.jpg') }}" alt="">
+            </div>
+            <div class="swiper-slide opacity-75 hover:opacity-100 cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
+                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-09.jpg') }}" alt="">
+            </div>
+            <div class="swiper-slide opacity-75 hover:opacity-100 cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
+                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-10.jpg') }}" alt="">
+            </div>
+            <div class="swiper-slide opacity-75 hover:opacity-100 cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
+                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-11.jpg') }}" alt="">
             </div>
         </div>
     
@@ -70,7 +82,7 @@
         <div class="flex flex-col md:flex-row md:justify-evenly md:items-stretch w-full">
             <div class="flex-1 min-h-[300px] relative overflow-hidden">
                 <div class="bg-custom-gradient-x absolute inset-0 z-10 "></div>
-                <img class="min-w-full min-h-full absolute object-cover top-0" src="https://cdn-cmdne.nitrocdn.com/hNJckCstFVQjUckKaelcVKoVJrzdTVkW/assets/images/optimized/rev-ce006a7/www.provocollege.edu/wp-content/uploads/2023/02/shutterstock_1724802532-scaled.jpg" alt="Sample Image">
+                <img class="min-w-full min-h-full absolute object-cover top-0" src="{{ asset('img/stock/landing-05.jpg') }}" alt="Sample Image">
             </div>
             <div class="bg-primary text-white p-10 m-0 md:w-1/2 flex flex-col">
                 <h2 class="text-3xl font-bold mb-3">Why Us?</h2>
