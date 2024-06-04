@@ -10,11 +10,11 @@
                 <option value="">500</option>
                 <option value="">1000</option>
             </select>
-            <a href="#">
+            <button hx-trigger="click" hx-get="{{ route('employer.job.add') }}" hx-target="#target-content" hx-push-url="true"> 
                 <div class="bg-cyan-600 text-white text-sm border h-10 flex items-center justify-center px-4 rounded-md hover:opacity-70">
                     Add Job
                 </div>
-            </a>
+            </button>
         </div>
         <div class="">
             <input class="h-10 w-72 rounded-lg border border-gray-200 focus:border-slate-400 focus:ring-0 focus:outline-none placeholder:text-slate-400" type="text" placeholder="Search...">

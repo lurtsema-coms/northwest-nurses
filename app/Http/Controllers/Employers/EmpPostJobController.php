@@ -19,6 +19,19 @@ class EmpPostJobController extends Controller
         }
     }
 
+    public function getAdd(Request $request){
+
+        $data = [];
+        $data['module_title'] = 'Add Jobs';
+
+        
+        if ($request->header('HX-Request')) {
+            return view('components.employer.jobs-view', $data)->render() . view('components.employer.module-title', $data);
+        } else {
+            return view('layouts.employer.jobs-add', $data);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      */

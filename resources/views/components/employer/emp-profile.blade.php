@@ -1,6 +1,8 @@
 <div class="bg-white mx-auto max-w-3xl p-10 rounded-xl shadow-sm text-slate-600">
-    <p class="font-bold mb-5">Edit</p>
-    <form hx-post="{{ route('employer.profile.update', auth()->user()->id) }}">
+    <p class="font-bold mb-5">Edit Profile</p>
+    <div id="error-messages">
+    </div>
+    <form hx-post="{{ route('employer.profile.update', auth()->user()->id) }}" hx-target="#error-messages" hx-swap="innerHTML" hx-on::after-request="$('#password').val(''); $('#password_confirmation').val('')" autocomplete="off">
         @csrf
         <div class="space-y-5 text-slate-500">
             <div class="flex flex-wrap gap-5">
@@ -32,11 +34,11 @@
             <div class="flex flex-wrap gap-5">
                 <div class="flex flex-col flex-1 space-y-2">
                     <span class="font-medium">Change Password</span>
-                    <input class="h-10 text-sm px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="password" name="">
+                    <input class="h-10 text-sm px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" id="password" type="password" name="password">
                 </div>
                 <div class="flex flex-col flex-1 space-y-2">
                     <span class="font-medium">Confirm Password</span>
-                    <input class="h-10 text-sm px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="password" name="password_confirmation">
+                    <input class="h-10 text-sm px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" id="password_confirmation" type="password" name="password_confirmation">
                 </div>
             </div>
             <div class="text-end">
@@ -45,3 +47,25 @@
         </div>
     </form>
 </div>
+
+<div class="success-toast">
+
+</div>
+
+@section('script')
+<script>
+    $("#password_confirmation").on('input', function(){
+        if ($(this).val() != ''){
+            $("#password").attr('required', true);
+        } else {
+            $("#password").attr('required', false);
+        }
+    });
+
+    $('input').keypress(function(event) {
+        if (event.which === 13) {
+            event.preventDefault();
+        }
+    });
+</script>
+@endsection

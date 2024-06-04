@@ -69,10 +69,27 @@ class EmpProfileController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+        $validator = \Validator::make($request->all(), [
+            'company_email' => 'required|email',
+            'company_contact_number' => 'required',
+            'company_address' => 'required',
+            'company_name' => 'required',
+            'company_website' => 'required',
+            'password' => 'nullable|min:8|confirmed',
+        ]);
+
+        if ($validator->fails()) {
+            $errors = $validator->errors()->all();
+
+            return view('components.employer.custom.update-profile', compact('errors'))->render();
+        }
+
         $input = $request->all();
 
-        User::find($id)
-            ->update([
+        $user = User::find($id);
+
+        $user->update([
                 'email' => $input['company_email'],
                 'contact_number' => $input['company_contact_number'],
                 'address' => $input['company_address'],
@@ -88,7 +105,14 @@ class EmpProfileController extends Controller
             ]
         );
 
-        return 'success';
+        if($input['password']){
+            $user->update([
+                'password' => password_hash($input['password'],  PASSWORD_DEFAULT),
+            ]
+            );
+        }
+
+        return '<p class="font-bold mb-4 text-green-500">Edited Successfully</p>';
     }
 
     /**
