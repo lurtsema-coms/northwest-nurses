@@ -85,7 +85,7 @@
                 <img class="min-w-full min-h-full absolute object-cover top-0" src="{{ asset('img/stock/landing-05.jpg') }}" alt="Sample Image">
             </div>
             <div class="bg-primary text-white p-10 m-0 md:w-1/2 flex flex-col">
-                <h2 class="text-3xl font-bold mb-3">Why Us?</h2>
+                <h2 class="text-4xl font-bold mb-3">Why Us?</h2>
                 <p class="text-md leading-5 mb-3">When you choose Northwest Nurses, you're joining a community of satisfied healthcare professionals who trust us for:</p>
                 <div class="flex flex-col xl:flex-row gap-5">
                     <div class="my-2">
@@ -102,7 +102,7 @@
     </div>
 </div>
 <div class="container mx-auto px-3 flex flex-col justify-center items-center py-10 gap-5">
-    <h1 class="text-3xl text-center font-extrabold">Most Recent Job Postings</h1>
+    <h1 class="text-4xl text-center font-extrabold mb-5">Most Recent Job Postings</h1>
     <div class="grid gap-5 md:grid-cols-2 2xl:grid-cols-3">
         @php
             $photoLinks = [
@@ -133,7 +133,7 @@
 </div>
 <div class="bg-primary text-white">
     <div class="container mx-auto px-3 flex flex-col justify-center items-center py-10 gap-5">
-        <h1 class="text-3xl text-center font-bold">How It Works</h1>
+        <h1 class="text-4xl text-center font-bold">How It Works</h1>
         <div class="my-5 flex flex-col gap-10 justify-center items-center lg:flex-row lg:justify-between">
             <div class="flex flex-1 flex-col justify-start items-center gap-5">
                 <h4 class="border border-slate-50 px-5 py-1 rounded-full">Step 1: Register</h4>
