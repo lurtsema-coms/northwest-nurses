@@ -55,4 +55,24 @@ class ApplicantController extends Controller
 
         return redirect()->back()->with('success', 'Profile updated successfully');
     }
+
+    public function updatePassword(Request $request, $id)
+    {
+        $user = User::find($id);
+        if (Hash::check($request->all()['current_password'], $user->password)) {
+
+            $request->validate([
+
+                'new_password' => 'required|min:8',
+                'confirmation_password' => 'required|min:8|same:new_password'
+            ]);
+
+            $user->password = Hash::make($request->get('new_password'));
+            $user->save();
+
+            return redirect()->back()->with('successPassword', 'Password updated, you will be logged-out.');
+        } else {
+            return redirect()->back()->with('error', 'Incorrect Current Password.');
+        }
+    }
 }
