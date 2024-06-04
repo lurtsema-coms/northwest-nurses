@@ -20,8 +20,8 @@
                 {{ $slot }}
             </div>
             <div class="w-full flex-1 hidden sm:block relative bg-contain bg-no-repeat bg-center">
-                <img class="absolute object-cover min-h-full min-w-full top-0 z-10" src="{{asset('img/nurse_bg.jpg')}}" alt="">
-                <div class="bg-primary w-full h-full absolute inset-0 z-20 opacity-75">
+                <img class="absolute object-cover min-h-full min-w-full top-0 z-10" src="{{asset('img/nurses.png')}}" alt="">
+                <div class=" w-full h-full absolute inset-0 z-20 opacity-75">
                 </div>
             </div>
         </div>
