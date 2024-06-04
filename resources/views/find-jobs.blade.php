@@ -9,9 +9,9 @@
                 <div class="form-top flex flex-col md:flex-row align-center justify-center">
                     <select class="p-5 py-3 min-w-[300px] text-primary text-lg font-semibold rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl border-none focus:outline-none focus:ring-0" name="" id="">
                         <option value="" selected disabled>Location</option>
-                        <option value="">Quezon City</option>
-                        <option value="">Makati City</option>
-                        <option value="">Mandaluyong City</option>
+                        @foreach (config('global.us_states') as $location)
+                        <option value="">{{ $location }}</option>
+                        @endforeach
                     </select>
                     <input class="py-3 grow border-none text-lg focus:outline-none focus:ring-0 text-primary" type="text" placeholder="Job title or company">
                     <div class="py-3 search-btn-wrapper px-3 rounded-b-2xl md:rounded-bl-none md:rounded-r-2xl bg-white flex items-center content-center ">
