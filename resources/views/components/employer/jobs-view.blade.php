@@ -12,7 +12,7 @@
     <form action="{{ route('employer.job.add-jobs') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="w-full max-w-[45.5rem]">
-            <div class="font-medium text-slate-600 mb-3">Upload Image</div>
+            <div class="font-medium text-slate-600 mb-3">Upload Image <span class="text-red-400">*</span></div>
             
             <div class="flex items-center justify-center w-full">
                 <label for="dropzone-file" id="dropzone-parent" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600" draggable="true">
@@ -122,7 +122,7 @@
 
     $(document).ready(function() {
 
-        $('input,textarea').attr('required', false)
+        // $('input,textarea').attr('required', false);
 
         let dropzone = document.getElementById('dropzone-parent');
         
