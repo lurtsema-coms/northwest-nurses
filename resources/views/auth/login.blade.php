@@ -7,7 +7,7 @@
 
         <div class="mb-6">
             <h1 class="text-2xl  text-cyan-600 text-center sm:text-start">WELCOME TO</h1>
-            <h1 class="text-5xl font-bold text-cyan-600 mb-5 text-center sm:text-start">North West Nurses</h1>
+            <h1 class="text-5xl font-bold text-cyan-600 mb-5 text-center sm:text-start">Northwest Nurses</h1>
             <span class="font-bold">Doesn't have an account yet? <a href="/register" class="text-cyan-600 underline font-bold">Sign Up</a></span>
         </div>
         
