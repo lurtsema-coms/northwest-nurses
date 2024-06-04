@@ -72,24 +72,20 @@
                         <p class="text-lg">Reach out to Northwest Nurses today to learn more about our exciting opportunities.</p>
                         <p class="mt-5">info@northwestnurses.com</p>
                     </div>
-                    <div class="grow flex flex-col 2xl:flex-row 2xl:justify-between gap-8">
-                        <div class="2xl:flex-1">
+                    <div class="grow flex flex-col md:flex-row md:justify-between gap-8">
+                        <div class="md:flex-1">
                             <h3 class="font-bold">For Employers</h3>
-                            <p class="mt-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro quidem veritatis aliquam aut excepturi provident numquam quis pariatur nostrum. Nam ea consequuntur a aut molestiae veritatis quasi quidem voluptatibus consectetur?</p>
+                            <p class="mt-2">Northwest Nurses empowers healthcare leaders by providing them with the necessary tools and data to enhance their management of workforce.</p>
                         </div>
-                        <div class="2xl:flex-1">
+                        <div class="md:flex-1">
                             <h3 class="font-bold">For Applicants</h3>
-                            <p class="mt-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro quidem veritatis aliquam aut excepturi provident numquam quis pariatur nostrum. Nam ea consequuntur a aut molestiae veritatis quasi quidem voluptatibus consectetur? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo, optio in sed reiciendis, voluptas minima cupiditate quasi nihil enim cumque exercitationem est autem? Voluptatum itaque aliquid et, quidem deleniti aspernatur.</p>
-                        </div>
-                        <div class="2xl:flex-1">
-                            <h3 class="font-bold">About</h3>
-                            <p class="mt-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro quidem veritatis aliquam aut excepturi provident numquam quis pariatur nostrum. Nam ea consequuntur a aut molestiae veritatis quasi quidem voluptatibus consectetur?</p>
+                            <p class="mt-2">Northwest Nurses provides the opportunity for Travel Nursing, Allied & Per Diem Jobs with ease - directly connecting you with the best healthcare facilities.
+                            </p>
                         </div>
                     </div>
                 </div>
                 <div class="mt-10">
                     <p class="text-gray-500">All rights reserve <span>{{ date('Y') }}</span></p>
-
                 </div>
             </div>
         </footer>
