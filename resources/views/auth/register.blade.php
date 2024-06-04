@@ -171,8 +171,8 @@
                             <x-input-error :messages="$errors->get('company_name')" class="mt-2" />
                         </div>
                         <div class="mt-4 sm:mt-0 flex-grow">
-                            <x-input-label for="company_website" :value="__('Company Website')" />
-                            <x-text-input id="company_website" class="block mt-1 w-full" type="text" name="company_website" required autofocus/>
+                            <x-input-label for="company_website" :value="__('Company Website Link')" />
+                            <x-text-input id="company_website" class="block mt-1 w-full" type="text" name="company_website" placeholder="Not Required" autofocus/>
                             <x-input-error :messages="$errors->get('company_website')" class="mt-2" />
                         </div>
                     </div>
@@ -183,7 +183,7 @@
                             <x-input-error :messages="$errors->get('company_number')" class="mt-2" />
                         </div>
                         <div class="mt-4 flex-grow">
-                            <x-input-label for="contact_email" :value="__('Contact Email')" />
+                            <x-input-label for="contact_email" :value="__('Contact Email')" /> 
                             <x-text-input id="contact_email" class="block mt-1 w-full" type="email" name="email"  required/>
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
