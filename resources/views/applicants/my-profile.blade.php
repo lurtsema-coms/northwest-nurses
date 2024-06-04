@@ -124,7 +124,6 @@
 		</div>
 		@endif
 		@if (session('successPassword'))
-				<button type="button" class="inline-flex flex-shrink-0 justify-center items-center size-5 rounded-lg text-white hover:text-white opacity-50 hover:opacity-100 focus:outline-none focus:opacity-100" data-hs-remove-element=".update-success">
 		<div class="max-w-xs bg-teal-500 text-sm text-white rounded-xl shadow-lg update-success" role="alert">
 			<div class="flex p-4">
 			{{ session('successPassword') }}
