@@ -25,7 +25,7 @@
 <div class="container mx-auto px-3 flex flex-col lg:flex-row lg:justify-around py-10 gap-5">
     <div class="job-listing grow md:mx-0 flex flex-col gap-5">
         @for ($i = 0; $i < 10; $i++)
-        <div class="job-list-card lg:max-w-screen-sm bg-white border-2 border-gray-300 p-5 gap-5 rounded-xl">
+        <div class="job-list-card lg:max-w-screen-sm bg-white border-2 border-gray-300 p-5 gap-5 rounded-xl shadow-md">
             <div class="job-list-card-header grow flex flex-row pb-3 justify-between gap-5">
                 <div>
                     <h2 class="font-bold text-2xl">ANCHORAGE, ALASKA</h2>

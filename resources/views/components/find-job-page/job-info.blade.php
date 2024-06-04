@@ -1,4 +1,4 @@
-<div class="sticky top-0 mx-auto max-w-screen-md bg-white border-2 border-gray-300 gap-5 rounded-xl overflow-hidden">
+<div class="sticky top-0 mx-auto max-w-screen-md bg-white border-2 border-gray-300 gap-5 rounded-xl overflow-hidden shadow-md">
   <div class="w-full max-h-64 overflow-hidden">
       <img class="w-full" src="https://www.shutterstock.com/image-photo/aerial-view-sunset-over-downtown-600nw-2000550491.jpg" alt="">
   </div>
