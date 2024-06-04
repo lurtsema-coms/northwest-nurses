@@ -5,7 +5,7 @@
     <img class="absolute z-[-2] min-h-full min-w-full object-cover md:translate-y-[-25%]" src="{{ asset('img/landing-page/image-no-filter.jpg') }}" alt="">
     <div class="search-section-container min-h-96 md:min-h-[500px] relative flex flex-col justify-center md:justify-end">
         <div class="top-search-bar flex flex-col justify-end items-center px-4 md:px-5 md:mt-16 md:pb-10">
-            <form action="" class="search-form container max-w-screen-lg flex flex-col align-center justify-center">
+            <form action="" class="search-form container max-w-screen-lg flex flex-col align-center justify-center md:mb-5">
                 <div class="form-top flex flex-col md:flex-row align-center justify-center">
                     <select class="p-5 py-3 min-w-[300px] text-primary text-lg font-semibold rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl border-none focus:outline-none focus:ring-0" name="" id="">
                         <option value="" selected disabled>Location</option>
@@ -52,7 +52,7 @@
                 <p class="font-bold text-primary align-middle text-lg">$3,0492 - $5,839 weekly</p>
                 <button 
                     hx-get="/job-info"
-                    hx-target="#job-info-section"
+                    hx-target=".job-info-section"
                     class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full whitespace-nowrap">
                     View Job
                 </button>
