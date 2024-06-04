@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class ApplicantController extends Controller
 {
@@ -29,11 +30,11 @@ class ApplicantController extends Controller
         }
 
         $request->validate([
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class, 'email')->ignore($userId)],
             'address' => ['required'],
             'contact_number' => ['required'],
             'contact_number' => ['required'],
-            'password' => ['required', 'confirmed'],
+            'password' => ['required', 'confirmed', 'min:8'],
             'first_name' => ['required'],
             'last_name' => ['required'],
             'birthdate' => ['required'],
@@ -53,5 +54,7 @@ class ApplicantController extends Controller
             'last_name' => $request->last_name,
             'birthdate' => $request->birthdate,
         ]);
+
+        return redirect()->back()->with('success', 'Profile updated successfully');
     }
 }
