@@ -83,10 +83,10 @@
 			<div class="flex flex-col sm:flex-row sm:gap-5">
 				<div class="mt-4 flex-grow ">
 						<x-input-label for="sex" :value="__('Sex')" />
-						<select value="{{ $sex }}" name="sex" id="sex" class="block mt-1 w-full border-cyan-600 focus:border-cyan-600 dark:focus:border-cyan-600 focus:ring-cyan-600 dark:focus:ring-cyan-600 rounded-md shadow-sm" required>
+						<select name="sex" id="sex" class="block mt-1 w-full border-cyan-600 focus:border-cyan-600 dark:focus:border-cyan-600 focus:ring-cyan-600 dark:focus:ring-cyan-600 rounded-md shadow-sm" required>
 								<option disabled value="">None selected</option>
-								<option value="male">Male</option>
-								<option value="female">Female</option>
+								<option value="male" {{ $sex === "male" ? "selected" : "" }}>Male</option>
+								<option value="female" {{ $sex === "female" ? "selected" : "" }}>Female</option>
 						</select>
 						<x-input-error :messages="$errors->get('sex')" class="mt-2" />
 				</div>

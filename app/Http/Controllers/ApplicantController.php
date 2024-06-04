@@ -51,6 +51,7 @@ class ApplicantController extends Controller
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'birthdate' => $request->birthdate,
+            'sex' => $request->sex,
         ]);
 
         return redirect()->back()->with('success', 'Profile updated successfully');
