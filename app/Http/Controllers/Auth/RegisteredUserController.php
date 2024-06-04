@@ -52,7 +52,6 @@ class RegisteredUserController extends Controller
         else if ($role == 'employer'){
             $request->validate([
                 'company_name' => ['required'],
-                'company_website' => ['required'],
             ]);
         }
 
