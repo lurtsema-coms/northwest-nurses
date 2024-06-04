@@ -1,11 +1,9 @@
 <?php
 
-use App\Http\Controllers\Employers\DashboardController;
+use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\Employers\EmpDashboardController;
 use App\Http\Controllers\Employers\EmpPostJobController;
 use App\Http\Controllers\Employers\EmpProfileController;
-use App\Http\Controllers\ProfileController;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\VerifyEmailController;
@@ -55,10 +53,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //applicant route group
     Route::middleware('role:applicant')->group(function () {
-        Route::get('/my-jobs', function () {
-            return view('applicant.my-jobs');
-        })->name('applicant.my_jobs');
-        Route::get('/my-profile', [EmpProfileController::class, 'index'])->name('applicant.profile');
+        Route::get('/my-jobs', [ApplicantController::class, 'myJobs'])->name('applicant.my_jobs');
+        Route::get('/my-profile', [ApplicantController::class, 'myProfile'])->name('applicant.profile');
+        Route::put('/my-profile/update/{id}', [ApplicantController::class, 'updateMyProfile'])->name('applicant.profile.update');
     });
 });
 

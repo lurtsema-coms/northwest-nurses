@@ -45,7 +45,7 @@
                         @endguest
                         @auth
                         @role('applicant')
-                        <a class="text-md py-2 hover:opacity-75 md:px-5" href="#">Profile</a>
+                        <a class="text-md py-2 hover:opacity-75 md:px-5" href="/my-profile">Profile</a>
                         @endrole
                         @role('employer')
                         <a class="text-md py-2 hover:opacity-75 md:px-5" href="/employer-dashboard">Dashboard</a>
