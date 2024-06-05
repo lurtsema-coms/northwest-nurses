@@ -9,7 +9,12 @@
           <div class="flex flex-col sm:flex-row justify-between mt-5 gap-5">
               <p class="text-gray-500">Job Contact | Job ID: {{ rand(0, 9) }}{{ rand(0, 9) }}{{ rand(0, 9) }}{{ rand(0, 9) }}{{ rand(0, 9) }}{{ rand(0, 9) }}{{ rand(0, 9) }}{{ rand(0, 9) }}{{ rand(0, 9) }}</p>
               @auth
+              @role('applicant')
                 <button id="apply-now-btn" class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full">Apply Now</button>
+              @endrole
+              @role('employer')
+                <button class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full opacity-75" disabled>Apply Now</button>
+              @endrole
               @endauth
               @guest
                 <a href="/login" class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full">Login to Apply</a>

@@ -4,12 +4,21 @@ namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
 use App\Mail\ContactUsResponseNotif;
+use App\Models\JobPosting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class GuestController extends Controller
 {
+    public function index(Request $request)
+    {
+        $mostRecentJobPostings = (new JobPosting())->getRecentJobPostings();
+        $data = [];
+        $data['mostRecentJobPostings'] = $mostRecentJobPostings;
+        return view('welcome', $data);
+    }
+
     public function findJobs(Request $request)
     {
         return view('find-jobs');
