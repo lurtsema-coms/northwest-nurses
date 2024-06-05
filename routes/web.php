@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\ApplicantController;
+use App\Http\Controllers\Applicant\ApplicantController;
 use App\Http\Controllers\Employers\EmpDashboardController;
 use App\Http\Controllers\Employers\EmpPostJobController;
 use App\Http\Controllers\Employers\EmpProfileController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Guest\GuestController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -25,9 +26,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/find-jobs', function () {
-    return view('find-jobs');
+Route::get('/find-jobs', [GuestController::class, 'findJobs'])->name('find-jobs');
+
+Route::get('/contact-us', function () {
+    return view('contact-us');
 });
+
+Route::post('/contact-us', [GuestController::class, 'submitContactUsResponse'])->name('contact-us.submit');
 
 route::get('/backend-layout', function () {
     return view('layouts.backend-layout');
@@ -40,6 +45,7 @@ route::get('/backend-layout', function () {
 Route::get('/job-info', function () {
     return view('components.find-job-page.job-info');
 });
+
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -59,7 +65,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/my-profile', [ApplicantController::class, 'myProfile'])->name('applicant.profile');
         Route::put('/my-profile/update/{id}', [ApplicantController::class, 'updateMyProfile'])->name('applicant.profile.update');
         Route::post('/my-profile/update-password/{id}', [ApplicantController::class, 'updatePassword'])->name('applicant.update.password');
-
     });
 });
 

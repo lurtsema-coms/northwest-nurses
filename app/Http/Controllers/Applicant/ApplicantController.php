@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Applicant;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -51,6 +52,7 @@ class ApplicantController extends Controller
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'birthdate' => $request->birthdate,
+            'sex' => $request->sex,
         ]);
 
         return redirect()->back()->with('success', 'Profile updated successfully');

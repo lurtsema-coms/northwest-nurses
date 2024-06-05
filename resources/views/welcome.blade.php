@@ -1,20 +1,20 @@
 @extends('layouts.applicant')
 @section('content')
 <div class="search-section overflow-hidden relative">
-    <div class="z-[-1] bg-custom-gradient-y absolute inset-0"></div>
+    <div class="z-[-1] bg-custom-gradient-x md:bg-custom-gradient-y absolute inset-0"></div>
     <img class="absolute z-[-2] min-h-full min-w-full object-cover md:translate-y-[-25%]" src="{{ asset('img/landing-page/image-no-filter.jpg') }}" alt="">
     <div class="search-section-container min-h-96 md:min-h-[500px] relative flex flex-col justify-center md:justify-end">
         <div class="top-search-bar flex flex-col justify-end items-center px-4 md:px-5 md:mb-8">
             <h1 class="text-4xl font-bold text-center text-white md:text-5xl mb-5 md:mb-10">Your Gateway to Exceptional Travel Nursing Opportunities</h1>
-            <form action="" class="search-form container max-w-screen-lg flex flex-col align-center justify-center md:mb-5">
+            <form action="/find-jobs" method="GET" class="search-form container max-w-screen-lg flex flex-col align-center justify-center md:mb-5">
                 <div class="form-top flex flex-col md:flex-row align-center justify-center">
-                    <select class="p-5 py-3 min-w-[300px] text-primary text-lg font-semibold rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl border-none focus:outline-none focus:ring-0" name="" id="">
+                    <select name="location" class="p-5 py-3 min-w-[300px] text-primary text-lg font-semibold rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl border-none focus:outline-none focus:ring-0" name="" id="">
                         <option value="" selected disabled>Location</option>
                         @foreach (config('global.us_states') as $location)
-                        <option value="">{{ $location }}</option>
+                        <option value="{{ $location }}">{{ $location }}</option>
                         @endforeach
                     </select>
-                    <input class="py-3 grow border-none text-lg focus:outline-none focus:ring-0 text-primary" type="text" placeholder="Job title or company">
+                    <input name="query" class="py-3 grow border-none text-lg focus:outline-none focus:ring-0 text-primary" type="text" placeholder="Job title or company">
                     <div class="py-3 search-btn-wrapper px-3 rounded-b-2xl md:rounded-bl-none md:rounded-r-2xl bg-white flex items-center content-center ">
                         <button class="bg-primary hover:opacity-75 text-white text-lg px-5 py-2 rounded-full flex-grow flex flex-row justify-center align-center gap-2" type="submit"><p>Search</p> <span class="material-symbols-outlined">search</span></button>
                     </div>
@@ -85,7 +85,7 @@
                 <img class="min-w-full min-h-full absolute object-cover top-0" src="{{ asset('img/stock/landing-05.jpg') }}" alt="Sample Image">
             </div>
             <div class="bg-primary text-white p-10 m-0 md:w-1/2 flex flex-col">
-                <h2 class="text-3xl font-bold mb-3">Why Us?</h2>
+                <h2 class="text-4xl font-bold mb-3">Why Us?</h2>
                 <p class="text-md leading-5 mb-3">When you choose Northwest Nurses, you're joining a community of satisfied healthcare professionals who trust us for:</p>
                 <div class="flex flex-col xl:flex-row gap-5">
                     <div class="my-2">
@@ -102,7 +102,7 @@
     </div>
 </div>
 <div class="container mx-auto px-3 flex flex-col justify-center items-center py-10 gap-5">
-    <h1 class="text-3xl text-center font-extrabold">Most Recent Job Postings</h1>
+    <h1 class="text-4xl text-center font-extrabold mb-5">Most Recent Job Postings</h1>
     <div class="grid gap-5 md:grid-cols-2 2xl:grid-cols-3">
         @php
             $photoLinks = [
@@ -133,7 +133,7 @@
 </div>
 <div class="bg-primary text-white">
     <div class="container mx-auto px-3 flex flex-col justify-center items-center py-10 gap-5">
-        <h1 class="text-3xl text-center font-bold">How It Works</h1>
+        <h1 class="text-4xl text-center font-bold">How It Works</h1>
         <div class="my-5 flex flex-col gap-10 justify-center items-center lg:flex-row lg:justify-between">
             <div class="flex flex-1 flex-col justify-start items-center gap-5">
                 <h4 class="border border-slate-50 px-5 py-1 rounded-full">Step 1: Register</h4>
