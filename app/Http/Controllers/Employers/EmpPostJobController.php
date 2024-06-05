@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\JobPosting;
 use Illuminate\Http\Request;
 use Spatie\ImageOptimizer\OptimizerChainFactory;
+use Image;
 
 class EmpPostJobController extends Controller
 {
@@ -81,12 +82,16 @@ class EmpPostJobController extends Controller
         // Move the image to the public directory
         $file_img->move(public_path('img/job-cover'), $file_name);
 
-        // Get the full path of the uploaded image
-        $uploadedFilePath = public_path("img/job-cover/$file_name");
+        // Open the image using Intervention Image
+        $image = Image::make(public_path('img/job-cover') . '/' . $file_name);
 
-        // Optimize the image
-        $optimizerChain = OptimizerChainFactory::create();
-        $optimizerChain->optimize($uploadedFilePath);
+        // Resize the image to your desired dimensions (optional)
+        $image->resize(800, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+
+        // Optimize and save the image
+        $image->save(public_path('img/job-cover') . '/' . $file_name, 80);
         
         JobPosting::find($job_posting->id)
             ->update(['img_link' => $file_name]);
