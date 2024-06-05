@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ApplicantController;
+use App\Http\Controllers\Applicant\ApplicantController;
 use App\Http\Controllers\Employers\EmpDashboardController;
 use App\Http\Controllers\Employers\EmpPostJobController;
 use App\Http\Controllers\Employers\EmpProfileController;
