@@ -29,6 +29,10 @@ Route::get('/find-jobs', function () {
     return view('find-jobs');
 });
 
+Route::get('/contact-us', function () {
+    return view('contact-us');
+});
+
 route::get('/backend-layout', function () {
     return view('layouts.backend-layout');
 });
@@ -59,7 +63,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/my-profile', [ApplicantController::class, 'myProfile'])->name('applicant.profile');
         Route::put('/my-profile/update/{id}', [ApplicantController::class, 'updateMyProfile'])->name('applicant.profile.update');
         Route::post('/my-profile/update-password/{id}', [ApplicantController::class, 'updatePassword'])->name('applicant.update.password');
-
     });
 });
 

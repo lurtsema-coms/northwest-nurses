@@ -37,7 +37,7 @@
                 <div class="navbar-list hidden md:flex flex-col items-start md:flex-row md:items-end md:gap-10 relative">
                     <a class="text-md py-2 hover:opacity-75" href="/find-jobs">Find Jobs</a>
                     <a class="text-md py-2 hover:opacity-75" href="#">About Us</a>
-                    <a class="text-md py-2 hover:opacity-75" href="#">Contact Us</a>
+                    <a class="text-md py-2 hover:opacity-75" href="/contact-us">Contact Us</a>
                     @guest
                     <a href="/login" class="account-nav-btn text-md mt-1 py-2 rounded-full md:bg-primary md:px-5 hover:opacity-75 flex flex-row justify-center align-center gap-2" type="submit"><p>Login</p></a>
                     @endguest
