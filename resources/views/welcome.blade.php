@@ -103,6 +103,7 @@
 </div>
 <div class="container mx-auto px-3 flex flex-col justify-center items-center py-10 gap-5">
     <h1 class="text-4xl text-center font-extrabold mb-5">Most Recent Job Postings</h1>
+    @if (count($mostRecentJobPostings))
     <div class="grid gap-5 md:grid-cols-2 2xl:grid-cols-3">
         @php
             $photoLinks = [
@@ -115,20 +116,28 @@
 
             ];
         @endphp
-        @foreach ($photoLinks as $link)
-        <div class="landing-job-card flex flex-row padding-0 rounded-2xl border border-gray-200 shadow-md overflow-hidden">
-            <div class="w-52 relative">
-                <img class="h-full object-cover absolute top-0 left-0" src="{{ $link }}" alt="">
+        @foreach ($mostRecentJobPostings as $jobPosting)
+        <div class="landing-job-card flex flex-row justify-between padding-0 rounded-2xl border border-gray-200 shadow-md overflow-hidden">
+            <div class="w-32 md:w-40 relative flex-none">
+                <img class="h-full object-cover absolute top-0 left-0" src="https://www.redfin.com/blog/wp-content/uploads/2023/09/Sitka-alaska.jpg" alt="">
             </div>
-            <div class="p-3 ml-3">
-                <h1 class="font-extrabold text-lg text-nowrap">ANCHORAGE, ALASKA</h1>
-                <p class="text-md font-bold">PRN Medical Surgical</p>
-                <p class="text-md font-bold">$349 / shift</p>
+            <div class="p-3 ml-3 flex-grow">
+                <h1 class="font-extrabold text-lg leading-5 text-wrap">{{ $jobPosting->address }}</h1>
+                <p class="font-bold">{{ $jobPosting->job_title }}</p>
+                <p class="font-bold">{{ $jobPosting->pay }}</p>
                 <button class="bg-primary mt-3 hover:opacity-75 text-white px-5 py-2 rounded-full whitespace-nowrap">View Job</button>
             </div>
         </div>
         @endforeach
     </div>
+    @else
+    <div class="flex items-center justify-center gap-3">
+        <h3 class="text-center text-slate-500 italic">Wow so empty... </h3>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-slate-500">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 16.318A4.486 4.486 0 0 0 12.016 15a4.486 4.486 0 0 0-3.198 1.318M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
+        </svg>
+    </div>
+    @endif
     <a href="/find-jobs" class="bg-primary mt-3 hover:opacity-75 text-white px-5 py-2 rounded-full whitespace-nowrap">More Jobs</a>
 </div>
 <div class="bg-primary text-white">

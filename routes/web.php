@@ -22,9 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [GuestController::class, 'index'])->name('index');
 
 Route::get('/find-jobs', [GuestController::class, 'findJobs'])->name('find-jobs');
 
