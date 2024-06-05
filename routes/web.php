@@ -7,6 +7,7 @@ use App\Http\Controllers\Employers\EmpProfileController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Guest\GuestController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -25,9 +26,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/find-jobs', function () {
-    return view('find-jobs');
-});
+Route::get('/find-jobs', [GuestController::class, 'findJobs'])->name('find-jobs');
 
 Route::get('/contact-us', function () {
     return view('contact-us');
