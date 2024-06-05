@@ -47,7 +47,7 @@
                         <td class="px-6 py-4 text-sm whitespace-nowrap space-x-2">
                             <button class="bg-green-500 text-gray-50 px-3 py-1 rounded-md shadow-md hover:bg-green-400">Edit</button>
                             <button class="bg-sky-500 text-gray-50 px-3 py-1 rounded-md shadow-md hover:bg-sky-400">View</button>
-                            <button class="bg-red-500 text-gray-50 px-3 py-1 rounded-md shadow-md hover:bg-red-400">Delete</button>
+                            <button class="bg-red-500 text-gray-50 px-3 py-1 rounded-md shadow-md hover:bg-red-400 delete-btn" data-entry-id="{{ $job->id }}" data-href="{{ route('employer.job.delete-job', $job->id ) }}">Delete</button>
                         </td>
                     </tr>
                 @endforeach
@@ -55,3 +55,45 @@
         </table>
     </div>
 </div>
+
+@include('components.dialog', ['title' => 'Are You Sure?', 'text_content' => 'This action will submit the form', 'id' => 'modal-warning', 'icon' => 'warning'])
+
+
+<script>
+    $(document).ready(function() {
+
+        $('.delete-btn').click(function(e) {
+            e.preventDefault();
+            const entryId = $(this).data('entry-id');
+            console.log(entryId);
+            const url = $(this).attr('href');
+            let editUrl = "{{ route('employer.job.delete-job', 'entryId') }}";
+            const newUrl = editUrl.replace('entryId', entryId);
+            console.log(newUrl);
+
+            $('#modal-warning').show();
+            $('#modal-submit').focus();
+            
+            $('#modal-cancel').on('click', function(){
+                $('#modal-warning').hide();
+            })
+            $('#modal-submit').on('click', function(){
+                $.ajax({
+                        url: newUrl,   
+                        dataType: 'json',
+                        type: 'GET',
+                        success: function(response) {
+                            // Reload the browser
+                            location.reload();
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle errors here
+                            console.log('AJAX request failed:', error);
+                        }
+                    });
+            })
+        });
+
+    })
+
+</script>

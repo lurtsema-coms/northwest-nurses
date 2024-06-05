@@ -111,6 +111,13 @@ class EmpPostJobController extends Controller
         return redirect(route('employer.job'));
     }
 
+    public function delete($id)
+    {
+        $user = JobPosting::withTrashed()->find($id);
+        $user->delete();
+        return true;
+    }
+
     /**
      * Display the specified resource.
      */
