@@ -1,4 +1,4 @@
-<div class="min-h-96 mx-auto max-w-5xl relative bg-white py-7 px-10 shadow-sm border rounded-2xl">
+<div class="h-auto min-h-96 mx-auto max-w-5xl relative bg-white py-7 px-10 shadow-sm border rounded-2xl">
     <div class="font-medium text-sky-600 flex absolute -top-9 left-0">
         <span class="flex items-center space-x-2 hover:opacity-70 cursor-pointer"
             hx-get="{{ route('employer.job') }}" hx-target="#target-content" hx-push-url="true" hx-on::after-request="$('input').val()"
@@ -9,25 +9,24 @@
             <span>Back to Jobs</span>
         </span>
     </div>
-    <form action="{{ route('employer.job.add-jobs') }}" method="POST" enctype="multipart/form-data">
+    <form id="add-form" action="{{ route('employer.job.add-jobs') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="w-full">
             <div class="font-medium text-slate-600 mb-3">Upload Image <span class="text-red-400">*</span></div>
             
             <div class="flex items-center justify-center w-full">
                 <label for="dropzone-file" id="dropzone-parent" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 draggable="true">
+                    <input id="dropzone-file" type="file" class="absolute -z-10" name="img_link" required>
                     <div class="flex flex-col items-center justify-center pt-5 pb-6" id="img-content">
                         <svg class="w-8 h-8 mb-4 text-gray-500 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
                         </svg>
                         <p class="mb-2 text-gray-500><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                        <p class="text-xs text-gray-500>SVG, PNG, and JPG (MAX. 600x400)</p>
-                    </div>
-                    <input id="dropzone-file" type="file" class="-z-10" name="img_link" required>
-                </label>
+                        <p class="text-xs text-gray-500">SVG, PNG, and JPG (MAX. 600x400)</p>
+                    </label>
+                </div>
             </div> 
         </div>
-
         <div class="mt-10 space-y-5 text-slate-500">
             <div class="flex flex-wrap gap-5">
                 <div class="flex flex-col w-full max-w-[28.9rem] space-y-2">
@@ -108,9 +107,6 @@
                     <textarea class="px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" name="requirements" id="" rows="7" required></textarea>
                 </div>
             </div>
-            <div></div>
-            <div></div>
-            <div></div>
             <div class="text-end">
                 <button class="bg-cyan-600 text-white border h-10 px-4 rounded-md hover:opacity-70" type="submit">Save</button>
             </div>
@@ -118,11 +114,31 @@
     </form>
 </div>
 
+@include('components.dialog', ['title' => 'Are You Sure?', 'text_content' => 'This action will submit the form', 'id' => 'modal-warning', 'icon' => 'warning'])
+
+
 <script>
 
     $(document).ready(function() {
 
         // $('input,textarea').attr('required', false);
+
+        $('#add-form').on('submit', function(e){
+            e.preventDefault();
+            const form = this;
+
+            $('#modal-warning').show();
+            $('#modal-submit').focus();
+            
+            $('#modal-cancel').on('click', function(){
+                $('#modal-warning').hide();
+            })
+
+            $('#modal-submit').on('click', function(){
+                $(this).attr('disabled', true);
+                form.submit();
+            })
+        })
 
         let dropzone = document.getElementById('dropzone-parent');
         
@@ -134,14 +150,16 @@
             event.preventDefault();
 
             let files = event.dataTransfer.files;
+            // Update the file input's value
+            $('#dropzone-file')[0].files = files;
             updateImgFile(files);
         });
 
 
-        $('#dropzone-file').on('change', function(event){
+        $(document).on('change', '#dropzone-file', function(event){
             let files = event.target.files;
-            
             updateImgFile(files);
+
         });
 
         function updateImgFile(files){
@@ -149,14 +167,14 @@
                 let reader = new FileReader();
 
                 reader.onload = function(e) {
-                let uploadedFileContainer = $('#img-content');
-                uploadedFileContainer.empty();
-                
-                let img = document.createElement('img');
-                img.classList.add('h-52', 'w-full', 'max-w-80', 'object-contain'); 
-                img.src = e.target.result;
-                
-                uploadedFileContainer.append(img);
+                    let uploadedFileContainer = $('#img-content');
+                    uploadedFileContainer.empty();
+                    
+                    let img = document.createElement('img');
+                    img.classList.add('h-52', 'w-full', 'max-w-80', 'object-contain'); 
+                    img.src = e.target.result;
+                    
+                    uploadedFileContainer.append(img);
                 };
 
                 reader.readAsDataURL(files[0]);

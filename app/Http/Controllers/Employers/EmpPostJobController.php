@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Employers;
 use App\Http\Controllers\Controller;
 use App\Models\JobPosting;
 use Illuminate\Http\Request;
+use Spatie\ImageOptimizer\OptimizerChainFactory;
 
 class EmpPostJobController extends Controller
 {
@@ -47,7 +48,7 @@ class EmpPostJobController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-
+        
         $job_posting = new JobPosting([
             'job_title' => $input['job_title'],
             'profession' => $input['profession'],
@@ -70,6 +71,25 @@ class EmpPostJobController extends Controller
         ]);
 
         $job_posting->save();
+
+        // Insert img
+        $file_img = $input['img_link'];
+        $unique_id = uniqid();
+        $img_extension = $file_img->getClientOriginalExtension();
+        $file_name = "$job_posting->id - job_cover-$unique_id.$img_extension";
+
+        // Move the image to the public directory
+        $file_img->move(public_path('img/job-cover'), $file_name);
+
+        // Get the full path of the uploaded image
+        $uploadedFilePath = public_path("img/job-cover/$file_name");
+
+        // Optimize the image
+        $optimizerChain = OptimizerChainFactory::create();
+        $optimizerChain->optimize($uploadedFilePath);
+        
+        JobPosting::find($job_posting->id)
+            ->update(['img_link' => $file_name]);
 
         return redirect(route('employer.job'));
     }

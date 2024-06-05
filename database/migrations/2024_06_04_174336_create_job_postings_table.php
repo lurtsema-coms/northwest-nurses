@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('status');
             $table->text('address');
-            $table->text('img_link');
+            $table->text('img_link')->nullable();
             $table->string('profession');
             $table->string('pay');
             $table->string('assignment_length');

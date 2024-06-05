@@ -48,9 +48,8 @@
                 </div>
             </div>
         </div>
-
+        
         <script>
-
             $(document).ready(function() {
                 // Toggle Profile
                 $('#profile-button').on('click', function(){
@@ -140,7 +139,6 @@
                 event.currentTarget.classList.remove('bg-white')
                 event.currentTarget.classList.add('bg-slate-300')
             }
-
         </script>
 
         @yield('script')

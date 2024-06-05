@@ -1,7 +1,8 @@
-<div class="fixed top-0 left-0 min-h-screen min-w-screen inset-0 bg-black bg-opacity-75 transition-opacity">
+<div class="hidden fixed overflow-hidden top-0 left-0 min-h-screen min-w-screen inset-0 bg-black bg-opacity-75 transition-opacity" id="{{ $id }}">
     <div class="flex h-full w-full text-black">
         <div class="m-auto w-full max-w-lg bg-white relative shadow-xl rounded-lg py-10 px-6">
             {{-- Icon --}}
+            @if($icon == 'warning')
             <div class="text-center">
                 <span class="mb-4 inline-flex justify-center items-center w-[62px] h-[62px] rounded-full border-4 border-yellow-50 bg-yellow-100 text-yellow-500">
                     <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
@@ -9,16 +10,17 @@
                     </svg>
                 </span>
             </div>
+            @endif
             {{-- Content --}}
             <div class="text-center">
                 {{-- Title --}}
                 <div class="space-y-3">
-                    <p class="text-xl text-slate-600 font-medium" id="m-title">Are You Sure?</p>
-                    <p class="text-slate-500" id="m-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat, quae.</p>
+                    <p class="text-xl text-slate-600 font-medium" id="m-title">{{ $title }}</p>
+                    <p class="text-slate-500" id="m-text">{{ $text_content }}</p>
                 </div>
                 <div class="flex justify-center items-center mt-7 space-x-5">
-                    <button class="text-sm text-slate-600 h-10 px-5 rounded-md shadow-sm border bg-white hover:bg-gray-50">Cancel</button>
-                    <button class="text-sm text-white h-10 px-5 rounded-md shadow-sm border bg-sky-600 hover:bg-sky-500">Yes</button>
+                    <button class="text-sm text-slate-600 h-10 px-5 rounded-md shadow-sm border bg-white hover:bg-gray-50" id="modal-cancel">Cancel</button>
+                    <button class="text-sm text-white h-10 px-5 rounded-md shadow-sm border bg-sky-600 hover:bg-sky-500" id="modal-submit">Yes</button>
                 </div>
             </div>
         </div>
