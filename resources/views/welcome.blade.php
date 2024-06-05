@@ -1,7 +1,7 @@
 @extends('layouts.applicant')
 @section('content')
 <div class="search-section overflow-hidden relative">
-    <div class="z-[-1] bg-custom-gradient-y absolute inset-0"></div>
+    <div class="z-[-1] bg-custom-gradient-x md:bg-custom-gradient-y absolute inset-0"></div>
     <img class="absolute z-[-2] min-h-full min-w-full object-cover md:translate-y-[-25%]" src="{{ asset('img/landing-page/image-no-filter.jpg') }}" alt="">
     <div class="search-section-container min-h-96 md:min-h-[500px] relative flex flex-col justify-center md:justify-end">
         <div class="top-search-bar flex flex-col justify-end items-center px-4 md:px-5 md:mb-8">
