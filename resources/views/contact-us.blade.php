@@ -6,7 +6,7 @@
       <div class="flex flex-col items-center justify-center lg:flex-row lg:items-end gap-5">
         <div class="flex-grow w-full bg-slate-100 shadow-md p-10 rounded-xl max-w-[500px]">
           <h2 class="text-2xl font-bold text-center text-primary">Get In Touch</h2>
-          <form action="" method="POST" class="flex flex-col gap-5">
+          <form action="" method="POST" class="flex flex-col gap-5" autocomplete="off">
             @csrf
             <div class="flex-grow">
               <label for="name" class="font-bold">Name</label>

@@ -32,6 +32,8 @@ Route::get('/contact-us', function () {
     return view('contact-us');
 });
 
+Route::post('/contact-us', [GuestController::class, 'submitContactUsResponse'])->name('contact-us.submit');
+
 route::get('/backend-layout', function () {
     return view('layouts.backend-layout');
 });
@@ -43,6 +45,7 @@ route::get('/backend-layout', function () {
 Route::get('/job-info', function () {
     return view('components.find-job-page.job-info');
 });
+
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
