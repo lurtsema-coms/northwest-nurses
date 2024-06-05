@@ -54,6 +54,9 @@
             </tbody>
         </table>
     </div>
+    <div class="mt-5">
+        {{  $jobs->links()}}
+    </div>
 </div>
 
 @include('components.dialog', ['title' => 'Are You Sure?', 'text_content' => 'This action will submit the form', 'id' => 'modal-warning', 'icon' => 'warning'])
