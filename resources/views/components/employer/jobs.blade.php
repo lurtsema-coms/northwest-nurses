@@ -24,7 +24,6 @@
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
                 <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Job Title</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Address</th>
@@ -36,21 +35,22 @@
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-                <tr>
-                    <td class="px-6 py-4 text-sm whitespace-nowrap">1</td>
-                    <td class="px-6 py-4 text-sm whitespace-nowrap font-medium text-green-500">Active</td>
-                    <td class="px-6 py-4 text-sm whitespace-nowrap">Hospital De Luna</td>
-                    <td class="px-6 py-4 text-sm whitespace-nowrap">Alaska</td>
-                    <td class="px-6 py-4 text-sm whitespace-nowrap">Doctor</td>
-                    <td class="px-6 py-4 text-sm whitespace-nowrap">1</td>
-                    <td class="px-6 py-4 text-sm whitespace-nowrap">8 - 9 hrs</td>
-                    <td class="px-6 py-4 text-sm whitespace-nowrap">2500$ - 3500$</td>
-                    <td class="px-6 py-4 text-sm whitespace-nowrap space-x-2">
-                        <button class="bg-green-500 text-gray-50 px-3 py-1 rounded-md shadow-md hover:bg-green-400">Edit</button>
-                        <button class="bg-sky-500 text-gray-50 px-3 py-1 rounded-md shadow-md hover:bg-sky-400">View</button>
-                        <button class="bg-red-500 text-gray-50 px-3 py-1 rounded-md shadow-md hover:bg-red-400">Delete</button>
-                    </td>
-                </tr>
+                @foreach ($jobs as $job)
+                    <tr>
+                        <td class="px-6 py-4 text-sm whitespace-nowrap font-medium text-green-500">{{$job->status}}</td>
+                        <td class="px-6 py-4 text-sm whitespace-nowrap">{{$job->job_title}}</td>
+                        <td class="px-6 py-4 text-sm whitespace-nowrap">{{$job->address}}</td>
+                        <td class="px-6 py-4 text-sm whitespace-nowrap">{{$job->profession}}</td>
+                        <td class="px-6 py-4 text-sm whitespace-nowrap">{{$job->opening}}</td>
+                        <td class="px-6 py-4 text-sm whitespace-nowrap">{{$job->start_date}}</td>
+                        <td class="px-6 py-4 text-sm whitespace-nowrap">{{$job->pay}}</td>
+                        <td class="px-6 py-4 text-sm whitespace-nowrap space-x-2">
+                            <button class="bg-green-500 text-gray-50 px-3 py-1 rounded-md shadow-md hover:bg-green-400">Edit</button>
+                            <button class="bg-sky-500 text-gray-50 px-3 py-1 rounded-md shadow-md hover:bg-sky-400">View</button>
+                            <button class="bg-red-500 text-gray-50 px-3 py-1 rounded-md shadow-md hover:bg-red-400">Delete</button>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

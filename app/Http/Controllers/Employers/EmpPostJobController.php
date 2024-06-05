@@ -14,10 +14,22 @@ class EmpPostJobController extends Controller
      */
     public function index(Request $request)
     {
+        $data = [];
+        $data['jobs'] = JobPosting::leftJoin('employer_details as creator', 'creator.user_id', 'job_postings.created_by')
+            ->leftJoin('employer_details as updator', 'updator.user_id', 'job_postings.updated_by')
+            ->select(
+                'job_postings.*',
+                'creator.name as creator_name',
+                'updator.name as updator_name'
+            )
+            ->whereNull('job_postings.deleted_at')
+            ->orderBy('job_postings.created_at', 'desc') // Order by created_at in descending order
+            ->paginate(10);
+    
         if ($request->header('HX-Request')) {
-            return view('components.employer.jobs')->render() . view('components.employer.module-title', ['module_title' => 'Jobs']);
+            return view('components.employer.jobs', $data)->render() . view('components.employer.module-title', ['module_title' => 'Jobs']);
         } else {
-            return view('layouts.employer.job', ['module_title' => 'Jobs']);
+            return view('layouts.employer.job', ['module_title' => 'Jobs', 'jobs' => $data['jobs']]);
         }
     }
 
