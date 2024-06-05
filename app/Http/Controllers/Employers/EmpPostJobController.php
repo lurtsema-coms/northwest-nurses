@@ -94,8 +94,10 @@ class EmpPostJobController extends Controller
         // Move the image to the public directory
         $file_img->move(public_path('img/job-cover'), $file_name);
 
+        $file_path = public_path('img/job-cover') . '/' . $file_name;
+
         // Open the image using Intervention Image
-        $image = Image::make(public_path('img/job-cover') . '/' . $file_name);
+        $image = Image::make($file_path);
 
         // Resize the image to your desired dimensions (optional)
         $image->resize(800, null, function ($constraint) {
@@ -103,10 +105,10 @@ class EmpPostJobController extends Controller
         });
 
         // Optimize and save the image
-        $image->save(public_path('img/job-cover') . '/' . $file_name, 80);
+        $image->save($file_path, 80);
         
         JobPosting::find($job_posting->id)
-            ->update(['img_link' => $file_name]);
+            ->update(['img_link' => $file_path]);
 
         return redirect(route('employer.job'));
     }
@@ -129,9 +131,18 @@ class EmpPostJobController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request, string $id)
     {
-        //
+        $data = [];
+        $data['id'] = $id;
+        $data['module_title'] = 'Edit Jobs';
+        $data['job_post'] = JobPosting::find($id);
+
+        if ($request->header('HX-Request')) {
+            return view('components.employer.jobs-view-edit', $data)->render() . view('components.employer.module-title', ['module_title' => $data['module_title']]);
+        } else {
+            return view('layouts.employer.jobs-edit', $data);
+        }
     }
 
     /**

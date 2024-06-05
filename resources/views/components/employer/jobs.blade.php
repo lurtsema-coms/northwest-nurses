@@ -10,7 +10,7 @@
                 <option value="">500</option>
                 <option value="">1000</option>
             </select>
-            <button hx-trigger="click" hx-get="{{ route('employer.job.add') }}" hx-target="#target-content" hx-push-url="true" hx-on::after-request="initializeJobForm()">  
+            <button hx-trigger="click" hx-get="{{ route('employer.job.add') }}" hx-target="#target-content" hx-push-url="true">  
                 <div class="bg-cyan-600 text-white text-sm border h-10 flex items-center justify-center px-4 rounded-md hover:opacity-70">
                 Add Job
                 </div>
@@ -28,7 +28,7 @@
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Job Title</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Address</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Profession</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Opening</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Openings</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Start Date</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pay</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
@@ -41,11 +41,14 @@
                         <td class="px-6 py-4 text-sm whitespace-nowrap">{{$job->job_title}}</td>
                         <td class="px-6 py-4 text-sm whitespace-nowrap">{{$job->address}}</td>
                         <td class="px-6 py-4 text-sm whitespace-nowrap">{{$job->profession}}</td>
-                        <td class="px-6 py-4 text-sm whitespace-nowrap">{{$job->opening}}</td>
+                        <td class="px-6 py-4 text-sm whitespace-nowrap">{{$job->openings}}</td>
                         <td class="px-6 py-4 text-sm whitespace-nowrap">{{$job->start_date}}</td>
                         <td class="px-6 py-4 text-sm whitespace-nowrap">{{$job->pay}}</td>
                         <td class="px-6 py-4 text-sm whitespace-nowrap space-x-2">
-                            <button class="bg-green-500 text-gray-50 px-3 py-1 rounded-md shadow-md hover:bg-green-400">Edit</button>
+                            <button class="bg-green-500 text-gray-50 px-3 py-1 rounded-md shadow-md hover:bg-green-400"
+                            hx-trigger="click" hx-get="{{ route('employer.job.edit', $job->id) }}" hx-target="#target-content" hx-push-url="true"
+                            >Edit
+                            </button>
                             <button class="bg-sky-500 text-gray-50 px-3 py-1 rounded-md shadow-md hover:bg-sky-400">View</button>
                             <button class="bg-red-500 text-gray-50 px-3 py-1 rounded-md shadow-md hover:bg-red-400 delete-btn" data-entry-id="{{ $job->id }}" data-href="{{ route('employer.job.delete-job', $job->id ) }}">Delete</button>
                         </td>
@@ -80,6 +83,7 @@
             $('#modal-cancel').on('click', function(){
                 $('#modal-warning').hide();
             })
+            
             $('#modal-submit').on('click', function(){
                 $.ajax({
                         url: newUrl,   

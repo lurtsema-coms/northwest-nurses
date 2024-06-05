@@ -16,7 +16,7 @@
                 </div>
                 <span class="font-medium">Dashboard</span>
             </div>
-            <div class="flex items-center w-full border shadow-sm py-2 px-3 rounded-xl text-slate-500 space-x-2 text-sm cursor-pointer hover:bg-slate-300 url-links {{ Route::is('employer.job') || Route::is('employer.job.add') ? 'bg-slate-300' : 'bg-white'  }}" id="job-link" 
+            <div class="flex items-center w-full border shadow-sm py-2 px-3 rounded-xl text-slate-500 space-x-2 text-sm cursor-pointer hover:bg-slate-300 url-links {{ Route::is('employer.job') || Route::is('employer.job.add') || Route::is('employer.job.edit') ? 'bg-slate-300' : 'bg-white'  }}" id="job-link" 
                     hx-get="{{ route('employer.job') }}" hx-target="#target-content" hx-push-url="true" hx-on:click="removeBgColor(); addBgColorLink(event); $('#target-content').hide()" hx-on::after-request="$('#target-content').show()" hx-indicator="#htmx-indicator"
                 >
                 <div class="p-1 rounded-lg bg-cyan-600">
