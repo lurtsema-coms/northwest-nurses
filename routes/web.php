@@ -55,6 +55,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/employer-job', [EmpPostJobController::class, 'index'])->name('employer.job');
         Route::get('/employer-job/add', [EmpPostJobController::class, 'getAdd'])->name('employer.job.add');
         Route::post('/employer-job/add-jobs', [EmpPostJobController::class, 'store'])->name('employer.job.add-jobs');
+        Route::get('/employer-job/delete/{id}', [EmpPostJobController::class, 'delete'])->name('employer.job.delete-job');
+
         Route::get('/employer-profile/{id}', [EmpProfileController::class, 'index'])->name('employer.profile');
         Route::post('/employer-profile/update/{id}', [EmpProfileController::class, 'update'])->name('employer.profile.update');
     });
