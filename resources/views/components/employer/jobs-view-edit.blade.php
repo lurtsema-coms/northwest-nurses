@@ -12,7 +12,7 @@
     <form id="add-form" action="{{ route('employer.job.edit-jobs', $id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="w-full">
-            <div class="font-medium text-slate-600 mb-3">Upload Image <span class="text-red-400">*</span></div>
+            <div class="font-medium text-slate-600 mb-3">Upload Image</div>
             
             <div class="flex items-center justify-center w-full">
                 <label for="dropzone-file" id="dropzone-parent" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 draggable="true">
