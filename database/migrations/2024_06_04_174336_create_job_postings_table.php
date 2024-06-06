@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('address');
             $table->text('img_link')->nullable();
             $table->text('file_name')->nullable();
-            $table->text('job_id');
+            $table->string('job_id');
             $table->string('profession');
             $table->string('pay');
             $table->string('assignment_length');
