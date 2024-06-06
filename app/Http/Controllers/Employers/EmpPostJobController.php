@@ -109,7 +109,6 @@ class EmpPostJobController extends Controller
 
         $unique_id = uniqid();
 
-
         $job_posting = new JobPosting([
             'job_title' => $input['job_title'],
             'profession' => $input['profession'],

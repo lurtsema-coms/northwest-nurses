@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\JobPosting;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -41,5 +43,7 @@ class DatabaseSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'sex' => 'male',
         ]);
+
+        JobPosting::factory()->count(20)->create();
     }
 }
