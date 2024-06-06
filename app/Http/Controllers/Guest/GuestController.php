@@ -25,6 +25,8 @@ class GuestController extends Controller
     {
         $htmxParamString = http_build_query($request->except('id'));
         $jobPostingId = $request->id;
+        $search = $request->search;
+        $location = $request->location;
         $data = [];
         $data['htmxParamString'] = $htmxParamString;
         $activeJobPosts = (new JobPosting())->getActiveJobPostings()
