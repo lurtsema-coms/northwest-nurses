@@ -16,16 +16,26 @@ class EmpPostJobController extends Controller
     public function index(Request $request)
     {
         $data = [];
-        $data['jobs'] = JobPosting::leftJoin('employer_details as creator', 'creator.user_id', 'job_postings.created_by')
+        $query = JobPosting::leftJoin('employer_details as creator', 'creator.user_id', 'job_postings.created_by')
             ->leftJoin('employer_details as updator', 'updator.user_id', 'job_postings.updated_by')
             ->select(
                 'job_postings.*',
                 'creator.name as creator_name',
                 'updator.name as updator_name'
             )
-            ->whereNull('job_postings.deleted_at')
-            ->orderBy('job_postings.created_at', 'desc') // Order by created_at in descending order
-            ->paginate(10);
+            ->whereNull('job_postings.deleted_at');
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('job_title', 'like', "%{$search}%")
+                    ->orWhere('address', 'like', "%{$search}%")
+                    ->orWhere('profession', 'like', "%{$search}%")
+                    ->orWhere('pay', 'like', "%{$search}%");
+            });
+        }
+
+        $data['jobs'] = $query->orderBy('job_postings.created_at', 'desc')->paginate(10);
 
         if ($request->header('HX-Request')) {
             return view('components.employer.jobs', $data)->render() . view('components.employer.module-title', ['module_title' => 'Jobs']);
@@ -33,6 +43,40 @@ class EmpPostJobController extends Controller
             return view('layouts.employer.job', ['module_title' => 'Jobs', 'jobs' => $data['jobs']]);
         }
     }
+
+    public function search(Request $request)
+    {
+        $data = [];
+        $paginate = $request->input('paginate') ?? 10;
+        
+        $query = JobPosting::leftJoin('employer_details as creator', 'creator.user_id', 'job_postings.created_by')
+            ->leftJoin('employer_details as updator', 'updator.user_id', 'job_postings.updated_by')
+            ->select(
+                'job_postings.*',
+                'creator.name as creator_name',
+                'updator.name as updator_name'
+            )
+            ->whereNull('job_postings.deleted_at');
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('job_title', 'like', "%{$search}%")
+                    ->orWhere('status', 'like', "%{$search}%")
+                    ->orWhere('address', 'like', "%{$search}%")
+                    ->orWhere('profession', 'like', "%{$search}%")
+                    ->orWhere('pay', 'like', "%{$search}%")
+                    ->orWhere('openings', 'like', "%{$search}%");
+            });
+        }
+
+        $data['jobs'] = $query->orderBy('job_postings.created_at', 'desc')->paginate($paginate);
+
+        if ($request->header('HX-Request')) {
+            return view('components.employer.custom.jobs-table-body', $data)->render();
+        }
+    }
+
 
     public function getAdd(Request $request)
     {
@@ -42,7 +86,7 @@ class EmpPostJobController extends Controller
 
 
         if ($request->header('HX-Request')) {
-            return view('components.employer.jobs-view', $data)->render() . view('components.employer.module-title', $data);
+            return view('components.employer.jobs-view-add', $data)->render() . view('components.employer.module-title', $data);
         } else {
             return view('layouts.employer.jobs-add', $data);
         }
@@ -127,9 +171,18 @@ class EmpPostJobController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
-        //
+        $data = [];
+        $data['id'] = $id;
+        $data['module_title'] = 'View Jobs';
+        $data['job_post'] = JobPosting::find($id);
+
+        if ($request->header('HX-Request')) {
+            return view('components.employer.jobs-view', $data)->render() . view('components.employer.module-title', ['module_title' => $data['module_title']]);
+        } else {
+            return view('layouts.employer.jobs-view', $data);
+        }
     }
 
     /**
@@ -194,7 +247,7 @@ class EmpPostJobController extends Controller
             $image->save($file_path, 80);
         }
 
-        return redirect(route('employer.job'));
+        return redirect(route('employer.job'))->with('success', 'Your app has been successfully updated.');
     }
 
     /**

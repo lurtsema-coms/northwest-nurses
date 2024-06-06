@@ -52,10 +52,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/employer-dashboard', [EmpDashboardController::class, 'index'])->name('employer.dashboard');
         // Jobs
         Route::get('/employer-job', [EmpPostJobController::class, 'index'])->name('employer.job');
+        Route::get('/employer-job/search', [EmpPostJobController::class, 'search'])->name('employer.job.search');
         Route::get('/employer-job/add', [EmpPostJobController::class, 'getAdd'])->name('employer.job.add');
         Route::post('/employer-job/add-jobs', [EmpPostJobController::class, 'store'])->name('employer.job.add-jobs');
         Route::get('/employer-job/edit/{id}', [EmpPostJobController::class, 'edit'])->name('employer.job.edit');
         Route::post('/employer-job/edit-jobs/{id}', [EmpPostJobController::class, 'update'])->name('employer.job.edit-jobs');
+        Route::get('/employer-job/view/{id}', [EmpPostJobController::class, 'show'])->name('employer.job.view');
         Route::get('/employer-job/delete/{id}', [EmpPostJobController::class, 'delete'])->name('employer.job.delete-job');
 
         Route::get('/employer-profile/{id}', [EmpProfileController::class, 'index'])->name('employer.profile');

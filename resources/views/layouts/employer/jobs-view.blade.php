@@ -9,5 +9,5 @@
 @endsection
 
 @section('main-section')
-    @include('components.employer.jobs-view-add')
+    @include('components.employer.jobs-view')
 @endsection
