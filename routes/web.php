@@ -26,6 +26,9 @@ Route::get('/', [GuestController::class, 'index'])->name('index');
 
 Route::get('/find-jobs', [GuestController::class, 'findJobs'])->name('find-jobs');
 
+Route::get('/job-info/get-job/{id}', [GuestController::class, 'getJob'])->name('get-job');
+Route::post('/job-info/apply-job/{id}', [GuestController::class, 'applyJob'])->name('apply-job');  
+
 Route::get('/contact-us', function () {
     return view('contact-us');
 });

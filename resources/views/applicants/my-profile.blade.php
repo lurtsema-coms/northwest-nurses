@@ -39,8 +39,8 @@
 	</div>
 </div>
 
-<div class="container mx-auto my-10">
-	<h1 class="text-3xl text-center font-bold my-10">My Profile</h1>
+<div class="container mx-auto my-10 py-10">
+	<h1 class="text-3xl text-center font-bold mb-10">My Profile</h1>
 	<div class="mx-3 lg:mx-auto py-10 px-5 md:px-16 shadow-md max-w-screen-lg rounded-lg">
 		<h3 class="font-bold text-2xl mb-5">Edit Profile</h3>
 		<form method="POST" action="{{ route('applicant.profile.update', auth()->user()->id) }}" autocomplete="off">

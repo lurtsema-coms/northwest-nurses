@@ -1,7 +1,8 @@
 @extends('layouts.applicant')
 @section('content')
 <div class="modal-center modal-applicant fixed inset-0 h-screen w-full bg-black bg-opacity-75  p-4 z-10 overflow-y-auto hidden">
-    <form action="">
+    <form id="job-application-form" method="POST"  enctype="multipart/form-data">
+        @csrf
         <div class="modal-box m-auto w-full max-w-3xl bg-white shadow-lg rounded-lg animate-fade-in p-10">
             <div class="modal-content flex flex-col p-3">
                 <div class="mb-4">
@@ -12,15 +13,15 @@
                 <div class="flex flex-col gap-10">
                     <div class="space-y-3">
                         <label for="answer_1" class="font-semibold">1. This is a sample question?</label>
-                        <textarea name="answer_1" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
+                        <textarea name="answer_1" id="answer_1" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
                     </div>
                     <div class="space-y-3">
-                        <label for="answer_1" class="font-semibold">2. This is another sample question?</label>
-                        <textarea name="answer_1" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
+                        <label for="answer_2" class="font-semibold">2. This is another sample question?</label>
+                        <textarea name="answer_2" id="answer_2" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
                     </div>
                     <div class="space-y-3">
-                        <label for="answer_1" class="font-semibold">3. Yet another sample question, innit?</label>
-                        <textarea name="answer_1" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
+                        <label for="answer_3" class="font-semibold">3. Yet another sample question, innit?</label>
+                        <textarea name="answer_3" id="answer_3" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
                     </div>
                 </div>
                 <div class="flex flex-row gap-10 justify-center p-2 mt-5">
@@ -154,6 +155,48 @@
 
     $(document).on('click', '#apply-now-btn', function() {
         $(".modal-center").removeClass("hidden");
+        const entryId = $(this).data('entry-id');
+        const url = $(this).attr('href');
+        let editUrl = "{{ route('get-job', 'entryId') }}";
+        const newUrl = editUrl.replace('entryId', entryId);
+        console.log(newUrl);
+        $.ajax({
+            url: newUrl,   
+                dataType: 'json',
+                type: 'GET',
+                success: function(response) {
+                    console.log(response);
+                    let submitUrl = "{{ route('apply-job', 'entryId') }}";
+                    submitUrl = submitUrl.replace('entryId', response.id);
+                    $('#job-application-form').attr('action', submitUrl);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+        });
     });
+
+    $(document).on('click', '.submit-application-btn', function() {
+        const form = $('#job-application-form');
+        const url = form.attr('action');
+        const formData = new FormData(form[0]);
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                console.log(response);
+                // Handle success response
+            },
+            error: function(error) {
+                console.log(error);
+                // Handle error response
+            }
+        });
+    });
+
 </script>
 @endsection
