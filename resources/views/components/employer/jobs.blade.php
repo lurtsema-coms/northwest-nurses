@@ -44,13 +44,16 @@
                         <td class="px-6 py-4 text-sm whitespace-nowrap">{{$job->openings}}</td>
                         <td class="px-6 py-4 text-sm whitespace-nowrap">{{$job->start_date}}</td>
                         <td class="px-6 py-4 text-sm whitespace-nowrap">{{$job->pay}}</td>
-                        <td class="px-6 py-4 text-sm whitespace-nowrap space-x-2">
-                            <button class="bg-green-500 text-gray-50 px-3 py-1 rounded-md shadow-md hover:bg-green-400"
-                            hx-trigger="click" hx-get="{{ route('employer.job.edit', $job->id) }}" hx-target="#target-content" hx-push-url="true"
-                            >Edit
-                            </button>
-                            <button class="bg-sky-500 text-gray-50 px-3 py-1 rounded-md shadow-md hover:bg-sky-400">View</button>
-                            <button class="bg-red-500 text-gray-50 px-3 py-1 rounded-md shadow-md hover:bg-red-400 delete-btn" data-entry-id="{{ $job->id }}" data-href="{{ route('employer.job.delete-job', $job->id ) }}">Delete</button>
+                        <td class="px-6 py-4 text-sm">
+                            <div class="flex gap-2 flex-wrap">
+                                <button class="bg-green-500 text-gray-50 px-3 py-1 rounded-md shadow-md hover:bg-green-400"
+                                hx-trigger="click" hx-get="{{ route('employer.job.edit', $job->id) }}" hx-target="#target-content" hx-push-url="true"
+                                >Edit
+                                </button>
+                                <button class="bg-sky-500 text-gray-50 px-3 py-1 rounded-md shadow-md hover:bg-sky-400">View</button>
+                                <button class="bg-yellow-500 text-gray-50 px-3 py-1 rounded-md shadow-md hover:bg-yellow-400 delete-btn" data-entry-id="{{ $job->id }}" data-href="{{ route('employer.job.delete-job', $job->id ) }}">Applicants</button>
+                                <button class="bg-red-500 text-gray-50 px-3 py-1 rounded-md shadow-md hover:bg-red-400 delete-btn" data-entry-id="{{ $job->id }}" data-href="{{ route('employer.job.delete-job', $job->id ) }}">Delete</button>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
