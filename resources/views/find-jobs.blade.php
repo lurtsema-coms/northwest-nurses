@@ -45,7 +45,7 @@
                         <option value="{{ $location }}">{{ $location }}</option>
                         @endforeach
                     </select>
-                    <input name="query" class="py-3 grow border-none text-lg focus:outline-none focus:ring-0 text-primary" type="text" placeholder="Job title or company">
+                    <input name="query" class="py-3 grow border-none text-lg focus:outline-none focus:ring-0 text-primary" type="text" placeholder="Job title or company" required>
                     <div class="py-3 search-btn-wrapper px-3 rounded-b-2xl md:rounded-bl-none md:rounded-r-2xl bg-white flex items-center content-center ">
                         <button class="bg-primary hover:opacity-75 text-white text-lg px-5 py-2 rounded-full flex-grow flex flex-row justify-center align-center gap-2" type="submit"><p>Search</p> <span class="material-symbols-outlined">search</span></button>
                     </div>
@@ -86,7 +86,7 @@
             <div class="job-list-card-footer flex flex-wrap flex-col sm:flex-row justify-between gap-5">
                 <p class="font-bold text-primary align-middle text-lg">{{ $jobPost->pay }}</p>
                 <button 
-                    hx-get="/find-jobs?id={{ $jobPost->id }}"
+                    hx-get="/find-jobs?{{ $htmxParamString }}&id={{ $jobPost->id }}"
                     hx-target=".job-info-section"
                     hx-push-url="true"
                     class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full whitespace-nowrap">
@@ -95,15 +95,11 @@
             </div>
         </div>
         @endforeach
-        <div class="flex flex-row justify-center items-center lg:max-w-screen-sm gap-3">
-            <button class="bg-black hover:opacity-75 text-white py-2 px-5 rounded-full">Prev</button>
-            <p>1 - 10 of 5,330</p>
-            <button class="bg-black hover:opacity-75 text-white py-2 px-5 rounded-full">Next</button>
-        </div>
+        {{ $activeJobPosts->links('vendor.pagination.custom-pagination') }}
     </div>
     <div id="job-info-section" class="job-info-section">
         @if (count($activeJobPosts))
-        @include('components.find-job-page.job-info', ['jobPost' => (clone $activeJobPosts)->first()])
+        @include('components.find-job-page.job-info')
         @endif
     </div>
 </div>

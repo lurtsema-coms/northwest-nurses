@@ -23,23 +23,30 @@ class GuestController extends Controller
 
     public function findJobs(Request $request)
     {
+        $htmxParamString = http_build_query($request->except('id'));
         $jobPostingId = $request->id;
         $data = [];
-        if (!$jobPostingId) {
-            $activeJobPosts = (new JobPosting())->getActiveJobPostings()
-                ->orderBy('created_at', 'desc')
-                ->paginate(10);
-        } else {
-            $activeJobPosts = (new JobPosting())->getActiveJobPostings()
-                ->orderBy(DB::raw("job_postings.id = $jobPostingId"), 'desc')
-                ->orderBy('created_at', 'desc')
-                ->paginate(10);
-        }
+        $data['htmxParamString'] = $htmxParamString;
+        $activeJobPosts = (new JobPosting())->getActiveJobPostings()
+            ->orderBy('created_at', 'desc')
+            ->paginate(10)
+            ->withQueryString();
+        $selectedJobPost = (new JobPosting())
+            ->getActiveJobPostings()
+            ->where('job_postings.id', $jobPostingId)
+            ->first() ?? (new JobPosting())->getActiveJobPostings()->first();
+        // dd($jobPost);
+
+        // dd($jobPost);selectedJobPost
 
         if ($request->header('HX-Request')) {
-            return view('components.find-job-page.job-info', ['jobPost' => JobPosting::find($jobPostingId)]);
+            return view(
+                'components.find-job-page.job-info',
+                ['selectedJobPost' => $selectedJobPost]
+            )->render() . view('vendor.pagination.custom-pagination', ['paginator' => $activeJobPosts]);
         } else {
             $data['activeJobPosts'] = $activeJobPosts;
+            $data['selectedJobPost'] = $selectedJobPost ?? null;
             return view('find-jobs', $data);
         }
     }
