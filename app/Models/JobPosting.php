@@ -9,8 +9,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class JobPosting extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
     protected $guarded = [];
+
+    public function getActiveJobPostings()
+    {
+        return self::query()
+            ->orderBy('created_at', 'desc')
+            ->whereNull('deleted_at')
+            ->where('status', 'ACTIVE')
+            ->where('openings', '>', 0);
+    }
 
     public function getRecentJobPostings()
     {

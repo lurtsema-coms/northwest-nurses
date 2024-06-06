@@ -105,21 +105,10 @@
     <h1 class="text-4xl text-center font-extrabold mb-5">Most Recent Job Postings</h1>
     @if (count($mostRecentJobPostings))
     <div class="grid gap-5 md:grid-cols-2 2xl:grid-cols-3">
-        @php
-            $photoLinks = [
-                'https://www.redfin.com/blog/wp-content/uploads/2023/09/Sitka-alaska.jpg',
-                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxwL9if9H8D7e6bCLzDUFw6flzNhOaUUnjUpYjwvpgMw&s',
-                'https://www.nps.gov/common/uploads/grid_builder/anch/crop16_9/2AEBB6D0-DED7-C590-BBF91C0E33EE7E9A.jpg?width=640&quality=90&mode=crop',
-                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpJzmscM8XxA9s-1R4MaiOy-KInKXB2UoVCPp5U8U6BQ&s',
-                'https://youthjournalism.org/wp-content/uploads/2022/11/Alaska-first-city-Ketchikan-Parker-rszd.jpg',
-                'https://preview.redd.it/a-shitty-city-with-a-pretty-view-anchorage-v0-xthmxqba6i2a1.jpg?width=1080&crop=smart&auto=webp&s=fe6118e50577d0a31c68d4bb422ce3c64bf86f0b',
-
-            ];
-        @endphp
         @foreach ($mostRecentJobPostings as $jobPosting)
         <div class="landing-job-card flex flex-row justify-between padding-0 rounded-2xl border border-gray-200 shadow-md overflow-hidden">
             <div class="w-32 md:w-40 relative flex-none">
-                <img class="h-full object-cover absolute top-0 left-0" src="{{ $jobPosting->img_link }}" alt="">
+                <img class="h-full object-cover absolute top-0 left-0" src="{{ $jobPosting->img_link }}?v={{ time() }}" alt="">
             </div>
             <div class="px-8 py-5 ml-3 flex-grow">
                 <h1 class="font-extrabold text-lg leading-5 text-wrap">{{ $jobPosting->address }}</h1>

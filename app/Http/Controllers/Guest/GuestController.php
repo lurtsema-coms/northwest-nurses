@@ -21,7 +21,23 @@ class GuestController extends Controller
 
     public function findJobs(Request $request)
     {
-        return view('find-jobs');
+        $activeJobPosts = (new JobPosting())
+            ->getActiveJobPostings()
+            ->paginate(10);
+
+        $data = [];
+        $data['activeJobPosts'] = $activeJobPosts;
+
+        return view('find-jobs', $data);
+    }
+
+    public function jobInfo(Request $request, $id)
+    {
+        $jobPost = JobPosting::find($id);
+        $data = [];
+        $data['jobPost'] = $jobPost;
+
+        return view('components.find-job-page.job-info', $data);
     }
 
     public function submitContactUsResponse(Request $request)

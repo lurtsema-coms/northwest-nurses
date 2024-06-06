@@ -26,6 +26,8 @@ Route::get('/', [GuestController::class, 'index'])->name('index');
 
 Route::get('/find-jobs', [GuestController::class, 'findJobs'])->name('find-jobs');
 
+Route::get('/job-info/{id}', [GuestController::class, 'jobInfo'])->name('job-info');
+
 Route::get('/contact-us', function () {
     return view('contact-us');
 });
@@ -35,15 +37,6 @@ Route::post('/contact-us', [GuestController::class, 'submitContactUsResponse'])-
 route::get('/backend-layout', function () {
     return view('layouts.backend-layout');
 });
-
-// Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
-//     return view('dashboard');
-// })->name('dashboard');
-
-Route::get('/job-info', function () {
-    return view('components.find-job-page.job-info');
-});
-
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
