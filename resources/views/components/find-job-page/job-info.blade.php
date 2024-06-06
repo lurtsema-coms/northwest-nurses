@@ -1,5 +1,5 @@
 <div class="sticky top-0 mx-auto max-w-screen-md flex-grow bg-white border-2 border-gray-300 gap-5 rounded-xl overflow-hidden shadow-md">
-  <div class="w-full max-h-64 min-h-52 overflow-hidden">
+  <div class="w-full aspect-[8/3] overflow-hidden">
       <img class="w-full" src="{{ $selectedJobPost->img_link }}?v={{ time() }}" alt="">
   </div>
     <div class="p-5">

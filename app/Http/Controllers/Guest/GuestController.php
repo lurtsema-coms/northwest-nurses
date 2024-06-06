@@ -34,10 +34,7 @@ class GuestController extends Controller
         $selectedJobPost = (new JobPosting())
             ->getActiveJobPostings()
             ->where('job_postings.id', $jobPostingId)
-            ->first() ?? (new JobPosting())->getActiveJobPostings()->first();
-        // dd($jobPost);
-
-        // dd($jobPost);selectedJobPost
+            ->first() ?? (new JobPosting())->getActiveJobPostings()->orderBy('created_at', 'desc')->first();
 
         if ($request->header('HX-Request')) {
             return view(
@@ -78,23 +75,21 @@ class GuestController extends Controller
         $job_post = JobPosting::findOrFail($id);
         return response()->json($job_post);
     }
-    
+
     public function applyJob(Request $request, $id)
     {
         $user_id = auth()->user()->id;
-    
+
         $application = JobApplication::create([
             'job_posting_id' => $id,
             'status' => 'APPLIED',
-            'status_history' => json_encode([[ date('Y-m-d H:i:s') => 'APPLIED']]),
+            'status_history' => json_encode([[date('Y-m-d H:i:s') => 'APPLIED']]),
             'answer_1' => $request->input('answer_1'),
             'answer_2' => $request->input('answer_2'),
             'answer_3' => $request->input('answer_3'),
             'created_by' => $user_id,
         ]);
-    
+
         return redirect()->back()->with('success', 'Applied Successfully.');
     }
-
-
 }
