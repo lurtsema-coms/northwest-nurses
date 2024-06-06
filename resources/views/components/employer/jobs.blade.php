@@ -39,3 +39,5 @@
 </div>
 
 @include('components.dialog', ['title' => 'Are You Sure?', 'text_content' => 'This action will submit the form', 'id' => 'modal-warning', 'icon' => 'warning'])
+
+{{-- @include('components.employer.emp-applicant') --}}

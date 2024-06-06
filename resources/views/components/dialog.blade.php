@@ -2,6 +2,15 @@
     <div class="flex h-full w-full text-black">
         <div class="m-auto w-full max-w-lg bg-white relative shadow-xl rounded-lg py-10 px-6">
             {{-- Icon --}}
+            @if($icon == 'success')
+            <div class="text-center">
+                <span class="mb-4 inline-flex justify-center items-center w-[62px] h-[62px] rounded-full border-4 border-green-50 bg-green-100 text-green-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7" width="16" height="16">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                </span>
+            </div>
+            @endif
             @if($icon == 'warning')
             <div class="text-center">
                 <span class="mb-4 inline-flex justify-center items-center w-[62px] h-[62px] rounded-full border-4 border-yellow-50 bg-yellow-100 text-yellow-500">
@@ -19,8 +28,24 @@
                     <p class="text-slate-500" id="m-text">{{ $text_content }}</p>
                 </div>
                 <div class="flex justify-center items-center mt-7 space-x-5">
-                    <button class="text-sm text-slate-600 h-10 px-5 rounded-md shadow-sm border bg-white hover:bg-gray-50" id="modal-cancel">Cancel</button>
-                    <button class="text-sm text-white h-10 px-5 rounded-md shadow-sm border bg-sky-600 hover:bg-sky-500" id="modal-submit">Yes</button>
+                    @if (isset($showButtonCancel) && $showButtonCancel)
+                    <button class="text-sm text-slate-600 h-10 px-5 rounded-md shadow-sm border bg-white hover:bg-gray-50" id="modal-cancel">
+                        @if (isset($cancelButtonText))
+                            {{ $cancelButtonText }}
+                            @else
+                            Cancel
+                        @endif
+                    </button>
+                    @endif
+                    @if (isset($showButtonSubmit) && $showButtonSubmit) 
+                    <button class="text-sm text-white h-10 px-5 rounded-md shadow-sm border bg-sky-600 hover:bg-sky-500" id="modal-submit">
+                        @if (isset($confirmButtonText))
+                            {{ $confirmButtonText }}
+                            @else
+                            Yes
+                        @endif
+                    </button>
+                    @endif
                 </div>
             </div>
         </div>
