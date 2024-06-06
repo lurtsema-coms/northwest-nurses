@@ -92,6 +92,6 @@ class GuestController extends Controller
             'created_by' => $user_id,
         ]);
 
-        return redirect()->back()->with('success', 'Applied Successfully.');
+        return response()->json(['success' => true]);
     }
 }
