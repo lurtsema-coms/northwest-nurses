@@ -12,15 +12,15 @@
                 </div>
                 <div class="flex flex-col gap-10">
                     <div class="space-y-3">
-                        <label for="answer_1" class="font-semibold">1. This is a sample question?</label>
+                        <x-input-label for="answer_1" :value="__('')" />
                         <textarea name="answer_1" id="answer_1" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
                     </div>
                     <div class="space-y-3">
-                        <label for="answer_2" class="font-semibold">2. This is another sample question?</label>
+                        <x-input-label for="answer_2" :value="__('')" />
                         <textarea name="answer_2" id="answer_2" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
                     </div>
                     <div class="space-y-3">
-                        <label for="answer_3" class="font-semibold">3. Yet another sample question, innit?</label>
+                        <x-input-label for="answer_3" :value="__('')" />
                         <textarea name="answer_3" id="answer_3" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
                     </div>
                 </div>
@@ -150,18 +150,33 @@
     });
 
     $(document).on('click', '#apply-now-btn', function() {
-        $(".modal-center").removeClass("hidden");
         const entryId = $(this).data('entry-id');
         const url = $(this).attr('href');
         let editUrl = "{{ route('get-job', 'entryId') }}";
         const newUrl = editUrl.replace('entryId', entryId);
-        console.log(newUrl);
+        // console.log(newUrl);
         $.ajax({
             url: newUrl,   
                 dataType: 'json',
                 type: 'GET',
                 success: function(response) {
-                    console.log(response);
+                    // console.log(response);
+                    $('label[for="answer_1"]').text(response.question_1);
+                    if (response.question_2 !== null) {
+                        $('label[for="answer_2"]').text(response.question_2);
+                        $('textarea#answer_2').parent().show();
+                    } else {
+                        $('label[for="answer_2"]').text('');
+                        $('textarea#answer_2').parent().hide();
+                    }
+                    if (response.question_3 !== null) {
+                        $('label[for="answer_3"]').text(response.question_3);
+                        $('textarea#answer_3').parent().show();
+                    } else {
+                        $('label[for="answer_3"]').text('');
+                        $('textarea#answer_3').parent().hide();
+                    }
+                    $(".modal-center").removeClass("hidden");
                     let submitUrl = "{{ route('apply-job', 'entryId') }}";
                     submitUrl = submitUrl.replace('entryId', response.id);
                     $('#job-application-form').attr('action', submitUrl);
