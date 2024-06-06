@@ -1,7 +1,8 @@
 @extends('layouts.applicant')
 @section('content')
 <div class="modal-center modal-applicant fixed inset-0 h-screen w-full bg-black bg-opacity-75  p-4 z-10 overflow-y-auto hidden">
-    <form action="">
+    <form id="job-application-form" method="POST"  enctype="multipart/form-data">
+        @csrf
         <div class="modal-box m-auto w-full max-w-3xl bg-white shadow-lg rounded-lg animate-fade-in p-10">
             <div class="modal-content flex flex-col p-3">
                 <div class="mb-4">
@@ -11,16 +12,16 @@
                 </div>
                 <div class="flex flex-col gap-10">
                     <div class="space-y-3">
-                        <label for="answer_1" class="font-semibold">1. This is a sample question?</label>
-                        <textarea name="answer_1" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
+                        <x-input-label for="answer_1" :value="__('')" />
+                        <textarea name="answer_1" id="answer_1" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
                     </div>
                     <div class="space-y-3">
-                        <label for="answer_1" class="font-semibold">2. This is another sample question?</label>
-                        <textarea name="answer_1" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
+                        <x-input-label for="answer_2" :value="__('')" />
+                        <textarea name="answer_2" id="answer_2" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
                     </div>
                     <div class="space-y-3">
-                        <label for="answer_1" class="font-semibold">3. Yet another sample question, innit?</label>
-                        <textarea name="answer_1" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
+                        <x-input-label for="answer_3" :value="__('')" />
+                        <textarea name="answer_3" id="answer_3" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
                     </div>
                 </div>
                 <div class="flex flex-row gap-10 justify-center p-2 mt-5">
@@ -44,7 +45,7 @@
                         <option value="{{ $location }}">{{ $location }}</option>
                         @endforeach
                     </select>
-                    <input name="query" class="py-3 grow border-none text-lg focus:outline-none focus:ring-0 text-primary" type="text" placeholder="Job title or company">
+                    <input name="query" class="py-3 grow border-none text-lg focus:outline-none focus:ring-0 text-primary" type="text" placeholder="Job title or company" required>
                     <div class="py-3 search-btn-wrapper px-3 rounded-b-2xl md:rounded-bl-none md:rounded-r-2xl bg-white flex items-center content-center ">
                         <button class="bg-primary hover:opacity-75 text-white text-lg px-5 py-2 rounded-full flex-grow flex flex-row justify-center align-center gap-2" type="submit"><p>Search</p> <span class="material-symbols-outlined">search</span></button>
                     </div>
@@ -85,23 +86,20 @@
             <div class="job-list-card-footer flex flex-wrap flex-col sm:flex-row justify-between gap-5">
                 <p class="font-bold text-primary align-middle text-lg">{{ $jobPost->pay }}</p>
                 <button 
-                    hx-get="/job-info/{{ $jobPost->id }}"
+                    hx-get="/find-jobs?{{ $htmxParamString }}&id={{ $jobPost->id }}"
                     hx-target=".job-info-section"
+                    hx-push-url="true"
                     class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full whitespace-nowrap">
                     View Job
                 </button>
             </div>
         </div>
         @endforeach
-        <div class="flex flex-row justify-center items-center lg:max-w-screen-sm gap-3">
-            <button class="bg-black hover:opacity-75 text-white py-2 px-5 rounded-full">Prev</button>
-            <p>1 - 10 of 5,330</p>
-            <button class="bg-black hover:opacity-75 text-white py-2 px-5 rounded-full">Next</button>
-        </div>
+        {{ $activeJobPosts->links('vendor.pagination.custom-pagination') }}
     </div>
     <div id="job-info-section" class="job-info-section">
         @if (count($activeJobPosts))
-        @include('components.find-job-page.job-info', ['jobPost' => (clone $activeJobPosts)->first()])
+        @include('components.find-job-page.job-info')
         @endif
     </div>
 </div>
@@ -152,7 +150,64 @@
     });
 
     $(document).on('click', '#apply-now-btn', function() {
-        $(".modal-center").removeClass("hidden");
+        const entryId = $(this).data('entry-id');
+        const url = $(this).attr('href');
+        let editUrl = "{{ route('get-job', 'entryId') }}";
+        const newUrl = editUrl.replace('entryId', entryId);
+        // console.log(newUrl);
+        $.ajax({
+            url: newUrl,   
+                dataType: 'json',
+                type: 'GET',
+                success: function(response) {
+                    // console.log(response);
+                    $('label[for="answer_1"]').text(response.question_1);
+                    if (response.question_2 !== null) {
+                        $('label[for="answer_2"]').text(response.question_2);
+                        $('textarea#answer_2').parent().show();
+                    } else {
+                        $('label[for="answer_2"]').text('');
+                        $('textarea#answer_2').parent().hide();
+                    }
+                    if (response.question_3 !== null) {
+                        $('label[for="answer_3"]').text(response.question_3);
+                        $('textarea#answer_3').parent().show();
+                    } else {
+                        $('label[for="answer_3"]').text('');
+                        $('textarea#answer_3').parent().hide();
+                    }
+                    $(".modal-center").removeClass("hidden");
+                    let submitUrl = "{{ route('apply-job', 'entryId') }}";
+                    submitUrl = submitUrl.replace('entryId', response.id);
+                    $('#job-application-form').attr('action', submitUrl);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+        });
     });
+
+    $(document).on('click', '.submit-application-btn', function() {
+        const form = $('#job-application-form');
+        const url = form.attr('action');
+        const formData = new FormData(form[0]);
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                console.log(response);
+                // Handle success response
+            },
+            error: function(error) {
+                console.log(error);
+                // Handle error response
+            }
+        });
+    });
+
 </script>
 @endsection

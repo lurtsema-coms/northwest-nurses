@@ -6,7 +6,7 @@
     <div class="search-section-container min-h-96 md:min-h-[500px] relative flex flex-col justify-center md:justify-end">
         <div class="top-search-bar flex flex-col justify-end items-center px-4 md:px-5 md:mb-8">
             <h1 class="text-4xl font-bold text-center text-white md:text-5xl mb-5 md:mb-10">Your Gateway to Exceptional Travel Nursing Opportunities</h1>
-            <form action="/find-jobs" method="GET" class="search-form container max-w-screen-lg flex flex-col align-center justify-center md:mb-5">
+            <form action="/find-jobs" method="GET" class="search-form container max-w-screen-lg flex flex-col align-center justify-center md:mb-5" autocomplete="off">
                 <div class="form-top flex flex-col md:flex-row align-center justify-center">
                     <select name="location" class="p-5 py-3 min-w-[300px] text-primary text-lg font-semibold rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl border-none focus:outline-none focus:ring-0" name="" id="">
                         <option value="" selected disabled>Location</option>
@@ -14,7 +14,7 @@
                         <option value="{{ $location }}">{{ $location }}</option>
                         @endforeach
                     </select>
-                    <input name="query" class="py-3 grow border-none text-lg focus:outline-none focus:ring-0 text-primary" type="text" placeholder="Job title or company">
+                    <input name="search" class="py-3 grow border-none text-lg focus:outline-none focus:ring-0 text-primary" type="text" placeholder="Job title or company">
                     <div class="py-3 search-btn-wrapper px-3 rounded-b-2xl md:rounded-bl-none md:rounded-r-2xl bg-white flex items-center content-center ">
                         <button class="bg-primary hover:opacity-75 text-white text-lg px-5 py-2 rounded-full flex-grow flex flex-row justify-center align-center gap-2" type="submit"><p>Search</p> <span class="material-symbols-outlined">search</span></button>
                     </div>
@@ -104,17 +104,17 @@
 <div class="container mx-auto px-3 flex flex-col justify-center items-center py-10 gap-5">
     <h1 class="text-4xl text-center font-extrabold mb-5">Most Recent Job Postings</h1>
     @if (count($mostRecentJobPostings))
-    <div class="grid gap-5 md:grid-cols-2 2xl:grid-cols-3">
+    <div class="grid gap-5 xl:grid-cols-2">
         @foreach ($mostRecentJobPostings as $jobPosting)
-        <div class="landing-job-card flex flex-row justify-between padding-0 rounded-2xl border border-gray-200 shadow-md overflow-hidden">
-            <div class="w-32 md:w-40 relative flex-none">
-                <img class="h-full object-cover absolute top-0 left-0" src="{{ $jobPosting->img_link }}?v={{ time() }}" alt="">
+        <div class="landing-job-card flex flex-col md:flex-row justify-between padding-0 rounded-2xl border border-gray-200 shadow-md overflow-hidden">
+            <div class="w-full aspect-[8/3] md:w-72 relative flex-none overflow-hidden">
+                <img class="min-h-full min-w-full object-cover absolute top-0 left-0" src="{{ $jobPosting->img_link }}?v={{ time() }}" alt="">
             </div>
-            <div class="px-8 py-5 ml-3 flex-grow">
+            <div class="px-5 py-5 ml-3 flex-grow flex flex-col items-start justify-between gap-1">
                 <h1 class="font-extrabold text-lg leading-5 text-wrap">{{ $jobPosting->address }}</h1>
                 <p class="font-bold">{{ $jobPosting->job_title }}</p>
                 <p class="font-bold">{{ $jobPosting->pay }}</p>
-                <button class="bg-primary mt-3 hover:opacity-75 text-white px-5 py-2 rounded-full whitespace-nowrap">View Job</button>
+                <a href="/find-jobs?id={{ $jobPosting->id }}" class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full whitespace-nowrap">View Job</a>
             </div>
         </div>
         @endforeach

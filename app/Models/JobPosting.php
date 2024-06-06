@@ -15,7 +15,6 @@ class JobPosting extends Model
     public function getActiveJobPostings()
     {
         return self::query()
-            ->orderBy('created_at', 'desc')
             ->whereNull('deleted_at')
             ->where('status', 'ACTIVE')
             ->where('openings', '>', 0);
