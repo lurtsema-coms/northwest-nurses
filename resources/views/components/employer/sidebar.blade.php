@@ -1,7 +1,6 @@
 <div class="hidden min-h-dvh w-72 shrink-0 md:block" id="sidebar">
     <div class="w-full h-16 flex relative">
         <p class="m-auto text-slate-600 text-md font-bold" id="logo">Northwest Nurses</p>
-        <div class="css-o2c9dn absolute bottom-0"></div>
     </div>
     <div class="py-10 pl-7" id="sidebar-links">
         <div class="space-y-3">
