@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\JobPosting;
 use Illuminate\Http\Request;
 use Spatie\ImageOptimizer\OptimizerChainFactory;
-use Image;
+use Intervention\Image\Facades\Image;
 
 class EmpPostJobController extends Controller
 {
@@ -26,7 +26,7 @@ class EmpPostJobController extends Controller
             ->whereNull('job_postings.deleted_at')
             ->orderBy('job_postings.created_at', 'desc') // Order by created_at in descending order
             ->paginate(10);
-    
+
         if ($request->header('HX-Request')) {
             return view('components.employer.jobs', $data)->render() . view('components.employer.module-title', ['module_title' => 'Jobs']);
         } else {
@@ -34,12 +34,13 @@ class EmpPostJobController extends Controller
         }
     }
 
-    public function getAdd(Request $request){
+    public function getAdd(Request $request)
+    {
 
         $data = [];
         $data['module_title'] = 'Add Jobs';
 
-        
+
         if ($request->header('HX-Request')) {
             return view('components.employer.jobs-view', $data)->render() . view('components.employer.module-title', $data);
         } else {
@@ -61,7 +62,7 @@ class EmpPostJobController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        
+
         $job_posting = new JobPosting([
             'job_title' => $input['job_title'],
             'profession' => $input['profession'],
@@ -106,9 +107,9 @@ class EmpPostJobController extends Controller
 
         // Optimize and save the image
         $image->save($file_path, 80);
-        
+
         JobPosting::find($job_posting->id)
-            ->update(['img_link' => $file_path]);
+            ->update(['img_link' => asset("img/job-cover/$file_name")]);
 
         return redirect(route('employer.job'));
     }

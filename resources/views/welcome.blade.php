@@ -119,9 +119,9 @@
         @foreach ($mostRecentJobPostings as $jobPosting)
         <div class="landing-job-card flex flex-row justify-between padding-0 rounded-2xl border border-gray-200 shadow-md overflow-hidden">
             <div class="w-32 md:w-40 relative flex-none">
-                <img class="h-full object-cover absolute top-0 left-0" src="https://www.redfin.com/blog/wp-content/uploads/2023/09/Sitka-alaska.jpg" alt="">
+                <img class="h-full object-cover absolute top-0 left-0" src="{{ $jobPosting->img_link }}" alt="">
             </div>
-            <div class="p-3 ml-3 flex-grow">
+            <div class="px-8 py-5 ml-3 flex-grow">
                 <h1 class="font-extrabold text-lg leading-5 text-wrap">{{ $jobPosting->address }}</h1>
                 <p class="font-bold">{{ $jobPosting->job_title }}</p>
                 <p class="font-bold">{{ $jobPosting->pay }}</p>
