@@ -85,8 +85,9 @@
             <div class="job-list-card-footer flex flex-wrap flex-col sm:flex-row justify-between gap-5">
                 <p class="font-bold text-primary align-middle text-lg">{{ $jobPost->pay }}</p>
                 <button 
-                    hx-get="/job-info/{{ $jobPost->id }}"
+                    hx-get="/find-jobs?id={{ $jobPost->id }}"
                     hx-target=".job-info-section"
+                    hx-push-url="true"
                     class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full whitespace-nowrap">
                     View Job
                 </button>

@@ -10,7 +10,9 @@
               <p class="text-gray-500">Job ID: {{ $jobPost->job_id }}</p>
               @auth
               @role('applicant')
-                <button id="apply-now-btn" class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full">Apply Now</button>
+                <button 
+                id="apply-now-btn" 
+                class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full">Apply Now</button>
               @endrole
               @role('employer')
                 <button class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full opacity-75" disabled>Apply Now</button>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\ContactUsResponseNotif;
 use App\Models\JobPosting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
@@ -21,23 +22,25 @@ class GuestController extends Controller
 
     public function findJobs(Request $request)
     {
-        $activeJobPosts = (new JobPosting())
-            ->getActiveJobPostings()
-            ->paginate(10);
-
+        $jobPostingId = $request->id;
         $data = [];
-        $data['activeJobPosts'] = $activeJobPosts;
+        if (!$jobPostingId) {
+            $activeJobPosts = (new JobPosting())->getActiveJobPostings()
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        } else {
+            $activeJobPosts = (new JobPosting())->getActiveJobPostings()
+                ->orderBy(DB::raw("job_postings.id = $jobPostingId"), 'desc')
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        }
 
-        return view('find-jobs', $data);
-    }
-
-    public function jobInfo(Request $request, $id)
-    {
-        $jobPost = JobPosting::find($id);
-        $data = [];
-        $data['jobPost'] = $jobPost;
-
-        return view('components.find-job-page.job-info', $data);
+        if ($request->header('HX-Request')) {
+            return view('components.find-job-page.job-info', ['jobPost' => JobPosting::find($jobPostingId)]);
+        } else {
+            $data['activeJobPosts'] = $activeJobPosts;
+            return view('find-jobs', $data);
+        }
     }
 
     public function submitContactUsResponse(Request $request)
