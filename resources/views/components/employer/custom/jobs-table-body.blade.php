@@ -22,8 +22,8 @@
                 <td class="px-6 py-4 text-sm whitespace-nowrap">{{$job->openings}}</td>
                 <td class="px-6 py-4 text-sm whitespace-nowrap">{{$job->start_date}}</td>
                 <td class="px-6 py-4 text-sm whitespace-nowrap">{{$job->pay}}</td>
-                <td class="px-6 py-4 text-sm">
-                    <div class="flex gap-2 flex-wrap">
+                <td class="px-6 py-4 text-sm whitespace-nowrap">
+                    <div class="flex gap-2">
                         <button class="bg-green-500 text-gray-50 px-3 py-1 rounded-md shadow-md hover:bg-green-400"
                             hx-trigger="click" hx-get="{{ route('employer.job.edit', $job->id) }}" hx-target="#target-content" hx-push-url="true">
                             Edit
