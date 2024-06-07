@@ -103,6 +103,14 @@
         @endif
     </div>
 </div>
+@include('components.dialog', ['title' => 'Your form has been updated!',
+    'text_content' => '',
+    'id' => 'modal-success',
+    'icon' => 'success',
+    'showButtonCancel' => false,
+    'showButtonSubmit' => true,
+    'confirmButtonText' => 'Ok',
+])
 @endsection
 @section('scripts')
 <script>
@@ -187,7 +195,8 @@
         });
     });
 
-    $(document).on('click', '.submit-application-btn', function() {
+    $(document).on('submit', '#job-application-form', function(event) {
+        event.preventDefault();
         const form = $('#job-application-form');
         const url = form.attr('action');
         const formData = new FormData(form[0]);
@@ -200,6 +209,11 @@
             contentType: false,
             success: function(response) {
                 console.log(response);
+                $('.modal-applicant').addClass('hidden');
+                $('#modal-success').removeClass('hidden');
+                $('#modal-submit').on('click', function(){
+                    $('#modal-success').hide();
+                });
                 // Handle success response
             },
             error: function(error) {
