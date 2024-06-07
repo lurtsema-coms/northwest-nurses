@@ -17,19 +17,19 @@
             @if ($jobPost->question_1)
               <div class="space-y-3">
                   <label for="answer_1">{{ $jobPost->question_1 }}</label>
-                  <textarea name="answer_1" id="answer_1" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
+                  <textarea name="answer_1" id="answer_1" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..." required></textarea>
               </div>
             @endif
             @if ($jobPost->question_2)
               <div class="space-y-3">
                   <label for="answer_2">{{ $jobPost->question_2 }}</label>
-                  <textarea name="answer_2" id="answer_2" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
+                  <textarea name="answer_2" id="answer_2" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..." required></textarea>
               </div>
             @endif
             @if ($jobPost->question_3)
               <div class="space-y-3">
                 <label for="answer_3">{{ $jobPost->question_3 }}</label>
-                <textarea name="answer_3" id="answer_3" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
+                <textarea name="answer_3" id="answer_3" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..." required></textarea>
               </div>
             @endif
           </div>
