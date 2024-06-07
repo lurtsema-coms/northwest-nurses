@@ -26,7 +26,7 @@
 						<x-text-input  id="new_password" class="block mt-1 w-full" type="password" name="new_password" required/>
 					</div>
 					<div class="flex-grow mt-4">
-						<x-input-label for="confirmation_password" :value="__('Current Password:')"/>
+						<x-input-label for="confirmation_password" :value="__('Confirm New Password:')"/>
 						<x-text-input  id="confirmation_password" class="block mt-1 w-full" type="password" name="confirmation_password" required/>
 					</div>
 				</div>
