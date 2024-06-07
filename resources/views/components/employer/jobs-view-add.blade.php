@@ -114,7 +114,7 @@
     </form>
 </div>
 
-@include('components.dialog', ['title' => 'Are You Sure?', 'text_content' => 'This action will submit the form', 'id' => 'modal-warning', 'icon' => 'warning'])
+@include('components.dialog', ['title' => 'Are You Sure?', 'text_content' => 'This action will submit the form', 'class' => 'modal-warning', 'icon' => 'warning'])
 
 
 <script>
@@ -127,11 +127,11 @@
             e.preventDefault();
             const form = this;
 
-            $('#modal-warning').show();
+            $('.modal-warning').show();
             $('#modal-submit').focus();
             
             $('#modal-cancel').on('click', function(){
-                $('#modal-warning').hide();
+                $('.modal-warning').hide();
             })
 
             $('#modal-submit').on('click', function(){

@@ -102,7 +102,6 @@ class EmpPostJobController extends Controller
             'getApplicantsPost.getApplicantsInformation'
         ])->findOrFail($id);
 
-
         $data = [
             'module_title' => 'Applicants',
             'job_posts' => $jobPost,
@@ -287,6 +286,8 @@ class EmpPostJobController extends Controller
     }
 
     public function editApplicant(Request $request, string $id){
+        $input = $request->all();
 
+        dd($id);
     }
 }

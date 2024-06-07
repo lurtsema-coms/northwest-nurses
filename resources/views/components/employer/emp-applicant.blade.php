@@ -24,7 +24,7 @@
                 <input type="hidden" name="action-btn">
                 <div class="relative p-[1px] bg-gray-300 rounded-lg hover:shadow-lg">
                     <div class="bg-white rounded-lg p-5 sm:p-10">
-                        <p class="text-md text-green-500 font-bold mb-3" data-time="{{ $applicants[$i]->created_at }}"></p>
+                        <p class="timeago text-md text-green-500 font-bold mb-3" datetime="{{ $applicants[$i]->created_at }} {{ config('app.timezone') }}" ></p>
                         <div>
                             <div class="flex flex-wrap">
                                 <div class="flex-1 basis-52"><span class="text-slate-600 font-medium">Name: </span><span class="">{{ $applicant_information[$i]->first_name." ".$applicant_information[$i]->last_name }}</span></div>
@@ -69,17 +69,36 @@
     </div>
 </div>
 
+@include('components.dialog', ['title' => 'Are You Sure?', 'text_content' => 'This action will submit the form', 'class' => 'modal-warning', 'icon' => 'warning'])
+
 <script>
     $(document).ready(function() {
-        $('p[data-time]').each(function() {
-            let timeString = $(this).attr('data-time'); // Get the time from the data-time attribute
-            let timeAgo = timeago.format(timeString + ' UTC'); // Append 'UTC' to ensure correct interpretation
-            $(this).text(timeAgo); // Set the text content to the formatted time
-        });
+        const timeagoNodes = document.querySelectorAll('.timeago');
+        if (timeagoNodes.length) {
+            timeago.render(timeagoNodes);
+        }
 
         $('form').on('submit', function(event){
             event.preventDefault();
-            const form = this;
-        })
+            const form = $(this);
+
+            const buttonClicked = form.find('button:focus');
+            const buttonText = buttonClicked.text();
+            form.find('input[name="action-btn"]').val(buttonText);
+
+            if (buttonText.trim() !== '') { // Check if buttonText is not empty
+                $('.modal-warning').removeClass('hidden');
+                $('#modal-submit').focus();
+                
+                $('#modal-cancel').on('click', function(){
+                    $('.modal-warning').addClass('hidden');
+                });
+
+                $('#modal-submit').on('click', function(){
+                    $(this).attr('disabled', true);
+                    form.off('submit').submit();
+                });
+            }
+        });
     });
 </script>

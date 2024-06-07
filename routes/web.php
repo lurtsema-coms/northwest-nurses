@@ -49,7 +49,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/employer-job/edit/{id}', [EmpPostJobController::class, 'edit'])->name('employer.job.edit');
         Route::post('/employer-job/edit-jobs/{id}', [EmpPostJobController::class, 'update'])->name('employer.job.edit-jobs');
         Route::get('/employer-job/applicants/{id}', [EmpPostJobController::class, 'getApplicant'])->name('employer.job.applicants');
-        Route::get('/employer-job/edit-applicants/{id}', [EmpPostJobController::class, 'editApplicant'])->name('employer.job.edit-applicant');
+        Route::post('/employer-job/edit-applicants/{id}', [EmpPostJobController::class, 'editApplicant'])->name('employer.job.edit-applicant');
         Route::get('/employer-job/view/{id}', [EmpPostJobController::class, 'show'])->name('employer.job.view');
         Route::get('/employer-job/delete/{id}', [EmpPostJobController::class, 'delete'])->name('employer.job.delete-job');
 
