@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\ImageOptimizer\OptimizerChainFactory;
 use Intervention\Image\Facades\Image;
+use Carbon\Carbon;
 
 class EmpPostJobController extends Controller
 {
@@ -94,9 +95,16 @@ class EmpPostJobController extends Controller
     public function getApplicant(Request $request, string $id)
     {
         // Fetch the JobPosting along with its related applicants and their information
-        $jobPost = JobPosting::with('getApplicantsPost.getApplicantsInformation')->findOrFail($id);
+        $jobPost = JobPosting::with([
+            'getApplicantsPost' => function ($query) {
+                $query->orderBy('id', 'desc');
+            },
+            'getApplicantsPost.getApplicantsInformation'
+        ])->findOrFail($id);
+
 
         $data = [
+            'module_title' => 'Applicants',
             'job_posts' => $jobPost,
             'applicants' => $jobPost->getApplicantsPost,
             'applicant_information' => []
@@ -107,7 +115,9 @@ class EmpPostJobController extends Controller
         }
 
         if ($request->header('HX-Request')) {
-            return view('components.employer.emp-applicant', $data)->render();
+            return view('components.employer.emp-applicant', $data)->render() . view('components.employer.module-title', $data);
+        }else{
+            return view('layouts.employer.jobs-applicant', $data);
         }
     }
 
@@ -274,5 +284,9 @@ class EmpPostJobController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function editApplicant(Request $request, string $id){
+
     }
 }

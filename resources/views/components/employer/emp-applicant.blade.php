@@ -1,29 +1,41 @@
-<div class="fixed overflow-hidden top-0 left-0 min-h-screen min-w-screen inset-0 bg-black bg-opacity-20 transition-all" id="applicant-content" x-data="{ isOpen: true }" x-show="isOpen" x-transition>
-    <div class="text-slate-700 p-7">
-        <div class="m-auto w-full h-full max-w-4xl bg-white relative shadow-xl rounded-lg py-7 px-5" @click.outside="isOpen = false">
-            <div class="max-h-[40rem] overflow-auto px-5">
-                <div class="mb-5 font-bold">
-                    <p>Job Title: <span class="text-slate-500">{{ $job_posts->job_title }}</span></p>
-                    <p>Job ID: <span class="text-slate-500">{{ $job_posts->job_id }}</span></p>
-                </div>
-                <div class="mb-3 font-medium">
-                    Applicants
-                </div>
-                <div class="space-y-7">
-                    @for ($i=0; $i<count($applicants); $i++)
-                    <div class="relative p-[1px] bg-gradient-to-r from-blue-300 via-cyan-500 to-teal-500 rounded-lg hover:shadow-lg">
-                        <div class="bg-white rounded-lg py-3 px-5 text-sm space-y-3">
-                            <p class="text-md font-medium">{{ $applicants[$i]->created_at }}</p>
-                            <div>
-                                <div class="flex flex-wrap">
-                                    <div class="flex-1 basis-52"><span class="text-slate-600 font-medium">Name: </span><span class="">{{ $applicant_information[$i]->first_name." ".$applicant_information[$i]->last_name }}</span></div>
-                                    <div class="flex-1 basis-52"><span class="text-slate-600 font-medium">Birthday: </span><span class="">{{ \DateTime::createFromFormat('Y-m-d', $applicant_information[$i]->birthdate)->format('M j, Y') }}</span></div>
-                                </div> 
-                                <div class="flex flex-wrap">
-                                    <div class="flex-1 basis-52"><span class="text-slate-600 font-medium">Contact: </span><span class="">{{ $applicant_information[$i]->contact_number }}</span></div>
-                                    <div class="flex-1 basis-52"><span class="text-slate-600 font-medium">Sex: </span><span class="capitalize">{{ $applicant_information[$i]->sex }}</span></div>
-                                </div>
+<div class="h-auto mx-auto max-w-5xl relative text-slate-600 bg-white py-7 px-10 shadow-sm border rounded-2xl">
+    <div class="font-medium text-sky-600 flex absolute -top-9 left-0">
+        <span class="flex items-center space-x-2 hover:opacity-70 cursor-pointer"
+            hx-get="{{ route('employer.job') }}" hx-target="#target-content" hx-push-url="true" hx-on::after-request="$('input').val()"
+        >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            <span>Back to Jobs</span>
+        </span>
+    </div>
+    <div class="mb-5 font-medium text-center">
+        <p>Job Title: <span class="">{{ $job_posts->job_title }}</span></p>
+        <p>Job ID: <span class="">{{ $job_posts->job_id }}</span></p>
+    </div>
+    <div class="mb-3 font-medium">
+        Applicants
+    </div>
+    <div class="space-y-7">
+        @if (count($applicants) > 0)
+            @for ($i=0; $i<count($applicants); $i++)
+            <form action="{{ route('employer.job.edit-applicant', $applicants[$i]->id) }}" method="POST">
+                @csrf
+                <input type="hidden" name="action-btn">
+                <div class="relative p-[1px] bg-gray-300 rounded-lg hover:shadow-lg">
+                    <div class="bg-white rounded-lg p-5 sm:p-10">
+                        <p class="text-md text-green-500 font-bold mb-3" data-time="{{ $applicants[$i]->created_at }}"></p>
+                        <div>
+                            <div class="flex flex-wrap">
+                                <div class="flex-1 basis-52"><span class="text-slate-600 font-medium">Name: </span><span class="">{{ $applicant_information[$i]->first_name." ".$applicant_information[$i]->last_name }}</span></div>
+                                <div class="flex-1 basis-52"><span class="text-slate-600 font-medium">Birthday: </span><span class="">{{ \DateTime::createFromFormat('Y-m-d', $applicant_information[$i]->birthdate)->format('M j, Y') }}</span></div>
+                            </div> 
+                            <div class="flex flex-wrap">
+                                <div class="flex-1 basis-52"><span class="text-slate-600 font-medium">Contact: </span><span class="">{{ $applicant_information[$i]->contact_number }}</span></div>
+                                <div class="flex-1 basis-52"><span class="text-slate-600 font-medium">Sex: </span><span class="capitalize">{{ $applicant_information[$i]->sex }}</span></div>
                             </div>
+                        </div>
+                        <div class="mt-5 space-y-3">
                             <div>
                                 <p class="text-slate-600 font-medium">Question 1</p>
                                 <p class="text-slate-500">{{ $job_posts->question_1 }}</p>
@@ -39,28 +51,35 @@
                                 <p class="text-slate-500">{{ $job_posts->question_3 }}</p>
                                 <p>Answer: {{ $applicants[$i]->answer_3 }}</p>
                             </div>
-                            <div class="flex justify-end">
-                                <button class="bg-red-400 text-gray-50 px-4 py-2 rounded-md hover:bg-red-500 mr-2 cursor-pointer">Reject</button>
+                            <p class="!mt-10 text-center font-medium">STATUS: {{ $applicants[$i]->status }}</p>
+                            <div class="!mt-5 flex gap-2 flex-wrap sm:justify-center ">
+                                <button class="bg-yellow-500 text-gray-50 px-4 py-2 rounded-md shadow-md hover:bg-yellow-600 cursor-pointer">For Review</button>
+                                <button class="bg-red-500 text-gray-50 px-4 py-2 rounded-md shadow-md hover:bg-red-600 cursor-pointer">Reject</button>
                                 <button class="bg-green-500 text-gray-50 px-4 py-2 rounded-md shadow-md hover:bg-green-600 cursor-pointer">Hire</button>
                             </div>
                         </div>
                     </div>
-                    @endfor
-                    <div>
-                        <button class="text-sm text-slate-600 h-10 px-5 rounded-md shadow-sm border bg-white hover:bg-gray-50" id="btn-close" @click="isOpen = false;">
-                            Back
-                        </button>
-                    </div>
                 </div>
-            </div>
-        </div>
+            </form>
+            @endfor
+            
+            @else
+            <p class="text-center text-slate-500 font-medium">No applicants have applied yet..</p>
+        @endif
     </div>
 </div>
 
 <script>
-    // $(document).ready(function(){
-    //     $('#btn-close').on('click', function(){
-    //         $('#applicant-content').addClass('hidden');
-    //     })
-    // })
+    $(document).ready(function() {
+        $('p[data-time]').each(function() {
+            let timeString = $(this).attr('data-time'); // Get the time from the data-time attribute
+            let timeAgo = timeago.format(timeString + ' UTC'); // Append 'UTC' to ensure correct interpretation
+            $(this).text(timeAgo); // Set the text content to the formatted time
+        });
+
+        $('form').on('submit', function(event){
+            event.preventDefault();
+            const form = this;
+        })
+    });
 </script>

@@ -17,7 +17,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         {{-- Htmx --}}
         <script src="https://unpkg.com/htmx.org@1.9.12"></script>
-
+        <!-- Include timeago.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js"></script>
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
