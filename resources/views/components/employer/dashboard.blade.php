@@ -38,7 +38,7 @@
         <div class="flex justify-between items-center bg-white px-10 py-5 shadow-sm rounded-2xl" style="flex: 1 0 250px;">
             <div class="mr-3">
                 <p class="font-medium">Applications this month</p>
-                <p class="text-xl">133</p>
+                <p class="text-xl">{{$applicant_this_month}}</p>
             </div>
             <div class="bg-white rounded-md px-3 py-2 shadow-md mr-3">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8">

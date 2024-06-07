@@ -15,7 +15,29 @@ class ApplicantController extends Controller
 {
     public function myJobs(Request $request)
     {
-        return view('applicants.my-jobs');
+        $myId = Auth::user()->id;
+        $jobPostingId = $request->id;
+
+        $myJobs = (new JobPosting())
+            ->applicationInfo()
+            ->whereRaw("job_postings.id in (SELECT job_posting_id FROM job_applications WHERE created_by = $myId)")
+            ->paginate(10);
+
+        $selectedJobPost = (new JobPosting())
+            ->applicationInfo()
+            ->whereRaw("job_postings.id in (SELECT job_posting_id FROM job_applications WHERE created_by = $myId)")
+            ->where('job_postings.id', $jobPostingId)
+            ->first();
+
+        if ($request->header('HX-Request')) {
+            return view(
+                'components.find-job-page.job-info',
+                ['selectedJobPost' => $selectedJobPost]
+            )->render() . view('vendor.pagination.custom-pagination', ['paginator' => $myJobs]);
+        }
+        $data['myJobs'] = $myJobs;
+
+        return view('applicants.my-jobs', $data);
     }
 
     public function myProfile(Request $request)
@@ -100,7 +122,7 @@ class ApplicantController extends Controller
             'created_by' => $user_id,
         ]);
 
-        $jobPost = JobPosting::findOrFail($id);
+        $jobPost = JobPosting::applicationInfo()->findOrFail($id);
         $dialogData = [
             'title' => 'Thank you for applying to this job!',
             'text_content' => '',
@@ -112,6 +134,8 @@ class ApplicantController extends Controller
             'hidden' => '',
         ];
 
-        return view('components.find-job-page.job-info', ['selectedJobPost' => $jobPost])->render() . view('components.dialog', $dialogData);
+        return view('components.find-job-page.job-info', ['selectedJobPost' => $jobPost])->render()
+            . view('components.dialog', $dialogData)
+            . view('components.find-job-page.job-posting-card', ['jobPost' => $jobPost]);
     }
 }

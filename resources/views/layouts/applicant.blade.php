@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 		<script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js"></script>
 
 
         <!-- Styles -->
@@ -91,6 +92,13 @@
         </footer>
         <script>
         $(document).ready(function() {
+            htmx.onLoad(function() {
+                const timeagoNodes = document.querySelectorAll('.timeago');
+                if (timeagoNodes.length) {
+                    timeago.render(timeagoNodes);
+                }
+            });
+
 			$.fn.slideToggleFlex = function (duration = 400, easing, complete) {
 				return this.each(function () {
 					var $el = $(this);

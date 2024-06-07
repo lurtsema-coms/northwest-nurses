@@ -20,18 +20,18 @@ class JobPosting extends Model
     public function getActiveJobPostings()
     {
         return self::query()
-            ->whereNull('deleted_at')
-            ->where('status', 'ACTIVE')
-            ->where('openings', '>', 0);
+            ->whereNull('job_postings.deleted_at')
+            ->where('job_postings.status', 'ACTIVE')
+            ->where('job_postings.openings', '>', 0);
     }
 
     public function getRecentJobPostings()
     {
         return self::query()
-            ->orderBy('created_at', 'desc')
-            ->whereNull('deleted_at')
-            ->where('status', 'ACTIVE')
-            ->where('openings', '>', 0)
+            ->orderBy('job_postings.created_at', 'desc')
+            ->whereNull('job_postings.deleted_at')
+            ->where('job_postings.status', 'ACTIVE')
+            ->where('job_postings.openings', '>', 0)
             ->take(6)
             ->get();
     }
@@ -41,4 +41,16 @@ class JobPosting extends Model
         return $this->hasMany(JobApplication::class);
     }
 
+    public function scopeApplicationInfo($query)
+    {
+        if (auth()->check()) {
+            return $query->select(
+                'job_postings.*',
+                'job_applications.created_at as applied_date',
+                'job_applications.status as application_status',
+            )
+                ->leftJoin('job_applications', 'job_postings.id', '=', 'job_applications.job_posting_id');
+        }
+        return $query;
+    }
 }

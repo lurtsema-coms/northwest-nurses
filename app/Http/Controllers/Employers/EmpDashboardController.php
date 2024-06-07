@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Employers;
 
 use App\Http\Controllers\Controller;
+use App\Models\JobApplication;
 use App\Models\JobPosting;
 use Illuminate\Http\Request;
 
@@ -13,9 +14,13 @@ class EmpDashboardController extends Controller
      */
     public function index(Request $request)
     {
+        $userId = auth()->user()->id;
+        $currentMonth = date('m');
+        $currentYear = date('Y');
+
         $data = [];
         $data['module_title'] = 'Dashboard';
-        $job_posting = JobPosting::where('created_by', auth()->user()->id);
+        $job_posting = JobPosting::where('created_by', auth()   ->user()->id);
         $job_counts = $job_posting->selectRaw("
             COUNT(*) as total,
             COUNT(CASE WHEN status = 'ACTIVE' AND deleted_at IS NULL THEN 1 END) as active,
@@ -25,7 +30,13 @@ class EmpDashboardController extends Controller
         $data['job_total_posts'] = $job_counts->total;
         $data['job_active_posts'] = $job_counts->active;
         $data['job_expired_posts'] = $job_counts->expired;
-        
+
+        $data['applicant_this_month'] = JobApplication::leftJoin('job_postings' , 'job_postings.id' , 'job_applications.job_posting_id')
+        ->where('job_postings.created_by', $userId)
+        ->whereMonth('job_applications.created_at', $currentMonth)
+        ->whereYear('job_applications.created_at', $currentYear)
+        ->count();
+
         if ($request->header('HX-Request')) {
             return view('components.employer.dashboard', $data)->render() . view('components.employer.module-title', ['module_title' => 'Dashboard']);
         } else {
