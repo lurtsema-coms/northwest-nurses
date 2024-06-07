@@ -44,6 +44,21 @@ class DatabaseSeeder extends Seeder
             'sex' => 'male',
         ]);
 
+                $applicant = \App\Models\User::factory()->create([
+            'email' => 'test@applicant1.com',
+            'contact_number' => '1234567890',
+            'address' => '123 Applicant St, Applicantown, CA 90210',
+            'role' => 'applicant',
+        ]);
+
+        $applicantDetail = \App\Models\ApplicantDetail::create([
+            'user_id' => $applicant->id,
+            'first_name' => 'Applicant1',
+            'last_name' => 'Test',
+            'birthdate' => '2000-01-01',
+            'sex' => 'male',
+        ]);
+
         JobPosting::factory()->count(20)->create();
     }
 }

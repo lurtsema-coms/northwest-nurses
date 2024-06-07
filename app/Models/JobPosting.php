@@ -35,4 +35,10 @@ class JobPosting extends Model
             ->take(6)
             ->get();
     }
+
+    public function getApplicantsPost()
+    {
+        return $this->hasMany(JobApplication::class);
+    }
+
 }
