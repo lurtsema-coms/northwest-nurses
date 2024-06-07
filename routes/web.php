@@ -26,9 +26,6 @@ Route::get('/', [GuestController::class, 'index'])->name('index');
 
 Route::get('/find-jobs', [GuestController::class, 'findJobs'])->name('find-jobs');
 
-Route::get('/job-info/get-job/{id}', [GuestController::class, 'getJob'])->name('get-job');
-Route::post('/job-info/apply-job/{id}', [GuestController::class, 'applyJob'])->name('apply-job');  
-
 Route::get('/contact-us', function () {
     return view('contact-us');
 });
@@ -65,6 +62,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/my-profile', [ApplicantController::class, 'myProfile'])->name('applicant.profile');
         Route::put('/my-profile/update/{id}', [ApplicantController::class, 'updateMyProfile'])->name('applicant.profile.update');
         Route::post('/my-profile/update-password/{id}', [ApplicantController::class, 'updatePassword'])->name('applicant.update.password');
+        Route::get('/job-info/get-questions/{id}', [ApplicantController::class, 'getQuestions'])->name('applicant.get-questions');
+        Route::post('/job-info/apply-job/{id}', [ApplicantController::class, 'applyJob'])->name('applicant.apply-job');
     });
 });
 

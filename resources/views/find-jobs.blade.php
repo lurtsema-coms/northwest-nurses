@@ -1,36 +1,10 @@
 @extends('layouts.applicant')
 @section('content')
-<div class="modal-center modal-applicant fixed inset-0 h-screen w-full bg-black bg-opacity-75  p-4 z-10 overflow-y-auto hidden">
-    <form id="job-application-form" method="POST"  enctype="multipart/form-data">
-        @csrf
-        <div class="modal-box m-auto w-full max-w-3xl bg-white shadow-lg rounded-lg animate-fade-in p-10">
-            <div class="modal-content flex flex-col p-3">
-                <div class="mb-4">
-                    <h1 class="text-xl font-bold text-center mb-2">Want to apply to this job?</h1>
-                    <p class="p-2 text-center">The employer wants to know more about you.</p>
-                    <p class="p-2 text-center italic text-gray-400">Please answer the questions with honesty to the best of your knowledge and belief.</p>
-                </div>
-                <div class="flex flex-col gap-10">
-                    <div class="space-y-3">
-                        <x-input-label for="answer_1" :value="__('')" />
-                        <textarea name="answer_1" id="answer_1" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
-                    </div>
-                    <div class="space-y-3">
-                        <x-input-label for="answer_2" :value="__('')" />
-                        <textarea name="answer_2" id="answer_2" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
-                    </div>
-                    <div class="space-y-3">
-                        <x-input-label for="answer_3" :value="__('')" />
-                        <textarea name="answer_3" id="answer_3" class="py-3 px-4 block w-full focus:border-primary focus:ring-primary border-gray-200 rounded-lg disabled:opacity-50 disabled:pointer-events-none" rows="3" placeholder="Answer..."></textarea>
-                    </div>
-                </div>
-                <div class="flex flex-row gap-10 justify-center p-2 mt-5">
-                    <button class="cancel-btn" type="button">Cancel</button>
-                    <button class="submit-applicant-btn font-semibold py-2 px-5 bg-cyan-800 text-white rounded-full" type="submit">Apply</button>
-                </div>
-            </div>
-        </div>
-    </form>
+<div 
+    id="modal-center" 
+    hx-on="htmx:afterSwap: $(this).removeClass('hidden')"
+    class="modal-center modal-applicant fixed inset-0 h-screen w-full bg-black bg-opacity-75  p-4 z-10 overflow-y-auto hidden">
+    
 </div>
 <div class="search-section overflow-hidden relative">
     <div class="z-[-1] bg-custom-gradient-y absolute inset-0"></div>
@@ -97,7 +71,11 @@
         @endforeach
         {{ $activeJobPosts->links('vendor.pagination.custom-pagination') }}
     </div>
-    <div id="job-info-section" class="job-info-section">
+    <div 
+        id="job-info-section" 
+        class="job-info-section"
+        hx-on="htmx:afterSwap: $('#modal-center').addClass('hidden');"
+        ">
         @if (count($activeJobPosts))
         @include('components.find-job-page.job-info')
         @endif
@@ -155,72 +133,6 @@
 
     $(".cancel-btn").click(function() {
         $(".modal-center").addClass("hidden");
-    });
-
-    $(document).on('click', '#apply-now-btn', function() {
-        const entryId = $(this).data('entry-id');
-        const url = $(this).attr('href');
-        let editUrl = "{{ route('get-job', 'entryId') }}";
-        const newUrl = editUrl.replace('entryId', entryId);
-        // console.log(newUrl);
-        $.ajax({
-            url: newUrl,   
-                dataType: 'json',
-                type: 'GET',
-                success: function(response) {
-                    // console.log(response);
-                    $('label[for="answer_1"]').text(response.question_1);
-                    if (response.question_2 !== null) {
-                        $('label[for="answer_2"]').text(response.question_2);
-                        $('textarea#answer_2').parent().show();
-                    } else {
-                        $('label[for="answer_2"]').text('');
-                        $('textarea#answer_2').parent().hide();
-                    }
-                    if (response.question_3 !== null) {
-                        $('label[for="answer_3"]').text(response.question_3);
-                        $('textarea#answer_3').parent().show();
-                    } else {
-                        $('label[for="answer_3"]').text('');
-                        $('textarea#answer_3').parent().hide();
-                    }
-                    $(".modal-center").removeClass("hidden");
-                    let submitUrl = "{{ route('apply-job', 'entryId') }}";
-                    submitUrl = submitUrl.replace('entryId', response.id);
-                    $('#job-application-form').attr('action', submitUrl);
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-        });
-    });
-
-    $(document).on('submit', '#job-application-form', function(event) {
-        event.preventDefault();
-        const form = $('#job-application-form');
-        const url = form.attr('action');
-        const formData = new FormData(form[0]);
-
-        $.ajax({
-            url: url,
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function(response) {
-                console.log(response);
-                $('.modal-applicant').addClass('hidden');
-                $('#modal-success').removeClass('hidden');
-                $('#modal-submit').on('click', function(){
-                    $('#modal-success').hide();
-                });
-                // Handle success response
-            },
-            error: function(error) {
-                console.log(error);
-                // Handle error response
-            }
-        });
     });
 
 </script>

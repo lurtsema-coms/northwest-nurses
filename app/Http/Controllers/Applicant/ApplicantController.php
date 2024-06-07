@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Applicant;
 
 use App\Http\Controllers\Controller;
+use App\Models\JobApplication;
+use App\Models\JobPosting;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -76,5 +78,30 @@ class ApplicantController extends Controller
         } else {
             return redirect()->back()->with('error', 'Incorrect Current Password.');
         }
+    }
+
+    public function getQuestions(Request $request, $id)
+    {
+        $jobPost = JobPosting::findOrFail($id);
+        return view('components.find-job-page.question-modal', ['jobPost' => $jobPost]);
+    }
+
+    public function applyJob(Request $request, $id)
+    {
+        $user_id = auth()->user()->id;
+
+        $application = JobApplication::create([
+            'job_posting_id' => $id,
+            'status' => 'APPLIED',
+            'status_history' => json_encode([[date('Y-m-d H:i:s') => 'APPLIED']]),
+            'answer_1' => $request->input('answer_1'),
+            'answer_2' => $request->input('answer_2'),
+            'answer_3' => $request->input('answer_3'),
+            'created_by' => $user_id,
+        ]);
+
+        $jobPost = JobPosting::findOrFail($id);
+
+        return view('components.find-job-page.job-info', ['selectedJobPost' => $jobPost]);
     }
 }

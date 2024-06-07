@@ -10,7 +10,21 @@
                 <p class="text-gray-500">Job ID: {{ $selectedJobPost->job_id }}</p>
                 @auth
                 @role('applicant')
-                <button id="apply-now-btn" class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full" data-entry-id="{{ $selectedJobPost->id }}" data-href="{{ route('get-job', $selectedJobPost->id ) }}">Apply Now</button>
+                @if (\App\Models\User::find(auth()->user()->id)->jobApplications?->contains($selectedJobPost->id))
+                <button 
+                    class="bg-primary text-white px-5 py-2 rounded-full opacity-75" 
+                    disabled
+                >Applied ✓</button>
+                @else
+                <button 
+                    id="apply-now-btn" 
+                    class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full" 
+                    data-entry-id="{{ $selectedJobPost->id }}" 
+                    data-href="{{ route('applicant.get-questions', $selectedJobPost->id ) }}"
+                    hx-get="{{ route('applicant.get-questions', $selectedJobPost->id ) }}"
+                    hx-target="#modal-center"
+                >Apply Now</button>
+                @endif
                 @endrole
                 @role('employer')
                 <button class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full opacity-75" disabled>Apply Now</button>
