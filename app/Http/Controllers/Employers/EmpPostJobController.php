@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Employers;
 
 use App\Http\Controllers\Controller;
 use App\Models\JobPosting;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\ImageOptimizer\OptimizerChainFactory;
 use Intervention\Image\Facades\Image;
@@ -80,15 +81,23 @@ class EmpPostJobController extends Controller
 
     public function getAdd(Request $request)
     {
-
         $data = [];
         $data['module_title'] = 'Add Jobs';
-
 
         if ($request->header('HX-Request')) {
             return view('components.employer.jobs-view-add', $data)->render() . view('components.employer.module-title', $data);
         } else {
             return view('layouts.employer.jobs-add', $data);
+        }
+    }
+
+    public function getApplicant(Request $request, string $id)
+    {
+        $data = [];
+        $data['job_posts'] = JobPosting::find($id);
+
+        if ($request->header('HX-Request')) {
+            return view('components.employer.emp-applicant', $data)->render();
         }
     }
 
