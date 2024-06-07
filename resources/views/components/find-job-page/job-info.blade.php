@@ -10,7 +10,11 @@
                 <p class="text-gray-500">Job ID: {{ $selectedJobPost->job_id }}</p>
                 @auth
                 @role('applicant')
-                @if (\App\Models\User::find(auth()->user()->id)->jobApplications?->contains($selectedJobPost->id))
+                @if (
+                \App\Models\JobApplication::where('created_by', auth()->user()->id)
+                    ->where('job_posting_id', $selectedJobPost->id)
+                    ->exists()
+                )
                 <button 
                     class="bg-primary text-white px-5 py-2 rounded-full opacity-75" 
                     disabled

@@ -101,7 +101,17 @@ class ApplicantController extends Controller
         ]);
 
         $jobPost = JobPosting::findOrFail($id);
+        $dialogData = [
+            'title' => 'Thank you for applying to this job!',
+            'text_content' => '',
+            'id' => 'modal-success',
+            'icon' => 'success',
+            'showButtonCancel' => false,
+            'showButtonSubmit' => true,
+            'confirmButtonText' => 'Ok',
+            'hidden' => '',
+        ];
 
-        return view('components.find-job-page.job-info', ['selectedJobPost' => $jobPost]);
+        return view('components.find-job-page.job-info', ['selectedJobPost' => $jobPost])->render() . view('components.dialog', $dialogData);
     }
 }

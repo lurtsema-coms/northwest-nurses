@@ -1,4 +1,7 @@
-<div class="hidden fixed overflow-hidden top-0 left-0 min-h-screen min-w-screen inset-0 bg-black bg-opacity-75 transition-opacity" id="{{ $id }}">
+<div 
+    hx-oob="true"
+    id="custom-dialog" 
+    class="{{ $hidden ?? 'hidden' }} fixed overflow-hidden top-0 left-0 min-h-screen min-w-screen inset-0 bg-black bg-opacity-75 transition-opacity" id="{{ $id }}">
     <div class="flex h-full w-full text-black">
         <div class="m-auto w-full max-w-lg bg-white relative shadow-xl rounded-lg py-10 px-6">
             {{-- Icon --}}
@@ -35,7 +38,7 @@
                             Cancel
                         @endif
                     </button>
-                    <button class="{{ isset($showButtonSubmit) && $showButtonSubmit == false ? 'hidden' : '' }} text-sm text-white h-10 px-5 rounded-md shadow-sm border bg-sky-600 hover:bg-sky-500" id="modal-submit">
+                    <button onclick="$(this).parents('#custom-dialog').addClass('hidden')" class="{{ isset($showButtonSubmit) && $showButtonSubmit == false ? 'hidden' : '' }} text-sm text-white h-10 px-5 rounded-md shadow-sm border bg-sky-600 hover:bg-sky-500" id="modal-submit">
                         @if (isset($confirmButtonText))
                             {{ $confirmButtonText }}
                             @else
