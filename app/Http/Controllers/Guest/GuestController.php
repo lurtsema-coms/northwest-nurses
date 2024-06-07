@@ -29,11 +29,14 @@ class GuestController extends Controller
         $data = [];
         $data['htmxParamString'] = $htmxParamString;
         $activeJobPosts = (new JobPosting())->getActiveJobPostings()
+            ->applicationInfo()
             ->orderBy('created_at', 'desc')
             ->paginate(10)
             ->withQueryString();
+
         $selectedJobPost = (new JobPosting())
             ->getActiveJobPostings()
+            ->applicationInfo()
             ->where('job_postings.id', $jobPostingId)
             ->first() ?? (new JobPosting())->getActiveJobPostings()->orderBy('created_at', 'desc')->first();
 
