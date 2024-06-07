@@ -93,8 +93,18 @@ class EmpPostJobController extends Controller
 
     public function getApplicant(Request $request, string $id)
     {
-        $data = [];
-        $data['job_posts'] = JobPosting::find($id);
+        // Fetch the JobPosting along with its related applicants and their information
+        $jobPost = JobPosting::with('getApplicantsPost.getApplicantsInformation')->findOrFail($id);
+
+        $data = [
+            'job_posts' => $jobPost,
+            'applicants' => $jobPost->getApplicantsPost,
+            'applicant_information' => []
+        ];
+
+        foreach($data['applicants'] as $ap){
+            $data['applicant_information'][] = $ap->getApplicantsInformation;
+        }
 
         if ($request->header('HX-Request')) {
             return view('components.employer.emp-applicant', $data)->render();

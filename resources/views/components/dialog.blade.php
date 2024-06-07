@@ -28,14 +28,14 @@
                     <p class="text-slate-500" id="m-text">{{ $text_content }}</p>
                 </div>
                 <div class="flex justify-center items-center mt-7 space-x-5">
-                    <button class="{{ isset($showButtonCancel) && $showButtonCancel == true ? 'hidden': '' }} text-sm text-slate-600 h-10 px-5 rounded-md shadow-sm border bg-white hover:bg-gray-50" id="modal-cancel">
+                    <button class="{{ isset($showButtonCancel) && $showButtonCancel == false ? 'hidden': '' }} text-sm text-slate-600 h-10 px-5 rounded-md shadow-sm border bg-white hover:bg-gray-50" id="modal-cancel">
                         @if (isset($showButtonCancel) && $showButtonCancel)
                             {{ $cancelButtonText }}
                             @else
                             Cancel
                         @endif
                     </button>
-                    <button class="{{ isset($showButtonSubmit) && $showButtonSubmit == true ? 'hidden' : '' }} text-sm text-white h-10 px-5 rounded-md shadow-sm border bg-sky-600 hover:bg-sky-500" id="modal-submit">
+                    <button class="{{ isset($showButtonSubmit) && $showButtonSubmit == false ? 'hidden' : '' }} text-sm text-white h-10 px-5 rounded-md shadow-sm border bg-sky-600 hover:bg-sky-500" id="modal-submit">
                         @if (isset($confirmButtonText))
                             {{ $confirmButtonText }}
                             @else
