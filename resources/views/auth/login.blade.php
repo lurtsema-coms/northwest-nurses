@@ -29,7 +29,7 @@
         </div>
 
         <!-- Remember Me -->
-        <div class=" mt-4 flex flex-row gap-x-4 ">
+        <div class=" mt-4 flex flex-col sm:flex-row gap-x-4 ">
             <label for="remember_me" class="inline-flex items-center">
                 <input id="remember_me" type="checkbox" class="rounded shadow-sm border-cyan-600 focus:border-cyan-600 dark:focus:border-cyan-600 focus:ring-cyan-600 dark:focus:ring-cyan-600" name="remember">
                 <span class="ms-2 text-sm text-cyan-600">{{ __('Remember me') }}</span>
