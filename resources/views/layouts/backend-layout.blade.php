@@ -44,7 +44,7 @@
                 {{-- Body Content --}}
                 <div class="m-auto w-full max-w-[112.5rem] text-slate-500 py-10 pr-7 md:pl-0">
                     @include('layouts.skeleton')
-                    <div id="target-content">
+                    <div id="target-content" hx-history-elt>
                         @yield('main-section')
                     </div>
                 </div>
