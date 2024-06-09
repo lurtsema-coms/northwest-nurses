@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\JobApplication;
 use App\Models\JobPosting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 
 class EmpDashboardController extends Controller
 {
@@ -38,7 +39,12 @@ class EmpDashboardController extends Controller
         ->count();
 
         if ($request->header('HX-Request')) {
-            return view('components.employer.dashboard', $data)->render() . view('components.employer.module-title', ['module_title' => 'Dashboard']);
+            $renderedView = view('components.employer.dashboard', $data)->render();
+            $renderedModuleTitle = view('components.employer.module-title', ['module_title' => 'Dashboard'])->render();
+            $combinedContent = $renderedView . $renderedModuleTitle;
+
+            return response($combinedContent)
+                ->header('HX-Current-URL', 'employer-dashboard');
         } else {
             return view('layouts.employer.dashboard', $data);
         }

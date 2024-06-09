@@ -1,4 +1,3 @@
-@include('components.custom-session-alert')
 <div>
     <div class="mb-5 flex justify-between flex-wrap">
         <div class="space-x-3 flex items-center">
@@ -38,8 +37,7 @@
     </div>
 </div>
 
-@include('components.dialog', ['title' => 'Are You Sure?', 'text_content' => 'This action will submit the form', 'id' => 'modal-warning', 'icon' => 'warning', 'isHxSwap' => false])
+@include('components.dialog', ['title' => 'Are You Sure?', 'text_content' => 'This action will submit the form', 'class' => 'modal-warning', 'icon' => 'warning', 'isHxSwap' => false])
 
 <div id="emp-applicant">
-
 </div>

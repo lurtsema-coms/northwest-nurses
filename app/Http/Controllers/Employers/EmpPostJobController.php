@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Employers;
 
 use App\Http\Controllers\Controller;
+use App\Models\JobApplication;
 use App\Models\JobPosting;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\ImageOptimizer\OptimizerChainFactory;
 use Intervention\Image\Facades\Image;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Auth;
 
 class EmpPostJobController extends Controller
 {
@@ -25,7 +28,8 @@ class EmpPostJobController extends Controller
                 'creator.name as creator_name',
                 'updator.name as updator_name'
             )
-            ->whereNull('job_postings.deleted_at');
+            ->whereNull('job_postings.deleted_at')
+            ->orderBy('id', 'desc');
 
         if ($request->has('search')) {
             $search = $request->input('search');
@@ -40,7 +44,12 @@ class EmpPostJobController extends Controller
         $data['jobs'] = $query->orderBy('job_postings.created_at', 'desc')->paginate(10);
 
         if ($request->header('HX-Request')) {
-            return view('components.employer.jobs', $data)->render() . view('components.employer.module-title', ['module_title' => 'Jobs']);
+            $renderedView = view('components.employer.jobs', $data)->render();
+            $renderedModuleTitle = view('components.employer.module-title', ['module_title' => 'Jobs'])->render();
+            $combinedContent = $renderedModuleTitle . $renderedView;
+
+            return response($combinedContent)
+                ->header('HX-Current-URL', 'employer-job');
         } else {
             return view('layouts.employer.job', ['module_title' => 'Jobs', 'jobs' => $data['jobs']]);
         }
@@ -94,6 +103,7 @@ class EmpPostJobController extends Controller
 
     public function getApplicant(Request $request, string $id)
     {
+        $user = Auth::user();
         // Fetch the JobPosting along with its related applicants and their information
         $jobPost = JobPosting::with([
             'getApplicantsPost' => function ($query) {
@@ -101,6 +111,11 @@ class EmpPostJobController extends Controller
             },
             'getApplicantsPost.getApplicantsInformation'
         ])->findOrFail($id);
+
+        // Check if the authenticated user is the creator of the job posting
+        if (!$jobPost || $user->id !== $jobPost->created_by) {
+            abort(403);
+        }
 
         $data = [
             'module_title' => 'Applicants',
@@ -192,6 +207,8 @@ class EmpPostJobController extends Controller
     {
         $user = JobPosting::withTrashed()->find($id);
         $user->delete();
+        $user->update(['status' => 'INACTIVE']);
+
         return true;
     }
 
@@ -200,10 +217,18 @@ class EmpPostJobController extends Controller
      */
     public function show(Request $request, string $id)
     {
+        $user = Auth::user();
+        $jobPost = JobPosting::find($id);
+
+        // Check if the authenticated user is the creator of the job posting
+        if (!$jobPost || $user->id !== $jobPost->created_by) {
+            abort(403);
+        }
+
         $data = [];
         $data['id'] = $id;
         $data['module_title'] = 'View Jobs';
-        $data['job_post'] = JobPosting::find($id);
+        $data['job_post'] = $jobPost;
 
         if ($request->header('HX-Request')) {
             return view('components.employer.jobs-view', $data)->render() . view('components.employer.module-title', ['module_title' => $data['module_title']]);
@@ -217,10 +242,18 @@ class EmpPostJobController extends Controller
      */
     public function edit(Request $request, string $id)
     {
+        $user = Auth::user();
+        $jobPost = JobPosting::find($id);
+
+        // Check if the authenticated user is the creator of the job posting
+        if (!$jobPost || $user->id !== $jobPost->created_by) {
+            abort(403);
+        }
+
         $data = [];
         $data['id'] = $id;
         $data['module_title'] = 'Edit Jobs';
-        $data['job_post'] = JobPosting::find($id);
+        $data['job_post'] = $jobPost;
 
         if ($request->header('HX-Request')) {
             return view('components.employer.jobs-view-edit', $data)->render() . view('components.employer.module-title', ['module_title' => $data['module_title']]);
@@ -285,9 +318,17 @@ class EmpPostJobController extends Controller
         //
     }
 
-    public function editApplicant(Request $request, string $id){
+    public function editApplicant(Request $request, string $id)
+    {
         $input = $request->all();
+        $job_application = JobApplication::find($id);
+        
+        $job_application->update([
+            'status' => $input['action-btn'],
+            'updated_by' => auth()->user()->id,
+            'updated_at' => date('Y-m-d')
+        ]);
 
-        dd($id);
+        return redirect()->back()->with('success', 'Your app has been successfully updated.');
     }
 }

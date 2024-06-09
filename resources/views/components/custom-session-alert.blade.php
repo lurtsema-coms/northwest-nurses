@@ -19,6 +19,6 @@
     document.addEventListener('DOMContentLoaded', function() {
         setTimeout(function() {
             $('.alert').addClass('hidden');
-        }, 5000); // 5000 milliseconds = 5 seconds
+        }, 5000);
     });
 </script>

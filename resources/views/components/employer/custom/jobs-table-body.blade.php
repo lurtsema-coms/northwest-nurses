@@ -53,26 +53,23 @@
     </table>
 </div>
 <div class="mt-5">
-    {{  $jobs->links()}}
+    {{  $jobs->links('vendor.pagination.custom-pagination-backend')}}
 </div>
 
 <script>
     $(document).ready(function() {
-
         $('.delete-btn').click(function(e) {
             e.preventDefault();
             const entryId = $(this).data('entry-id');
-            console.log(entryId);
             const url = $(this).attr('href');
             let editUrl = "{{ route('employer.job.delete-job', 'entryId') }}";
             const newUrl = editUrl.replace('entryId', entryId);
-            console.log(newUrl);
 
-            $('#modal-warning').show();
+            $('.modal-warning').removeClass('hidden');
             $('#modal-submit').focus();
             
             $('#modal-cancel').on('click', function(){
-                $('#modal-warning').hide();
+                $('.modal-warning').addClass('hidden');
             })
             
             $('#modal-submit').on('click', function(){
@@ -91,6 +88,5 @@
                     });
             })
         });
-
     })
 </script>

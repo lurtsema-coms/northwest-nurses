@@ -23,7 +23,7 @@
                 @csrf
                 <input type="hidden" name="action-btn">
                 <div class="relative p-[1px] bg-gray-300 rounded-lg hover:shadow-lg">
-                    <div class="bg-white rounded-lg p-5 sm:p-10">
+                    <div class="bg-white rounded-lg p-5 sm:p-8">
                         <p class="timeago text-md text-green-500 font-bold mb-3" datetime="{{ $applicants[$i]->created_at }} {{ config('app.timezone') }}" ></p>
                         <div>
                             <div class="flex flex-wrap">
@@ -41,22 +41,32 @@
                                 <p class="text-slate-500">{{ $job_posts->question_1 }}</p>
                                 <p>Answer: {{ $applicants[$i]->answer_1 }}</p>
                             </div>
+                            @if ($job_posts->question_2)                              
                             <div>
                                 <p class="text-slate-600 font-medium">Question 2</p>
                                 <p class="text-slate-500">{{ $job_posts->question_2 }}</p>
                                 <p>Answer: {{ $applicants[$i]->answer_2 }}</p>
                             </div>
+                            @endif
+                            @if ($job_posts->question_3)
                             <div>
                                 <p class="text-slate-600 font-medium">Question 3</p>
                                 <p class="text-slate-500">{{ $job_posts->question_3 }}</p>
                                 <p>Answer: {{ $applicants[$i]->answer_3 }}</p>
                             </div>
-                            <p class="!mt-10 text-center font-medium">STATUS: {{ $applicants[$i]->status }}</p>
+                            @endif
+                            <p class="!mt-10 text-center font-bold {{ $applicants[$i]->status == 'FOR REVIEW' ? 'text-yellow-500' : '' }} {{ $applicants[$i]->status == 'REJECTED' ? 'text-red-500' : '' }} {{ $applicants[$i]->status == 'APPROVED' ? 'text-green-500' : '' }}">
+                                STATUS: {{ $applicants[$i]->status }}
+                            </p>
+                            @if ($applicants[$i]->status != 'REJECTED' && $applicants[$i]->status != 'APPROVED')
                             <div class="!mt-5 flex gap-2 flex-wrap sm:justify-center ">
+                                @if ($applicants[$i]->status != 'FOR REVIEW')                         
                                 <button class="bg-yellow-500 text-gray-50 px-4 py-2 rounded-md shadow-md hover:bg-yellow-600 cursor-pointer">For Review</button>
+                                @endif
                                 <button class="bg-red-500 text-gray-50 px-4 py-2 rounded-md shadow-md hover:bg-red-600 cursor-pointer">Reject</button>
                                 <button class="bg-green-500 text-gray-50 px-4 py-2 rounded-md shadow-md hover:bg-green-600 cursor-pointer">Hire</button>
-                            </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -83,7 +93,15 @@
             const form = $(this);
 
             const buttonClicked = form.find('button:focus');
-            const buttonText = buttonClicked.text();
+            let buttonText = buttonClicked.text();
+            if(buttonText == 'For Review'){
+                buttonText = 'FOR REVIEW'
+            }else if(buttonText == 'Reject'){
+                buttonText = 'REJECTED'
+            }else{
+                buttonText = 'APPROVED'
+            }
+
             form.find('input[name="action-btn"]').val(buttonText);
 
             if (buttonText.trim() !== '') { // Check if buttonText is not empty

@@ -50,9 +50,36 @@
                 </div>
             </div>
         </div>
+        @include('components.custom-session-alert')
         
         <script>
             $(document).ready(function() {
+
+                window.addEventListener("popstate", (event) => {
+                    const dashboard_url = '{{ route('employer.dashboard') }}';
+                    const jobs_url = '{{ route('employer.job') }}';
+                    const location = document.location;
+                    
+                    // Sidebar active links
+                    if(getSecondUrlSegment(location) == getSecondUrlSegment(dashboard_url)){
+                        removeBgColor();
+                        $('#dashboard-link').removeClass('bg-white')
+                        $('#dashboard-link').addClass('bg-slate-300')
+                    }else if(getSecondUrlSegment(location) == getSecondUrlSegment(jobs_url)){
+                        removeBgColor();
+                        $('#jobs-link').removeClass('bg-white')
+                        $('#jobs-link').addClass('bg-slate-300')
+                    }
+
+                    if(location == dashboard_url){
+                        $('#module-section-title').text('Dashboard')
+                    }else if(location == jobs_url){
+                        $('#module-section-title').text('Jobs')
+
+                    }
+
+                });
+
                 // Toggle Profile
                 $('#profile-button').on('click', function(){
                     $('#profile-setting').toggle();
@@ -132,7 +159,7 @@
             });
 
             // Sidebar active links
-            function removeBgColor(event) {
+            function removeBgColor() {
                 $('.url-links').removeClass('bg-slate-300');
                 $('.url-links').addClass('bg-white');
             }
@@ -140,6 +167,29 @@
             function addBgColorLink(event){
                 event.currentTarget.classList.remove('bg-white')
                 event.currentTarget.classList.add('bg-slate-300')
+            }
+
+            function getSecondUrlSegment(url) {
+                const parsedUrl = new URL(url, window.location.origin);
+                const segments = parsedUrl.pathname.split('/');
+
+                return segments[1] || '';
+            }
+
+            function getBaseWithSecondSegment(url) {
+                // Create a URL object to parse the URL
+                const parsedUrl = new URL(url, window.location.origin);
+                // Split the pathname into segments
+                const segments = parsedUrl.pathname.split('/').filter(segment => segment); // Remove empty segments
+
+                // Reconstruct the URL including the origin and the first two segments
+                if (segments.length >= 2) {
+                    return `${parsedUrl.origin}/${segments[0]}/${segments[1]}`;
+                } else if (segments.length === 1) {
+                    return `${parsedUrl.origin}/${segments[0]}`;
+                } else {
+                    return parsedUrl.origin; // Just the base URL if no segments
+                }
             }
         </script>
 
