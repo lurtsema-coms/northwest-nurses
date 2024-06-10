@@ -50,8 +50,6 @@
 </div>
 <br>
 <div class="bg-white p-10 rounded-3xl shadow-sm overflow-x-auto">
-    <div class="min-w-[40rem]">
-        <div id="chart">
-        </div>
+    <div class="min-w-[40rem]" hx-get="{{ route('employer.dashboard_chart') }}" hx-trigger="load" hx-history-elt>
     </div>
 </div>

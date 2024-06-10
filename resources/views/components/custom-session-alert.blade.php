@@ -1,5 +1,5 @@
 @if (session('success'))
-    <div class="fixed bottom-5 right-5 max-w-xs bg-white border border-gray-200 rounded-xl shadow-md dark:bg-neutral-800 dark:border-neutral-700 alert z-10">
+    <div class="fixed bottom-5 right-5 max-w-xs bg-white border border-gray-200 rounded-xl shadow-md alert z-10">
         <div class="flex p-4">
         <div class="flex-shrink-0">
             <svg class="flex-shrink-0 size-4 text-teal-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
@@ -7,7 +7,7 @@
             </svg>
         </div>
         <div class="ms-3">
-            <p class="text-sm text-gray-700 dark:text-neutral-400">
+            <p class="text-sm text-gray-700">
                 {{ session('success') }}
             </p>
         </div>

@@ -7,7 +7,6 @@ use App\Models\JobApplication;
 use App\Models\JobPosting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
-use Carbon\Carbon;
 
 class EmpDashboardController extends Controller
 {
@@ -39,22 +38,17 @@ class EmpDashboardController extends Controller
         ->whereYear('job_applications.created_at', $currentYear)
         ->count();
 
+        $employmentSuccess = JobPosting::where('created_by', auth()->user()->id)
+            ->pluck('id')
+            ->toArray();
 
-
-        // Get daily counts of job applications for the current month
-        $dailyApplicants = JobApplication::leftJoin('job_postings', 'job_postings.id', '=', 'job_applications.job_posting_id')
-        ->where('job_postings.created_by', $userId)
-        ->whereMonth('job_applications.created_at', $currentMonth)
-        ->whereYear('job_applications.created_at', $currentYear)
-        ->selectRaw('DATE(job_applications.created_at) as date, COUNT(*) as count')
-        ->groupBy('date')
-        ->orderBy('date')
-        ->get();
-
-        // Format data for Chart.js
-        $data['dates'] = $dailyApplicants->pluck('date')->toArray();
-        $data['counts'] = $dailyApplicants->pluck('count')->toArray();
-
+        $data['job_applicants_per_month'] = JobApplication::where('status', 'APPROVED')
+            ->whereIn('job_posting_id', $employmentSuccess)
+            ->selectRaw('CONCAT(MONTH(created_at), "/", YEAR(created_at)) as month_year, COUNT(*) as count')
+            ->groupBy('month_year')
+            ->orderByRaw('MIN(created_at)')
+            ->pluck('count', 'month_year');
+        
         if ($request->header('HX-Request')) {
             $renderedView = view('components.employer.dashboard', $data)->render();
             $renderedModuleTitle = view('components.employer.module-title', ['module_title' => 'Dashboard'])->render();
@@ -65,6 +59,22 @@ class EmpDashboardController extends Controller
         } else {
             return view('layouts.employer.dashboard', $data);
         }
+    }
+
+    public function employmentChart(Request $request)
+    {
+        $employmentSuccess = JobPosting::where('created_by', auth()->user()->id)
+            ->pluck('id')
+            ->toArray();
+        $data = [];
+        $data['job_applicants_per_month'] = JobApplication::where('status', 'APPROVED')
+            ->whereIn('job_posting_id', $employmentSuccess)
+            ->selectRaw('CONCAT(MONTH(created_at), "/", YEAR(created_at)) as month_year, COUNT(*) as count')
+            ->groupBy('month_year')
+            ->orderByRaw('MIN(created_at)')
+            ->pluck('count', 'month_year');
+
+        return view('components.employer.custom.employment-chart', $data);
     }
 
     /**
