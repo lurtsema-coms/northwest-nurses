@@ -22,6 +22,7 @@ class GuestController extends Controller
 
     public function findJobs(Request $request)
     {
+        // dd($request->all());
         $htmxParamString = http_build_query($request->except('id'));
         $jobPostingId = $request->id;
         $search = $request->search;
@@ -30,9 +31,24 @@ class GuestController extends Controller
         $data['htmxParamString'] = $htmxParamString;
         $activeJobPosts = (new JobPosting())->getActiveJobPostings()
             ->applicationInfo()
+            ->leftJoin('employer_details', 'employer_details.user_id', 'job_postings.created_by')
+            ->select(
+                'job_postings.*',
+                'employer_details.name'
+            )
+            ->when($search, function ($query, $search) {
+                return $query->where(function ($query) use ($search) {
+                    $query->where('employer_details.name', 'like', "%{$search}%")
+                        ->orWhere('job_postings.job_title', 'like', "%{$search}%");
+                });
+            })
+            ->when($location, function ($query, $location) {
+                return $query->where('job_postings.address', 'like', "%{$location}%");
+            })
             ->orderBy('created_at', 'desc')
             ->paginate(10)
             ->withQueryString();
+
 
         $selectedJobPost = (new JobPosting())
             ->getActiveJobPostings()

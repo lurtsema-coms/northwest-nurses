@@ -39,24 +39,21 @@ class EmpDashboardController extends Controller
         ->whereYear('job_applications.created_at', $currentYear)
         ->count();
 
-        // $currentMonth = Carbon::now()->month;
 
-        // $employmentSuccess = JobPosting::where('created_by', auth()->user()->id)
-        //     ->withCount(['getApplicantsPost' => function ($query) use ($currentMonth) {
-        //         $query->where('status', 'APPROVED')
-        //             ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-        //             ->selectRaw('COUNT(*) as count');
-        //     }])
-        //     ->orderBy('id', 'desc')
-        //     ->get()
-        //     ->map(function ($jobPosting) {
-        //         $approvedCount = $jobPosting->get_applicants_post_count->isEmpty() ? 0 : $jobPosting->get_applicants_post_count[0]->count;
-        //         return [$currentMonth => $approvedCount];
-        //     })
-        //     ->flatten()
-        //     ->all();
 
-        //     dd($employmentSuccess);
+        // Get daily counts of job applications for the current month
+        $dailyApplicants = JobApplication::leftJoin('job_postings', 'job_postings.id', '=', 'job_applications.job_posting_id')
+        ->where('job_postings.created_by', $userId)
+        ->whereMonth('job_applications.created_at', $currentMonth)
+        ->whereYear('job_applications.created_at', $currentYear)
+        ->selectRaw('DATE(job_applications.created_at) as date, COUNT(*) as count')
+        ->groupBy('date')
+        ->orderBy('date')
+        ->get();
+
+        // Format data for Chart.js
+        $data['dates'] = $dailyApplicants->pluck('date')->toArray();
+        $data['counts'] = $dailyApplicants->pluck('count')->toArray();
 
         if ($request->header('HX-Request')) {
             $renderedView = view('components.employer.dashboard', $data)->render();
