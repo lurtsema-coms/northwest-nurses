@@ -35,7 +35,7 @@
                         <div class="w-[30px] h-[0.25rem] bg-white rounded-full"></div>
                     </button>
                 </div>
-                <div class="navbar-list hidden md:flex flex-col items-start md:flex-row md:items-end md:gap-10 relative">
+                <div class="navbar-list hidden my-10 md:my-5 md:flex flex-col items-start md:flex-row md:items-end md:gap-10 relative">
                     <a class="text-md py-2 hover:opacity-75" href="/find-jobs">Find Jobs</a>
                     <a class="text-md py-2 hover:opacity-75" href="#">About Us</a>
                     <a class="text-md py-2 hover:opacity-75" href="/contact-us">Contact Us</a>

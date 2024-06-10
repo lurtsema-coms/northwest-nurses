@@ -32,7 +32,7 @@ class GuestController extends Controller
         $activeJobPosts = (new JobPosting())->getActiveJobPostings()
             ->applicationInfo()
             ->leftJoin('employer_details', 'employer_details.user_id', 'job_postings.created_by')
-            ->select(
+            ->addSelect(
                 'job_postings.*',
                 'employer_details.name'
             )

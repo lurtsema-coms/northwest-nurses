@@ -18,6 +18,7 @@ class ApplicantController extends Controller
         $myId = Auth::user()->id;
         $jobPostingId = $request->id;
 
+        $htmxParamString = http_build_query($request->except('id'));
         $myJobs = (new JobPosting())
             ->applicationInfo()
             ->whereRaw("job_postings.id in (SELECT job_posting_id FROM job_applications WHERE created_by = $myId)")
@@ -27,15 +28,19 @@ class ApplicantController extends Controller
             ->applicationInfo()
             ->whereRaw("job_postings.id in (SELECT job_posting_id FROM job_applications WHERE created_by = $myId)")
             ->where('job_postings.id', $jobPostingId)
-            ->first();
+            ->first() ?? (clone $myJobs)->first();
 
         if ($request->header('HX-Request')) {
             return view(
                 'components.find-job-page.job-info',
                 ['selectedJobPost' => $selectedJobPost]
             )->render() . view('vendor.pagination.custom-pagination', ['paginator' => $myJobs]);
+        } else if ($jobPostingId && $jobPostingId != $selectedJobPost?->id) {
+            return redirect()->route('applicant.my_jobs');
         }
         $data['myJobs'] = $myJobs;
+        $data['selectedJobPost'] = $selectedJobPost;
+        $data['htmxParamString'] = $htmxParamString;
 
         return view('applicants.my-jobs', $data);
     }

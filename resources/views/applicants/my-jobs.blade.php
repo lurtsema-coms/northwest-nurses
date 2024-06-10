@@ -17,7 +17,22 @@
 
   </div>
   <div id="job-info-section" class="job-info-section">
-      
+      @if ($selectedJobPost)
+      @include('components.find-job-page.job-info')
+      @endif
   </div>
 </div>
+@endsection
+@section('scripts')
+<script>
+  $(document).on('htmx:beforeSend', function(event) {
+        if ($($(event.target).attr('hx-target')).is('#job-info-section')) {
+            if ($(window).width() <= 1023) {
+                $('html, body').animate({
+                    scrollTop: $('#job-info-section').offset().top
+                }, 100);
+            }
+        }
+    });
+</script>
 @endsection

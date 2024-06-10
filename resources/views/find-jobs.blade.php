@@ -102,8 +102,8 @@
         $(".modal-center").addClass("hidden");
     });
 
-    $(document).on('htmx:afterSwap', function(event) {
-        if ($(event.target).is('#job-info-section')) {
+    $(document).on('htmx:beforeSend', function(event) {
+        if ($($(event.target).attr('hx-target')).is('#job-info-section')) {
             if ($(window).width() <= 1023) {
                 $('html, body').animate({
                     scrollTop: $('#job-info-section').offset().top
