@@ -21,25 +21,10 @@ class EmpPostJobController extends Controller
     public function index(Request $request)
     {
         $data = [];
-        $query = JobPosting::leftJoin('employer_details as creator', 'creator.user_id', 'job_postings.created_by')
-            ->leftJoin('employer_details as updator', 'updator.user_id', 'job_postings.updated_by')
-            ->select(
-                'job_postings.*',
-                'creator.name as creator_name',
-                'updator.name as updator_name'
-            )
-            ->whereNull('job_postings.deleted_at')
+        $query = JobPosting::
+            where('created_by', auth()->user()->id)
+            ->withCount('getApplicantsPost')
             ->orderBy('id', 'desc');
-
-        if ($request->has('search')) {
-            $search = $request->input('search');
-            $query->where(function ($q) use ($search) {
-                $q->where('job_title', 'like', "%{$search}%")
-                    ->orWhere('address', 'like', "%{$search}%")
-                    ->orWhere('profession', 'like', "%{$search}%")
-                    ->orWhere('pay', 'like', "%{$search}%");
-            });
-        }
 
         $data['jobs'] = $query->orderBy('job_postings.created_at', 'desc')->paginate(10);
 
@@ -60,14 +45,10 @@ class EmpPostJobController extends Controller
         $data = [];
         $paginate = $request->input('paginate') ?? 10;
         
-        $query = JobPosting::leftJoin('employer_details as creator', 'creator.user_id', 'job_postings.created_by')
-            ->leftJoin('employer_details as updator', 'updator.user_id', 'job_postings.updated_by')
-            ->select(
-                'job_postings.*',
-                'creator.name as creator_name',
-                'updator.name as updator_name'
-            )
-            ->whereNull('job_postings.deleted_at');
+        $query = JobPosting::
+            where('created_by', auth()->user()->id)
+            ->withCount('getApplicantsPost')
+            ->orderBy('id', 'desc');
 
         if ($request->has('search')) {
             $search = $request->input('search');
@@ -254,6 +235,7 @@ class EmpPostJobController extends Controller
         $data['id'] = $id;
         $data['module_title'] = 'Edit Jobs';
         $data['job_post'] = $jobPost;
+        $data['hasAnyApplicantApplied'] = $jobPost->getApplicantsPost->count();
 
         if ($request->header('HX-Request')) {
             return view('components.employer.jobs-view-edit', $data)->render() . view('components.employer.module-title', ['module_title' => $data['module_title']]);

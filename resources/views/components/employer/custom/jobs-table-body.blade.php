@@ -7,6 +7,7 @@
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Address</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Profession</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Openings</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Applied</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Start Date</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pay</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
@@ -21,6 +22,7 @@
                 <td class="px-6 py-4 text-sm whitespace-nowrap">{{$job->profession}}</td>
                 <td class="px-6 py-4 text-sm whitespace-nowrap">{{$job->openings}}</td>
                 <td class="px-6 py-4 text-sm whitespace-nowrap">{{$job->start_date}}</td>
+                <td class="px-6 py-4 text-sm whitespace-nowrap">{{$job->get_applicants_post_count}}</td>
                 <td class="px-6 py-4 text-sm whitespace-nowrap">{{$job->pay}}</td>
                 <td class="px-6 py-4 text-sm whitespace-nowrap">
                     <div class="flex gap-2">

@@ -125,7 +125,10 @@
 
     $(document).ready(function() {
 
-        // $('input,textarea').attr('required', false);
+        if("{{ $hasAnyApplicantApplied > 0 }}"){
+            $('input,textarea,button').attr('disabled', true);
+            $('input:disabled,textarea:disabled').addClass('disabled:bg-slate-300 opacity-80');
+        }
 
         $('#add-form').on('submit', function(e){
             e.preventDefault();

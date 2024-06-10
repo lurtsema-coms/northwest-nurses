@@ -7,6 +7,7 @@ use App\Models\JobApplication;
 use App\Models\JobPosting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
+use Carbon\Carbon;
 
 class EmpDashboardController extends Controller
 {
@@ -21,7 +22,7 @@ class EmpDashboardController extends Controller
 
         $data = [];
         $data['module_title'] = 'Dashboard';
-        $job_posting = JobPosting::where('created_by', auth()   ->user()->id);
+        $job_posting = JobPosting::where('created_by', auth()->user()->id);
         $job_counts = $job_posting->selectRaw("
             COUNT(*) as total,
             COUNT(CASE WHEN status = 'ACTIVE' AND deleted_at IS NULL THEN 1 END) as active,
@@ -37,6 +38,25 @@ class EmpDashboardController extends Controller
         ->whereMonth('job_applications.created_at', $currentMonth)
         ->whereYear('job_applications.created_at', $currentYear)
         ->count();
+
+        // $currentMonth = Carbon::now()->month;
+
+        // $employmentSuccess = JobPosting::where('created_by', auth()->user()->id)
+        //     ->withCount(['getApplicantsPost' => function ($query) use ($currentMonth) {
+        //         $query->where('status', 'APPROVED')
+        //             ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
+        //             ->selectRaw('COUNT(*) as count');
+        //     }])
+        //     ->orderBy('id', 'desc')
+        //     ->get()
+        //     ->map(function ($jobPosting) {
+        //         $approvedCount = $jobPosting->get_applicants_post_count->isEmpty() ? 0 : $jobPosting->get_applicants_post_count[0]->count;
+        //         return [$currentMonth => $approvedCount];
+        //     })
+        //     ->flatten()
+        //     ->all();
+
+        //     dd($employmentSuccess);
 
         if ($request->header('HX-Request')) {
             $renderedView = view('components.employer.dashboard', $data)->render();
