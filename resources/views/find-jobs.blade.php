@@ -11,7 +11,7 @@
     <img class="absolute z-[-2] min-h-full min-w-full object-cover md:translate-y-[-25%]" src="{{ asset('img/landing-page/image-no-filter.jpg') }}" alt="">
     <div class="search-section-container min-h-96 md:min-h-[500px] relative flex flex-col justify-center md:justify-end">
         <div class="top-search-bar flex flex-col justify-end items-center px-4 md:px-5 md:mt-16 md:pb-10">
-            <form action="/find-jobs" class="search-form container max-w-screen-lg flex flex-col align-center justify-center md:mb-5">
+            <form action="/find-jobs" class="search-form container max-w-screen-lg flex flex-col align-center justify-center md:mb-5" autocomplete="off">
                 <div class="form-top flex flex-col md:flex-row align-center justify-center">
                     <select name="location" class="p-5 py-3 min-w-[300px] text-primary text-lg font-semibold rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl border-none focus:outline-none focus:ring-0" name="" id="">
                         <option value="" selected disabled>Location</option>
@@ -19,7 +19,7 @@
                         <option value="{{ $location }}">{{ $location }}</option>
                         @endforeach
                     </select>
-                    <input name="query" class="py-3 grow border-none text-lg focus:outline-none focus:ring-0 text-primary" type="text" placeholder="Job title or company" required>
+                    <input name="search" class="py-3 grow border-none text-lg focus:outline-none focus:ring-0 text-primary" type="text" placeholder="Job title or company">
                     <div class="py-3 search-btn-wrapper px-3 rounded-b-2xl md:rounded-bl-none md:rounded-r-2xl bg-white flex items-center content-center ">
                         <button class="bg-primary hover:opacity-75 text-white text-lg px-5 py-2 rounded-full flex-grow flex flex-row justify-center align-center gap-2" type="submit"><p>Search</p> <span class="material-symbols-outlined">search</span></button>
                     </div>
@@ -104,10 +104,10 @@
 
     $(document).on('htmx:afterSwap', function(event) {
         if ($(event.target).is('#job-info-section')) {
-            if ($(window).width() <= 768) {
+            if ($(window).width() <= 1023) {
                 $('html, body').animate({
                     scrollTop: $('#job-info-section').offset().top
-                }, 'slow');
+                }, 100);
             }
         }
     });
