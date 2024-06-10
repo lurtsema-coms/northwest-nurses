@@ -9,7 +9,7 @@
             <form action="/find-jobs" method="GET" class="search-form container max-w-screen-lg flex flex-col align-center justify-center md:mb-5" autocomplete="off">
                 <div class="form-top flex flex-col md:flex-row align-center justify-center">
                     <select name="location" class="p-5 py-3 min-w-[300px] text-primary text-lg font-semibold rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl border-none focus:outline-none focus:ring-0" name="" id="">
-                        <option value="" selected disabled>Location</option>
+                        <option value="" selected>All Location</option>
                         @foreach (config('global.us_states') as $location)
                         <option value="{{ $location }}">{{ $location }}</option>
                         @endforeach

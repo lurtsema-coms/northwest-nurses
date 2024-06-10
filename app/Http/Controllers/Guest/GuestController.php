@@ -22,13 +22,13 @@ class GuestController extends Controller
 
     public function findJobs(Request $request)
     {
-        // dd($request->all());
         $htmxParamString = http_build_query($request->except('id'));
         $jobPostingId = $request->id;
         $search = $request->search;
         $location = $request->location;
         $data = [];
         $data['htmxParamString'] = $htmxParamString;
+        $data['request'] = $request;
         $activeJobPosts = (new JobPosting())->getActiveJobPostings()
             ->applicationInfo()
             ->leftJoin('employer_details', 'employer_details.user_id', 'job_postings.created_by')
@@ -54,7 +54,7 @@ class GuestController extends Controller
             ->getActiveJobPostings()
             ->applicationInfo()
             ->where('job_postings.id', $jobPostingId)
-            ->first() ?? (new JobPosting())->getActiveJobPostings()->orderBy('created_at', 'desc')->first();
+            ->first() ?? (clone $activeJobPosts)->first();
 
         if ($request->header('HX-Request')) {
             return view(

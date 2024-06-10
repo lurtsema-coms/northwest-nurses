@@ -14,12 +14,12 @@
             <form action="/find-jobs" class="search-form container max-w-screen-lg flex flex-col align-center justify-center md:mb-5" autocomplete="off">
                 <div class="form-top flex flex-col md:flex-row align-center justify-center">
                     <select name="location" class="p-5 py-3 min-w-[300px] text-primary text-lg font-semibold rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl border-none focus:outline-none focus:ring-0" name="" id="">
-                        <option value="" selected disabled>Location</option>
+                        <option value="" selected>All Location</option>
                         @foreach (config('global.us_states') as $location)
-                        <option value="{{ $location }}">{{ $location }}</option>
+                        <option value="{{ $location }}" {{ $location == $request?->location ? 'selected' : '' }}>{{ $location }}</option>
                         @endforeach
                     </select>
-                    <input name="search" class="py-3 grow border-none text-lg focus:outline-none focus:ring-0 text-primary" type="text" placeholder="Job title or company">
+                    <input name="search" value="{{ $request?->search }}" class="py-3 grow border-none text-lg focus:outline-none focus:ring-0 text-primary" type="text" placeholder="Job title or company">
                     <div class="py-3 search-btn-wrapper px-3 rounded-b-2xl md:rounded-bl-none md:rounded-r-2xl bg-white flex items-center content-center ">
                         <button class="bg-primary hover:opacity-75 text-white text-lg px-5 py-2 rounded-full flex-grow flex flex-row justify-center align-center gap-2" type="submit"><p>Search</p> <span class="material-symbols-outlined">search</span></button>
                     </div>
