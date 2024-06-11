@@ -8,7 +8,7 @@
           <p class="italic text-gray-500 mt-2">Applied <span class="timeago" datetime="{{ $jobPost->applied_date }} {{ config('app.timezone') }}">{{ $jobPost->applied_date }}</span></p>
           @if ($jobPost->application_status == 'FOR REVIEW')
           <p class="bg-orange-500 text-stone-100 px-3 rounded mt-2 inline-block font-semibold">{{ $jobPost->application_status }}</p>
-          @elseif ($jobPost->application_status == 'HIRED')
+          @elseif ($jobPost->application_status == 'HIRED' || $jobPost->application_status == 'APPROVED')
           <p class="bg-green-500 text-stone-100 px-3 rounded mt-2 inline-block font-semibold">{{ $jobPost->application_status }}</p>
           @elseif ($jobPost->application_status == 'REJECTED')
           <p class="bg-red-500 text-stone-100 px-3 rounded mt-2 inline-block font-semibold">{{ $jobPost->application_status }}</p>
