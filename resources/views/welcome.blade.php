@@ -108,7 +108,7 @@
         @foreach ($mostRecentJobPostings as $jobPosting)
         <div class="landing-job-card flex flex-col md:flex-row justify-between padding-0 rounded-2xl border border-gray-200 shadow-md overflow-hidden">
             <div class="w-full aspect-[8/3] md:w-72 relative flex-none overflow-hidden">
-                <img class="min-h-full min-w-full object-cover absolute top-0 left-0" src="{{ $jobPosting->img_link }}?v={{ time() }}" alt="">
+                <img class="min-h-full min-w-full object-cover absolute top-0 left-0" src="{{ $jobPosting->img_link }}?v={{ strtotime(date('Y-m-d H:00:00')) }}" alt="">
             </div>
             <div class="px-5 py-5 ml-3 flex-grow flex flex-col items-start justify-between gap-1">
                 <h1 class="font-extrabold text-lg leading-5 text-wrap">{{ $jobPosting->address }}</h1>

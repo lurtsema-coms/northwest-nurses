@@ -1,6 +1,6 @@
 <div class="sticky top-0 mx-auto max-w-screen-md flex-grow bg-white border-2 border-gray-300 gap-5 rounded-xl overflow-hidden shadow-md">
   <div class="w-full aspect-[8/3] overflow-hidden">
-      <img class="w-full" src="{{ $selectedJobPost->img_link }}?v={{ time() }}" alt="">
+      <img class="w-full" src="{{ $selectedJobPost->img_link }}?v={{ strtotime(date('Y-m-d H:00:00')) }}" alt="">
   </div>
     <div class="p-5">
         <div class="my-5">
