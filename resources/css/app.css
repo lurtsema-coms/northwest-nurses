@@ -13,3 +13,14 @@ button:disabled {
   opacity: 0.75 !important;
   cursor: not-allowed !important;
 }
+
+
+.htmx-indicator{
+  display:none;
+}
+.htmx-request .htmx-indicator{
+  display:inline;
+}
+.htmx-request.htmx-indicator{
+  display:inline;
+}

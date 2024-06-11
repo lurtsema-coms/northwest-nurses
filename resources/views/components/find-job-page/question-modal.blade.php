@@ -5,6 +5,7 @@
   hx-target="#job-info-section"
   hx-post="{{ route('applicant.apply-job', $jobPost->id) }}"
   hx-disabled-elt="textarea, button"
+  hx-indicator="#question-modal-apply-btn .htmx-indicator"
   enctype="multipart/form-data">
   @csrf
   <div class="modal-box m-auto w-full max-w-3xl bg-white shadow-lg rounded-lg animate-fade-in p-10">
@@ -36,7 +37,13 @@
           </div>
           <div class="flex flex-row gap-10 justify-center p-2 mt-5">
               <button class="hover:opacity-75 cancel-btn" type="button" onclick="$('#modal-center').addClass('hidden')">Cancel</button>
-              <button id="question-modal-apply-btn" class="hover:opacity-75 submit-applicant-btn font-semibold py-2 px-5 bg-cyan-800 text-white rounded-full" type="submit">Apply</button>
+              <button id="question-modal-apply-btn" class="hover:opacity-75 submit-applicant-btn font-semibold py-2 px-5 bg-cyan-800 text-white rounded-full" type="submit">
+                Apply
+                <svg class="animate-spin h-5 w-5 text-white htmx-indicator" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              </button>
           </div>
       </div>
   </div>
