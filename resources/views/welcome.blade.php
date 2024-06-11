@@ -114,7 +114,7 @@
                 <h1 class="font-extrabold text-lg leading-5 text-wrap">{{ $jobPosting->address }}</h1>
                 <p class="font-bold">{{ $jobPosting->job_title }}</p>
                 <p class="font-bold">{{ $jobPosting->pay }}</p>
-                <a href="/find-jobs?id={{ $jobPosting->id }}" class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full whitespace-nowrap">View Job</a>
+                <a href="/find-jobs?id={{ $jobPosting->id }}#job-info-section" class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full whitespace-nowrap">View Job</a>
             </div>
         </div>
         @endforeach
