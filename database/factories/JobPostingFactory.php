@@ -23,7 +23,8 @@ class JobPostingFactory extends Factory
             'https://www.nps.gov/common/uploads/grid_builder/anch/crop16_9/2AEBB6D0-DED7-C590-BBF91C0E33EE7E9A.jpg?width=640&quality=90&mode=crop',
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpJzmscM8XxA9s-1R4MaiOy-KInKXB2UoVCPp5U8U6BQ&s',
             'https://youthjournalism.org/wp-content/uploads/2022/11/Alaska-first-city-Ketchikan-Parker-rszd.jpg',
-            'https://preview.redd.it/a-shitty-city-with-a-pretty-view-anchorage-v0-xthmxqba6i2a1.jpg?width=1080&crop=smart&auto=webp&s=fe6118e50577d0a31c68d4bb422ce3c64bf86f0b',
+            'https://www.cruisehive.com/wp-content/uploads/2021/08/anchorage14-696x463.jpg',
+            'https://www.albomadventures.com/wp-content/uploads/2022/03/USA-Alaska-Anchorage-skyline-Depositphotos_530807232_L-400x300.jpeg'
 
         ];
 
