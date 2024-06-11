@@ -41,6 +41,7 @@
           hx-get="?id={{ $jobPost->id }}&{{ $htmxParamString ?? '' }}"
           hx-target=".job-info-section"
           hx-push-url="true"
+          hx-disabled-elt="this"
           class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full whitespace-nowrap">
           View Job
       </button>

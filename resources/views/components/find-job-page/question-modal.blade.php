@@ -4,6 +4,7 @@
   action="{{ route('applicant.apply-job', $jobPost->id) }}" 
   hx-target="#job-info-section"
   hx-post="{{ route('applicant.apply-job', $jobPost->id) }}"
+  hx-disabled-elt="textarea, button"
   enctype="multipart/form-data">
   @csrf
   <div class="modal-box m-auto w-full max-w-3xl bg-white shadow-lg rounded-lg animate-fade-in p-10">
@@ -35,7 +36,7 @@
           </div>
           <div class="flex flex-row gap-10 justify-center p-2 mt-5">
               <button class="hover:opacity-75 cancel-btn" type="button" onclick="$('#modal-center').addClass('hidden')">Cancel</button>
-              <button class="hover:opacity-75 submit-applicant-btn font-semibold py-2 px-5 bg-cyan-800 text-white rounded-full" type="submit">Apply</button>
+              <button id="question-modal-apply-btn" class="hover:opacity-75 submit-applicant-btn font-semibold py-2 px-5 bg-cyan-800 text-white rounded-full" type="submit">Apply</button>
           </div>
       </div>
   </div>

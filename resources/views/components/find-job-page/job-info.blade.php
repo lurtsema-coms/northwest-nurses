@@ -27,6 +27,7 @@
                     data-href="{{ route('applicant.get-questions', $selectedJobPost->id ) }}"
                     hx-get="{{ route('applicant.get-questions', $selectedJobPost->id ) }}"
                     hx-target="#modal-center"
+                    hx-disabled-elt="this"
                 >Apply Now</button>
                 @endif
                 @endrole
