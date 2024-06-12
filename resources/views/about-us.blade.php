@@ -8,8 +8,7 @@
               <img class="min-w-full min-h-full absolute object-cover top-0" src="{{ asset('img/stock/landing-04.jpg') }}" alt="Sample Image">
           </div>
           <div class="bg-primary text-white p-10 m-0 md:w-[45%] flex flex-col">
-              <img src="{{ asset('img/logo/North West Nurses Logo-v5.png') }}" alt="">
-              <h2 class="text-4xl font-bold mb-3">Northwest Nurses</h2>
+              <img src="{{ asset('img/logo/North West Nurses Logo-v5.png') }}" alt="Northwest Nurses">
               <p class="text-md leading-5 mb-3 text-xl">Alaska-based company in Anchorage, Alaska.</p>
               <p class="text-md leading-5 mt-5 mb-3 text-lg ">Conceived in 2020, Founded in 2023. Founded by Nurses for Nurses. As experienced travel personel ourselves, we know the troubles of traveling and having bad contracts. It would take weeks for the recruiter to get back to us. Payroll issues. We want to personalize the experience for travel nurses and give them the respect that they deserve. Our goal is to never grow beyond our means, we always want to be able to reach out to our nurses in a reasonable time frame.</p>
           </div>
