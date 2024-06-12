@@ -15,6 +15,7 @@ class EmpDashboardController extends Controller
      */
     public function index(Request $request)
     {
+        // dd('test');
         $userId = auth()->user()->id;
         $currentMonth = date('m');
         $currentYear = date('Y');

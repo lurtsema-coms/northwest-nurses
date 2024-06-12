@@ -84,6 +84,10 @@
                 $('#profile-button').on('click', function(){
                     $('#profile-setting').toggle();
                 })
+                //Toggle Notification
+                $('#notification-button').on('click', function(){
+                    $('#notification-setting').toggle();
+                })
                 // Toggle Sidebar
                 $('#menu-bar').on('click', function(){
                         $('#sidebar').toggle();

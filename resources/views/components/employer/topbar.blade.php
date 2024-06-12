@@ -9,9 +9,6 @@
     </div>
     {{-- Settings Button --}}
     <div class="flex">
-        {{-- <div class="text-gray-500 mr-3 flex items-center">
-            <span class="hidden lg:block">Patrick Lester Punzalan</span>
-        </div> --}}
         <div class="bg-white rounded-md px-3 py-2 shadow-sm mr-3 relative hover:cursor-pointer hover:shadow-md" id="profile-button">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 text-slate-600">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
@@ -38,10 +35,30 @@
                 </div>
             </div>
         </div>
-        <div class="bg-white rounded-md px-3 py-2 shadow-sm mr-7 hover:cursor-pointer hover:shadow-md">
+        <div class="bg-white rounded-md px-3 py-2 shadow-sm mr-7 hover:cursor-pointer hover:shadow-md" id="notification-button">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 text-slate-600">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"/>
             </svg>
+        </div>
+        <div class="hidden mt-4" id="notification-setting">
+            <div class="flex flex-col absolute  w-80 sm:w-96 top-14 right-7 bg-white text-slate-500 shadow-sm transition-all z-10">
+                <div class="mb-1">
+                    <h1 class="text-xl font-bold text-start p-2 pl-4 shadow-sm">Notifications:</h1>
+                </div>
+                <div class="p-2 pl-4 ">
+                    <span><strong>Gabriel Quing</strong> Applied to your job post</span>
+                    <p class="max-w-[400px] whitespace-nowrap overflow-hidden text-ellipsis  font-bold">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe laudantium soluta facere corporis rerum deserunt laborum molestiae qui. Nobis optio quas libero ducimus quisquam! Animi quia quod corrupti facere tenetur?" </p>
+                    <span>10m ago</span>
+                </div>
+                <div class="p-2 pl-4 ">
+                    <span><strong>Gabriel Quing</strong> Applied to your job post</span>
+                    <p class="max-w-[400px] whitespace-nowrap overflow-hidden text-ellipsis  font-bold">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe laudantium soluta facere corporis rerum deserunt laborum molestiae qui. Nobis optio quas libero ducimus quisquam! Animi quia quod corrupti facere tenetur?" </p>
+                    <span>10m ago</span>
+                </div>
+                <div class="shadow-custom flex justify-center">
+                    <a href="/employer-job" class="p-4 pl-4 text-start font-bold ">Go to Jobs</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
