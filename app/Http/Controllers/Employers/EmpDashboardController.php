@@ -86,6 +86,7 @@ class EmpDashboardController extends Controller
             ->leftJoin('users','users.id', 'job_applications.created_by')
             ->select(
                 'job_postings.*',
+                'job_applications.id as application_id',
                 'job_applications.answer_1',
                 'job_applications.status',
                 'job_applications.created_at as applied_at',
@@ -100,6 +101,10 @@ class EmpDashboardController extends Controller
         return view('components.employer.custom.employer-notification', $data);
 
     }
+
+    // public function countNotification(){
+
+    // }
     /**
      * Show the form for creating a new resource.
      */

@@ -83,10 +83,14 @@
                 // Toggle Profile
                 $('#profile-button').on('click', function(){
                     $('#profile-setting').toggle();
+                    $('#notification-setting').hide();
+
                 })
                 //Toggle Notification
                 $('#notification-button').on('click', function(){
                     $('#notification-setting').toggle();
+                    $('#profile-setting').hide();
+
                 })
                 // Toggle Sidebar
                 $('#menu-bar').on('click', function(){
