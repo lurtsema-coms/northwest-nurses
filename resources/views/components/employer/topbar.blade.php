@@ -41,22 +41,15 @@
             </svg>
         </div>
         <div class="hidden mt-4" id="notification-setting">
-            <div class="flex flex-col absolute  w-80 sm:w-96 top-14 right-7 bg-white text-slate-500 shadow-sm transition-all z-10">
-                <div class="mb-1">
+            <div class="flex flex-col absolute  w-80 sm:w-96 top-14 right-7 bg-white text-slate-500 shadow-sm transition-all z-10" hx-get="{{ route('employer.notification') }}" hx-trigger="load" hx-target="#notification-content">
+                <div>
                     <h1 class="text-xl font-bold text-start p-2 pl-4 shadow-sm">Notifications:</h1>
                 </div>
-                <div class="p-2 pl-4 ">
-                    <span><strong>Gabriel Quing</strong> Applied to your job post</span>
-                    <p class="max-w-[400px] whitespace-nowrap overflow-hidden text-ellipsis  font-bold">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe laudantium soluta facere corporis rerum deserunt laborum molestiae qui. Nobis optio quas libero ducimus quisquam! Animi quia quod corrupti facere tenetur?" </p>
-                    <span>10m ago</span>
-                </div>
-                <div class="p-2 pl-4 ">
-                    <span><strong>Gabriel Quing</strong> Applied to your job post</span>
-                    <p class="max-w-[400px] whitespace-nowrap overflow-hidden text-ellipsis  font-bold">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe laudantium soluta facere corporis rerum deserunt laborum molestiae qui. Nobis optio quas libero ducimus quisquam! Animi quia quod corrupti facere tenetur?" </p>
-                    <span>10m ago</span>
+                <div id="notification-content" class="overflow-y-auto  max-h-96 scrollbar-thin scrollbar-thumb-cyan scrollbar-thumb-rounded">
+                    {{-- employer-notification --}}
                 </div>
                 <div class="shadow-custom flex justify-center">
-                    <a href="/employer-job" class="p-4 pl-4 text-start font-bold ">Go to Jobs</a>
+                    <a href="/employer-job" class="p-4 pl-4 text-start font-bold text-cyan-600 ">Go to Jobs</a>
                 </div>
             </div>
         </div>

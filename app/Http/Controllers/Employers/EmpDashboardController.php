@@ -78,6 +78,28 @@ class EmpDashboardController extends Controller
         return view('components.employer.custom.employment-chart', $data);
     }
 
+    public function employmentnotification()
+    {
+        $userId = auth()->user()->id;
+        $data = [];
+        $data['applied_applicants'] = JobApplication::leftJoin('job_postings', 'job_postings.id', 'job_applications.job_posting_id')
+            ->leftJoin('users','users.id', 'job_applications.created_by')
+            ->select(
+                'job_postings.*',
+                'job_applications.answer_1',
+                'job_applications.status',
+                'job_applications.created_at as applied_at',
+                'job_applications.created_by as applied_by',
+                'users.email',
+            )
+            ->where('job_postings.created_by',$userId )
+            ->where('job_applications.status','APPLIED')
+            ->orderBy('job_applications.created_at', 'desc')
+            ->get();
+
+        return view('components.employer.custom.employer-notification', $data);
+
+    }
     /**
      * Show the form for creating a new resource.
      */
