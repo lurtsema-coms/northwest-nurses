@@ -46,7 +46,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::middleware('role:employer')->group(function () {
         Route::get('/employer-dashboard', [EmpDashboardController::class, 'index'])->name('employer.dashboard');
         Route::get('/employer-dashboard-chart', [EmpDashboardController::class, 'employmentChart'])->name('employer.dashboard-chart');
-        Route::get('/employer-dashboard-notification', [EmpDashboardController::class, 'employmentnotification'])->name('employer.notification');
+        Route::get('/employer-dashboard-notification', [EmpDashboardController::class, 'employmentNotification'])->name('employer.notification');
+        Route::get('/employer-dashboard-bell', [EmpDashboardController::class, 'countNotification'])->name('employer.bell');
         // Jobs
         Route::get('/employer-job', [EmpPostJobController::class, 'index'])->name('employer.job');
         Route::get('/employer-job/search', [EmpPostJobController::class, 'search'])->name('employer.job.search');
