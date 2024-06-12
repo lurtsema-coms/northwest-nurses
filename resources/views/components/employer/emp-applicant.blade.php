@@ -25,7 +25,7 @@
                 <div class="relative p-[1px] bg-gray-300 rounded-lg hover:shadow-lg">
                     <div class="bg-white rounded-lg p-5 sm:p-8">
                         <p class="timeago text-md text-green-500 font-bold mb-3" datetime="{{ $applicants[$i]->created_at }} {{ config('app.timezone') }}" ></p>
-                        <div>
+                        <div class="space-y-1">
                             <div class="flex flex-wrap">
                                 <div class="flex-1 basis-52"><span class="text-slate-600 font-medium">Name: </span><span class="">{{ $applicant_information[$i]->first_name." ".$applicant_information[$i]->last_name }}</span></div>
                                 <div class="flex-1 basis-52"><span class="text-slate-600 font-medium">Birthday: </span><span class="">{{ \DateTime::createFromFormat('Y-m-d', $applicant_information[$i]->birthdate)->format('M j, Y') }}</span></div>
@@ -33,6 +33,9 @@
                             <div class="flex flex-wrap">
                                 <div class="flex-1 basis-52"><span class="text-slate-600 font-medium">Contact: </span><span class="">{{ $applicant_information[$i]->contact_number }}</span></div>
                                 <div class="flex-1 basis-52"><span class="text-slate-600 font-medium">Sex: </span><span class="capitalize">{{ $applicant_information[$i]->sex }}</span></div>
+                            </div>
+                            <div class="flex flex-wrap">
+                                <div class="flex-1 basis-52"><span class="text-slate-600 font-medium">Email: </span><span class="">{{ $applicant_information[$i]->email }}</span></div>
                             </div>
                         </div>
                         <div class="mt-5 space-y-3">
