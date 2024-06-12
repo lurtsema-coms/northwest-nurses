@@ -30,6 +30,10 @@ Route::get('/contact-us', function () {
     return view('contact-us');
 });
 
+Route::get('/about-us', function () {
+    return view('about-us');
+});
+
 Route::post('/contact-us', [GuestController::class, 'submitContactUsResponse'])->name('contact-us.submit');
 
 route::get('/backend-layout', function () {
