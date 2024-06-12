@@ -39,18 +39,21 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 text-slate-600">
             <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"/>
             </svg>
-        </div>
-        <div class="hidden mt-4" id="notification-setting">
-            <div class="flex flex-col absolute  w-80 sm:w-96 top-14 right-7 bg-white text-slate-500 shadow-sm transition-all z-10" hx-get="{{ route('employer.notification') }}" hx-trigger="load" hx-target="#notification-content">
-                <div>
-                    <h1 class="text-xl font-bold text-start p-2 pl-4 shadow-sm">Notifications:</h1>
+            <div class="hidden" id="notification-setting">
+                <div class="flex flex-col absolute  w-80 sm:w-96 top-14 right-7 bg-white text-slate-500 shadow-sm transition-all z-10" hx-get="{{ route('employer.notification') }}" hx-trigger="load" hx-target="#notification-content">
+                    <div>
+                        <h1 class="text-xl font-bold text-start p-2 pl-4 shadow-sm">Job Notifications:</h1>
+                    </div>
+                    <div id="notification-content" class="overflow-y-auto  max-h-96 scrollbar-thin scrollbar-thumb-cyan scrollbar-thumb-rounded">
+                        {{-- employer-notification --}}
+                    </div>
+                    <div class="shadow-custom flex justify-center">
+                        <a href="/employer-job" class="p-4 pl-4 text-start font-bold text-cyan-600 ">Go to Jobs</a>
+                    </div>
                 </div>
-                <div id="notification-content" class="overflow-y-auto  max-h-96 scrollbar-thin scrollbar-thumb-cyan scrollbar-thumb-rounded">
-                    {{-- employer-notification --}}
-                </div>
-                <div class="shadow-custom flex justify-center">
-                    <a href="/employer-job" class="p-4 pl-4 text-start font-bold text-cyan-600 ">Go to Jobs</a>
-                </div>
+            </div>
+            <div>
+                <span class="text-white text-sm absolute top-1 right-5 w-5 bg-cyan-600 flex items-center justify-center  rounded-2xl">2</span>
             </div>
         </div>
     </div>
