@@ -251,7 +251,14 @@ class EmpPostJobController extends Controller
     {
         $input = $request->all();
         
-        $job_posting = JobPosting::find($id);
+        $job_posting = JobPosting::where('id', $id)
+            ->withCount('getApplicantsPost')
+            ->get()
+            ->first();
+        
+        if($job_posting->get_applicants_post_count > 0){
+            return redirect()->back()->with('error', 'Your app has been failed to update.');
+        }
 
         $job_posting->update([
             'job_title' => $input['job_title'],
