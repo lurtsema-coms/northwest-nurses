@@ -43,7 +43,7 @@
                 @endrole
                 @endauth
                 @guest
-                <a href="/login" class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full">Login to Apply</a>
+                <a href="/login" class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full text-center">Login to Apply</a>
                 @endguest
             </div>
         </div>
