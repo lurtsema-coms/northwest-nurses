@@ -16,47 +16,50 @@
   </div>
 </div>
 <div class="container mx-auto flex flex-col justify-center items-center p-10 gap-12">
-  <div class="flex flex-col md:flex-row gap-8 w-full justify-between items-start">
-    <div class="flex-grow flex flex-col gap-2 basis-1/3">
-      <h1 class="text-3xl font-extrabold text-center md:text-left">Our Mission</h1>
-      <hr class="border-2 w-16 border-primary mx-auto md:mx-0">
-      <p class="text-center md:text-left">To provide personalized travel experiences to professional health care workers to meet the needs of the industry while opportunity to explore the North West Territory.</p>
+  <div class="flex flex-col gap-8 w-full justify-between items-center">
+    <div class="max-w-[500px] flex flex-col gap-2 basis-1/3">
+      <h1 class="text-3xl font-extrabold text-center">Core Values</h1>
+      <hr class="border-2 w-32 border-primary mx-auto">
+      <p class="text-center text-lg">Communication, Connections, Travel experiences, Fair & Competitive Pay, Relationships, and Opportunity</p>
     </div>
-    <div class="flex-grow flex flex-col gap-2 basis-1/3">
-      <h1 class="text-3xl font-extrabold text-center md:text-left">Our Vision</h1>
-      <hr class="border-2 w-16 border-primary mx-auto md:mx-0">
-      <p class="text-center md:text-left">Maintain high-quality health care personnel with competitive pay and consistent communication.</p>
-    </div>
-    <div class="flex-grow flex flex-col gap-2 basis-1/3">
-      <h1 class="text-3xl font-extrabold text-center md:text-left">Core Values</h1>
-      <hr class="border-2 w-16 border-primary mx-auto md:mx-0">
-      <p class="text-center md:text-left">Communication, Connections, Travel experiences, Fair & Competitive Pay, Relationships, and Opportunity</p>
+    <div class="flex flex-col w-full lg:flex-row gap-5 justify-around items-center">
+      <div class="max-w-[500px] flex-grow flex flex-col gap-2 basis-1/3">
+        <h1 class="text-3xl font-extrabold text-center">Our Mission</h1>
+        <hr class="border-2 w-32 border-primary mx-auto">
+        <p class="text-center text-lg">To provide personalized travel experiences to professional health care workers to meet the needs of the industry while opportunity to explore the North West Territory.</p>
+      </div>  
+      <div class="max-w-[500px] flex-grow flex flex-col gap-2 basis-1/3">
+        <h1 class="text-3xl font-extrabold text-center">Our Vision</h1>
+        <hr class="border-2 w-32 border-primary mx-auto">
+        <p class="text-center text-lg">Maintain high-quality health care personnel with competitive pay and consistent communication.</p>
+      </div>
     </div>
   </div>
-  <hr class="border-2 border-primary w-full">
-  <div class="w-full">
+</div>
+<div class="w-full bg-gray-300">
+  <div class="container mx-auto py-10">
     <h1 class="text-3xl font-extrabold text-center">Founders</h1>
     <div class="flex flex-col gap-5 lg:flex-row justify-around items-center lg:items-start mt-5">
       <div class="flex flex-col justify-center items-center basis-1/3">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
           <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
         </svg>
-        <h3 class="font-semibold text-lg text-center">Garey Robinson</h3>
-        <p class="text-slate-600 italic text-center">Founder, General Operations Manager</p> 
+        <h3 class="font-semibold text-xl text-center">Garey Robinson</h3>
+        <p class="text-slate-600 text-lg italic text-center">Founder, General Operations Manager</p> 
       </div>
       <div class="flex flex-col justify-center items-center basis-1/3">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
           <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
         </svg>
-        <h3 class="font-semibold text-lg text-center">Enrico Faraci</h3>
-        <p class="text-slate-600 italic text-center">Operations Manager, Co-Founder - Allied Health</p> 
+        <h3 class="font-semibold text-xl text-center">Enrico Faraci</h3>
+        <p class="text-slate-600 text-lg italic text-center">Operations Manager, Co-Founder - Allied Health</p> 
       </div>
       <div class="flex flex-col justify-center items-center basis-1/3">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16">
           <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
         </svg>
-        <h3 class="font-semibold text-lg text-center">Brandon Emmett</h3>
-        <p class="text-slate-600 italic text-center">Chief Procurement Officer, Co-Founder</p> 
+        <h3 class="font-semibold text-xl text-center">Brandon Emmett</h3>
+        <p class="text-slate-600 text-lg italic text-center">Chief Procurement Officer, Co-Founder</p> 
       </div>
     </div>
   </div>
