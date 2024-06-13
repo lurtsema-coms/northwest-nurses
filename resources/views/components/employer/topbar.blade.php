@@ -44,7 +44,7 @@
                     <div>
                         <h1 class="text-xl font-bold text-start p-2 pl-4 shadow-sm">Job Notifications:</h1>
                     </div>
-                    <div id="notification-content" class="overflow-y-auto  max-h-96 scrollbar-thin scrollbar-thumb-cyan scrollbar-thumb-rounded" hx-history-elt>
+                    <div id="notification-content" class="overflow-y-auto  max-h-96 scrollbar-thin scrollbar-thumb-cyan scrollbar-thumb-rounded" >
                         {{-- employer-notification --}}
                     </div>
                     <div class="shadow-custom flex justify-center">
@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div hx-get="{{ route('employer.bell') }}" hx-trigger="load" hx-target="#notification-bell" >
-                <div id="notification-bell" hx-history-elt>
+                <div id="notification-bell" >
                 </div>
             </div>
         </div>
