@@ -58,6 +58,7 @@
                 window.addEventListener("popstate", (event) => {
                     const dashboard_url = '{{ route('employer.dashboard') }}';
                     const jobs_url = '{{ route('employer.job') }}';
+                    const profile_url = '{{ route('employer.profile', auth()->user()->id) }}';
                     const location = document.location;
                     
                     // Sidebar active links
@@ -69,13 +70,16 @@
                         removeBgColor();
                         $('#jobs-link').removeClass('bg-white')
                         $('#jobs-link').addClass('bg-slate-300')
+                    }else if (getSecondUrlSegment(location) == getSecondUrlSegment(profile_url)){
+                        removeBgColor();
                     }
 
                     if(location == dashboard_url){
                         $('#module-section-title').text('Dashboard')
                     }else if(location == jobs_url){
                         $('#module-section-title').text('Jobs')
-
+                    }else if(location == profile_url){
+                        $('#module-section-title').text('Profile')
                     }
 
                 });
