@@ -1,3 +1,6 @@
+<div class="h-16 flex items-center absolute top-0 left-16 text-xl">
+    {{ $module_title }}
+</div>
 <div class="bg-white mx-auto max-w-3xl p-10 rounded-xl shadow-sm text-slate-600">
     <p class="font-bold mb-5">Edit Profile</p>
     <div id="error-messages">

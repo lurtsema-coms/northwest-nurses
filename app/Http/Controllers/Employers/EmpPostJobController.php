@@ -21,6 +21,7 @@ class EmpPostJobController extends Controller
     public function index(Request $request)
     {
         $data = [];
+        $data['module_title'] = 'Jobs';
         $query = JobPosting::
             where('created_by', auth()->user()->id)
             ->withCount('getApplicantsPost')
@@ -30,10 +31,8 @@ class EmpPostJobController extends Controller
 
         if ($request->header('HX-Request')) {
             $renderedView = view('components.employer.jobs', $data)->render();
-            $renderedModuleTitle = view('components.employer.module-title', ['module_title' => 'Jobs'])->render();
-            $combinedContent = $renderedModuleTitle . $renderedView;
 
-            return response($combinedContent)
+            return response($renderedView)
                 ->header('HX-Current-URL', 'employer-job');
         } else {
             return view('layouts.employer.job', ['module_title' => 'Jobs', 'jobs' => $data['jobs']]);
@@ -212,7 +211,7 @@ class EmpPostJobController extends Controller
         $data['job_post'] = $jobPost;
 
         if ($request->header('HX-Request')) {
-            return view('components.employer.jobs-view', $data)->render() . view('components.employer.module-title', ['module_title' => $data['module_title']]);
+            return view('components.employer.jobs-view', $data)->render();
         } else {
             return view('layouts.employer.jobs-view', $data);
         }
@@ -238,7 +237,7 @@ class EmpPostJobController extends Controller
         $data['hasAnyApplicantApplied'] = $jobPost->getApplicantsPost->count();
 
         if ($request->header('HX-Request')) {
-            return view('components.employer.jobs-view-edit', $data)->render() . view('components.employer.module-title', ['module_title' => $data['module_title']]);
+            return view('components.employer.jobs-view-edit', $data)->render();
         } else {
             return view('layouts.employer.jobs-edit', $data);
         }

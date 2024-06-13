@@ -53,7 +53,7 @@ class EmpDashboardController extends Controller
         if ($request->header('HX-Request')) {
             $renderedView = view('components.employer.dashboard', $data)->render();
             $renderedModuleTitle = view('components.employer.module-title', ['module_title' => 'Dashboard'])->render();
-            $combinedContent = $renderedView . $renderedModuleTitle;
+            $combinedContent = $renderedModuleTitle . $renderedView;
 
             return response($combinedContent)
                 ->header('HX-Current-URL', 'employer-dashboard');

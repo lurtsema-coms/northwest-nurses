@@ -1,3 +1,6 @@
+<div class="h-16 flex items-center absolute top-0 left-16 text-xl">
+    {{ $module_title }}
+</div>
 <div class="h-auto mx-auto max-w-5xl relative text-slate-600 bg-white py-7 px-10 shadow-sm border rounded-2xl">
     <div class="font-medium text-sky-600 flex absolute -top-9 left-0">
         <span class="flex items-center space-x-2 hover:opacity-70 cursor-pointer"

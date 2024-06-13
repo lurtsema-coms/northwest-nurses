@@ -1,3 +1,6 @@
+<div class="h-16 flex items-center absolute top-0 left-16 text-xl">
+    {{ $module_title }}
+</div>
 <div>
     <div class="mb-5 flex justify-between flex-wrap">
         <div class="space-x-3 flex items-center">

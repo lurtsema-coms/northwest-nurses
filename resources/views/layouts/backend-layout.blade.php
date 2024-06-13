@@ -38,7 +38,7 @@
         <div class="flex overflow-hidden sm:overflow-visible">
             @yield('sidebar')
             {{-- Main Content --}}
-            <div class="flex-1 pl-7 min-w-72">
+            <div class="flex-1 pl-7 min-w-72 relative">
                 {{-- Top Bar --}}
                 @yield('topbar')
                 {{-- Body Content --}}
@@ -73,15 +73,6 @@
                     }else if (getSecondUrlSegment(location) == getSecondUrlSegment(profile_url)){
                         removeBgColor();
                     }
-
-                    if(location == dashboard_url){
-                        $('#module-section-title').text('Dashboard')
-                    }else if(location == jobs_url){
-                        $('#module-section-title').text('Jobs')
-                    }else if(location == profile_url){
-                        $('#module-section-title').text('Profile')
-                    }
-
                 });
 
                 // Toggle Profile

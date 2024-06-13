@@ -1,3 +1,7 @@
+
+<div class="h-16 flex items-center absolute top-0 left-16 text-xl">
+    {{ $module_title }}
+</div>
 <div class="gap-2 w-full max-w-[56.25rem] space-y-3">
     <div class="flex flex-wrap gap-3">
         <div class="flex justify-between items-center bg-white px-10 py-5 shadow-sm rounded-2xl" style="flex: 1 0 250px;">
