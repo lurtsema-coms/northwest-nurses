@@ -86,6 +86,7 @@ class EmpDashboardController extends Controller
             ->leftJoin('users','users.id', 'job_applications.created_by')
             ->select(
                 'job_postings.*',
+                'job_applications.job_posting_id as posting_id',
                 'job_applications.id as application_id',
                 'job_applications.answer_1',
                 'job_applications.status',
