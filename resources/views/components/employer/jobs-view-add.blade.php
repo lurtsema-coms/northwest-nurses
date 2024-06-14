@@ -47,7 +47,7 @@
                 </div>
                 <div class="flex flex-col flex-1 space-y-2">
                     <span class="font-medium">Pay <span class="text-red-400">*</span></span>
-                    <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="pay" value="" required placeholder="e.g., $25/hour or $3000 a month">
+                    <input oninput="formatPayInput(this)" class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="pay" value="" required placeholder="e.g., $25/hour or $3000 a month">
                 </div>
                 <div class="flex flex-col flex-1 space-y-2">
                     <span class="font-medium">Assignment Length <span class="text-red-400">*</span></span>
@@ -124,6 +124,13 @@
 
 
 <script>
+    function formatPayInput(el) {
+        let value = el.value.replace(/^\s+/, '');
+        if (value[0] != '$') {
+            value = `$${value}`;
+        }
+        el.value = value;
+    }
 
     $(document).ready(function() {
 
