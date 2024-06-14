@@ -1,123 +1,125 @@
 <div class="h-16 flex items-center absolute top-0 left-16 text-xl">
     {{ $module_title }}
 </div>
-<div class="h-[50rem] mx-auto max-w-5xl relative bg-white py-7 px-5 shadow-sm border rounded-2xl overflow-auto sm:px-10">
-    <div class="font-medium text-sky-600 flex absolute -top-9 left-0">
-        <span class="flex items-center space-x-2 hover:opacity-70 cursor-pointer"
-            hx-get="{{ route('employer.job') }}" hx-target="#target-content" hx-push-url="true" hx-on::after-request="$('input').val()"
-        >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-            </svg>
-            <span>Back to Jobs</span>
-        </span>
+<div class="h-[50rem] mx-auto max-w-5xl relative bg-white py-7 shadow-sm border rounded-2xl">
+    <div class="h-full overflow-auto px-5 sm:px-10"">
+        <div class="font-medium text-sky-600 flex absolute -top-9 left-0">
+            <span class="flex items-center space-x-2 hover:opacity-70 cursor-pointer"
+                hx-get="{{ route('employer.job') }}" hx-target="#target-content" hx-push-url="true" hx-on::after-request="$('input').val()"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                <span>Back to Jobs</span>
+            </span>
+        </div>
+        <form id="add-form" action="{{ route('employer.job.add-jobs') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="w-full">
+                <div class="font-medium text-slate-600 mb-3">Upload Image <span class="text-red-400">*</span></div>
+                
+                <div class="flex items-center justify-center w-full">
+                    <label for="dropzone-file" id="dropzone-parent" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 draggable="true">
+                        <input id="dropzone-file" type="file" class="absolute -z-10 w-7" name="img_link" required>
+                        <div class="flex flex-col items-center justify-center pt-5 pb-6" id="img-content">
+                            <svg class="w-8 h-8 mb-4 text-gray-500 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                            </svg>
+                            <p class="mb-2 text-gray-500><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                            <p class="text-xs text-gray-500">SVG, PNG, and JPG (MAX. 600x400)</p>
+                        </label>
+                    </div>
+                </div> 
+            </div>
+            <div class="mt-10 space-y-5 text-slate-500">
+                <div class="flex flex-wrap gap-5">
+                    <div class="flex flex-col w-full max-w-[28.9rem] space-y-2">
+                        <span class="font-medium">Job Title <span class="text-red-400">*</span></span>
+                        <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="job_title" value="" placeholder="e.g., Registered Nurse" required>
+                    </div>
+                </div>
+                <div class="font-medium">
+                    Job Details
+                </div>
+                <div class="flex flex-wrap gap-5">
+                    <div class="flex flex-col flex-1 space-y-2">
+                        <span class="font-medium">Profession <span class="text-red-400">*</span></span>
+                        <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="profession" value="" placeholder="e.g., Nursing" required>
+                    </div>
+                    <div class="flex flex-col flex-1 space-y-2">
+                        <span class="font-medium">Pay <span class="text-red-400">*</span></span>
+                        <input oninput="formatPayInput(this)" class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="pay" value="" required placeholder="e.g., $25/hour or $3000 a month">
+                    </div>
+                    <div class="flex flex-col flex-1 space-y-2">
+                        <span class="font-medium">Assignment Length <span class="text-red-400">*</span></span>
+                        <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="assignment_length" value="" placeholder="e.g., 3 months">
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-5">
+                    <div class="flex flex-col flex-1 space-y-2">
+                        <span class="font-medium">Schedule <span class="text-red-400">*</span></span>
+                        <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="schedule" value="" placeholder="e.g., Full-time, Monday to Friday, 9 AM - 5 PM" required>
+                    </div>
+                    <div class="flex flex-col flex-1 space-y-2">
+                        <span class="font-medium">Openings <span class="text-red-400">*</span></span>
+                        <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="number" name="openings" value="" placeholder="e.g., 1 or more" min="1" required>
+                    </div>
+                    <div class="flex flex-col flex-1 space-y-2">
+                        <span class="font-medium">Expected Start Date <span class="text-red-400">*</span></span>
+                        <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="date" name="start_date" value="" required>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-5">
+                    <div class="flex flex-col flex-1 space-y-2">
+                        <span class="font-medium">Preferred Experience <span class="text-red-400">*</span></span>
+                        <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="experience" value="" placeholder="e.g., 5 years (Preferred)" required>
+                    </div>
+                    <div class="flex flex-col flex-1 space-y-2">
+                        <span class="font-medium">Address <span class="text-red-400">*</span></span>
+                        <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="address" value="" placeholder="Insert address..." required>
+                    </div>
+                </div>
+                <div class="flex flex-wrap">
+                    <span>What are your initial questions for the applicant?</span>
+                </div>
+                <div class="flex flex-wrap gap-5">
+                    <div class="flex flex-col flex-1 space-y-2">
+                        <span class="font-medium">Question 1 <span class="text-red-400">*</span></span>
+                        <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="question_1" value=""  placeholder="Insert question..." required>
+                    </div>
+                    <div class="flex flex-col flex-1 space-y-2">
+                        <span class="font-medium">Question 2 (Optional)</span>
+                        <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="question_2" value="" placeholder="Insert question...">
+                    </div>
+                    <div class="flex flex-col flex-1 space-y-2">
+                        <span class="font-medium">Question 3 (Optional)</span>
+                        <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="question_3" value="" placeholder="Insert question...">
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-5">
+                    <div class="flex flex-col flex-1 space-y-2">
+                        <span class="font-medium">Job Description <span class="text-red-400">*</span></span>
+                        <textarea class="px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" name="job_description" id="" rows="7" placeholder="Insert job description..." required></textarea>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-5">
+                    <div class="flex flex-col flex-1 space-y-2">
+                        <span class="font-medium">Responsibilities <span class="text-red-400">*</span></span>
+                        <textarea class="px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" name="responsibilities" id="" rows="7" placeholder="Insert job responsibilities..." required></textarea>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-5">
+                    <div class="flex flex-col flex-1 space-y-2">
+                        <span class="font-medium">Requirements <span class="text-red-400">*</span></span>
+                        <textarea class="px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" name="requirements" id="" rows="7" placeholder="Insert job requirements..." required></textarea>
+                    </div>
+                </div>
+                <div class="text-end">
+                    <button class="bg-cyan-600 text-white border h-10 px-4 rounded-md hover:opacity-70" type="submit">Save</button>
+                </div>
+            </div>
+        </form>
     </div>
-    <form id="add-form" action="{{ route('employer.job.add-jobs') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <div class="w-full">
-            <div class="font-medium text-slate-600 mb-3">Upload Image <span class="text-red-400">*</span></div>
-            
-            <div class="flex items-center justify-center w-full">
-                <label for="dropzone-file" id="dropzone-parent" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 draggable="true">
-                    <input id="dropzone-file" type="file" class="absolute -z-10 w-7" name="img_link" required>
-                    <div class="flex flex-col items-center justify-center pt-5 pb-6" id="img-content">
-                        <svg class="w-8 h-8 mb-4 text-gray-500 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-                        </svg>
-                        <p class="mb-2 text-gray-500><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                        <p class="text-xs text-gray-500">SVG, PNG, and JPG (MAX. 600x400)</p>
-                    </label>
-                </div>
-            </div> 
-        </div>
-        <div class="mt-10 space-y-5 text-slate-500">
-            <div class="flex flex-wrap gap-5">
-                <div class="flex flex-col w-full max-w-[28.9rem] space-y-2">
-                    <span class="font-medium">Job Title <span class="text-red-400">*</span></span>
-                    <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="job_title" value="" placeholder="e.g., Registered Nurse" required>
-                </div>
-            </div>
-            <div class="font-medium">
-                Job Details
-            </div>
-            <div class="flex flex-wrap gap-5">
-                <div class="flex flex-col flex-1 space-y-2">
-                    <span class="font-medium">Profession <span class="text-red-400">*</span></span>
-                    <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="profession" value="" placeholder="e.g., Nursing" required>
-                </div>
-                <div class="flex flex-col flex-1 space-y-2">
-                    <span class="font-medium">Pay <span class="text-red-400">*</span></span>
-                    <input oninput="formatPayInput(this)" class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="pay" value="" required placeholder="e.g., $25/hour or $3000 a month">
-                </div>
-                <div class="flex flex-col flex-1 space-y-2">
-                    <span class="font-medium">Assignment Length <span class="text-red-400">*</span></span>
-                    <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="assignment_length" value="" placeholder="e.g., 3 months">
-                </div>
-            </div>
-            <div class="flex flex-wrap gap-5">
-                <div class="flex flex-col flex-1 space-y-2">
-                    <span class="font-medium">Schedule <span class="text-red-400">*</span></span>
-                    <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="schedule" value="" placeholder="e.g., Full-time, Monday to Friday, 9 AM - 5 PM" required>
-                </div>
-                <div class="flex flex-col flex-1 space-y-2">
-                    <span class="font-medium">Openings <span class="text-red-400">*</span></span>
-                    <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="number" name="openings" value="" placeholder="e.g., 1 or more" min="1" required>
-                </div>
-                <div class="flex flex-col flex-1 space-y-2">
-                    <span class="font-medium">Expected Start Date <span class="text-red-400">*</span></span>
-                    <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="date" name="start_date" value="" required>
-                </div>
-            </div>
-            <div class="flex flex-wrap gap-5">
-                <div class="flex flex-col flex-1 space-y-2">
-                    <span class="font-medium">Preferred Experience <span class="text-red-400">*</span></span>
-                    <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="experience" value="" placeholder="e.g., 5 years (Preferred)" required>
-                </div>
-                <div class="flex flex-col flex-1 space-y-2">
-                    <span class="font-medium">Address <span class="text-red-400">*</span></span>
-                    <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="address" value="" placeholder="Insert address..." required>
-                </div>
-            </div>
-            <div class="flex flex-wrap">
-                <span>What are your initial questions for the applicant?</span>
-            </div>
-            <div class="flex flex-wrap gap-5">
-                <div class="flex flex-col flex-1 space-y-2">
-                    <span class="font-medium">Question 1 <span class="text-red-400">*</span></span>
-                    <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="question_1" value=""  placeholder="Insert question..." required>
-                </div>
-                <div class="flex flex-col flex-1 space-y-2">
-                    <span class="font-medium">Question 2 (Optional)</span>
-                    <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="question_2" value="" placeholder="Insert question...">
-                </div>
-                <div class="flex flex-col flex-1 space-y-2">
-                    <span class="font-medium">Question 3 (Optional)</span>
-                    <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="question_3" value="" placeholder="Insert question...">
-                </div>
-            </div>
-            <div class="flex flex-wrap gap-5">
-                <div class="flex flex-col flex-1 space-y-2">
-                    <span class="font-medium">Job Description <span class="text-red-400">*</span></span>
-                    <textarea class="px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" name="job_description" id="" rows="7" placeholder="Insert job description..." required></textarea>
-                </div>
-            </div>
-            <div class="flex flex-wrap gap-5">
-                <div class="flex flex-col flex-1 space-y-2">
-                    <span class="font-medium">Responsibilities <span class="text-red-400">*</span></span>
-                    <textarea class="px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" name="responsibilities" id="" rows="7" placeholder="Insert job responsibilities..." required></textarea>
-                </div>
-            </div>
-            <div class="flex flex-wrap gap-5">
-                <div class="flex flex-col flex-1 space-y-2">
-                    <span class="font-medium">Requirements <span class="text-red-400">*</span></span>
-                    <textarea class="px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" name="requirements" id="" rows="7" placeholder="Insert job requirements..." required></textarea>
-                </div>
-            </div>
-            <div class="text-end">
-                <button class="bg-cyan-600 text-white border h-10 px-4 rounded-md hover:opacity-70" type="submit">Save</button>
-            </div>
-        </div>
-    </form>
 </div>
 
 @include('components.dialog', ['title' => 'Are You Sure?', 'text_content' => 'This action will submit the form', 'class' => 'modal-warning', 'icon' => 'warning', 'isHxSwap' => false])
