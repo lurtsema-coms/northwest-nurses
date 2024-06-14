@@ -3,7 +3,7 @@
         <img class="min-h-full min-w-full object-cover absolute top-0" src="{{ $selectedJobPost->img_link }}?v={{ strtotime(date('Y-m-d H:00:00')) }}" alt="">
     </div>
     <div class="px-5 pt-5 pb-2 flex flex-col flex-grow justify-start items-start overflow-hidden">
-        <div class="pb-5">
+        <div class="pb-5 w-full">
             <h2 class="font-bold text-2xl">{{ $selectedJobPost->job_title }}, {{ $selectedJobPost->address }}</h2>
             <h2 class="font-bold text-2xl text-primary">{{ $selectedJobPost->pay }}</h2>
             <div class="flex flex-col sm:flex-row justify-between mt-5 gap-5">
