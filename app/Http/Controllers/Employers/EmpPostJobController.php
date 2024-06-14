@@ -22,6 +22,7 @@ class EmpPostJobController extends Controller
     {
         $data = [];
         $data['module_title'] = 'Jobs';
+        $data['paginate'] = 10;
         $query = JobPosting::
             where('created_by', auth()->user()->id)
             ->withCount('getApplicantsPost')
@@ -35,7 +36,7 @@ class EmpPostJobController extends Controller
             return response($renderedView)
                 ->header('HX-Current-URL', 'employer-job');
         } else {
-            return view('layouts.employer.job', ['module_title' => 'Jobs', 'jobs' => $data['jobs']]);
+            return view('layouts.employer.job', $data);
         }
     }
 
@@ -43,7 +44,8 @@ class EmpPostJobController extends Controller
     {
         $data = [];
         $paginate = $request->input('paginate') ?? 10;
-        
+        $data['paginate'] = $paginate;
+
         $query = JobPosting::
             where('created_by', auth()->user()->id)
             ->withCount('getApplicantsPost')
@@ -208,7 +210,7 @@ class EmpPostJobController extends Controller
         $data = [];
         $data['id'] = $id;
         $data['module_title'] = 'View Jobs';
-        $data['job_post'] = $jobPost;
+        $data['selectedJobPost'] = $jobPost;
 
         if ($request->header('HX-Request')) {
             return view('components.employer.jobs-view', $data)->render();

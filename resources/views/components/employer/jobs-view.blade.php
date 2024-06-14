@@ -12,7 +12,8 @@
             <span>Back to Jobs</span>
         </span>
     </div>
-    <form id="add-form" action="{{ route('employer.job.edit-jobs', $id) }}" method="POST" enctype="multipart/form-data">
+    @include('components.find-job-page.job-info')
+    {{-- <form id="add-form" action="{{ route('employer.job.edit-jobs', $id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="w-full">
             <div class="font-medium text-slate-600 mb-3">Upload Image</div>
@@ -115,7 +116,7 @@
                 </div>
             </div>
         </div>
-    </form>
+    </form> --}}
 </div>
 
 @include('components.dialog', ['title' => 'Are You Sure?', 'text_content' => 'This action will submit the form', 'id' => 'modal-warning', 'icon' => 'warning'])

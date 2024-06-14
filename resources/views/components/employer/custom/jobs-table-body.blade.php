@@ -58,6 +58,18 @@
     {{  $jobs->links('vendor.pagination.custom-pagination-backend')}}
 </div>
 
+@php
+    $firstItem = $jobs->firstItem();
+    $lastItem = $jobs->lastItem();
+    $total = $jobs->total();
+@endphp
+
+@if ($jobs->count() < $paginate)
+    <p class="text-sm text-gray-700 mt-2">
+        Showing {{ $firstItem ?? 0 }} to {{ $lastItem ?? 0 }} of {{ $total }} results
+    </p>
+@endif
+
 <script>
     $(document).ready(function() {
         $('.delete-btn').click(function(e) {
