@@ -50,7 +50,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/employer-dashboard-bell', [EmpDashboardController::class, 'countNotification'])->name('employer.bell');
         // Jobs
         Route::get('/employer-job', [EmpPostJobController::class, 'index'])->name('employer.job');
-        Route::get('/employer-job/search', [EmpPostJobController::class, 'search'])->name('employer.job.search');
+        Route::post('/employer-job', [EmpPostJobController::class, 'search'])->name('employer.job.search');
         Route::get('/employer-job/add', [EmpPostJobController::class, 'getAdd'])->name('employer.job.add');
         Route::post('/employer-job/add-jobs', [EmpPostJobController::class, 'store'])->name('employer.job.add-jobs');
         Route::get('/employer-job/edit/{id}', [EmpPostJobController::class, 'edit'])->name('employer.job.edit');

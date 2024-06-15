@@ -28,13 +28,27 @@ class EmpPostJobController extends Controller
             ->withCount('getApplicantsPost')
             ->orderBy('id', 'desc');
 
+        if ($request->has('paginate')){
+            $data['paginate'] = $request->input('paginate');
+        }
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('job_title', 'like', "%{$search}%")
+                    ->orWhere('status', 'like', "%{$search}%")
+                    ->orWhere('address', 'like', "%{$search}%")
+                    ->orWhere('profession', 'like', "%{$search}%")
+                    ->orWhere('pay', 'like', "%{$search}%")
+                    ->orWhere('openings', 'like', "%{$search}%");
+            });
+        }
+
         $data['jobs'] = $query->orderBy('job_postings.created_at', 'desc')->paginate(10);
 
         if ($request->header('HX-Request')) {
             $renderedView = view('components.employer.jobs', $data)->render();
-
-            return response($renderedView)
-                ->header('HX-Current-URL', 'employer-job');
+            return response($renderedView);
         } else {
             return view('layouts.employer.job', $data);
         }
