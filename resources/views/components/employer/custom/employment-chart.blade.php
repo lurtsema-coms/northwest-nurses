@@ -27,7 +27,7 @@
 
             let options = {
                 series: [{
-                    name: 'Sales',
+                    name: 'employed',
                     data: seriesData,
                 }],
                 chart: {

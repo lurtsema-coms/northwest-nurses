@@ -148,6 +148,13 @@ class EmpPostJobController extends Controller
 
         $unique_id = uniqid();
 
+        $file_img = $input['img_link'];
+        $mime_type_img = $file_img->getClientMimeType();
+        
+        if(!(str_starts_with($mime_type_img, 'image/'))){
+            return redirect()->back()->with('error', 'Your app has been failed to add jobs. Upload image only');
+        }
+
         $job_posting = new JobPosting([
             'job_title' => $input['job_title'],
             'profession' => $input['profession'],
@@ -173,7 +180,6 @@ class EmpPostJobController extends Controller
         $job_posting->save();
 
         // Img Handling
-        $file_img = $input['img_link'];
         $img_extension = $file_img->getClientOriginalExtension();
         $file_name = "$job_posting->id - job_cover-$unique_id.$img_extension";
 
@@ -275,6 +281,31 @@ class EmpPostJobController extends Controller
             return redirect()->back()->with('error', 'Your app has been failed to update.');
         }
 
+
+        if(isset($input['img_link'])){
+            $file_name = $job_posting->file_name;
+            $file_img = $input['img_link'];
+
+            // Validates image
+            $mime_type_img = $file_img->getClientMimeType();
+            if(!(str_starts_with($mime_type_img, 'image/'))){
+                return redirect()->back()->with('error', 'Your app has been failed to update jobs. Upload image only');
+            }
+
+            // Move the image to the public directory
+            $file_path = public_path('img/job-cover') . '/' . $file_name;
+            $file_img->move(public_path('img/job-cover'), $file_name);
+            // Open the image using Intervention Image
+            $image = Image::make($file_path);
+            // Resize the image to your desired dimensions (optional)
+            $image->resize(800, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+
+            // Optimize and save the image
+            $image->save($file_path, 80);
+        }
+
         $job_posting->update([
             'job_title' => $input['job_title'],
             'profession' => $input['profession'],
@@ -293,23 +324,6 @@ class EmpPostJobController extends Controller
             'requirements' => $input['requirements'],
             'updated_by' => auth()->user()->id,
         ]);
-
-        if(isset($input['img_link'])){
-            $file_name = $job_posting->file_name;
-            $file_img = $input['img_link'];
-            // Move the image to the public directory
-            $file_path = public_path('img/job-cover') . '/' . $file_name;
-            $file_img->move(public_path('img/job-cover'), $file_name);
-            // Open the image using Intervention Image
-            $image = Image::make($file_path);
-            // Resize the image to your desired dimensions (optional)
-            $image->resize(800, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-
-            // Optimize and save the image
-            $image->save($file_path, 80);
-        }
 
         return redirect(route('employer.job'))->with('success', 'Your app has been successfully updated.');
     }

@@ -24,8 +24,13 @@
                 </div>
             </button>
         </div>
-        <div>
-            <input class="h-10 w-72 rounded-lg border border-gray-200 focus:border-slate-400 focus:ring-0 focus:outline-none placeholder:text-slate-400" type="text" placeholder="Search..."
+        <div class="flex">
+            <button class="bg-white rounded-lg px-4 border mr-3 hover:opacity-70" id="reset-btn"
+                hx-post="{{ route('employer.job.search') }}" 
+                hx-target="#table-jobs"
+                hx-swap="innerHTML"
+            >Reset</button>
+            <input class="h-10 w-72 rounded-lg border border-gray-200 focus:border-slate-400 focus:ring-0 focus:outline-none placeholder:text-slate-400" id="search-btn" type="text" placeholder="Search..."
                 name="search"
                 hx-trigger="keyup changed delay:500ms" 
                 hx-post="{{ route('employer.job.search') }}" 
@@ -67,4 +72,14 @@
             history.replaceState(currentState, '', newUrl.toString());
         });
     });
+
+    $('#reset-btn').on('click', function(){
+        $('#search-btn').val('');
+
+        const newUrl = new URL(window.location.href);
+        newUrl.searchParams.delete('search');
+        newUrl.searchParams.delete('page');
+        
+        history.replaceState(null, '', newUrl.toString());
+    })
 </script>

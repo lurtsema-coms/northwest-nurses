@@ -20,7 +20,7 @@
                 
                 <div class="flex items-center justify-center w-full">
                     <label for="dropzone-file" id="dropzone-parent" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 draggable="true">
-                        <input id="dropzone-file" type="file" class="absolute -z-10" name="img_link">
+                        <input id="dropzone-file" type="file" class="absolute -z-10" accept="image/*" name="img_link">
                         <div class="flex flex-col items-center justify-center pt-5 pb-6" id="img-content">
                             @if($job_post->img_link)
                             <img class="h-52 w-full max-w-80 object-contain" src="{{ $job_post->img_link }}?v={{ time() }}" alt="">
