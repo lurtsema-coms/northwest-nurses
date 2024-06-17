@@ -1,4 +1,4 @@
-<div class="mx-auto overflow-x-auto overflow-hidden rounded-md shadow-sm">
+<div class="mx-auto overflow-x-auto overflow-hidden rounded-md shadow-sm"w>
     <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
             <tr>
@@ -55,16 +55,17 @@
     </table>
 </div>
 <div class="mt-5">
-    {{  $jobs->links('vendor.pagination.custom-pagination-backend')}}
+{{ $jobs->appends(request()->query())->links('vendor.pagination.custom-pagination-backend') }}
 </div>
 
 @php
     $firstItem = $jobs->firstItem();
     $lastItem = $jobs->lastItem();
     $total = $jobs->total();
+    $page = (integer) request('page')
 @endphp
 
-@if ($jobs->count() < $paginate)
+@if (($jobs->count() < $paginate) && $page < 2 )
     <p class="text-sm text-gray-700 mt-2">
         Showing {{ $firstItem ?? 0 }} to {{ $lastItem ?? 0 }} of {{ $total }} results
     </p>

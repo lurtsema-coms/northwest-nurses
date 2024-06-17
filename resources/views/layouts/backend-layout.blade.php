@@ -11,6 +11,7 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
         {{-- Apex Chart Js --}}
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
         {{-- Jquery --}}
@@ -19,6 +20,7 @@
         <script src="https://unpkg.com/htmx.org@1.9.12"></script>
         <!-- Include timeago.js -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js"></script>
+        
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
