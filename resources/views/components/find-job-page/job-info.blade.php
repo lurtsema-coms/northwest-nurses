@@ -4,8 +4,9 @@
     </div>
     <div class="px-5 pt-5 pb-2 flex flex-col flex-grow justify-start items-start overflow-hidden">
         <div class="pb-5 w-full">
-            <h2 class="font-bold text-2xl">{{ $selectedJobPost->job_title }}, {{ $selectedJobPost->address }}</h2>
-            <h2 class="font-bold text-2xl text-primary">{{ $selectedJobPost->pay }}</h2>
+            <h2 class="font-bold text-2xl">{{ $selectedJobPost->job_title }}</h2>
+            <h4 class="font-semibold text-xl">{{ $selectedJobPost->address }}</h4>
+            <h2 class="font-bold text-xl text-primary">{{ $selectedJobPost->pay }}</h2>
             <div class="flex flex-col sm:flex-row justify-between mt-5 gap-5">
                 <p class="text-gray-500">Job ID: {{ $selectedJobPost->job_id }}</p>
                 @auth

@@ -111,8 +111,8 @@
                 <img class="min-h-full min-w-full object-cover absolute top-0 left-0" src="{{ $jobPosting->img_link }}?v={{ strtotime(date('Y-m-d H:00:00')) }}" alt="">
             </div>
             <div class="px-5 py-5 ml-3 flex-grow flex flex-col items-start justify-between gap-1">
-                <h1 class="font-extrabold text-lg leading-5 text-wrap">{{ $jobPosting->address }}</h1>
-                <p class="font-bold">{{ $jobPosting->job_title }}</p>
+                <h1 class="font-extrabold text-lg leading-5 text-wrap">{{ $jobPosting->job_title }}</h1>
+                <p class="font-bold">{{ $jobPosting->address }}</p>
                 <p class="font-bold">{{ $jobPosting->pay }}</p>
                 <a href="/find-jobs?id={{ $jobPosting->id }}#job-info-section" class="bg-primary hover:opacity-75 text-white px-5 py-2 rounded-full whitespace-nowrap">View Job</a>
             </div>

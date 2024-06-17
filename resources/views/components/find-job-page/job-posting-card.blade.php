@@ -1,8 +1,8 @@
 <div id="job-list-card-{{ $jobPost->id }}" hx-swap-oob="true" class="job-list-card lg:max-w-screen-sm bg-white border-2 border-gray-300 p-5 gap-5 rounded-xl shadow-md">
   <div class="job-list-card-header grow flex flex-row pb-3 justify-between gap-5">
       <div>
-          <h2 class="font-bold text-2xl">{{ $jobPost->address }}</h2>
-          <h4 class="font-semibold text-xl">{{ $jobPost->job_title }}</h4>
+          <h2 class="font-bold text-2xl">{{ $jobPost->job_title }}</h2>
+          <h4 class="font-semibold text-xl">{{ $jobPost->address }}</h4>
           @auth
           @role('applicant' && $jobPost->applied_date)
           <p class="italic text-gray-500 mt-2">Applied <span class="timeago" datetime="{{ $jobPost->applied_date }} {{ config('app.timezone') }}">{{ $jobPost->applied_date }}</span></p>
