@@ -18,7 +18,7 @@
             <div class="w-full">
                 <div class="font-medium text-slate-600 mb-3">Upload Image</div>
                 
-                <div class="flex items-center justify-center w-full">
+                <div class="relative flex items-center justify-center w-full overflow-hidden">
                     <label for="dropzone-file" id="dropzone-parent" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 draggable="true">
                         <input id="dropzone-file" type="file" class="absolute -z-10" accept="image/*" name="img_link">
                         <div class="flex flex-col items-center justify-center pt-5 pb-6" id="img-content">

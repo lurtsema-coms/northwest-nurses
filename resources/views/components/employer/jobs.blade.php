@@ -2,7 +2,7 @@
     {{ $module_title }}
 </div>
 <div>
-    <div class="mb-5 flex justify-between flex-wrap">
+    <div class="mb-5 flex justify-between flex-wrap gap-3">
         <div class="space-x-3 flex items-center">
             <select class="h-10 outline-none border border-gray-200 rounded-md focus:border-slate-400 focus:ring-0 focus:outline-none" name="paginate" id
                 hx-trigger="change" 
@@ -24,13 +24,13 @@
                 </div>
             </button>
         </div>
-        <div class="flex">
-            <button class="bg-white rounded-lg px-4 border mr-3 hover:opacity-70" id="reset-btn"
+        <div class="flex flex-wrap gap-3">
+            <button class="bg-white rounded-lg px-4 border hover:opacity-70" id="reset-btn"
                 hx-post="{{ route('employer.job.search') }}" 
                 hx-target="#table-jobs"
                 hx-swap="innerHTML"
             >Reset</button>
-            <input class="h-10 w-72 rounded-lg border border-gray-200 focus:border-slate-400 focus:ring-0 focus:outline-none placeholder:text-slate-400" id="search-btn" type="text" placeholder="Search..."
+            <input class="h-10 max-w-72 rounded-lg border border-gray-200 focus:border-slate-400 focus:ring-0 focus:outline-none placeholder:text-slate-400" id="search-btn" type="text" placeholder="Search..."
                 name="search"
                 hx-trigger="keyup changed delay:500ms" 
                 hx-post="{{ route('employer.job.search') }}" 
