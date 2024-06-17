@@ -117,6 +117,13 @@ class ApplicantController extends Controller
     {
         $user_id = auth()->user()->id;
 
+        $isExisting = JobApplication::where([
+            'job_posting_id' => $id,
+            'created_by' => $user_id
+        ])->exists();
+
+        if ($isExisting) abort(400);
+
         $application = JobApplication::create([
             'job_posting_id' => $id,
             'status' => 'APPLIED',
