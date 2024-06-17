@@ -75,7 +75,7 @@
                         </div>
                         <div class="flex gap-3 text-gray-600">
                             <span class="material-symbols-outlined">calendar_month</span>
-                            <p>Start Date: <span class="font-semibold">{{ $selectedJobPost->start_date }}</span></p>
+                            <p>Expected Start Date: <span class="font-semibold">{{ $selectedJobPost->start_date }}</span></p>
                         </div>
                         <div class="flex gap-3 text-gray-600">
                             <span class="material-symbols-outlined">badge</span>
