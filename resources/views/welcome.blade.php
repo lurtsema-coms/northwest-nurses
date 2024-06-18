@@ -66,7 +66,7 @@
         <div class="swiper-button-next"></div>
     </div>
 </div>
-<div class="container mx-auto px-3 flex flex-col py-10 gap-5">
+<div class="container mx-auto flex flex-col py-10 gap-5">
     <div class="photo-carousel"></div>
     <div class="flex flex-col items-center">
         <h2 class="font-extrabold text-center text-3xl">At Northwest Nurses, we offer an extensive array of services tailored to meet the unique needs of healthcare professionals like you.</h2>
@@ -101,7 +101,7 @@
         </div>
     </div>
 </div>
-<div class="container mx-auto px-3 flex flex-col justify-center items-center py-10 gap-5">
+<div class="container mx-auto flex flex-col justify-center items-center py-10 gap-5">
     <h1 class="text-4xl text-center font-extrabold mb-5">Most Recent Job Postings</h1>
     @if (count($mostRecentJobPostings))
     <div class="grid gap-5 xl:grid-cols-2">
@@ -130,7 +130,7 @@
     <a href="/find-jobs" class="bg-primary mt-3 hover:opacity-75 text-white px-5 py-2 rounded-full whitespace-nowrap">More Jobs</a>
 </div>
 <div class="bg-primary text-white">
-    <div class="container mx-auto px-3 flex flex-col justify-center items-center py-10 gap-5">
+    <div class="container mx-auto flex flex-col justify-center items-center py-10 gap-5">
         <h1 class="text-4xl text-center font-bold">How It Works</h1>
         <div class="my-5 flex flex-col gap-10 justify-center items-center lg:flex-row lg:justify-between">
             <div class="flex flex-1 flex-col justify-start items-center gap-5">

@@ -3,7 +3,7 @@
 <div class="container mx-auto">
 	<h1 class="text-3xl text-center font-bold my-10">My Jobs</h1>
 </div>
-<div class="container mx-auto px-3 flex flex-col lg:flex-row lg:justify-around py-10 gap-5">
+<div class="container mx-auto flex flex-col lg:flex-row lg:justify-around py-10 gap-5">
   <div class="job-listing grow md:mx-0 flex flex-col gap-5">
     @if (count($myJobs))
         @foreach ($myJobs as $jobPost)

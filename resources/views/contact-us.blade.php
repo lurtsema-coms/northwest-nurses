@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="px-3 bg-primary">
-    <div class="container mx-auto px-3 flex flex-col  py-10 gap-5">
+    <div class="container mx-auto flex flex-col  py-10 gap-5">
       <div class="flex flex-col items-center justify-center lg:flex-row lg:items-end gap-5">
         <div class="flex-grow w-full bg-slate-100 shadow-md p-10 rounded-xl max-w-[500px]">
           <h2 class="text-2xl font-bold text-center text-primary">Get In Touch</h2>

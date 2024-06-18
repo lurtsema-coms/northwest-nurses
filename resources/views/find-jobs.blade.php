@@ -28,7 +28,7 @@
         </div>
     </div>
 </div>
-<div class="container mx-auto px-3 flex flex-col lg:flex-row lg:justify-around py-10 gap-5">
+<div class="container mx-auto flex flex-col lg:flex-row lg:justify-around py-10 gap-5">
     <div class="job-listing grow md:mx-0 flex flex-col gap-5">
         @if (!count($activeJobPosts))
         <h3 class="text-center text-slate-500 italic">Wow, so empty... :((</h3>

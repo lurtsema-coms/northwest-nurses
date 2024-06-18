@@ -15,7 +15,7 @@
       </div>
   </div>
 </div>
-<div class="container mx-auto flex flex-col justify-center items-center p-10 gap-12">
+<div class="container mx-auto flex flex-col justify-center items-center py-10 gap-12">
   <div class="flex flex-col gap-8 w-full justify-between items-center">
     <div class="max-w-[500px] flex flex-col gap-2 basis-1/3">
       <h1 class="text-3xl font-extrabold text-center">Core Values</h1>

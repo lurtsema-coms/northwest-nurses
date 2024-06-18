@@ -36,39 +36,49 @@ export default {
             animation: {
                 "fade-in": "fadeIn 0.3s ease",
             },
-            boxShadow:{
-                "custom": "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
-            }
+            boxShadow: {
+                custom: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+            },
+        },
+        container: {
+            padding: {
+                DEFAULT: "1rem",
+                sm: "2rem",
+                md: "3rem",
+                lg: "4rem",
+                xl: "5rem",
+                "2xl": "6rem",
+            },
         },
     },
 
     plugins: [
-        forms, 
+        forms,
         require("preline/plugin"),
         function ({ addUtilities }) {
             const newUtilities = {
-                '.scrollbar-thin': {
-                    'scrollbar-width': 'thin',
+                ".scrollbar-thin": {
+                    "scrollbar-width": "thin",
                 },
-                '.scrollbar-thumb-gray': {
-                    '&::-webkit-scrollbar-thumb': {
-                        'background-color': '#a0aec0',
+                ".scrollbar-thumb-gray": {
+                    "&::-webkit-scrollbar-thumb": {
+                        "background-color": "#a0aec0",
                     },
                 },
-                '.scrollbar-thumb-rounded': {
-                    '&::-webkit-scrollbar-thumb': {
-                        'border-radius': '0.375rem',
+                ".scrollbar-thumb-rounded": {
+                    "&::-webkit-scrollbar-thumb": {
+                        "border-radius": "0.375rem",
                     },
                 },
-                '.scrollbar-thin::-webkit-scrollbar': {
-                    'width': '8px',
+                ".scrollbar-thin::-webkit-scrollbar": {
+                    width: "8px",
                 },
-                '.scrollbar-thin::-webkit-scrollbar-track': {
-                    'background': '#f1f1f1',
+                ".scrollbar-thin::-webkit-scrollbar-track": {
+                    background: "#f1f1f1",
                 },
             };
 
-            addUtilities(newUtilities, ['responsive', 'hover']);
-        }
+            addUtilities(newUtilities, ["responsive", "hover"]);
+        },
     ],
 };
