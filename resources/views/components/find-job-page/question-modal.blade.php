@@ -6,9 +6,10 @@
   hx-post="{{ route('applicant.apply-job', $jobPost->id) }}"
   hx-disabled-elt="textarea, button"
   hx-indicator="#question-modal-apply-btn .htmx-indicator"
-  enctype="multipart/form-data">
+  enctype="multipart/form-data"
+  >
   @csrf
-  <div class="modal-box m-auto w-full max-w-3xl bg-white shadow-lg rounded-lg animate-fade-in p-10">
+  <div class="modal-box m-auto w-full max-w-3xl bg-white shadow-lg rounded-lg animate-fade-in py-5 px-3">
       <div class="modal-content flex flex-col p-3">
           <div class="mb-4">
               <h1 class="text-xl font-bold text-center mb-2">Want to apply to this job?</h1>
