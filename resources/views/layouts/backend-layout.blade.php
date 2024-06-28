@@ -137,5 +137,40 @@
         </script>
 
         @yield('script')
+            <script>
+                let inactivityTime = function () {
+                    let time;
+                    let maxInactivityTime = 1800000; // 30 minutes in milliseconds
+
+                    // Reset the timer on user activity
+                    window.onload = resetTimer;
+                    document.onmousemove = resetTimer;
+                    document.onkeypress = resetTimer;
+                    document.onclick = resetTimer;
+                    document.onscroll = resetTimer;
+
+                    function logout() {
+                        const form = document.createElement('form');
+                        form.method = 'POST';
+                        form.action = "{{ route('logout') }}";
+                        // Include CSRF token for enhanced security
+                        const csrfInput = document.createElement('input');
+                        csrfInput.type = 'hidden';
+                        csrfInput.name = '_token';
+                        csrfInput.value = "{{ csrf_token() }}";
+                        form.appendChild(csrfInput);
+
+                        document.body.appendChild(form);
+                        form.submit();
+                    }
+
+                    function resetTimer() {
+                        clearTimeout(time);
+                        time = setTimeout(logout, maxInactivityTime);
+                    }
+                };
+
+            inactivityTime(); // Initialize the inactivity timer
+        </script>
     </body>
 </html>

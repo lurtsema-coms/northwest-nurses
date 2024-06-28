@@ -36,7 +36,7 @@
         </div>
     </div>
     <div id="table-jobs">
-        @include('components.employer.custom.jobs-table-body')
+        @include('components.employer.custom.m-employee-table-body')
     </div>
 </div>
 
