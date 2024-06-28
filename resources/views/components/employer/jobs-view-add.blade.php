@@ -136,8 +136,6 @@
 
     $(document).ready(function() {
 
-        // $('input,textarea').attr('required', false);
-
         $('#add-form').on('submit', function(e){
             e.preventDefault();
             const form = this;

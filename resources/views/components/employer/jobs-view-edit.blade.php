@@ -131,8 +131,8 @@
     $(document).ready(function() {
 
         if("{{ $hasAnyApplicantApplied > 0 }}"){
-            $('input,textarea,button').attr('disabled', true);
-            $('input:disabled,textarea:disabled').addClass('disabled:bg-slate-300 opacity-80');
+            $('#add-form').find('input, textarea, button').attr('disabled', true);
+            $('#add-form').find('input:disabled, textarea:disabled, button:disabled').addClass('bg-slate-300 opacity-80');
         }
 
         $('#add-form').on('submit', function(e){

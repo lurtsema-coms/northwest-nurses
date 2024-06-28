@@ -7,6 +7,7 @@ use App\Http\Controllers\Employers\EmpProfileController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Employers\ManageEmployeeController;
 use App\Http\Controllers\Guest\GuestController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +45,7 @@ route::get('/backend-layout', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     // employer route group
     Route::middleware('role:employer')->group(function () {
+        // Dashboard
         Route::get('/employer-dashboard', [EmpDashboardController::class, 'index'])->name('employer.dashboard');
         Route::get('/employer-dashboard-chart', [EmpDashboardController::class, 'employmentChart'])->name('employer.dashboard-chart');
         Route::get('/employer-dashboard-notification', [EmpDashboardController::class, 'employmentNotification'])->name('employer.notification');
@@ -59,9 +61,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/employer-job/edit-applicants/{id}', [EmpPostJobController::class, 'editApplicant'])->name('employer.job.edit-applicant');
         Route::get('/employer-job/view/{id}', [EmpPostJobController::class, 'show'])->name('employer.job.view');
         Route::get('/employer-job/delete/{id}', [EmpPostJobController::class, 'delete'])->name('employer.job.delete-job');
-
         Route::get('/employer-profile/{id}', [EmpProfileController::class, 'index'])->name('employer.profile');
         Route::post('/employer-profile/update/{id}', [EmpProfileController::class, 'update'])->name('employer.profile.update');
+        // Manage Employees
+        Route::get('/employer-manage-employee', [ManageEmployeeController::class, 'index'])->name('employer.m-employee');
     });
 
     //applicant route group
