@@ -347,6 +347,13 @@ class EmpPostJobController extends Controller
             'updated_at' => date('Y-m-d')
         ]);
 
+        if($input['action-btn'] == 'APPROVED' ) {
+            $job_application->update([
+                'hired_by' => auth()->user()->id,
+                'hired_at' => date('Y-m-d')
+            ]);
+        }
+
         return redirect()->back()->with('success', 'Your app has been successfully updated.');
     }
 }

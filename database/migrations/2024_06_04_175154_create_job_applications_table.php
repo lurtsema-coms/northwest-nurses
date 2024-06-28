@@ -20,7 +20,9 @@ return new class extends Migration
             $table->text('answer_1')->nullable();
             $table->text('answer_2')->nullable();
             $table->text('answer_3')->nullable();
-            $table->integer('created_by')->length(10)->unsigned();
+            $table->date('hired_at')->nullable();
+            $table->integer('hired_by')->length(10)->unsigned()->nullable();
+            $table->integer('created_by')->length(10)->unsigned()->nullable();
             $table->integer('updated_by')->length(10)->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -65,6 +65,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/employer-profile/update/{id}', [EmpProfileController::class, 'update'])->name('employer.profile.update');
         // Manage Employees
         Route::get('/employer-manage-employee', [ManageEmployeeController::class, 'index'])->name('employer.m-employee');
+        Route::get('/employer-manage-employee/remove/{id}', [ManageEmployeeController::class, 'remove'])->name('employer.m-employee-remove');
     });
 
     //applicant route group

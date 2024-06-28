@@ -61,10 +61,10 @@
                                 <p>Answer: {{ $applicants[$i]->answer_3 }}</p>
                             </div>
                             @endif
-                            <p class="!mt-10 text-center font-bold {{ $applicants[$i]->status == 'FOR REVIEW' ? 'text-yellow-500' : '' }} {{ $applicants[$i]->status == 'REJECTED' ? 'text-red-500' : '' }} {{ $applicants[$i]->status == 'APPROVED' ? 'text-green-500' : '' }}">
+                            <p class="!mt-10 text-center font-bold {{ $applicants[$i]->status == 'FOR REVIEW' ? 'text-yellow-500' : '' }} {{ $applicants[$i]->status == 'REJECTED' || $applicants[$i]->status == 'REMOVED' ? 'text-red-500' : '' }}  {{ $applicants[$i]->status == 'APPROVED' ? 'text-green-500' : '' }}">
                                 STATUS: {{ $applicants[$i]->status }}
                             </p>
-                            @if ($applicants[$i]->status != 'REJECTED' && $applicants[$i]->status != 'APPROVED')
+                            @if ($applicants[$i]->status != 'REJECTED' && $applicants[$i]->status != 'APPROVED' && $applicants[$i]->status != 'REMOVED')
                             <div class="!mt-5 flex gap-2 flex-wrap sm:justify-center ">
                                 @if ($applicants[$i]->status != 'FOR REVIEW')                         
                                 <button class="bg-yellow-500 text-gray-50 px-4 py-2 rounded-md shadow-md hover:bg-yellow-600 cursor-pointer">For Review</button>
