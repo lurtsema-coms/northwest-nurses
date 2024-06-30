@@ -107,6 +107,29 @@ class ApplicantController extends Controller
         }
     }
 
+    public function updateEmail(Request $request, $id)
+    {
+        $user = User::find($id);
+        if (Hash::check($request->all()['email_confirmation_password'], $user->password)) {
+
+            $request->validate([
+
+                'new_email' => 'required',
+                'confirm_new_email' => 'required||same:new_email'
+            ]);
+
+            $user->email = $request->get('new_email');
+            $user->email_verified_at = null;
+            $user->save();
+
+            $user->sendEmailVerificationNotification();
+
+            return redirect()->back()->with('successEmail', 'Email updated, you will be logged-out.');
+        } else {
+            return redirect()->back()->with('error', 'Incorrect Current Password.');
+        }
+    }
+
     public function getQuestions(Request $request, $id)
     {
         $jobPost = JobPosting::findOrFail($id);

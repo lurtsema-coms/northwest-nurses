@@ -39,6 +39,42 @@
 	</div>
 </div>
 
+<div class="modal-center change-email fixed inset-0 h-screen w-full bg-black bg-opacity-75  p-4 z-10 overflow-y-auto hidden ">
+	<div class="modal-box m-auto w-full max-w-lg bg-white shadow-lg rounded-lg animate-fade-in">
+		<div class="modal-content flex flex-col p-3">
+			<form method="POST" action="{{ route('applicant.update.email', auth()->user()->id) }}">
+				@csrf
+				<div>
+					<img src="{{ asset('img/username.png') }}" alt="" class=" w-60 object-contain mx-auto ">
+				</div>
+				<div class="mb-4">
+					<h1 class="text-xl font-bold text-center mb-2">Change Account Email</h1>
+					<p class="p-2 text-center"> To change your account email, type your new email and type your current account password for verification.</p>
+					<p class="p-2 text-center italic text-gray-400"> Note: You will be logged out and an email verification will be sent to the new email after changing email. </p>
+				</div>
+				<div class="p-5">
+					<div class="flex-grow">
+						<x-input-label for="new_email" :value="__('New Email:')"/>
+						<x-text-input  id="new_email" class="block mt-1 w-full" type="email" name="new_email" required/>
+					</div>
+					<div class="flex-grow mt-4">
+						<x-input-label for="confirm_new_email" :value="__('Re-Type New Email:')"/>
+						<x-text-input  id="confirm_new_email" class="block mt-1 w-full" type="email" name="confirm_new_email" required/>
+					</div>
+					<div class="flex-grow mt-4">
+						<x-input-label for="email_confirmation_password" :value="__('Current Password:')"/>
+						<x-text-input  id="email_confirmation_password" class="block mt-1 w-full" type="password" name="email_confirmation_password" required/>
+					</div>
+				</div>
+				<div class="flex flex-row gap-10 justify-center p-2 ">
+					<button class="btn-close-email">Cancel</button>
+					<button class="font-semibold py-2 px-4 bg-cyan-800 text-white ">Confirm</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
 <div class="container mx-auto my-10 py-10">
 	<h1 class="text-3xl text-center font-bold mb-10">My Profile</h1>
 	<div class="mx-3 lg:mx-auto py-10 px-5 md:px-16 shadow-md max-w-screen-lg rounded-lg">
@@ -97,7 +133,8 @@
 				</div>
 			</div>
 			<div class="flex flex-col sm:flex-row sm:gap-5 mt-4 ">
-				<div class="mt-4 flex-grow ">
+				<div class="mt-4 flex-grow gap-4 flex">
+					<button class="change-email-modal font-semibold py-2 px-4 bg-gray-50 border border-solid border-gray-400 rounded-md" type="button">Change Email</button>
 					<button class="change-password-modal font-semibold py-2 px-4 bg-gray-50 border border-solid border-gray-400 rounded-md" type="button">Change Password</button>
 				</div>
 			</div>
@@ -127,6 +164,22 @@
 		<div class="max-w-xs bg-teal-500 text-sm text-white rounded-xl shadow-lg update-success" role="alert">
 			<div class="flex p-4">
 			{{ session('successPassword') }}
+			<div class="ms-auto">
+				<button type="button" class="inline-flex flex-shrink-0 justify-center items-center size-5 rounded-lg text-white hover:text-white opacity-50 hover:opacity-100 focus:outline-none focus:opacity-100" data-hs-remove-element=".update-success">
+				<span class="sr-only">Close</span>
+				<svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M18 6 6 18"></path>
+					<path d="m6 6 12 12"></path>
+				</svg>
+				</button>
+			</div>
+			</div>
+		</div>
+		@endif
+		@if (session('successEmail'))
+		<div class="max-w-xs bg-teal-500 text-sm text-white rounded-xl shadow-lg update-success" role="alert">
+			<div class="flex p-4">
+			{{ session('successEmail') }}
 			<div class="ms-auto">
 				<button type="button" class="inline-flex flex-shrink-0 justify-center items-center size-5 rounded-lg text-white hover:text-white opacity-50 hover:opacity-100 focus:outline-none focus:opacity-100" data-hs-remove-element=".update-success">
 				<span class="sr-only">Close</span>
@@ -187,6 +240,38 @@
 			</div>
 		</div>
 		@endif
+		@if ($errors->has('new_email'))
+		<div class="max-w-xs bg-red-500 text-sm text-white rounded-xl shadow-lg update-success" role="alert">
+			<div class="flex p-4">
+			{{$errors->first('new_email') }}
+			<div class="ms-auto">
+				<button type="button" class="inline-flex flex-shrink-0 justify-center items-center size-5 rounded-lg text-white hover:text-white opacity-50 hover:opacity-100 focus:outline-none focus:opacity-100" data-hs-remove-element=".update-success">
+				<span class="sr-only">Close</span>
+				<svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M18 6 6 18"></path>
+					<path d="m6 6 12 12"></path>
+				</svg>
+				</button>
+			</div>
+			</div>
+		</div>
+		@endif
+		@if ($errors->has('confirm_new_email'))
+		<div class="max-w-xs bg-red-500 text-sm text-white rounded-xl shadow-lg update-success" role="alert">
+			<div class="flex p-4">
+			{{ $errors->first('confirm_new_email') }}
+			<div class="ms-auto">
+				<button type="button" class="inline-flex flex-shrink-0 justify-center items-center size-5 rounded-lg text-white hover:text-white opacity-50 hover:opacity-100 focus:outline-none focus:opacity-100" data-hs-remove-element=".update-success">
+				<span class="sr-only">Close</span>
+				<svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M18 6 6 18"></path>
+					<path d="m6 6 12 12"></path>
+				</svg>
+				</button>
+			</div>
+			</div>
+		</div>
+		@endif
 	</div>
 </div>
 @section('scripts')
@@ -200,8 +285,15 @@
 			$('.btn-close-password').on('click', function(){
 				$('.change-password').hide();
 			});
+			$('.change-email-modal').on('click', function(){
+				event.preventDefault();
+				$('.change-email').show();
+			});
+			$('.btn-close-email').on('click', function(){
+				$('.change-email').hide();
+			});
 
-			if ("{{ session('successPassword') }}"){
+			function logoutWithDelay() {
 				setTimeout(function(){
 					const form = document.createElement('form');
 					form.method = 'POST';
@@ -216,6 +308,14 @@
 					document.body.appendChild(form);
 					form.submit();
 				}, 2000);
+			}
+
+			if ("{{ session('successPassword') }}") {
+				logoutWithDelay();
+			}
+
+			if ("{{ session('successEmail') }}") {
+				logoutWithDelay();
 			}
 		});
 

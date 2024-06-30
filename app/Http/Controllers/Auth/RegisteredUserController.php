@@ -30,7 +30,8 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request, $role): RedirectResponse
+    // public function store(Request $request, $role): RedirectResponse
+    public function store(Request $request, $role)
     {
         // dd($request->all(), $role);
         $request->validate([
