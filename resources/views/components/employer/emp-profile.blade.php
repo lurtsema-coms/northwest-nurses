@@ -239,46 +239,6 @@
 
 @section('script')
 <script>
-    $(document).ready(function(){
-        $(document).on('click', '.change-password-modal', function(){
-            event.preventDefault();
-            $('.change-password').show();
-        });
-        $(document).on('click', '.btn-close-password', function(){
-            $('.change-password').hide();
-        });
-        $(document).on('click', '.change-email-modal', function(){
-            event.preventDefault();
-            $('.change-email').show();
-        });
-        $(document).on('click', '.btn-close-email', function(){
-            $('.change-email').hide();
-        });
 
-        function logoutWithDelay() {
-            setTimeout(function(){
-                const form = document.createElement('form');
-                form.method = 'POST';
-                form.action = "{{ route('logout') }}";
-                // Include CSRF token for enhanced security
-                const csrfInput = document.createElement('input');
-                csrfInput.type = 'hidden';
-                csrfInput.name = '_token';
-                csrfInput.value = "{{ csrf_token() }}";
-                form.appendChild(csrfInput);
-
-                document.body.appendChild(form);
-                form.submit();
-            }, 2000);
-        }
-
-        if ("{{ session('successPassword') }}") {
-            logoutWithDelay();
-        }
-
-        if ("{{ session('successEmail') }}") {
-            logoutWithDelay();
-        }
-    });
 </script>
 @endsection
