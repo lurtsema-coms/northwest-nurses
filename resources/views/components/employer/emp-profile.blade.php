@@ -235,24 +235,24 @@
 </div>
 
 <div class="success-toast">
-
 </div>
 
 @section('script')
 <script>
     $(document).ready(function(){
-        $('.change-password-modal').on('click', function(){
+        $(document).on('click', '.change-password-modal', function(){
+			console.log('hello world')
             event.preventDefault();
             $('.change-password').show();
         });
-        $('.btn-close-password').on('click', function(){
+        $(document).on('click', '.btn-close-password', function(){
             $('.change-password').hide();
         });
-        $('.change-email-modal').on('click', function(){
+        $(document).on('click', '.change-email-modal', function(){
             event.preventDefault();
             $('.change-email').show();
         });
-        $('.btn-close-email').on('click', function(){
+        $(document).on('click', '.btn-close-email', function(){
             $('.change-email').hide();
         });
 
