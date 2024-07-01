@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\EmployerDetail;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class EmpProfileController extends Controller
 {
@@ -71,12 +72,12 @@ class EmpProfileController extends Controller
     {
 
         $validator = \Validator::make($request->all(), [
-            'company_email' => 'required|email',
+            // 'company_email' => 'required|email',
             'company_contact_number' => 'required',
             'company_address' => 'required',
             'company_name' => 'required',
             'company_website' => 'required',
-            'password' => 'nullable|min:8|confirmed',
+            // 'password' => 'nullable|min:8|confirmed',
         ]);
 
         if ($validator->fails()) {
@@ -90,7 +91,7 @@ class EmpProfileController extends Controller
         $user = User::find($id);
 
         $user->update([
-                'email' => $input['company_email'],
+                // 'email' => $input['company_email'],
                 'contact_number' => $input['company_contact_number'],
                 'address' => $input['company_address'],
                 'updated_at' => date('Y-m-d H:i:s')
@@ -105,14 +106,56 @@ class EmpProfileController extends Controller
             ]
         );
 
-        if($input['password']){
-            $user->update([
-                'password' => password_hash($input['password'],  PASSWORD_DEFAULT),
-            ]
-            );
-        }
+        // if($input['password']){
+        //     $user->update([
+        //         'password' => password_hash($input['password'],  PASSWORD_DEFAULT),
+        //     ]
+        //     );
+        // }
 
         return '<p class="font-medium mb-4 text-green-500">Edited Successfully</p>';
+    }
+
+    public function updatePassword(Request $request, $id)
+    {
+        $user = User::find($id);
+        if (Hash::check($request->all()['current_password'], $user->password)) {
+
+            $request->validate([
+
+                'new_password' => 'required|min:8',
+                'confirmation_password' => 'required|min:8|same:new_password'
+            ]);
+
+            $user->password = Hash::make($request->get('new_password'));
+            $user->save();
+
+            return redirect()->back()->with('successPassword', 'Password updated, you will be logged-out.');
+        } else {
+            return redirect()->back()->with('error', 'Incorrect Current Password.');
+        }
+    }
+
+    public function updateEmail(Request $request, $id)
+    {
+        $user = User::find($id);
+        if (Hash::check($request->input('email_confirmation_password'), $user->password)) {
+
+            $request->validate([
+                'new_email' => 'required|email|unique:users,email', // Ensure email is unique
+                'confirm_new_email' => 'required|same:new_email'    // Fixed double '|' syntax
+            ]);
+
+            $user->email = $request->get('new_email');
+            $user->email_verified_at = null;
+            $user->save();
+
+            $user->sendEmailVerificationNotification();
+
+            return redirect()->back()->with('successEmail', 'Email updated, you will be logged-out.');
+        } else {
+            return redirect()->back()->with('error', 'Incorrect Current Password.');
+        }
     }
 
     /**
