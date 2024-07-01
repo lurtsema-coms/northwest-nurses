@@ -68,7 +68,7 @@
 				</div>
 				<div class="flex flex-row gap-10 justify-center p-2 ">
 					<button class="btn-close-email">Cancel</button>
-					<button class="font-semibold py-2 px-4 bg-cyan-800 text-white ">Confirm</button>
+					<button class="font-semibold py-2 px-4 bg-cyan-800 text-white ">Logout And Verify Email</button>
 				</div>
 			</form>
 		</div>

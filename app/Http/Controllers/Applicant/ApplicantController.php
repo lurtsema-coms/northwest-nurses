@@ -110,12 +110,11 @@ class ApplicantController extends Controller
     public function updateEmail(Request $request, $id)
     {
         $user = User::find($id);
-        if (Hash::check($request->all()['email_confirmation_password'], $user->password)) {
+        if (Hash::check($request->input('email_confirmation_password'), $user->password)) {
 
             $request->validate([
-
-                'new_email' => 'required',
-                'confirm_new_email' => 'required||same:new_email'
+                'new_email' => 'required|email|unique:users,email', // Ensure email is unique
+                'confirm_new_email' => 'required|same:new_email'    // Fixed double '|' syntax
             ]);
 
             $user->email = $request->get('new_email');
