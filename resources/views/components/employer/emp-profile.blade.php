@@ -241,7 +241,6 @@
 <script>
     $(document).ready(function(){
         $(document).on('click', '.change-password-modal', function(){
-			console.log('hello world')
             event.preventDefault();
             $('.change-password').show();
         });
