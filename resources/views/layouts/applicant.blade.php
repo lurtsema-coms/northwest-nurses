@@ -27,7 +27,7 @@
             <div class="container mx-auto flex flex-col md:flex-row md:justify-between content-center py-5">
                 <div class="flex items-center justify-between">
                     <a href="{{ url('/') }}">
-                        <img class="max-w-28" src="{{ asset('img/logo/North West Nurses Logo-v5.png') }}" alt="">
+                        <img class="max-w-32" src="{{ asset('img/logo/nwn-logo.png') }}" alt="">
                     </a>
                     <button class="nav-hamburger flex flex-col gap-1 md:hidden">
                         <div class="w-[30px] h-[0.25rem] bg-white rounded-full"></div>
@@ -66,7 +66,7 @@
         @yield('content')
         <footer class="bg-dark text-white w-full py-12">
             <div class="container mx-auto">
-                <img class="max-w-[150px]" src="{{ asset('img/logo/North West Nurses Logo-v5.png') }}" alt="">
+                <img class="max-w-[150px]" src="{{ asset('img/logo/nwn-logo.png') }}" alt="">
                 <div class="flex flex-col lg:flex-row lg:justify-start lg:items-start mt-3 gap-10">
                     <div class="md:min-w-96">
                         <h1 class="text-xl font-extrabold">Ready to take the next step in your nursing career?</h1>
