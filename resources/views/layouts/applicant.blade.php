@@ -23,40 +23,40 @@
 
     </head>
     <body class="antialiased bg-slate-50">
-        <nav class="bg-dark text-white">
-            <div class="container mx-auto flex flex-col md:flex-row md:justify-between content-center py-5">
+        <nav class="text-white bg-dark">
+            <div class="container flex flex-col content-center py-5 mx-auto md:flex-row md:justify-between">
                 <div class="flex items-center justify-between">
                     <a href="{{ url('/') }}">
                         <img class="max-w-32" src="{{ asset('img/logo/nwn-logo.png') }}" alt="">
                     </a>
-                    <button class="nav-hamburger flex flex-col gap-1 md:hidden">
+                    <button class="flex flex-col gap-1 nav-hamburger md:hidden">
                         <div class="w-[30px] h-[0.25rem] bg-white rounded-full"></div>
                         <div class="w-[30px] h-[0.25rem] bg-white rounded-full"></div>
                         <div class="w-[30px] h-[0.25rem] bg-white rounded-full"></div>
                     </button>
                 </div>
-                <div class="navbar-list hidden my-10 md:my-5 md:flex flex-col items-start md:flex-row md:items-end md:gap-10 relative">
-                    <a class="text-md py-2 hover:opacity-75" href="/find-jobs">Find Jobs</a>
-                    <a class="text-md py-2 hover:opacity-75" href="/about-us">About Us</a>
-                    <a class="text-md py-2 hover:opacity-75" href="/contact-us">Contact Us</a>
+                <div class="relative flex-col items-start hidden my-10 navbar-list md:my-5 md:flex md:flex-row md:items-end md:gap-10">
+                    <a class="py-2 text-md hover:opacity-75" href="/find-jobs">Find Jobs</a>
+                    <a class="py-2 text-md hover:opacity-75" href="/about-us">About Us</a>
+                    <a class="py-2 text-md hover:opacity-75" href="/contact-us">Contact Us</a>
                     @guest
-                    <a href="/login" class="account-nav-btn text-md mt-1 py-2 rounded-full md:bg-primary md:px-5 hover:opacity-75 flex flex-row justify-center align-center gap-2" type="submit"><p>Login</p></a>
+                    <a href="/login" class="flex flex-row justify-center gap-2 py-2 mt-1 rounded-full account-nav-btn text-md md:bg-primary md:px-5 hover:opacity-75 align-center" type="submit"><p>Login</p></a>
                     @endguest
                     @auth
-                    <button class="account-nav-btn text-md mt-1 py-2 rounded-full md:bg-primary md:px-5 hover:opacity-75 flex flex-row justify-center align-center gap-2" type="submit"><p>Account</p><span class="material-symbols-outlined"><span class="material-symbols-outlined">arrow_drop_down</span></button>
+                    <button class="flex flex-row justify-center gap-2 py-2 mt-1 rounded-full account-nav-btn text-md md:bg-primary md:px-5 hover:opacity-75 align-center" type="submit"><p>Account</p><span class="material-symbols-outlined"><span class="material-symbols-outlined">arrow_drop_down</span></button>
                     <div class="account-nav-list flex flex-col pl-5 md:absolute z-10 right-0 top-[100%] md:mt-6 md:mr-4 bg-dark md:py-1 md:px-0" style="display: none">
                         @role('applicant')
-                        <a class="text-md py-2 hover:opacity-75 md:px-5" href="/my-profile">Profile</a>
+                        <a class="py-2 text-md hover:opacity-75 md:px-5" href="/my-profile">Profile</a>
                         @endrole
                         @role('employer')
-                        <a class="text-md py-2 hover:opacity-75 md:px-5" href="/employer-dashboard">Dashboard</a>
+                        <a class="py-2 text-md hover:opacity-75 md:px-5" href="/employer-dashboard">Dashboard</a>
                         @endrole
                         @role('applicant')
-                        <a class="text-md py-2 hover:opacity-75 md:px-5" href="/my-jobs">My Jobs</a>
+                        <a class="py-2 text-md hover:opacity-75 md:px-5" href="/my-jobs">My Jobs</a>
                         @endrole
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="text-md py-2 hover:opacity-75 md:px-5" href="/logout">Logout</button>
+                            <button type="submit" class="py-2 text-md hover:opacity-75 md:px-5" href="/logout">Logout</button>
                         </form>
                     </div>
                     @endauth
@@ -64,23 +64,23 @@
             </div>
         </nav>        
         @yield('content')
-        <footer class="bg-dark text-white w-full py-12">
+        <footer class="w-full py-12 text-white bg-dark">
             <div class="container mx-auto">
                 <img class="max-w-[150px]" src="{{ asset('img/logo/nwn-logo.png') }}" alt="">
-                <div class="flex flex-col lg:flex-row lg:justify-start lg:items-start mt-3 gap-10">
+                <div class="flex flex-col gap-10 mt-3 lg:flex-row lg:justify-start lg:items-start">
                     <div class="md:min-w-96">
                         <h1 class="text-xl font-extrabold">Ready to take the next step in your nursing career?</h1>
                         <p class="text-lg">Reach out to Northwest Nurses today to learn more about our exciting opportunities.</p>
                         <p class="mt-5">info@northwestnurses.com</p>
                     </div>
-                    <div class="grow flex flex-col md:flex-row md:justify-between gap-8">
+                    <div class="flex flex-col gap-8 grow md:flex-row md:justify-between">
                         <div class="md:flex-1">
                             <h3 class="font-bold">For Employers</h3>
                             <p class="mt-2">Northwest Nurses empowers healthcare leaders by providing them with the necessary tools and data to enhance their management of workforce.</p>
                         </div>
                         <div class="md:flex-1">
                             <h3 class="font-bold">For Applicants</h3>
-                            <p class="mt-2">Northwest Nurses provides the opportunity for Travel Nursing, Allied & Per Diem Jobs with ease - directly connecting you with the best healthcare facilities.
+                            <p class="mt-2">Northwest Nurses provides the opportunity for Travel Nursing, Allied Health & Per Diem Jobs with ease - directly connecting you with the best healthcare facilities.
                             </p>
                         </div>
                     </div>
