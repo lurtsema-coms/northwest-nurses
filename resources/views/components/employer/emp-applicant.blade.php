@@ -60,6 +60,10 @@
                                 <p class="text-slate-500">{{ $job_posts->question_3 }}</p>
                                 <p>Answer: {{ $applicants[$i]->answer_3 }}</p>
                             </div>
+                            <div>
+                                <p class="text-slate-600 font-medium">Resume</p>
+                                <embed src="" id="pdfShow" width="100%" height="700px"></embed>
+                            </div>
                             @endif
                             <p class="!mt-10 text-center font-bold {{ $applicants[$i]->status == 'FOR REVIEW' ? 'text-yellow-500' : '' }} {{ $applicants[$i]->status == 'REJECTED' || $applicants[$i]->status == 'REMOVED' ? 'text-red-500' : '' }}  {{ $applicants[$i]->status == 'APPROVED' ? 'text-green-500' : '' }}">
                                 STATUS: {{ $applicants[$i]->status }}
