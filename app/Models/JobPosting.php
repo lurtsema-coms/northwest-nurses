@@ -49,7 +49,10 @@ class JobPosting extends Model
                 'job_applications.created_at as applied_date',
                 'job_applications.status as application_status',
             )
-                ->leftJoin('job_applications', 'job_postings.id', '=', 'job_applications.job_posting_id');
+                ->leftJoin('job_applications', function ($join) {
+                    $join->on('job_postings.id', '=', 'job_applications.job_posting_id')
+                        ->where('job_applications.created_by', auth()->user()->id);
+                });
         }
         return $query;
     }
