@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
+
 
 class ApplicantController extends Controller
 {
@@ -105,6 +107,27 @@ class ApplicantController extends Controller
         } else {
             return redirect()->back()->with('error', 'Incorrect Current Password.');
         }
+    }
+
+    public function addResume(Request $request, $id)
+    {
+        $request->validate([
+            'resume' => 'required|mimes:pdf',
+        ]);
+    
+        if ($request->hasFile('resume')) {
+            $file = $request->file('resume');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = "applicant-resume/{$id}/";
+            
+            $file->storeAs($path, $filename);
+            
+            // Optionally, you can store the file path in the database if needed
+
+            return redirect()->back()->with('successResume', 'Resume uploaded successfully.');
+        }
+        
+        return redirect()->back()->with('error', 'Please upload a valid resume.');
     }
 
     public function updateEmail(Request $request, $id)

@@ -76,6 +76,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/my-profile', [ApplicantController::class, 'myProfile'])->name('applicant.profile');
         Route::put('/my-profile/update/{id}', [ApplicantController::class, 'updateMyProfile'])->name('applicant.profile.update');
         Route::post('/my-profile/update-password/{id}', [ApplicantController::class, 'updatePassword'])->name('applicant.update.password');
+        Route::put('/my-profile/add-resume/{id}', [ApplicantController::class, 'addResume'])->name('applicant.profile.add-resume');
         Route::post('/my-profile/update-email/{id}', [ApplicantController::class, 'updateEmail'])->name('applicant.update.email');
         Route::get('/job-info/get-questions/{id}', [ApplicantController::class, 'getQuestions'])->name('applicant.get-questions');
         Route::post('/job-info/apply-job/{id}', [ApplicantController::class, 'applyJob'])->name('applicant.apply-job');

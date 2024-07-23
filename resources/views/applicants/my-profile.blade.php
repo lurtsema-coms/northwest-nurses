@@ -278,31 +278,51 @@
 <div class="container mx-auto my-5 py-10">
     <div class="mx-3 lg:mx-auto py-10 px-5 md:px-16 shadow-md max-w-screen-lg rounded-lg">
 		<div>
-			<h3 class="font-bold text-2xl mb-5">Add Resume</h3>
-			<p class="mb-5">Add up to 10 resumés. Accepted file types: PDF (2MB limit).</p>
-			<div class="relative flex items-center justify-center w-full overflow-hidden">
-				<label for="dropzone-file" id="dropzone-parent" class="flex flex-col items-center justify-center w-full h-[10rem] border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50" draggable="true">
-					<input id="dropzone-file" type="file" class="absolute -z-10 w-7" name="resume" accept=".pdf" required>
-					<div class="flex flex-col items-center justify-center pt-5 pb-6" id="file-content">
-						<svg class="w-8 h-8 mb-4 text-gray-500 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-						</svg>
-						<p class="mb-2 text-gray-500"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-						<p class="text-xs text-gray-500">PDF only (MAX. 2MB)</p>
+			<form method="POST" action="{{ route('applicant.profile.add-resume', auth()->user()->id) }}" enctype="multipart/form-data" autocomplete="off">
+				@csrf
+				@method('PUT')
+					<h3 class="font-bold text-2xl mb-5">Add Resume</h3>
+					<p class="mb-5">Add up to 10 resumés. Accepted file types: PDF (2MB limit).</p>
+					<div class="relative flex items-center justify-center w-full overflow-hidden">
+						<label for="dropzone-file" id="dropzone-parent" class="flex flex-col items-center justify-center w-full h-[10rem] border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50" draggable="true">
+							<input id="dropzone-file" type="file" class="absolute -z-10 w-7" name="resume" accept=".pdf" required>
+							<div class="flex flex-col items-center justify-center pt-5 pb-6" id="file-content">
+								<svg class="w-8 h-8 mb-4 text-gray-500 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+									<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+								</svg>
+								<p class="mb-2 text-gray-500"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+								<p class="text-xs text-gray-500">PDF only (MAX. 2MB)</p>
+							</div>
+						</label>
 					</div>
-				</label>
-			</div>
-			<div class="mt-5">
-				<p class="text-justify indent-4">Protect your privacy Only share necessary information. Don't include the content of identity documents, financial information or other sensitive information such as your religion or race. By uploading, you agree to our Privacy Statement. In an application, we remove external links from documents to adhere to our security standards.</p>
-			</div>
-			<div class="flex items-center justify-end mt-4">
-				<x-primary-button class="ms-4 submit-applicant">
-					{{ __('UPLOAD') }}
-				</x-primary-button>
-			</div>
+					<div class="mt-5">
+						<p class="text-justify indent-4">Protect your privacy Only share necessary information. Don't include the content of identity documents, financial information or other sensitive information such as your religion or race. By uploading, you agree to our Privacy Statement. In an application, we remove external links from documents to adhere to our security standards.</p>
+					</div>
+					<div class="flex items-center justify-end mt-4">
+						<x-primary-button class="ms-4 submit-applicant">
+							{{ __('UPLOAD') }}
+						</x-primary-button>
+					</div>
+			</form>
 		</div>
 		<div class="my-5">
 			<h3 class="font-bold text-2xl">Manage Resume</h3>
+			@if (session('successResume'))
+			<div class="max-w-xs bg-teal-500 text-sm text-white rounded-xl shadow-lg update-success" role="alert">
+				<div class="flex p-4">
+				{{ session('successResume') }}
+				<div class="ms-auto">
+					<button type="button" class="inline-flex flex-shrink-0 justify-center items-center size-5 rounded-lg text-white hover:text-white opacity-50 hover:opacity-100 focus:outline-none focus:opacity-100" data-hs-remove-element=".update-success">
+					<span class="sr-only">Close</span>
+					<svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M18 6 6 18"></path>
+						<path d="m6 6 12 12"></path>
+					</svg>
+					</button>
+				</div>
+				</div>
+			</div>
+			@endif
 			<div class="relative flex items-center justify-center w-full sm:w-2/3 overflow-hidden mt-5">
 				<label  class="flex items-center justify-center w-full  h-[8rem] border-2 border-gray-300 rounded-lg bg-gray-50 py-5 px-10	">
 					<div class="hidden lg:block">
