@@ -12,4 +12,7 @@ class Resume extends Model
     use HasFactory, SoftDeletes;
     protected $guarded = [];
 
+    protected $fillable = [
+        'user_id', 'default', 'file_path', 'created_by', 'created_at',
+    ];
 }
