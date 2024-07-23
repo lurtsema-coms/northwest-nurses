@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\JobApplication;
 use App\Models\JobPosting;
 use App\Models\User;
+use App\Models\Resume;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -111,18 +112,26 @@ class ApplicantController extends Controller
 
     public function addResume(Request $request, $id)
     {
-        $request->validate([
-            'resume' => 'required|mimes:pdf',
-        ]);
-    
         if ($request->hasFile('resume')) {
             $file = $request->file('resume');
-            $filename = time() . '_' . $file->getClientOriginalName();
+            $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $extension = $file->getClientOriginalExtension();
             $path = "applicant-resume/{$id}/";
-            
+            $filename = $originalName . '.' . $extension;
+            $counter = 1;
+            // Check if file with same name exists and increment the filename
+            while (Storage::exists($path . $filename)) {
+                $filename = $originalName . ' (' . $counter . ').' . $extension;
+                $counter++;
+            }
             $file->storeAs($path, $filename);
-            
-            // Optionally, you can store the file path in the database if needed
+
+            Resume::create([
+                'user_id' => $id,
+                'default' => 0,
+                'file_path' => $path . $filename, 
+                'created_at' => now(),
+            ]);
 
             return redirect()->back()->with('successResume', 'Resume uploaded successfully.');
         }
