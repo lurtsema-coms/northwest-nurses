@@ -159,7 +159,7 @@
                   <x-input-error :messages="$errors->get('company_website')" class="mt-2" />
                 </div>
               </div>
-              <div class="flex flex-col sm:flex-row sm:gap-5">
+              <div class="flex flex-col sm:flex-row lg:flex-col xl:flex-row sm:gap-5">
                   <div class="flex-grow mt-4">
                     <x-input-label for="company_number" :value="__('Company Contact Number')" />
                     <x-text-input id="company_number" oninput="this.value = this.value.replace(/\D/gi, '')" class="block w-full mt-1" type="text" name="contact_number" required/>
