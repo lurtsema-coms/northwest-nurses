@@ -98,6 +98,41 @@
                     <h1 class="text-xl font-extrabold">Requirements:</h1>
                     <p class="my-5">{!! nl2br(e($selectedJobPost->requirements)) !!}</p>
                 </div>
+                <div class="mt-8">
+                    <h1 class="text-xl font-extrabold">Questions:</h1>
+                    <ul class="my-5">
+                        @if ($selectedJobPost->question_1)
+                        <li class="mb-3">
+                            <div class="flex items-center">
+                                <p class="mr-3 text-lg font-bolder">•</p><p class="inline-flex">{!! nl2br(e($selectedJobPost->question_1)) !!}</p>
+                            </div>
+                            @if ($selectedJobPost->answer_1)
+                            <p class="pl-3 italic text-gray-400">- {!! nl2br(e($selectedJobPost->answer_1)) !!}</p>
+                            @endif
+                        </li>
+                        @endif
+                        @if ($selectedJobPost->question_2)
+                        <li class="mb-3">
+                            <div class="flex items-center">
+                                <p class="mr-3 text-lg font-bolder">•</p><p class="inline-flex">{!! nl2br(e($selectedJobPost->question_2)) !!}</p>
+                            </div>
+                            @if ($selectedJobPost->answer_2)
+                            <p class="pl-3 italic text-gray-400">- {!! nl2br(e($selectedJobPost->answer_2)) !!}</p>
+                            @endif
+                        </li>
+                        @endif
+                        @if ($selectedJobPost->question_3)
+                        <li class="mb-3">
+                            <div class="flex items-center">
+                                <p class="mr-3 text-lg font-bolder">•</p><p class="inline-flex">{!! nl2br(e($selectedJobPost->question_3)) !!}</p>
+                            </div>
+                            @if ($selectedJobPost->answer_3)
+                            <p class="pl-3 italic text-gray-400">- {!! nl2br(e($selectedJobPost->answer_3)) !!}</p>
+                            @endif
+                        </li>
+                        @endif
+                   </ul>
+                </div>
             </div>
         </div>
     </div>

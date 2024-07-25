@@ -132,13 +132,13 @@ class ApplicantController extends Controller
             Resume::create([
                 'user_id' => $id,
                 'default' => 0,
-                'file_path' => $path . $filename, 
+                'file_path' => $path . $filename,
                 'created_at' => now(),
             ]);
 
             return redirect()->back()->with('successResume', 'Resume uploaded successfully.');
         }
-        
+
         return redirect()->back()->with('error', 'Please upload a valid resume.');
     }
 
@@ -174,8 +174,6 @@ class ApplicantController extends Controller
     {
         $user_id = auth()->user()->id;
 
-        $jobPost = JobPosting::with('requiredAttachment')->applicationInfo()->findOrFail($id);
-        
         $form = $request->all();
         $attachments = $form['attachments'] ?? null;
 
@@ -196,13 +194,15 @@ class ApplicantController extends Controller
             'created_by' => $user_id,
         ]);
 
+        $jobPost = JobPosting::with('requiredAttachment')->applicationInfo()->findOrFail($id);
+
         // Upload Attachments
-        if(!empty($attachments)) {
+        if (!empty($attachments)) {
 
             $uploaded_names = [];
             $uploaded_paths = [];
 
-            foreach($attachments as $attachment){
+            foreach ($attachments as $attachment) {
                 $extension_name = $attachment->getClientOriginalExtension();
                 $mimeType = $attachment->getMimeType();
                 $uuid = substr(Str::uuid()->toString(), 0, 8);
@@ -212,7 +212,7 @@ class ApplicantController extends Controller
 
                 $attachment->move(public_path("$f_path"), $file_name);
 
-                if(strpos($mimeType, 'image/') === 0) {
+                if (strpos($mimeType, 'image/') === 0) {
                     $attachment = Image::make($file_path);
                     $attachment->resize(800, null, function ($constraint) {
                         $constraint->aspectRatio();
@@ -224,7 +224,7 @@ class ApplicantController extends Controller
                 $uploaded_names[] = $file_name;
                 $uploaded_paths[] = asset("$f_path/$file_name");
             }
-            
+
             JobApplicationAttachment::create([
                 'job_application_id' => $application->id,
                 'required_attachment_id' => $jobPost->requiredAttachment->id,

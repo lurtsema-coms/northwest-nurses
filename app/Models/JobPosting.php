@@ -51,6 +51,9 @@ class JobPosting extends Model
         if (auth()->check()) {
             return $query->select(
                 'job_postings.*',
+                'job_applications.answer_1',
+                'job_applications.answer_2',
+                'job_applications.answer_3',
                 'job_applications.created_at as applied_date',
                 'job_applications.status as application_status',
             )
