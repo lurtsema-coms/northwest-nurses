@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Throwable;
 
 class RegisteredUserController extends Controller
 {
@@ -22,7 +23,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        return view('auth.register-2');
     }
 
     /**
@@ -33,24 +34,21 @@ class RegisteredUserController extends Controller
     // public function store(Request $request, $role): RedirectResponse
     public function store(Request $request, $role)
     {
-        // dd($request->all(), $role);
         $request->validate([
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'address' => ['required'],
-            'contact_number' => ['required'],
             'contact_number' => ['required'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        if ($role == 'applicant'){
+        if ($role == 'applicant') {
             $request->validate([
                 'first_name' => ['required'],
                 'last_name' => ['required'],
                 'sex' => ['required'],
-                'birthdate' => ['required'],
+                'birthdate' => ['required', 'date'],
             ]);
-        }
-        else if ($role == 'employer'){
+        } else if ($role == 'employer') {
             $request->validate([
                 'company_name' => ['required'],
             ]);
@@ -65,8 +63,8 @@ class RegisteredUserController extends Controller
             'created_at' => now()
         ]);
 
-        if ($role == 'applicant'){
-            ApplicantDetail::create([
+        if ($role == 'applicant') {
+            $userDetails = ApplicantDetail::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'user_id' => $user->id,
@@ -74,18 +72,24 @@ class RegisteredUserController extends Controller
                 'sex' => $request->sex,
                 'created_at' => now()
             ]);
-        }
-        else if ($role == 'employer'){
-            EmployerDetail::create([
+        } else if ($role == 'employer') {
+            $userDetails = EmployerDetail::create([
                 'user_id' => $user->id,
                 'name' => $request->company_name,
                 'website' => $request->company_website,
             ]);
         }
 
-        event(new Registered($user));
 
-        $user->sendEmailVerificationNotification();
+        try {
+            event(new Registered($user));
+            $user->sendEmailVerificationNotification();
+        } catch (Throwable $e) {
+            $userDetails->delete();
+            $user->delete();
+            return redirect()->back()->with('error', 'Something went wrong. Please try again later...');
+        }
+
 
         return redirect()->route('verification.notice');
     }
