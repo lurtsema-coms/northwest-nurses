@@ -1,9 +1,9 @@
-<div class="h-16 flex items-center absolute top-0 left-16 text-xl">
+<div class="absolute top-0 flex items-center h-16 text-xl left-16">
     {{ $module_title }}
 </div>
-<div class="h-auto mx-auto max-w-5xl relative text-slate-600 bg-white py-7 px-5 sm:px-10 shadow-sm border rounded-2xl">
-    <div class="font-medium text-sky-600 flex absolute -top-9 left-0">
-        <span class="flex items-center space-x-2 hover:opacity-70 cursor-pointer"
+<div class="relative h-auto max-w-5xl px-5 mx-auto bg-white border shadow-sm text-slate-600 py-7 sm:px-10 rounded-2xl">
+    <div class="absolute left-0 flex font-medium text-sky-600 -top-9">
+        <span class="flex items-center space-x-2 cursor-pointer hover:opacity-70"
             hx-get="{{ route('employer.job') }}" hx-target="#target-content" hx-push-url="true" hx-on::after-request="$('input').val()"
         >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -26,55 +26,74 @@
                 @csrf
                 <input type="hidden" name="action-btn">
                 <div class="relative p-[1px] bg-gray-300 rounded-lg hover:shadow-lg">
-                    <div class="bg-white rounded-lg p-5 sm:p-8">
-                        <p class="timeago text-md text-green-500 font-bold mb-3" datetime="{{ $applicants[$i]->created_at }} {{ config('app.timezone') }}" ></p>
+                    <div class="p-5 bg-white rounded-lg sm:p-8">
+                        <p class="mb-3 font-bold text-green-500 timeago text-md" datetime="{{ $applicants[$i]->created_at }} {{ config('app.timezone') }}" ></p>
                         <div class="space-y-1">
                             <div class="flex flex-wrap">
-                                <div class="flex-1 basis-52"><span class="text-slate-600 font-medium">Name: </span><span class="">{{ $applicant_information[$i]->first_name." ".$applicant_information[$i]->last_name }}</span></div>
-                                <div class="flex-1 basis-52"><span class="text-slate-600 font-medium">Birthday: </span><span class="">{{ \DateTime::createFromFormat('Y-m-d', $applicant_information[$i]->birthdate)->format('M j, Y') }}</span></div>
+                                <div class="flex-1 basis-52"><span class="font-medium text-slate-600">Name: </span><span class="">{{ $applicant_information[$i]->first_name." ".$applicant_information[$i]->last_name }}</span></div>
+                                <div class="flex-1 basis-52"><span class="font-medium text-slate-600">Birthday: </span><span class="">{{ \DateTime::createFromFormat('Y-m-d', $applicant_information[$i]->birthdate)->format('M j, Y') }}</span></div>
                             </div> 
                             <div class="flex flex-wrap">
-                                <div class="flex-1 basis-52"><span class="text-slate-600 font-medium">Contact: </span><span class="">{{ $applicant_information[$i]->contact_number }}</span></div>
-                                <div class="flex-1 basis-52"><span class="text-slate-600 font-medium">Sex: </span><span class="capitalize">{{ $applicant_information[$i]->sex }}</span></div>
+                                <div class="flex-1 basis-52"><span class="font-medium text-slate-600">Contact: </span><span class="">{{ $applicant_information[$i]->contact_number }}</span></div>
+                                <div class="flex-1 basis-52"><span class="font-medium text-slate-600">Sex: </span><span class="capitalize">{{ $applicant_information[$i]->sex }}</span></div>
                             </div>
                             <div class="flex flex-wrap">
-                                <div class="flex-1 basis-52"><span class="text-slate-600 font-medium">Email: </span><span class="">{{ $applicant_information[$i]->email }}</span></div>
+                                <div class="flex-1 basis-52"><span class="font-medium text-slate-600">Email: </span><span class="">{{ $applicant_information[$i]->email }}</span></div>
                             </div>
                         </div>
                         <div class="mt-5 space-y-3">
                             <div>
-                                <p class="text-slate-600 font-medium">Question 1</p>
+                                <p class="font-medium text-slate-600">Question 1</p>
                                 <p class="text-slate-500">{{ $job_posts->question_1 }}</p>
                                 <p>Answer: {{ $applicants[$i]->answer_1 }}</p>
                             </div>
                             @if ($job_posts->question_2)                              
                             <div>
-                                <p class="text-slate-600 font-medium">Question 2</p>
+                                <p class="font-medium text-slate-600">Question 2</p>
                                 <p class="text-slate-500">{{ $job_posts->question_2 }}</p>
                                 <p>Answer: {{ $applicants[$i]->answer_2 }}</p>
                             </div>
                             @endif
                             @if ($job_posts->question_3)
                             <div>
-                                <p class="text-slate-600 font-medium">Question 3</p>
+                                <p class="font-medium text-slate-600">Question 3</p>
                                 <p class="text-slate-500">{{ $job_posts->question_3 }}</p>
                                 <p>Answer: {{ $applicants[$i]->answer_3 }}</p>
                             </div>
                             <div>
-                                <p class="text-slate-600 font-medium">Resume</p>
+                                <p class="font-medium text-slate-600">Resume</p>
                                 <embed src="" id="pdfShow" width="100%" height="700px"></embed>
                             </div>
                             @endif
+                            <div>
+                                @foreach ($job_posts->getApplicantsPost as $applicantPost)
+                                    @php
+                                        $attachment = explode(',', $applicantPost->jobApplicationAttachments[$i]->file_paths);
+                                    @endphp
+                                    <p class="font-medium text-slate-600">Attachments:</p>
+                                    @if ($applicantPost->jobApplicationAttachments->isNotEmpty())
+                                        @foreach (explode(',', $job_posts->requiredAttachment->label) as $index => $ra)
+                                            <p>{{ $ra }}:
+                                                <a href="{{ $attachment[$index] }}" download="{{ basename($attachment[$index]) }}" class="text-blue-600 hover:underline">
+                                                    Download
+                                                </a>
+                                            </p>
+                                        @endforeach
+                                    @else
+                                        <p>No attachments available.</p>
+                                    @endif
+                                @endforeach
+                            </div>
                             <p class="!mt-10 text-center font-bold {{ $applicants[$i]->status == 'FOR REVIEW' ? 'text-yellow-500' : '' }} {{ $applicants[$i]->status == 'REJECTED' || $applicants[$i]->status == 'REMOVED' ? 'text-red-500' : '' }}  {{ $applicants[$i]->status == 'APPROVED' ? 'text-green-500' : '' }}">
                                 STATUS: {{ $applicants[$i]->status }}
                             </p>
                             @if ($applicants[$i]->status != 'REJECTED' && $applicants[$i]->status != 'APPROVED' && $applicants[$i]->status != 'REMOVED')
                             <div class="!mt-5 flex gap-2 flex-wrap sm:justify-center ">
                                 @if ($applicants[$i]->status != 'FOR REVIEW')                         
-                                <button class="bg-yellow-500 text-gray-50 px-4 py-2 rounded-md shadow-md hover:bg-yellow-600 cursor-pointer">For Review</button>
+                                <button class="px-4 py-2 bg-yellow-500 rounded-md shadow-md cursor-pointer text-gray-50 hover:bg-yellow-600">For Review</button>
                                 @endif
-                                <button class="bg-red-500 text-gray-50 px-4 py-2 rounded-md shadow-md hover:bg-red-600 cursor-pointer">Reject</button>
-                                <button class="bg-green-500 text-gray-50 px-4 py-2 rounded-md shadow-md hover:bg-green-600 cursor-pointer">Hire</button>
+                                <button class="px-4 py-2 bg-red-500 rounded-md shadow-md cursor-pointer text-gray-50 hover:bg-red-600">Reject</button>
+                                <button class="px-4 py-2 bg-green-500 rounded-md shadow-md cursor-pointer text-gray-50 hover:bg-green-600">Hire</button>
                                 </div>
                             @endif
                         </div>
@@ -84,7 +103,7 @@
             @endfor
             
             @else
-            <p class="text-center text-slate-500 font-medium">No applicants have applied yet..</p>
+            <p class="font-medium text-center text-slate-500">No applicants have applied yet..</p>
         @endif
     </div>
 </div>

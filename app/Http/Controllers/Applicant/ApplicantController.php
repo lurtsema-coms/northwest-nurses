@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Applicant;
 
 use App\Http\Controllers\Controller;
 use App\Models\JobApplication;
+use App\Models\JobApplicationAttachment;
 use App\Models\JobPosting;
 use App\Models\User;
 use App\Models\Resume;
@@ -12,7 +13,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
-
+use Spatie\ImageOptimizer\OptimizerChainFactory;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Str;
 
 class ApplicantController extends Controller
 {
@@ -163,13 +166,18 @@ class ApplicantController extends Controller
 
     public function getQuestions(Request $request, $id)
     {
-        $jobPost = JobPosting::findOrFail($id);
+        $jobPost = JobPosting::with('requiredAttachment')->findOrFail($id);
         return view('components.find-job-page.question-modal', ['jobPost' => $jobPost]);
     }
 
     public function applyJob(Request $request, $id)
     {
         $user_id = auth()->user()->id;
+
+        $jobPost = JobPosting::with('requiredAttachment')->applicationInfo()->findOrFail($id);
+        
+        $form = $request->all();
+        $attachments = $form['attachments'] ?? null;
 
         $isExisting = JobApplication::where([
             'job_posting_id' => $id,
@@ -188,7 +196,43 @@ class ApplicantController extends Controller
             'created_by' => $user_id,
         ]);
 
-        $jobPost = JobPosting::applicationInfo()->findOrFail($id);
+        // Upload Attachments
+        if(!empty($attachments)) {
+
+            $uploaded_names = [];
+            $uploaded_paths = [];
+
+            foreach($attachments as $attachment){
+                $extension_name = $attachment->getClientOriginalExtension();
+                $mimeType = $attachment->getMimeType();
+                $uuid = substr(Str::uuid()->toString(), 0, 8);
+                $f_path = "applicant_files/$id/$jobPost->job_id";
+                $file_name = "$user_id-$jobPost->job_id-$uuid.$extension_name";
+                $file_path = public_path("$f_path") . '/' . $file_name;
+
+                $attachment->move(public_path("$f_path"), $file_name);
+
+                if(strpos($mimeType, 'image/') === 0) {
+                    $attachment = Image::make($file_path);
+                    $attachment->resize(800, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                    // Optimize and save the image
+                    $attachment->save($file_path, 80);
+                }
+
+                $uploaded_names[] = $file_name;
+                $uploaded_paths[] = asset("$f_path/$file_name");
+            }
+            
+            JobApplicationAttachment::create([
+                'job_application_id' => $application->id,
+                'required_attachment_id' => $jobPost->requiredAttachment->id,
+                'file_names' => implode(",", $uploaded_names),
+                'file_paths' => implode(",", $uploaded_paths),
+            ]);
+        }
+
         $dialogData = [
             'title' => 'Thank you for applying to this job!',
             'text_content' => '',

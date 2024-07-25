@@ -41,6 +41,11 @@ class JobPosting extends Model
         return $this->hasMany(JobApplication::class);
     }
 
+    public function requiredAttachment()
+    {
+        return $this->hasOne(RequiredAttachment::class);
+    }
+
     public function scopeApplicationInfo($query)
     {
         if (auth()->check()) {

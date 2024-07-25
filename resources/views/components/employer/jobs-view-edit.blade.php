@@ -1,10 +1,10 @@
-<div class="h-16 flex items-center absolute top-0 left-16 text-xl">
+<div class="absolute top-0 flex items-center h-16 text-xl left-16">
     {{ $module_title }}
 </div>
 <div class="h-[50rem] mx-auto max-w-5xl relative bg-white py-7 shadow-sm border rounded-2xl">
-    <div class="h-full overflow-auto px-5 sm:px-10"">
-        <div class="font-medium text-sky-600 flex absolute -top-9 left-0">
-            <span class="flex items-center space-x-2 hover:opacity-70 cursor-pointer"
+    <div class="h-full px-5 overflow-auto sm:px-10"">
+        <div class="absolute left-0 flex font-medium text-sky-600 -top-9">
+            <span class="flex items-center space-x-2 cursor-pointer hover:opacity-70"
                 hx-get="{{ route('employer.job') }}" hx-target="#target-content" hx-push-url="true" hx-on::after-request="$('input').val()"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -13,17 +13,17 @@
                 <span>Back to Jobs</span>
             </span>
         </div>
-        <form id="add-form" action="{{ route('employer.job.edit-jobs', $id) }}" method="POST" enctype="multipart/form-data">
+        <form id="job-edit-form" action="{{ route('employer.job.edit-jobs', $id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="w-full">
-                <div class="font-medium text-slate-600 mb-3">Upload Image</div>
+                <div class="mb-3 font-medium text-slate-600">Upload Image</div>
                 
                 <div class="relative flex items-center justify-center w-full overflow-hidden">
                     <label for="dropzone-file" id="dropzone-parent" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 draggable="true">
                         <input id="dropzone-file" type="file" class="absolute -z-10" accept="image/*" name="img_link">
                         <div class="flex flex-col items-center justify-center pt-5 pb-6" id="img-content">
                             @if($job_post->img_link)
-                            <img class="h-52 w-full max-w-80 object-contain" src="{{ $job_post->img_link }}?v={{ time() }}" alt="">
+                            <img class="object-contain w-full h-52 max-w-80" src="{{ $job_post->img_link }}?v={{ time() }}" alt="">
                             @else
                             <svg class="w-8 h-8 mb-4 text-gray-500 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
@@ -115,8 +115,32 @@
                         <textarea class="px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" name="requirements" id="" rows="7" required>{{ $job_post->requirements }}</textarea>
                     </div>
                 </div>
+                <div class="flex flex-wrap gap-5">
+                    <div class="flex flex-col flex-1 space-y-2">
+                        <span class="font-medium">Add Attachments <span class="text-red-400">(Optional)</span></span>
+                        <div class="flex">                                
+                            <button type="button" id="add-attachment">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="flex flex-col gap-5 " id="attachment-input">
+                            @if (!empty($job_post->requiredAttachment) && $job_post->requiredAttachment->label)
+                                @foreach (explode(',', $job_post->requiredAttachment->label) as $ra)
+                                <div class="mb-2 space-x-2 required-attachment-container tems-center aflex">                                
+                                    <input class="w-full h-10 px-2 border border-gray-300 rounded-md max-w-80 focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="attachments[]" value="{{ $ra }}" required>
+                                    <button class="px-2 py-1 ml-2 text-white bg-red-500 rounded-md delete-attachment" type="button">
+                                        Delete
+                                    </button>
+                                </div>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+                </div>
                 <div class="text-end">
-                    <button class="bg-cyan-600 text-white border h-10 px-4 rounded-md hover:opacity-70" type="submit">Save</button>
+                    <button class="h-10 px-4 text-white border rounded-md bg-cyan-600 hover:opacity-70" type="submit">Save</button>
                 </div>
             </div>
         </form>
@@ -130,12 +154,18 @@
 
     $(document).ready(function() {
 
+        $('#job-edit-form').on('keydown', 'input', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+            }
+        })
+
         if("{{ $hasAnyApplicantApplied > 0 }}"){
-            $('#add-form').find('input, textarea, button').attr('disabled', true);
-            $('#add-form').find('input:disabled, textarea:disabled, button:disabled').addClass('bg-slate-300 opacity-80');
+            $('#job-edit-form').find('input, textarea, button').attr('disabled', true);
+            $('#job-edit-form').find('input:disabled, textarea:disabled, button:disabled').addClass('bg-slate-300 opacity-80');
         }
 
-        $('#add-form').on('submit', function(e){
+        $('#job-edit-form').on('submit', function(e){
             e.preventDefault();
             const form = this;
 
@@ -172,6 +202,31 @@
             let files = event.target.files;
             updateImgFile(files);
 
+        });
+
+        $('#add-attachment').on('click', function() {
+            // Create a new input element with the desired attributes
+            const input = $('<input>').attr({
+                type: 'text',
+                name: 'attachments[]',
+                required: true,
+                placeholder: 'Input label'
+            }).addClass('w-full max-w-80 h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none');
+
+            // Create a delete button
+            const deleteButton = $('<button>').text('Delete').addClass('ml-2 px-2 py-1 bg-red-500 text-white rounded-md');
+
+            const container = $('<div>').addClass('flex items-center space-x-2 mb-2').append(input).append(deleteButton);
+
+            $('#attachment-input').append(container);
+
+            deleteButton.on('click', function() {
+                container.remove();
+            });
+        });
+
+        $(document).on('click', '.delete-attachment', function() {
+            $(this).closest('.required-attachment-container').remove();
         });
 
         function updateImgFile(files){

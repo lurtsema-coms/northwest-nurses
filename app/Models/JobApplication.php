@@ -21,4 +21,9 @@ class JobApplication extends Model
             ->leftJoin('applicant_details', 'users.id', '=', 'applicant_details.user_id')
             ->select('users.*', 'applicant_details.first_name', 'applicant_details.last_name', 'applicant_details.sex', 'applicant_details.birthdate');
     }
+
+    public function jobApplicationAttachments()
+    {
+        return $this->hasMany(JobApplicationAttachment::class, 'job_application_id');
+    }
 }

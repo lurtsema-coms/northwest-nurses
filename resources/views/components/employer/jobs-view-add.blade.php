@@ -1,10 +1,10 @@
-<div class="h-16 flex items-center absolute top-0 left-16 text-xl">
+<div class="absolute top-0 flex items-center h-16 text-xl left-16">
     {{ $module_title }}
 </div>
 <div class="h-[50rem] mx-auto max-w-5xl relative bg-white py-7 shadow-sm border rounded-2xl">
-    <div class="h-full overflow-auto px-5 sm:px-10"">
-        <div class="font-medium text-sky-600 flex absolute -top-9 left-0">
-            <span class="flex items-center space-x-2 hover:opacity-70 cursor-pointer"
+    <div class="h-full px-5 overflow-auto sm:px-10"">
+        <div class="absolute left-0 flex font-medium text-sky-600 -top-9">
+            <span class="flex items-center space-x-2 cursor-pointer hover:opacity-70"
                 hx-get="{{ route('employer.job') }}" hx-target="#target-content" hx-push-url="true" hx-on::after-request="$('input').val()"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -16,7 +16,7 @@
         <form id="add-form" action="{{ route('employer.job.add-jobs') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="w-full">
-                <div class="font-medium text-slate-600 mb-3">Upload Image <span class="text-red-400">*</span></div>
+                <div class="mb-3 font-medium text-slate-600">Upload Image <span class="text-red-400">*</span></div>
                 
                 <div class="relative flex items-center justify-center w-full overflow-hidden">
                     <label for="dropzone-file" id="dropzone-parent" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 draggable="true">
@@ -114,8 +114,22 @@
                         <textarea class="px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" name="requirements" id="" rows="7" placeholder="Insert job requirements..." required></textarea>
                     </div>
                 </div>
+                <div class="flex flex-wrap gap-5">
+                    <div class="flex flex-col flex-1 space-y-2">
+                        <span class="font-medium">Add Attachments <span class="text-red-400">(Optional)</span></span>
+                        <div class="flex">                                
+                            <button type="button" id="add-attachment">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="flex flex-col gap-5 " id="attachment-input">
+                        </div>
+                    </div>
+                </div>
                 <div class="text-end">
-                    <button class="bg-cyan-600 text-white border h-10 px-4 rounded-md hover:opacity-70" type="submit">Save</button>
+                    <button class="h-10 px-4 text-white border rounded-md bg-cyan-600 hover:opacity-70" type="submit">Save</button>
                 </div>
             </div>
         </form>
@@ -135,6 +149,12 @@
     }
 
     $(document).ready(function() {
+
+        $('#add-form').on('keydown', 'input', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+            }
+        })
 
         $('#add-form').on('submit', function(e){
             e.preventDefault();
@@ -174,6 +194,28 @@
             updateImgFile(files);
 
         });
+        
+        $('#add-attachment').on('click', function() {
+            // Create a new input element with the desired attributes
+            const input = $('<input>').attr({
+                type: 'text',
+                name: 'attachments[]',
+                required: true,
+                placeholder: 'Input label'
+            }).addClass('w-full max-w-80 h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none');
+
+            // Create a delete button
+            const deleteButton = $('<button>').text('Delete').addClass('ml-2 px-2 py-1 bg-red-500 text-white rounded-md');
+
+            const container = $('<div>').addClass('flex items-center space-x-2 mb-2').append(input).append(deleteButton);
+
+            $('#attachment-input').append(container);
+
+            deleteButton.on('click', function() {
+                container.remove();
+            });
+        });
+
 
         function updateImgFile(files){
             if (files && files[0]) {
