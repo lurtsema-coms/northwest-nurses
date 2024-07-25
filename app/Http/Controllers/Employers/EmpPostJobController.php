@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Employers;
 use App\Http\Controllers\Controller;
 use App\Models\JobApplication;
 use App\Models\JobPosting;
+use App\Models\RequiredAttachment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\ImageOptimizer\OptimizerChainFactory;
@@ -105,7 +106,9 @@ class EmpPostJobController extends Controller
             'getApplicantsPost' => function ($query) {
                 $query->orderBy('id', 'desc');
             },
-            'getApplicantsPost.getApplicantsInformation'
+            'getApplicantsPost.getApplicantsInformation',
+            'getApplicantsPost.jobApplicationAttachments',
+            'requiredAttachment'
         ])->findOrFail($id);
 
         // Check if the authenticated user is the creator of the job posting
@@ -145,7 +148,7 @@ class EmpPostJobController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-
+        
         $unique_id = uniqid();
 
         $file_img = $input['img_link'];
@@ -178,6 +181,13 @@ class EmpPostJobController extends Controller
         ]);
 
         $job_posting->save();
+
+        if(!empty($input['attachments'])) {
+            RequiredAttachment::create([
+                'job_posting_id' => $job_posting->id,
+                'label' => implode(',', $input['attachments']),
+            ]);
+        }
 
         // Img Handling
         $img_extension = $file_img->getClientOriginalExtension();
@@ -245,7 +255,7 @@ class EmpPostJobController extends Controller
     public function edit(Request $request, string $id)
     {
         $user = Auth::user();
-        $jobPost = JobPosting::find($id);
+        $jobPost = JobPosting::with('requiredAttachment')->find($id);
 
         // Check if the authenticated user is the creator of the job posting
         if (!$jobPost || $user->id !== $jobPost->created_by) {
@@ -273,7 +283,7 @@ class EmpPostJobController extends Controller
         $input = $request->all();
         
         $job_posting = JobPosting::where('id', $id)
-            ->withCount('getApplicantsPost')
+            ->withCount('requiredAttachment', 'getApplicantsPost')
             ->get()
             ->first();
         
@@ -325,6 +335,21 @@ class EmpPostJobController extends Controller
             'updated_by' => auth()->user()->id,
         ]);
 
+        if(!$job_posting->requiredAttachment && !empty($input['attachments'])) {
+            RequiredAttachment::create([
+                'job_posting_id' => $job_posting->id,
+                'label' => implode(',', $input['attachments']),
+            ]);
+        } elseif($job_posting->requiredAttachment && !empty($input['attachments'])){
+            $job_posting->requiredAttachment->update([
+                'label' => implode(',', $input['attachments'])
+            ]);
+        } else if ($job_posting->requiredAttachment && empty($input['attachments'])) {
+            $job_posting->requiredAttachment->update([
+                'label' => null
+            ]);
+        }
+        
         return redirect(route('employer.job'))->with('success', 'Your app has been successfully updated.');
     }
 

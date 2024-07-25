@@ -30,6 +30,7 @@
                     hx-target="#modal-center"
                     hx-disabled-elt="this"
                     hx-indicator="#apply-now-btn > .htmx-indicator"
+                    onclick="$('body').addClass('overflow-hidden')"
                 >
                     Apply Now
                     <svg class="w-5 h-5 text-white animate-spin htmx-indicator" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
