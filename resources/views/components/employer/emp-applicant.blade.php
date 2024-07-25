@@ -66,23 +66,21 @@
                             </div>
                             @endif
                             <div>
-                                @foreach ($job_posts->getApplicantsPost as $applicantPost)
+                                @if ($job_posts->getApplicantsPost[$i]->jobApplicationAttachments->isNotEmpty())
                                     @php
-                                        $attachment = explode(',', $applicantPost->jobApplicationAttachments[$i]->file_paths);
+                                        $attachment = explode(',', $job_posts->getApplicantsPost[$i]->jobApplicationAttachments->first()->file_paths);
                                     @endphp
                                     <p class="font-medium text-slate-600">Attachments:</p>
-                                    @if ($applicantPost->jobApplicationAttachments->isNotEmpty())
-                                        @foreach (explode(',', $job_posts->requiredAttachment->label) as $index => $ra)
-                                            <p>{{ $ra }}:
-                                                <a href="{{ $attachment[$index] }}" download="{{ basename($attachment[$index]) }}" class="text-blue-600 hover:underline">
-                                                    Download
-                                                </a>
-                                            </p>
-                                        @endforeach
-                                    @else
-                                        <p>No attachments available.</p>
-                                    @endif
-                                @endforeach
+                                    @foreach (explode(',', $job_posts->requiredAttachment->label) as $index => $ra)
+                                        <p>{{ $ra }}:
+                                            <a href="{{ $attachment[$index] }}" download="{{ basename($attachment[$index]) }}" class="text-blue-600 hover:underline">
+                                                Download
+                                            </a>
+                                        </p>
+                                    @endforeach
+                                @else
+                                    <p>No attachments available.</p>
+                                @endif
                             </div>
                             <p class="!mt-10 text-center font-bold {{ $applicants[$i]->status == 'FOR REVIEW' ? 'text-yellow-500' : '' }} {{ $applicants[$i]->status == 'REJECTED' || $applicants[$i]->status == 'REMOVED' ? 'text-red-500' : '' }}  {{ $applicants[$i]->status == 'APPROVED' ? 'text-green-500' : '' }}">
                                 STATUS: {{ $applicants[$i]->status }}
