@@ -56,6 +56,10 @@ class ApplicantController extends Controller
         $userData = User::find(Auth::user()->id)->toArray();
         $applicantDetails = Auth::user()->applicantDetail;
         $data = array_merge($userData, $applicantDetails->toArray());
+        $data['my_resumes'] = Resume::where('user_id',auth()->user()->id)
+        ->whereNull('deleted_at')
+        ->get();
+
         return view('applicants.my-profile', $data);
     }
 
@@ -140,6 +144,23 @@ class ApplicantController extends Controller
         }
 
         return redirect()->back()->with('error', 'Please upload a valid resume.');
+    }
+
+    public function defaultResume(Request $request, string $id)
+    {
+        $user_id = auth()->user()->id;
+    
+        // Update all resumes to not default
+        Resume::where('user_id', $user_id)->update(['default' => 0]);
+    
+        // Set selected resume as default
+        $selectedResume = Resume::where('user_id', $user_id)->findOrFail($id);
+        $selectedResume->update(['default' => 1]);
+    
+        // Return the updated partial view for a specific resume and the update count
+        return view('components.applicant-resume.list-resume', [
+            'my_resume' => $selectedResume,
+        ])->render();
     }
 
     public function updateEmail(Request $request, $id)
