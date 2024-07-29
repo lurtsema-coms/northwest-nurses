@@ -201,7 +201,7 @@
                 type: 'text',
                 name: 'attachments[]',
                 required: true,
-                placeholder: 'Input label'
+                placeholder: 'e.g., Insert Resume or License ID'
             }).addClass('w-full max-w-80 h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none');
 
             // Create a delete button
