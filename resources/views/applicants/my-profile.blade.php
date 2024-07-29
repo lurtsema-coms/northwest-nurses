@@ -406,7 +406,6 @@
 				});
 			});
 
-
 			$('.delete-btn').click(function(e) {
 				e.preventDefault();
 				const entryId = $(this).data('entry-id');
@@ -438,6 +437,12 @@
 							}
 						});
 				})
+			});
+
+			$(document).on('click', '.download-btn', function(){
+				const filePath = $(this).data('file-path');
+				const route = `{{ route('applicant.profile.download-resume') }}?file_path=${filePath}`;
+				location.assign(route);
 			});
 			
 			function logoutWithDelay() {
