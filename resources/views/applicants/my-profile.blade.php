@@ -330,6 +330,8 @@
 			@endforeach
 		</div>
     </div>
+	@include('components.dialog', ['title' => 'Are You Sure?', 'text_content' => 'This action will submit the form', 'class' => 'modal-warning', 'icon' => 'warning', 'isHxSwap' => false])
+
 </div>
 
 
@@ -382,7 +384,7 @@
 			// Toggle dropdown menu
 			$(document).on('click', '.dropdown svg', function(event) {
 				event.stopPropagation();
-				var $menu = $(this).closest('.dropdown').find('.dropdown-menu');
+				const $menu = $(this).closest('.dropdown').find('.dropdown-menu');
 				$menu.toggleClass('hidden');
 			});
 
@@ -402,6 +404,40 @@
 					// Update the resume item in the DOM
 					$(`[data-id="${resumeId}"]`).replaceWith(data);
 				});
+			});
+
+
+			$('.delete-btn').click(function(e) {
+				e.preventDefault();
+				const entryId = $(this).data('entry-id');
+				console.log(entryId);
+				const url = $(this).attr('href');
+				let editUrl = "{{ route('applicant.profile.delete-resume', 'entryId') }}";
+				const newUrl = editUrl.replace('entryId', entryId);
+
+				$('.dropdown-menu').addClass('hidden');
+				$('.modal-warning').removeClass('hidden');
+				$('#modal-submit').focus();
+				
+				$('#modal-cancel').on('click', function(){
+					$('.modal-warning').addClass('hidden');
+				})
+				
+				$('#modal-submit').on('click', function(){
+					$.ajax({
+							url: newUrl,   
+							dataType: 'json',
+							type: 'GET',
+							success: function(response) {
+								// Reload the browser
+								location.reload();
+							},
+							error: function(xhr, status, error) {
+								// Handle errors here
+								console.log('AJAX request failed:', error);
+							}
+						});
+				})
 			});
 			
 			function logoutWithDelay() {

@@ -163,6 +163,15 @@ class ApplicantController extends Controller
         ])->render();
     }
 
+    public function deleteResume($id)
+    {
+        $resume = Resume::withTrashed()->find($id);
+        $resume->delete();
+
+        return true;
+    }
+
+
     public function updateEmail(Request $request, $id)
     {
         $user = User::find($id);
