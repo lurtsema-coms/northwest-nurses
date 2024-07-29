@@ -21,7 +21,11 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                if ($request->user()->hasVerifiedEmail() && $request->user()->role == 'applicant') {
+                    return redirect()->intended(RouteServiceProvider::HOME_APPLICANT);
+                } else if ($request->user()->hasVerifiedEmail() && $request->user()->role == 'employer') {
+                    return redirect()->intended(RouteServiceProvider::HOME_EMPLOYER);
+                }
             }
         }
 
