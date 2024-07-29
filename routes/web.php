@@ -79,6 +79,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::put('/my-profile/add-resume/{id}', [ApplicantController::class, 'addResume'])->name('applicant.profile.add-resume');
         Route::get('/my-profile/default-resume/{id}', [ApplicantController::class, 'defaultResume'])->name('applicant.default.resume');
         Route::get('/my-profile/delete-resume/{id}', [ApplicantController::class, 'deleteResume'])->name('applicant.profile.delete-resume');
+        Route::get('/my-profile/download', [ApplicantController::class, 'downloadResume'])->name('applicant.profile.download-resume');
+
 
         Route::post('/my-profile/update-email/{id}', [ApplicantController::class, 'updateEmail'])->name('applicant.update.email');
         Route::get('/job-info/get-questions/{id}', [ApplicantController::class, 'getQuestions'])->name('applicant.get-questions');

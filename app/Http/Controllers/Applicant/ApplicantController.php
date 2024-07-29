@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Storage;
 use Spatie\ImageOptimizer\OptimizerChainFactory;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Response;
 
 class ApplicantController extends Controller
 {
@@ -169,6 +170,13 @@ class ApplicantController extends Controller
         $resume->delete();
 
         return true;
+    }
+
+    public function downloadResume(Request $request)
+    {
+
+        $download = storage_path("app/$request->file_path");
+        return Response::download($download);
     }
 
 

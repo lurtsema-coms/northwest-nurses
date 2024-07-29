@@ -60,10 +60,6 @@
                                 <p class="text-slate-500">{{ $job_posts->question_3 }}</p>
                                 <p>Answer: {{ $applicants[$i]->answer_3 }}</p>
                             </div>
-                            <div>
-                                <p class="font-medium text-slate-600">Resume</p>
-                                <embed src="" id="pdfShow" width="100%" height="700px"></embed>
-                            </div>
                             @endif
                             <div>
                                 @if ($job_posts->getApplicantsPost[$i]->jobApplicationAttachments->isNotEmpty())
@@ -74,7 +70,7 @@
                                     @foreach (explode(',', $job_posts->requiredAttachment->label) as $index => $ra)
                                         <p>{{ $ra }}:
                                             <a href="{{ $attachment[$index] }}" download="{{ basename($attachment[$index]) }}" class="text-blue-600 hover:underline">
-                                                Download
+                                                Download Attached File
                                             </a>
                                         </p>
                                     @endforeach
