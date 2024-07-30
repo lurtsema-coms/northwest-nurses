@@ -23,7 +23,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register-2');
+        return view('auth.register');
     }
 
     /**
@@ -45,13 +45,15 @@ class RegisteredUserController extends Controller
             $request->validate([
                 'first_name' => ['required'],
                 'last_name' => ['required'],
-                'sex' => ['required'],
+                'sex' => ['required', 'in:male,female'],
                 'birthdate' => ['required', 'date'],
             ]);
         } else if ($role == 'employer') {
             $request->validate([
                 'company_name' => ['required'],
             ]);
+        } else {
+            abort(404);
         }
 
         $user = User::create([
