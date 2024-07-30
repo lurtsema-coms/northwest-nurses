@@ -144,7 +144,7 @@
               </div>
               <div class="mt-4 mb-2">
                 <x-input-label for="Resume" :value="__('Upload Resume:')" />
-                <div class="relative flex items-center justify-center w-full overflow-hidden">
+                <div class="relative flex flex-col items-center justify-center w-full overflow-hidden">
                   <label for="dropzone-file" id="dropzone-parent" class="flex flex-col items-center justify-center w-full h-[6rem] border border-cyan-600  rounded-lg cursor-pointer bg-gray-50" draggable="true">
                     <input id="dropzone-file" type="file" class="absolute -z-10 w-7" name="resume" accept=".pdf" required>
                     <div class="flex flex-col items-center justify-center pt-5 pb-6" id="file-content">
@@ -155,6 +155,7 @@
                       <p class="text-xs text-gray-500">PDF only (MAX. 2MB)</p>
                     </div>
                   </label>
+                  <x-input-error :messages="$errors->get('resume')" class="mt-2" />
                 </div>
               </div>
             </div>
@@ -245,7 +246,7 @@
           });
 
           function updateFileName(files) {
-            if (files && files[0] && files[0].type === 'application/pdf') {
+            // if (files && files[0] && files[0].type === 'application/pdf') {
               let file = files[0];
               let fileName = file.name;
               let fileContentContainer = $('#file-content');
@@ -256,9 +257,9 @@
                 </svg>
                 <p class="mb-2 text-gray-500"><span class="font-semibold">${fileName}</span></p>
               `);
-            } else {
-              alert("Please upload a valid PDF file.");
-            }
+            // } else {
+            //   alert("Please upload a valid PDF file.");
+            // }
           }
 
         });

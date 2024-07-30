@@ -49,6 +49,7 @@ class RegisteredUserController extends Controller
                 'last_name' => ['required'],
                 'sex' => ['required', 'in:male,female'],
                 'birthdate' => ['required', 'date'],
+                'resume' => ['required', 'file', 'mimes:pdf', 'max:2048'],
             ]);
         } else if ($role == 'employer') {
             $request->validate([
@@ -67,19 +68,28 @@ class RegisteredUserController extends Controller
             'created_at' => now()
         ]);
 
-        if ($role == 'applicant' && $request->hasFile('resume')) {
-            $file = $request->file('resume');
-            $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            $extension = $file->getClientOriginalExtension();
-            $path = "applicant-resume/$user->id/";
-            $filename = $originalName . '.' . $extension;
-            $counter = 1;
-            // Check if file with same name exists and increment the filename
-            while (Storage::exists($path . $filename)) {
-                $filename = $originalName . ' (' . $counter . ').' . $extension;
-                $counter++;
+        if ($role == 'applicant') {
+            if ($request->hasFile('resume')) {
+                $file = $request->file('resume');
+                $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $extension = $file->getClientOriginalExtension();
+                $path = "applicant-resume/$user->id/";
+                $filename = $originalName . '.' . $extension;
+                $counter = 1;
+                // Check if file with same name exists and increment the filename
+                while (Storage::exists($path . $filename)) {
+                    $filename = $originalName . ' (' . $counter . ').' . $extension;
+                    $counter++;
+                }
+                $file->storeAs($path, $filename);
+
+                $userResume = Resume::create([
+                    'user_id' => $user->id,
+                    'default' => 1,
+                    'file_path' => $path . $filename,
+                    'created_at' => now(),
+                ]);
             }
-            $file->storeAs($path, $filename);
 
             $userDetails = ApplicantDetail::create([
                 'first_name' => $request->first_name,
@@ -88,12 +98,6 @@ class RegisteredUserController extends Controller
                 'birthdate' => $request->birthdate,
                 'sex' => $request->sex,
                 'created_at' => now()
-            ]);
-            $userResume = Resume::create([
-                'user_id' => $user->id,
-                'default' => 1,
-                'file_path' => $path . $filename,
-                'created_at' => now(),
             ]);
         } else if ($role == 'employer') {
             $userDetails = EmployerDetail::create([
