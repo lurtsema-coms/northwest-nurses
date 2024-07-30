@@ -55,8 +55,8 @@ class EmpDashboardController extends Controller
             $renderedModuleTitle = view('components.employer.module-title', ['module_title' => 'Dashboard'])->render();
             $combinedContent = $renderedModuleTitle . $renderedView;
 
-            return response($combinedContent)
-                ->header('HX-Current-URL', 'employer-dashboard');
+        return response($combinedContent)
+            ->header('HX-Current-URL', 'employer-dashboard');
         } else {
             return view('layouts.employer.dashboard', $data);
         }

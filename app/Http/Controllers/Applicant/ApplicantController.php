@@ -157,11 +157,13 @@ class ApplicantController extends Controller
         // Set selected resume as default
         $selectedResume = Resume::where('user_id', $user_id)->findOrFail($id);
         $selectedResume->update(['default' => 1]);
-    
-        // Return the updated partial view for a specific resume and the update count
-        return view('components.applicant-resume.list-resume', [
-            'my_resume' => $selectedResume,
-        ])->render();
+
+        $data = [];
+        $data['my_resumes'] = Resume::where('user_id',auth()->user()->id)
+        ->whereNull('deleted_at')
+        ->get();
+        
+        return view('components.applicant-resume.default-resume', $data);
     }
 
     public function deleteResume($id)
