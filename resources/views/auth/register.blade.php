@@ -246,7 +246,7 @@
           });
 
           function updateFileName(files) {
-            // if (files && files[0] && files[0].type === 'application/pdf') {
+            if (files && files[0] && files[0].type === 'application/pdf') {
               let file = files[0];
               let fileName = file.name;
               let fileContentContainer = $('#file-content');
@@ -257,9 +257,9 @@
                 </svg>
                 <p class="mb-2 text-gray-500"><span class="font-semibold">${fileName}</span></p>
               `);
-            // } else {
-            //   alert("Please upload a valid PDF file.");
-            // }
+            } else {
+              alert("Please upload a valid PDF file.");
+            }
           }
 
         });
