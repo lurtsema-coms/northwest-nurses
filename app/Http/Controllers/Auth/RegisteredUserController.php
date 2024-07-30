@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\ApplicantDetail;
 use App\Models\EmployerDetail;
 use App\Models\User;
+use App\Models\Resume;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use Throwable;
@@ -65,7 +67,20 @@ class RegisteredUserController extends Controller
             'created_at' => now()
         ]);
 
-        if ($role == 'applicant') {
+        if ($role == 'applicant' && $request->hasFile('resume')) {
+            $file = $request->file('resume');
+            $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $extension = $file->getClientOriginalExtension();
+            $path = "applicant-resume/$user->id/";
+            $filename = $originalName . '.' . $extension;
+            $counter = 1;
+            // Check if file with same name exists and increment the filename
+            while (Storage::exists($path . $filename)) {
+                $filename = $originalName . ' (' . $counter . ').' . $extension;
+                $counter++;
+            }
+            $file->storeAs($path, $filename);
+
             $userDetails = ApplicantDetail::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
@@ -73,6 +88,12 @@ class RegisteredUserController extends Controller
                 'birthdate' => $request->birthdate,
                 'sex' => $request->sex,
                 'created_at' => now()
+            ]);
+            $userResume = Resume::create([
+                'user_id' => $user->id,
+                'default' => 1,
+                'file_path' => $path . $filename,
+                'created_at' => now(),
             ]);
         } else if ($role == 'employer') {
             $userDetails = EmployerDetail::create([
@@ -88,6 +109,7 @@ class RegisteredUserController extends Controller
             $user->sendEmailVerificationNotification();
         } catch (Throwable $e) {
             $userDetails->delete();
+            $userResume->delete();
             $user->delete();
             return redirect()->back()->with('error', 'Something went wrong. Please try again later...');
         }
