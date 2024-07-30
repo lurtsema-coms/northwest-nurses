@@ -142,7 +142,7 @@
                     <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                   </div>
               </div>
-              <div class="mb-2 mt-4">
+              <div class="mt-4 mb-2">
                 <x-input-label for="Resume" :value="__('Upload Resume:')" />
                 <div class="relative flex items-center justify-center w-full overflow-hidden">
                   <label for="dropzone-file" id="dropzone-parent" class="flex flex-col items-center justify-center w-full h-[6rem] border border-cyan-600  rounded-lg cursor-pointer bg-gray-50" draggable="true">
@@ -159,7 +159,7 @@
               </div>
             </div>
           </form>
-          <form method="POST" id="employerForm" x-show="role == 'employer'" action="{{ route('user.store','applicant') }}" class="flex flex-col justify-between w-full h-full">
+          <form method="POST" id="employerForm" x-show="role == 'employer'" action="{{ route('user.store','employer') }}" class="flex flex-col justify-between w-full h-full">
             @csrf
             <div class="w-full">
               <div class="flex flex-col sm:flex-row sm:gap-5">
@@ -283,7 +283,7 @@
                 }
               }
           }))
-      })
+        })
       </script>
     </body>
 </html>
