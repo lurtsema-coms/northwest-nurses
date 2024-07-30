@@ -40,6 +40,9 @@
                     <div class="flex flex-col w-full max-w-[28.9rem] space-y-2">
                         <span class="font-medium">Job Title</span>
                         <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="job_title" value="{{ $job_post->job_title }}" required>
+                        @error('job_title')
+                            <div class="text-red-600">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="font-medium">
@@ -49,44 +52,71 @@
                     <div class="flex flex-col flex-1 space-y-2">
                         <span class="font-medium">Profession</span>
                         <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="profession" value="{{ $job_post->profession }}" required>
+                        @error('profession')
+                            <div class="text-red-600">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="flex flex-col flex-1 space-y-2">
                         <span class="font-medium">Pay</span>
                         <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="pay" value="{{ $job_post->pay }}" required>
+                        @error('pay')
+                            <div class="text-red-600">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="flex flex-col flex-1 space-y-2">
                         <span class="font-medium">Assignment Length</span>
                         <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="assignment_length" value="{{ $job_post->assignment_length }}" required>
+                        @error('assignment_length')
+                            <div class="text-red-600">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="flex flex-wrap gap-5">
                     <div class="flex flex-col flex-1 space-y-2">
                         <span class="font-medium">Schedule</span>
                         <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="schedule" value="{{ $job_post->schedule }}" required>
+                        @error('schedule')
+                            <div class="text-red-600">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="flex flex-col flex-1 space-y-2">
                         <span class="font-medium">Openings</span>
                         <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="number" name="openings" value="{{ $job_post->openings }}" required>
+                        @error('openings')
+                            <div class="text-red-600">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="flex flex-col flex-1 space-y-2">
                         <span class="font-medium">Start Date</span>
                         <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="date" name="start_date" value="{{ $job_post->start_date }}" required>
+                        @error('start_date')
+                            <div class="text-red-600">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="flex flex-wrap gap-5">
                     <div class="flex flex-col flex-1 space-y-2">
                         <span class="font-medium">Experience</span>
                         <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="experience" value="{{ $job_post->experience }}" required>
+                        @error('experience')
+                            <div class="text-red-600">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="flex flex-col flex-1 space-y-2">
                         <span class="font-medium">Address</span>
                         <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="address" value="{{ $job_post->address }}" required>
+                        @error('address')
+                            <div class="text-red-600">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="flex flex-wrap gap-5">
                     <div class="flex flex-col flex-1 space-y-2">
                         <span class="font-medium">Question 1</span>
                         <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="question_1" value="{{ $job_post->question_1 }}" required>
+                        @error('question_1')
+                            <div class="text-red-600">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="flex flex-col flex-1 space-y-2">
                         <span class="font-medium">Question 2 (Optional)</span>
@@ -101,18 +131,27 @@
                     <div class="flex flex-col flex-1 space-y-2">
                         <span class="font-medium">Job Description</span>
                         <textarea class="px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" name="job_description" id="" rows="7" required>{{ $job_post->job_description }}</textarea>
+                        @error('job_description')
+                            <div class="text-red-600">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="flex flex-wrap gap-5">
                     <div class="flex flex-col flex-1 space-y-2">
                         <span class="font-medium">Responsibilities</span>
                         <textarea class="px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" name="responsibilities" id="" rows="7" required>{{ $job_post->responsibilities }}</textarea>
+                        @error('responsibilities')
+                            <div class="text-red-600">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="flex flex-wrap gap-5">
                     <div class="flex flex-col flex-1 space-y-2">
                         <span class="font-medium">Requirements</span>
                         <textarea class="px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" name="requirements" id="" rows="7" required>{{ $job_post->requirements }}</textarea>
+                        @error('requirements')
+                            <div class="text-red-600">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="flex flex-wrap gap-5">

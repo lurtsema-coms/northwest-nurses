@@ -159,6 +159,22 @@ class EmpPostJobController extends Controller
             return redirect()->back()->with('error', 'Your app has been failed to add jobs. Upload image only');
         }
 
+        $request->validate([
+            'job_title' => ['required'],
+            'profession' => ['required'],
+            'pay' => ['required'],
+            'assignment_length' => ['required'],
+            'schedule' => ['required'],
+            'openings' => ['required'],
+            'start_date' => ['required', 'date'], 
+            'experience' => ['required'],
+            'address' => ['required'],
+            'question_1' => ['required'],
+            'job_description' => ['required'],
+            'responsibilities' => ['required'],
+            'requirements' => ['required'],
+        ]);
+
         $job_posting = new JobPosting([
             'job_title' => $input['job_title'],
             'profession' => $input['profession'],
@@ -291,6 +307,23 @@ class EmpPostJobController extends Controller
         if($job_posting->get_applicants_post_count > 0){
             return redirect()->back()->with('error', 'Your app has been failed to update.');
         }
+
+        $request->validate([
+            'job_title' => ['required'],
+            'profession' => ['required'],
+            'pay' => ['required'],
+            'assignment_length' => ['required'],
+            'schedule' => ['required'],
+            'openings' => ['required'],
+            'start_date' => ['required', 'date'], 
+            'experience' => ['required'],
+            'address' => ['required'],
+            'question_1' => ['required'],
+            'job_description' => ['required'],
+            'responsibilities' => ['required'],
+            'requirements' => ['required'],
+        ]);
+
 
 
         if(isset($input['img_link'])){
