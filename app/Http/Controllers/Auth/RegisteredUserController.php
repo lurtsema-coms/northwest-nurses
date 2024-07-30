@@ -110,15 +110,12 @@ class RegisteredUserController extends Controller
 
         try {
             event(new Registered($user));
-            $user->sendEmailVerificationNotification();
+            return redirect()->route('register')->with('success', 'A verification link has been sent to your email address. Please verify your email address to continue.');
         } catch (Throwable $e) {
             $userDetails->delete();
             $userResume->delete();
             $user->delete();
             return redirect()->back()->with('error', 'Something went wrong. Please try again later...');
         }
-
-
-        return redirect()->route('verification.notice');
     }
 }

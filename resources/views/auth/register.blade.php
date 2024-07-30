@@ -75,6 +75,22 @@
               </div>
             </div>
           @endif   
+          @if(session('success'))
+            <div id="dismiss-toast" class="w-full mb-5 text-sm text-white bg-green-500 shadow-lg rounded-xl" role="alert" tabindex="-1" aria-labelledby="hs-toast-solid-color-green-label">
+              <div id="hs-toast-solid-color-green-label" class="flex p-4">
+                {{ session('success') }}
+                <div class="ms-auto">
+                  <button type="button" class="inline-flex items-center justify-center text-white rounded-lg opacity-50 shrink-0 size-5 hover:text-white hover:opacity-100 focus:outline-none focus:opacity-100" aria-label="Close" data-hs-remove-element="#dismiss-toast">
+                    <span class="sr-only">Close</span>
+                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M18 6 6 18"></path>
+                      <path d="m6 6 12 12"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          @endif
           <form method="POST" id="applicantForm" x-show="role == 'applicant'" action="{{ route('user.store','applicant') }}" enctype="multipart/form-data" class="flex flex-col justify-between w-full h-full">
             @csrf
             <div class="w-full">
