@@ -10,4 +10,8 @@ class JobApplicationAttachment extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function resume() {
+        return $this->belongsTo(Resume::class);
+    }
 }

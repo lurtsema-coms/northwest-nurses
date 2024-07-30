@@ -65,6 +65,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/employer-profile/update/{id}', [EmpProfileController::class, 'update'])->name('employer.profile.update');
         Route::post('/employer-profile/update-password/{id}', [EmpProfileController::class, 'updatePassword'])->name('employer.update.password');
         Route::post('/employer-profile/update-email/{id}', [EmpProfileController::class, 'updateEmail'])->name('employer.update.email');
+
         // Manage Employees
         Route::get('/employer-manage-employee', [ManageEmployeeController::class, 'index'])->name('employer.m-employee');
         Route::get('/employer-manage-employee/remove/{id}', [ManageEmployeeController::class, 'remove'])->name('employer.m-employee-remove');
@@ -79,13 +80,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::put('/my-profile/add-resume/{id}', [ApplicantController::class, 'addResume'])->name('applicant.profile.add-resume');
         Route::get('/my-profile/default-resume/{id}', [ApplicantController::class, 'defaultResume'])->name('applicant.default.resume');
         Route::get('/my-profile/delete-resume/{id}', [ApplicantController::class, 'deleteResume'])->name('applicant.profile.delete-resume');
-        Route::get('/my-profile/download', [ApplicantController::class, 'downloadResume'])->name('applicant.profile.download-resume');
-
 
         Route::post('/my-profile/update-email/{id}', [ApplicantController::class, 'updateEmail'])->name('applicant.update.email');
         Route::get('/job-info/get-questions/{id}', [ApplicantController::class, 'getQuestions'])->name('applicant.get-questions');
         Route::post('/job-info/apply-job/{id}', [ApplicantController::class, 'applyJob'])->name('applicant.apply-job');
     });
+
+    Route::get('/my-profile/download', [ApplicantController::class, 'downloadResume'])->name('applicant.profile.download-resume');
 });
 
 Route::get('/email/verify', [EmailVerificationPromptController::class, '__invoke'])

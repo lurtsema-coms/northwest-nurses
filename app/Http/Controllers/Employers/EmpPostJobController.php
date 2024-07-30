@@ -108,6 +108,7 @@ class EmpPostJobController extends Controller
             },
             'getApplicantsPost.getApplicantsInformation',
             'getApplicantsPost.jobApplicationAttachments',
+            'getApplicantsPost.jobApplicationAttachments.resume',
             'requiredAttachment'
         ])->findOrFail($id);
 

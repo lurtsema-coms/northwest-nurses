@@ -176,7 +176,6 @@ class ApplicantController extends Controller
 
     public function downloadResume(Request $request)
     {
-
         $download = storage_path("app/$request->file_path");
         return Response::download($download);
     }
@@ -206,24 +205,32 @@ class ApplicantController extends Controller
 
     public function getQuestions(Request $request, $id)
     {
-        $jobPost = JobPosting::with('requiredAttachment')->findOrFail($id);
-        return view('components.find-job-page.question-modal', ['jobPost' => $jobPost]);
+        $user_id = auth()->user()->id;
+
+        $data = [];
+        $data['jobPost'] = JobPosting::with('requiredAttachment')->findOrFail($id);
+        $data['my_resumes'] = Resume::where('user_id',auth()->user()->id)
+        ->whereNull('deleted_at')
+        ->get();
+
+        return view('components.find-job-page.question-modal', $data);
     }
 
     public function applyJob(Request $request, $id)
     {
+        
         $user_id = auth()->user()->id;
-
+        
         $form = $request->all();
         $attachments = $form['attachments'] ?? null;
-
+        
         $isExisting = JobApplication::where([
             'job_posting_id' => $id,
             'created_by' => $user_id
         ])->exists();
-
+            
         if ($isExisting) abort(400);
-
+        
         $application = JobApplication::create([
             'job_posting_id' => $id,
             'status' => 'APPLIED',
@@ -235,6 +242,12 @@ class ApplicantController extends Controller
         ]);
 
         $jobPost = JobPosting::with('requiredAttachment')->applicationInfo()->findOrFail($id);
+
+        // Resume
+        $job_attachment = JobApplicationAttachment::create([
+            'job_application_id' => $application->id,
+            'resume_id' => (int) $form['resume_id']
+        ]);
 
         // Upload Attachments
         if (!empty($attachments)) {
@@ -265,8 +278,7 @@ class ApplicantController extends Controller
                 $uploaded_paths[] = asset("$f_path/$file_name");
             }
 
-            JobApplicationAttachment::create([
-                'job_application_id' => $application->id,
+            $job_attachment->update([
                 'required_attachment_id' => $jobPost->requiredAttachment->id,
                 'file_names' => implode(",", $uploaded_names),
                 'file_paths' => implode(",", $uploaded_paths),
