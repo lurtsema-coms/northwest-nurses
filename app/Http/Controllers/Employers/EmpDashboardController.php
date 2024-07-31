@@ -84,6 +84,7 @@ class EmpDashboardController extends Controller
         $data = [];
         $data['applied_applicants'] = JobApplication::leftJoin('job_postings', 'job_postings.id', 'job_applications.job_posting_id')
             ->leftJoin('users','users.id', 'job_applications.created_by')
+            ->leftJoin('applicant_details', 'applicant_details.user_id', 'job_applications.created_by' )
             ->select(
                 'job_postings.*',
                 'job_applications.job_posting_id as posting_id',
@@ -93,11 +94,14 @@ class EmpDashboardController extends Controller
                 'job_applications.created_at as applied_at',
                 'job_applications.created_by as applied_by',
                 'users.email',
+                'applicant_details.first_name',
+                'applicant_details.last_name',
             )
             ->where('job_postings.created_by',$userId )
             ->where('job_applications.status','APPLIED')
             ->orderBy('job_applications.created_at', 'desc')
             ->get();
+        
 
         return view('components.employer.custom.employer-notification', $data);
 
