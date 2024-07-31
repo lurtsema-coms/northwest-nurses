@@ -39,7 +39,7 @@
                 <p class="font-bold" for="">File Attachment</p>
                 <div class="space-y-2">
                     <label for="">Resume</label>
-                    <select class="w-full px-2 border border-gray-200 rounded-lg" name="resume_id" id="selected-resume">
+                    <select class="w-full px-2 border border-gray-200 rounded-lg" name="resume_id" id="selected-resume" required>
                         @foreach ($my_resumes as $resume)
                             @php
                                 $item = explode('/', $resume->file_path);
