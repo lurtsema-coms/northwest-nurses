@@ -12,6 +12,19 @@
             <span>Back to Jobs</span>
         </span>
     </div>
+    {{-- View Resume --}}
+    <div class="fixed inset-0 z-10 hidden w-full h-screen p-4 overflow-y-auto bg-black bg-opacity-75 modal-center show-resume">
+        <div class="w-full max-w-4xl m-auto bg-white rounded-lg shadow-lg modal-box animate-fade-in">
+            <div class="flex flex-col p-3 modal-content">
+                <div class="">
+                    <embed src="" id="pdfShow" width="100%" height="700px"></embed>
+                </div>
+                <div class="flex flex-row justify-center gap-10 p-2 ">
+                    <button type="button" class="px-4 py-2 font-semibold text-white bg-cyan-800 btn-close-resume">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="mb-5 font-medium text-center">
         <p>Job Title: <span class="">{{ $job_posts->job_title }}</span></p>
         <p>Job ID: <span class="">{{ $job_posts->job_id }}</span></p>
@@ -67,7 +80,7 @@
                                     @php
                                         $resume = $job_posts->getApplicantsPost[$i]->jobApplicationAttachments->first()->resume->file_path;
                                     @endphp
-                                    <p>Resume: <a href="{{ route('applicant.profile.download-resume', ['file_path' => $resume]) }}" class="text-blue-600 cursor-pointer hover:underline">Download Resume</a></p>
+                                    <p>Resume: <a data-file-path="{{ $resume }}" href="#" class="text-blue-600 cursor-pointer view-resume hover:underline">View Resume</a></p>
                                 @endif
                                 @if ($job_posts->getApplicantsPost[$i]->jobApplicationAttachments->isNotEmpty())
                                     @php
@@ -148,6 +161,19 @@
                     form.off('submit').submit();
                 });
             }
+        });
+
+        $('.view-resume').on('click', function(){
+            const resumePath = $(this).data('file-path');
+            const route = `{{ route('showResume') }}?file_path=${resumePath}`;
+            $('#pdfShow').attr('src', route);
+            console.log(resumePath);
+            $('.show-resume').show();
+        });
+
+        $('.btn-close-resume').on('click', function(){
+            $('.show-resume').hide();
+            $('#pdfShow').attr('src', '');
         });
     });
 </script>
