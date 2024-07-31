@@ -63,21 +63,25 @@
                             @endif
                             <div>
                                 <p class="font-medium text-slate-600">Attachments:</p>
-                                @php
-                                    $resume = $job_posts->getApplicantsPost[$i]->jobApplicationAttachments->first()->resume->file_path;
-                                @endphp
-                                <p>Resume: <a href="{{ route('applicant.profile.download-resume', ['file_path' => $resume]) }}" class="text-blue-600 cursor-pointer hover:underline">Download Resume</a></p>
+                                @if ($job_posts->getApplicantsPost[$i]->jobApplicationAttachments->first())                                    
+                                    @php
+                                        $resume = $job_posts->getApplicantsPost[$i]->jobApplicationAttachments->first()->resume->file_path;
+                                    @endphp
+                                    <p>Resume: <a href="{{ route('applicant.profile.download-resume', ['file_path' => $resume]) }}" class="text-blue-600 cursor-pointer hover:underline">Download Resume</a></p>
+                                @endif
                                 @if ($job_posts->getApplicantsPost[$i]->jobApplicationAttachments->isNotEmpty())
                                     @php
                                         $attachment = explode(',', $job_posts->getApplicantsPost[$i]->jobApplicationAttachments->first()->file_paths);
                                     @endphp
-                                    @foreach (explode(',', $job_posts->requiredAttachment->label) as $index => $ra)
-                                        <p>{{ $ra }}:
-                                            <a href="{{ $attachment[$index] }}" download="{{ basename($attachment[$index]) }}" class="text-blue-600 hover:underline">
-                                                Download Attached File
-                                            </a>
-                                        </p>
-                                    @endforeach
+                                    @if ($job_posts->requiredAttachment)
+                                        @foreach (explode(',', $job_posts->requiredAttachment->label) as $index => $ra)
+                                            <p>{{ $ra }}:
+                                                <a href="{{ $attachment[$index] }}" download="{{ basename($attachment[$index]) }}" class="text-blue-600 hover:underline">
+                                                    Download Attached File
+                                                </a>
+                                            </p>
+                                        @endforeach
+                                    @endif
                                 @else
                                     <p>No attachments available.</p>
                                 @endif
