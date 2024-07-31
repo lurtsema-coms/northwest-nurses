@@ -38,7 +38,18 @@
 		</div>
 	</div>
 </div>
-
+<div class="fixed inset-0 z-10 hidden w-full h-screen p-4 overflow-y-auto bg-black bg-opacity-75 modal-center show-resume">
+	<div class="w-full max-w-lg m-auto bg-white rounded-lg shadow-lg modal-box animate-fade-in">
+		<div class="flex flex-col p-3 modal-content">
+			<div class="">
+				<embed src="" id="pdfShow" width="100%" height="700px"></embed>
+			</div>
+			<div class="flex flex-row justify-center gap-10 p-2 ">
+				<button type="button" class="px-4 py-2 font-semibold text-white bg-cyan-800 btn-close-resume">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
 <div class="fixed inset-0 z-10 hidden w-full h-screen p-4 overflow-y-auto bg-black bg-opacity-75 modal-center change-email ">
 	<div class="w-full max-w-lg m-auto bg-white rounded-lg shadow-lg modal-box animate-fade-in">
 		<div class="flex flex-col p-3 modal-content">
@@ -381,14 +392,6 @@
 				updateFileName(files);
 			});
 
-			// $('.dropdown').on('click', function(event) {
-			// 	event.stopPropagation();
-			// 	$(this).find('.dropdown-menu').toggle();
-			// });
-
-			// $(document).on('click', function() {
-			// 	$('.dropdown-menu').hide();
-			// });
 
 			// Toggle dropdown menu
 			$(document).on('click', '.dropdown svg', function(event) {
@@ -453,6 +456,21 @@
 				const route = `{{ route('applicant.profile.download-resume') }}?file_path=${filePath}`;
 				location.assign(route);
 			});
+
+			$('.view-resume').on('click', function(){
+				const resumePath = $(this).data('file-path');
+				const route = `{{ route('showResume') }}?file_path=${resumePath}`;
+				// const route = "{{ route('showResume', ':resumePath') }}".replace(':resumePath', resumePath);
+				$('#pdfShow').attr('src', route);
+				console.log(resumePath);
+				$('.show-resume').show();
+			});
+
+			$('.btn-close-resume').on('click', function(){
+				$('.show-resume').hide();
+				$('#pdfShow').attr('src', '');
+			});
+
 			
 			function logoutWithDelay() {
 				setTimeout(function(){

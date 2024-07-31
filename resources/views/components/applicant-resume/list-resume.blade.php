@@ -12,7 +12,9 @@
                         <span class="inline-block px-4 py-2 m-auto mb-1 text-sm font-semibold text-black bg-gray-200 rounded">Default</span>
                     @endif
                     <div>
-                        <h1 class="max-w-[200px] sm:max-w-[300px] whitespace-nowrap overflow-hidden text-ellipsis text-lg font-semibold my-1">{{basename($my_resume->file_path)}}</h1>
+                        <div class="cursor-pointer hover:bg-gray-200 view-resume" data-file-path="{{ $my_resume->file_path }}">
+                            <h1 class="max-w-[200px] sm:max-w-[300px] whitespace-nowrap overflow-hidden text-ellipsis text-lg font-semibold my-1">{{basename($my_resume->file_path)}}</h1>
+                        </div>
                         <span class="text-gray-500">Added about</span>
                         <span class="text-gray-500 timeago " datetime="{{ $my_resume->created_at }} {{ config('app.timezone') }}"></span>
                     </div>

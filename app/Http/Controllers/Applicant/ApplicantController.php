@@ -147,6 +147,15 @@ class ApplicantController extends Controller
         return redirect()->back()->with('error', 'Please upload a valid resume.');
     }
 
+    public function showResume(Request $request)
+    {
+        // $fileContents = Storage::get($file_path);
+        $fileContents = storage_path("app/$request->file_path");
+
+        return response()->file($fileContents);
+
+    }
+
     public function defaultResume(Request $request, string $id)
     {
         $user_id = auth()->user()->id;
