@@ -13,7 +13,6 @@
                 <span>Back to Jobs</span>
             </span>
         </div>
-        @dump($errors->all())
         <form id="add-form" action="{{ route('employer.job.add-jobs') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="w-full">
