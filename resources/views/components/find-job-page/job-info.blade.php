@@ -10,39 +10,39 @@
             <div class="flex flex-col justify-between gap-5 mt-5 sm:flex-row">
                 <p class="text-gray-500">Job ID: {{ $selectedJobPost->job_id }}</p>
                 @auth
-                @role('applicant')
-                @if (
-                \App\Models\JobApplication::where('created_by', auth()->user()->id)
-                    ->where('job_posting_id', $selectedJobPost->id)
-                    ->exists()
-                )
-                <button 
-                    class="px-5 py-2 text-white rounded-full opacity-75 bg-primary" 
-                    disabled
-                >Applied ✓</button>
-                @else
-                <button 
-                    id="apply-now-btn" 
-                    class="px-5 py-2 text-white rounded-full bg-primary hover:opacity-75" 
-                    data-entry-id="{{ $selectedJobPost->id }}" 
-                    data-href="{{ route('applicant.get-questions', $selectedJobPost->id ) }}"
-                    hx-get="{{ route('applicant.get-questions', $selectedJobPost->id ) }}"
-                    hx-target="#modal-center"
-                    hx-disabled-elt="this"
-                    hx-indicator="#apply-now-btn > .htmx-indicator"
-                    onclick="$('body').addClass('overflow-hidden')"
-                >
-                    Apply Now
-                    <svg class="w-5 h-5 text-white animate-spin htmx-indicator" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>            
-                </button>
-                @endif
-                @endrole
-                @role('employer')
-                <button class="px-5 py-2 text-white rounded-full opacity-75 bg-primary hover:opacity-75" disabled>Apply Now</button>
-                @endrole
+                    @role('applicant')
+                        @if (
+                        \App\Models\JobApplication::where('created_by', auth()->user()->id)
+                            ->where('job_posting_id', $selectedJobPost->id)
+                            ->exists()
+                        )
+                            <button 
+                                class="px-5 py-2 text-white rounded-full opacity-75 bg-primary" disabled>Applied ✓</button>
+                        @elseif (auth()->user()->email_verified_at)
+                            <button 
+                                id="apply-now-btn" 
+                                class="px-5 py-2 text-white rounded-full bg-primary hover:opacity-75" 
+                                data-entry-id="{{ $selectedJobPost->id }}" 
+                                data-href="{{ route('applicant.get-questions', $selectedJobPost->id ) }}"
+                                hx-get="{{ route('applicant.get-questions', $selectedJobPost->id ) }}"
+                                hx-target="#modal-center"
+                                hx-disabled-elt="this"
+                                hx-indicator="#apply-now-btn > .htmx-indicator"
+                                onclick="$('body').addClass('overflow-hidden')"
+                            >
+                                Apply Now
+                                <svg class="w-5 h-5 text-white animate-spin htmx-indicator" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>            
+                            </button>
+                        @else
+                        <a href="/verify-email" class="px-5 py-2 text-center text-white rounded-full bg-primary hover:opacity-75">Verify Email to Apply</a>
+                        @endif
+                    @endrole
+                    @role('employer')
+                        <button class="px-5 py-2 text-white rounded-full opacity-75 bg-primary hover:opacity-75" disabled>Apply Now</button>
+                    @endrole
                 @endauth
                 @guest
                 <a href="/login" class="px-5 py-2 text-center text-white rounded-full bg-primary hover:opacity-75">Login to Apply</a>
