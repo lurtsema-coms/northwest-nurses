@@ -238,7 +238,12 @@ class EmpPostJobController extends Controller
         $user->delete();
         $user->update(['status' => 'INACTIVE']);
 
-        return true;
+        // Flash a session message
+        session()->flash('success', 'App successfully deleted');
+        
+        // Return a JSON response
+        return response()->json(['success' => true]);
+
     }
 
     /**
