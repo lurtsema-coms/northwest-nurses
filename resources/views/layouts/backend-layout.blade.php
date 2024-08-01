@@ -20,6 +20,10 @@
         <script src="https://unpkg.com/htmx.org@1.9.12"></script>
         <!-- Include timeago.js -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js"></script>
+        <!-- Alpine Plugins -->
+        <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/sort@3.x.x/dist/cdn.min.js"></script>
+        <!-- Alpine Core -->
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
         
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -36,11 +40,11 @@
             }
         </style>
     </head>
-    <body class="min-h-screen bg-gray-100 font-sans text-gray-100 antialiased">
+    <body class="min-h-screen font-sans antialiased text-gray-100 bg-gray-100">
         <div class="flex overflow-hidden sm:overflow-visible">
             @yield('sidebar')
             {{-- Main Content --}}
-            <div class="flex-1 pl-7 min-w-72 relative">
+            <div class="relative flex-1 pl-7 min-w-72">
                 {{-- Top Bar --}}
                 @yield('topbar')
                 {{-- Body Content --}}
