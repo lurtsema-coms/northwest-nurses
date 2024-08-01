@@ -35,7 +35,7 @@
     <div class="space-y-7">
         @if (count($applicants) > 0)
             @for ($i=0; $i<count($applicants); $i++)
-            <form action="{{ route('employer.job.edit-applicant', $applicants[$i]->id) }}" method="POST" id="edit-form">
+            <form action="{{ route('employer.job.edit-applicant', $applicants[$i]->id) }}" method="POST" class="edit-form" id="edit-form">
                 @csrf
                 <input type="hidden" name="action-btn">
                 <div class="relative p-[1px] bg-gray-300 rounded-lg hover:shadow-lg">
@@ -132,7 +132,7 @@
             timeago.render(timeagoNodes);
         }
 
-        $('#edit-form').on('submit', function(event){
+        $('.edit-form').on('submit', function(event){
             event.preventDefault();
             const form = $(this);
 

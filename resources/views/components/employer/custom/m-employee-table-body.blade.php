@@ -1,22 +1,22 @@
-<div class="mx-auto overflow-x-auto overflow-hidden rounded-md shadow-sm"w>
+<div class="mx-auto overflow-hidden overflow-x-auto rounded-md shadow-sm"w>
     <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
             <tr>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date Applied</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date Hired</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Job Title</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sex</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Birth Date</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact Number</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Date Applied</th>
+                <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Date Hired</th>
+                <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Email</th>
+                <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Name</th>
+                <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Job Title</th>
+                <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Sex</th>
+                <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Birth Date</th>
+                <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Contact Number</th>
+                <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Action</th>
             </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
         @foreach ($applicants as $applicant)
             <tr >
-                <td class="px-6 py-4 text-sm whitespace-nowrap font-medium">{{date('Y-m-d', strtotime($applicant->applied_at))}}</td>
+                <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">{{date('Y-m-d', strtotime($applicant->applied_at))}}</td>
                 <td class="px-6 py-4 text-sm whitespace-nowrap">{{$applicant->hired_at}}</td>
                 <td class="px-6 py-4 text-sm whitespace-nowrap">{{$applicant->email}}</td>
                 <td class="px-6 py-4 text-sm whitespace-nowrap">{{"$applicant->first_name $applicant->last_name"}}</td>
@@ -26,7 +26,7 @@
                 <td class="px-6 py-4 text-sm whitespace-nowrap">{{$applicant->contact_number}}</td>
                 <td class="px-6 py-4 text-sm whitespace-nowrap">
                     <div class="flex gap-2">
-                        <a class="bg-red-500 text-gray-50 px-3 py-1 rounded-md shadow-md hover:bg-red-400"
+                        <a class="px-3 py-1 bg-red-500 rounded-md shadow-md text-gray-50 hover:bg-red-400"
                             href="{{ route('employer.m-employee-remove', $applicant->application_id) }}">
                             Remove
                     </a>
@@ -49,7 +49,7 @@
 @endphp
 
 @if (($applicants->count() < $paginate) && $page < 2 )
-    <p class="text-sm text-gray-700 mt-2">
+    <p class="mt-2 text-sm text-gray-700">
         Showing {{ $firstItem ?? 0 }} to {{ $lastItem ?? 0 }} of {{ $total }} results
     </p>
 @endif

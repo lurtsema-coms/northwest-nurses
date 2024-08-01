@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Employers;
 use App\Http\Controllers\Controller;
 use App\Models\JobApplication;
 use App\Models\JobPosting;
+use Illuminate\Contracts\Queue\Job;
 use Illuminate\Http\Request;
 
 class ManageEmployeeController extends Controller
 {
-    
+
     public function index(Request $request)
     {
         $data = [];
@@ -17,7 +18,7 @@ class ManageEmployeeController extends Controller
         $data['paginate'] = 10;
         $userId = auth()->user()->id;
         $query = JobApplication::leftJoin('job_postings', 'job_postings.id', 'job_applications.job_posting_id')
-            ->leftJoin('users','users.id', 'job_applications.created_by')
+            ->leftJoin('users', 'users.id', 'job_applications.created_by')
             ->leftJoin('applicant_details', 'applicant_details.id', 'job_applications.created_by')
             ->select(
                 'job_postings.*',
@@ -35,11 +36,11 @@ class ManageEmployeeController extends Controller
                 'applicant_details.birthdate',
                 'applicant_details.sex',
             )
-            ->where('job_postings.created_by',$userId )
-            ->where('job_applications.status','APPROVED')
+            ->where('job_postings.created_by', $userId)
+            ->where('job_applications.status', 'APPROVED')
             ->orderBy('job_applications.created_at', 'desc');
 
-        if ($request->has('paginate')){
+        if ($request->has('paginate')) {
             $data['paginate'] = $request->input('paginate');
         }
 
@@ -65,11 +66,17 @@ class ManageEmployeeController extends Controller
         }
     }
 
-    public function remove($id){
+    public function remove($id)
+    {
         $job_application = JobApplication::find($id);
-        $job_application->update([
+
+        $job_posting = JobPosting::find($job_application->job_posting_id);
+        if ($job_posting->created_by !== auth()->user()->id) {
+            abort(403);
+        }
+        $job_application?->update([
             'status' => 'REMOVED'
-        ]);    
+        ]);
 
         return redirect(route('employer.m-employee'))->with('success', 'Applicant has been removed.');
     }

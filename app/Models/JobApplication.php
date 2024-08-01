@@ -9,6 +9,20 @@ class JobApplication extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $casts = [
+        'status_history' => 'array',
+    ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::updating(function ($model) {
+            if ($model->isDirty('status')) {
+                $model->appendStatus($model->status);
+            }
+        });
+    }
 
     public function user()
     {
@@ -25,5 +39,12 @@ class JobApplication extends Model
     public function jobApplicationAttachments()
     {
         return $this->hasMany(JobApplicationAttachment::class, 'job_application_id');
+    }
+
+    public function appendStatus($status)
+    {
+        $status_history = $this->status_history;
+        $status_history[] = [date('Y-m-d H:i:s') => $status];
+        $this->status_history = $status_history;
     }
 }

@@ -24,12 +24,11 @@ class EmpPostJobController extends Controller
         $data = [];
         $data['module_title'] = 'Jobs';
         $data['paginate'] = 10;
-        $query = JobPosting::
-            where('created_by', auth()->user()->id)
+        $query = JobPosting::where('created_by', auth()->user()->id)
             ->withCount('getApplicantsPost')
             ->orderBy('id', 'desc');
 
-        if ($request->has('paginate')){
+        if ($request->has('paginate')) {
             $data['paginate'] = $request->input('paginate');
         }
 
@@ -61,8 +60,7 @@ class EmpPostJobController extends Controller
         $paginate = $request->input('paginate') ?? 10;
         $data['paginate'] = $paginate;
 
-        $query = JobPosting::
-            where('created_by', auth()->user()->id)
+        $query = JobPosting::where('created_by', auth()->user()->id)
             ->withCount('getApplicantsPost')
             ->orderBy('id', 'desc');
 
@@ -124,13 +122,13 @@ class EmpPostJobController extends Controller
             'applicant_information' => []
         ];
 
-        foreach($data['applicants'] as $ap){
+        foreach ($data['applicants'] as $ap) {
             $data['applicant_information'][] = $ap->getApplicantsInformation;
         }
 
         if ($request->header('HX-Request')) {
             return view('components.employer.emp-applicant', $data)->render() . view('components.employer.module-title', $data);
-        }else{
+        } else {
             return view('layouts.employer.jobs-applicant', $data);
         }
     }
@@ -149,13 +147,13 @@ class EmpPostJobController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        
+
         $unique_id = uniqid();
 
         $file_img = $input['img_link'];
         $mime_type_img = $file_img->getClientMimeType();
-        
-        if(!(str_starts_with($mime_type_img, 'image/'))){
+
+        if (!(str_starts_with($mime_type_img, 'image/'))) {
             return redirect()->back()->with('error', 'Your app has been failed to add jobs. Upload image only');
         }
 
@@ -166,7 +164,7 @@ class EmpPostJobController extends Controller
             'assignment_length' => ['required'],
             'schedule' => ['required'],
             'openings' => ['required'],
-            'start_date' => ['required', 'date'], 
+            'start_date' => ['required', 'date'],
             'experience' => ['required'],
             'address' => ['required'],
             'question_1' => ['required'],
@@ -199,7 +197,7 @@ class EmpPostJobController extends Controller
 
         $job_posting->save();
 
-        if(!empty($input['attachments'])) {
+        if (!empty($input['attachments'])) {
             RequiredAttachment::create([
                 'job_posting_id' => $job_posting->id,
                 'label' => implode(',', $input['attachments']),
@@ -240,10 +238,9 @@ class EmpPostJobController extends Controller
 
         // Flash a session message
         session()->flash('success', 'App successfully deleted');
-        
+
         // Return a JSON response
         return response()->json(['success' => true]);
-
     }
 
     /**
@@ -303,13 +300,13 @@ class EmpPostJobController extends Controller
     public function update(Request $request, string $id)
     {
         $input = $request->all();
-        
+
         $job_posting = JobPosting::where('id', $id)
             ->withCount('requiredAttachment', 'getApplicantsPost')
             ->get()
             ->first();
-        
-        if($job_posting->get_applicants_post_count > 0){
+
+        if ($job_posting->get_applicants_post_count > 0) {
             return redirect()->back()->with('error', 'Your app has been failed to update.');
         }
 
@@ -320,7 +317,7 @@ class EmpPostJobController extends Controller
             'assignment_length' => ['required'],
             'schedule' => ['required'],
             'openings' => ['required'],
-            'start_date' => ['required', 'date'], 
+            'start_date' => ['required', 'date'],
             'experience' => ['required'],
             'address' => ['required'],
             'question_1' => ['required'],
@@ -331,13 +328,13 @@ class EmpPostJobController extends Controller
 
 
 
-        if(isset($input['img_link'])){
+        if (isset($input['img_link'])) {
             $file_name = $job_posting->file_name;
             $file_img = $input['img_link'];
 
             // Validates image
             $mime_type_img = $file_img->getClientMimeType();
-            if(!(str_starts_with($mime_type_img, 'image/'))){
+            if (!(str_starts_with($mime_type_img, 'image/'))) {
                 return redirect()->back()->with('error', 'Your app has been failed to update jobs. Upload image only');
             }
 
@@ -374,12 +371,12 @@ class EmpPostJobController extends Controller
             'updated_by' => auth()->user()->id,
         ]);
 
-        if(!$job_posting->requiredAttachment && !empty($input['attachments'])) {
+        if (!$job_posting->requiredAttachment && !empty($input['attachments'])) {
             RequiredAttachment::create([
                 'job_posting_id' => $job_posting->id,
                 'label' => implode(',', $input['attachments']),
             ]);
-        } elseif($job_posting->requiredAttachment && !empty($input['attachments'])){
+        } elseif ($job_posting->requiredAttachment && !empty($input['attachments'])) {
             $job_posting->requiredAttachment->update([
                 'label' => implode(',', $input['attachments'])
             ]);
@@ -388,7 +385,7 @@ class EmpPostJobController extends Controller
                 'label' => null
             ]);
         }
-        
+
         return redirect(route('employer.job'))->with('success', 'Your app has been successfully updated.');
     }
 
@@ -404,14 +401,14 @@ class EmpPostJobController extends Controller
     {
         $input = $request->all();
         $job_application = JobApplication::find($id);
-        
+
         $job_application->update([
             'status' => $input['action-btn'],
             'updated_by' => auth()->user()->id,
             'updated_at' => date('Y-m-d')
         ]);
 
-        if($input['action-btn'] == 'APPROVED' ) {
+        if ($input['action-btn'] == 'APPROVED') {
             $job_application->update([
                 'hired_by' => auth()->user()->id,
                 'hired_at' => date('Y-m-d')
