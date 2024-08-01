@@ -120,6 +120,10 @@ class ApplicantController extends Controller
 
     public function addResume(Request $request, $id)
     {
+        $request->validate([
+            'resume' => 'required|mimes:pdf|max:2048',
+        ]);
+
         if ($request->hasFile('resume')) {
             $file = $request->file('resume');
             $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
