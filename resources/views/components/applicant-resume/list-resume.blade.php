@@ -1,5 +1,5 @@
 @foreach ($my_resumes as $my_resume)
-    <div class="relative flex items-center justify-center w-full mt-5 overflow-hidden sm:w-2/3 " data-id="{{ $my_resume->id }}">
+    <div class="relative flex items-center justify-center w-full mt-5 overflow-hidden lg:w-2/3 " data-id="{{ $my_resume->id }}">
         <label  class="flex items-center w-full h-[8rem] border-2 border-gray-300 rounded-lg bg-gray-50 py-5 px-5 lg:px-16	">
             <div class="flex items-center flex-1 gap-10">            
                 <div class="hidden lg:block">
