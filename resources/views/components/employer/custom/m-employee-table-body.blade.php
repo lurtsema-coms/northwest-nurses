@@ -27,7 +27,7 @@
                 <td class="px-6 py-4 text-sm whitespace-nowrap">
                     <div class="flex gap-2">
                         <a class="bg-red-500 text-gray-50 px-3 py-1 rounded-md shadow-md hover:bg-red-400"
-                            href="{{ route('employer.m-employee-remove', $applicant->id) }}">
+                            href="{{ route('employer.m-employee-remove', $applicant->application_id) }}">
                             Remove
                     </a>
                     </div>

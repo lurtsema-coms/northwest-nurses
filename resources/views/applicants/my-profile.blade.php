@@ -50,6 +50,15 @@
 		</div>
 	</div>
 </div>
+<div class="fixed inset-0 z-10 hidden w-full h-screen p-4 overflow-y-auto bg-black bg-opacity-75 modal-center privacy-policy">
+	<div class="w-full max-w-lg m-auto bg-white rounded-lg shadow-lg modal-box animate-fade-in">
+		<div class="flex flex-col p-3 modal-content">
+			<div class="flex flex-row justify-center gap-10 p-2 ">
+				<button type="button" class="px-4 py-2 font-semibold text-white bg-cyan-800 btn-close-policy">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
 <div class="fixed inset-0 z-10 hidden w-full h-screen p-4 overflow-y-auto bg-black bg-opacity-75 modal-center change-email ">
 	<div class="w-full max-w-lg m-auto bg-white rounded-lg shadow-lg modal-box animate-fade-in">
 		<div class="flex flex-col p-3 modal-content">
@@ -315,7 +324,7 @@
 						</label>
 					</div>
 					<div class="mt-5">
-						<p class="text-justify indent-4">Protect your privacy Only share necessary information. Don't include the content of identity documents, financial information or other sensitive information such as your religion or race. By uploading, you agree to our Privacy Statement. In an application, we remove external links from documents to adhere to our security standards.</p>
+						<p class="text-justify indent-4">Safeguard your privacy by sharing only essential details. Avoid including content from identity documents, financial data, or other sensitive information like religious beliefs or ethnicity. By uploading, you consent to our <span class="cursor-pointer text-cyan-600 underline italic  hover:text-cyan-400 show-policy-modal">Privacy Policy</span>.</p>
 					</div>
 					<div class="flex items-center justify-end mt-4">
 						<x-primary-button class="ms-4 submit-applicant">
@@ -374,6 +383,13 @@
 			});
 			$('.btn-close-email').on('click', function(){
 				$('.change-email').hide();
+			});
+			$('.show-policy-modal').on('click', function(){
+				event.preventDefault();
+				$('.privacy-policy').show();
+			});
+			$('.btn-close-policy').on('click', function(){
+				$('.privacy-policy').hide();
 			});
 			
 			dropzone.on('dragover', function(event) {
