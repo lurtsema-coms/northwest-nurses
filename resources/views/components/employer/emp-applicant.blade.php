@@ -130,7 +130,7 @@
                                         </template>
                                         <template x-if="!currentAttachment.endsWith('.pdf')">
                                         <div class="max-w-6xl p-10 m-auto shadow-lg rounded-2xl bg-blue-50">
-                                            <img x-bind:src="currentAttachment" class="object-contain w-full max-h-[700px]"/>
+                                            <img x-bind:src="currentAttachment" class="object-contain w-full max-h-[700px] max-w-xl"/>
                                             <a x-bind:href="currentAttachment" x-bind:download="currentAttachment" class="text-blue-600 hover:underline">
                                                 Download Image
                                             </a>
