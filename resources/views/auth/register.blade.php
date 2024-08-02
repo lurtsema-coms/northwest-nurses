@@ -27,8 +27,7 @@
                   </div>
                   <div class="mb-4">
                       <h1 class="mb-2 text-xl font-bold text-center">Check Inbox And Spam Messages</h1>
-                      <p class="p-2 text-center">A link will be sent to your email to verify your account. To continue, press the "Send Verification Link and login your account." </p>
-                      <p class="p-2 italic text-center text-gray-400"> You will be redirected to Login Page </p>
+                      <p class="p-2 text-center">A link will be sent to your email to verify your account. To continue, click "Send Verification Link" and check your email inbox. </p>
                   </div>
                   <div class="flex flex-row justify-center gap-10 p-2 ">
                       <button class="cancel-btn" @click="modalIsOpen = false; isSubmitting = false">Cancel</button>
