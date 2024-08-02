@@ -35,7 +35,7 @@
     <div class="space-y-7">
         @if (count($applicants) > 0)
             @for ($i=0; $i<count($applicants); $i++)
-            <form action="{{ route('employer.job.edit-applicant', $applicants[$i]->id) }}" method="POST" class="edit-form" id="edit-form">
+            <form action="{{ route('employer.job.edit-applicant', $applicants[$i]->id) }}" method="POST" id="edit-form">
                 @csrf
                 <input type="hidden" name="action-btn">
                 <div class="relative p-[1px] bg-gray-300 rounded-lg hover:shadow-lg">
@@ -74,7 +74,7 @@
                                 <p>Answer: {{ $applicants[$i]->answer_3 }}</p>
                             </div>
                             @endif
-                            <div>
+                            <div x-data="{ showModal: false, currentAttachment: '' }" x-init="console.log(showModal)">
                                 <p class="font-medium text-slate-600">Attachments:</p>
                                 @if ($job_posts->getApplicantsPost[$i]->jobApplicationAttachments->first())                                    
                                     @php
@@ -82,7 +82,7 @@
                                     @endphp
                                     <p>Resume: <a data-file-path="{{ $resume }}" href="#" class="text-blue-600 cursor-pointer view-resume hover:underline">View Resume</a></p>
                                 @endif
-                                @if ($job_posts->getApplicantsPost[$i]->jobApplicationAttachments->isNotEmpty())
+                                {{-- @if ($job_posts->getApplicantsPost[$i]->jobApplicationAttachments->isNotEmpty())
                                     @php
                                         $attachment = explode(',', $job_posts->getApplicantsPost[$i]->jobApplicationAttachments->first()->file_paths);
                                     @endphp
@@ -97,7 +97,47 @@
                                     @endif
                                 @else
                                     <p>No attachments available.</p>
+                                @endif --}}
+                                @if ($job_posts->getApplicantsPost[$i]->jobApplicationAttachments->isNotEmpty())
+                                    @php
+                                        $attachment = explode(',', $job_posts->getApplicantsPost[$i]->jobApplicationAttachments->first()->file_paths);
+                                    @endphp
+                                    @if ($job_posts->requiredAttachment)
+                                        @foreach (explode(',', $job_posts->requiredAttachment->label) as $index => $ra)
+                                            <p>{{ $ra }}:
+                                                <a href="#" @click.prevent="showModal = true; currentAttachment = '{{ $attachment[$index] }}'" class="text-blue-600 hover:underline">
+                                                    View Attachment
+                                                </a>
+                                            </p>
+                                        @endforeach
+                                    @endif
+                                @else
+                                    <p>No attachments available.</p>
                                 @endif
+
+                                <!-- Modal -->
+                                <div class="fixed inset-0 z-20 overflow-y-auto bg-black bg-opacity-50" x-show="showModal">
+                                    <div class="flex items-center justify-center min-h-screen py-10">
+                                        <button type="button" class="absolute top-10 right-10" @click="showModal = false">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-red-500 hover:text-red-600 size-10">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                            </svg>
+                                        </button>
+                                        <template x-if="currentAttachment.endsWith('.pdf')">
+                                        <div class="w-full max-w-6xl p-10 m-auto shadow-lg rounded-2xl bg-blue-50">
+                                            <embed x-bind:src="currentAttachment" width="100%" height="700px"></embed>
+                                        </div>
+                                        </template>
+                                        <template x-if="!currentAttachment.endsWith('.pdf')">
+                                        <div class="max-w-6xl p-10 m-auto shadow-lg rounded-2xl bg-blue-50">
+                                            <img x-bind:src="currentAttachment" class="object-contain w-full max-h-[700px] max-w-xl"/>
+                                            <a x-bind:href="currentAttachment" x-bind:download="currentAttachment" class="text-blue-600 hover:underline">
+                                                Download Image
+                                            </a>
+                                        </div>
+                                        </template>
+                                    </div>
+                                </div>
                             </div>
                             <p class="!mt-10 text-center font-bold {{ $applicants[$i]->status == 'FOR REVIEW' ? 'text-yellow-500' : '' }} {{ $applicants[$i]->status == 'REJECTED' || $applicants[$i]->status == 'REMOVED' ? 'text-red-500' : '' }}  {{ $applicants[$i]->status == 'APPROVED' ? 'text-green-500' : '' }}">
                                 STATUS: {{ $applicants[$i]->status }}
@@ -132,7 +172,7 @@
             timeago.render(timeagoNodes);
         }
 
-        $('.edit-form').on('submit', function(event){
+        $('#edit-form').on('submit', function(event){
             event.preventDefault();
             const form = $(this);
 
