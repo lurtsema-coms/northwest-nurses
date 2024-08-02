@@ -72,7 +72,7 @@
                     <div class="md:min-w-96">
                         <h1 class="text-xl font-extrabold">Ready to take the next step in your nursing career?</h1>
                         <p class="text-lg">Reach out to Northwest Nurses today to learn more about our exciting opportunities.</p>
-                        <p class="mt-5">info@northwestnurses.com</p>
+                        <p class="mt-5">info@northwestnursesllc.com</p>
                     </div>
                     <div class="flex flex-col gap-8 grow md:flex-row md:justify-between">
                         <div class="md:flex-1">
