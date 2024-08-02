@@ -20,6 +20,7 @@
                         @endforeach
                     </select>
                     <input name="search" value="{{ $request?->search }}" class="py-3 text-lg border-none grow focus:outline-none focus:ring-0 text-primary" type="text" placeholder="Job title or company">
+                    <input type="hidden" name="show_applied_jobs" value="{{ $request->show_applied_jobs }}">
                     <div class="flex items-center content-center px-3 py-3 bg-white search-btn-wrapper rounded-b-2xl md:rounded-bl-none md:rounded-r-2xl ">
                         <button class="flex flex-row justify-center flex-grow gap-2 px-5 py-2 text-lg text-white rounded-full bg-primary hover:opacity-75 align-center" type="submit"><p>Search</p> <span class="material-symbols-outlined">search</span></button>
                     </div>
@@ -30,8 +31,21 @@
 </div>
 <div class="container flex flex-col gap-5 py-10 mx-auto lg:flex-row lg:justify-around">
     <div class="flex flex-col gap-5 job-listing md:mx-0 lg:w-1/2">
+        @role('applicant')
+        <form action="{{ route('find-jobs') }}" method="GET" x-data="{ showAppliedJobs: {{ $request->show_applied_jobs == 'true' ? 'true' : 'false' }} }" x-ref="filterForm">
+            <input type="hidden" name="show_applied_jobs" :value="!showAppliedJobs" x-ref="showAppliedJobsInput">
+            @foreach ($request->except(['id', 'page', 'show_applied_jobs']) as $key => $value)
+                <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+            @endforeach
+            <label class="inline-flex items-center cursor-pointer">
+                <input type="checkbox" {{ $request->show_applied_jobs == 'true' ? 'checked' : '' }} :checked="showAppliedJobs" @change="showAppliedJobs = !showAppliedJobs; $refs.filterForm.submit()" class="sr-only peer">
+                <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                <span class="text-sm font-medium text-gray-900 ms-3">Show Jobs I've Applied To</span>
+            </label>
+        </form>
+        @endrole
         @if (!count($activeJobPosts))
-        <h3 class="italic text-center text-slate-500">Wow, so empty... :((</h3>
+        <h3 class="italic text-slate-500">Wow, such empty... :((</h3>
         @endif
         @foreach ($activeJobPosts as $jobPost)
         @include('components.find-job-page.job-posting-card', ['jobPost' => $jobPost])

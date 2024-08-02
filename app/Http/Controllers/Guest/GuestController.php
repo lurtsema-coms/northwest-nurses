@@ -22,10 +22,12 @@ class GuestController extends Controller
 
     public function findJobs(Request $request)
     {
+        $request->merge(['show_applied_jobs' => $request->show_applied_jobs ?? 'true']);
         $htmxParamString = http_build_query($request->except('id'));
         $jobPostingId = $request->id;
         $search = $request->search;
         $location = $request->location;
+        $showAppliedJobs = $request->show_applied_jobs == 'true';
         $data = [];
         $data['htmxParamString'] = $htmxParamString;
         $data['request'] = $request;
@@ -44,7 +46,13 @@ class GuestController extends Controller
             })
             ->when($location, function ($query, $location) {
                 return $query->where('job_postings.address', 'like', "%{$location}%");
-            })
+            });
+        if (auth()->check() && auth()->user()->role == 'applicant') {
+            $activeJobPosts = $activeJobPosts->when(!$showAppliedJobs, function ($query) {
+                return $query->whereNull('job_applications.id');
+            });
+        }
+        $activeJobPosts = $activeJobPosts
             ->orderBy('created_at', 'desc')
             ->paginate(10)
             ->withQueryString();
