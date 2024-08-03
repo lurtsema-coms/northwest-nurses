@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Applicant\ApplicantController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Employers\EmpDashboardController;
 use App\Http\Controllers\Employers\EmpPostJobController;
 use App\Http\Controllers\Employers\EmpProfileController;
@@ -37,9 +38,11 @@ Route::get('/about-us', function () {
 
 Route::post('/contact-us', [GuestController::class, 'submitContactUsResponse'])->name('contact-us.submit');
 
-route::get('/backend-layout', function () {
+Route::get('/backend-layout', function () {
     return view('layouts.backend-layout');
 });
+
+Route::get('/logout', [AuthenticatedSessionController::class, 'destroy']);
 
 
 Route::middleware(['auth', 'verified'])->group(function () {

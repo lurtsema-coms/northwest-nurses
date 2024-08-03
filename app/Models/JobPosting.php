@@ -51,6 +51,7 @@ class JobPosting extends Model
         if (auth()->check()) {
             return $query->select(
                 'job_postings.*',
+                'job_applications.id as job_application_id',
                 'job_applications.answer_1',
                 'job_applications.answer_2',
                 'job_applications.answer_3',

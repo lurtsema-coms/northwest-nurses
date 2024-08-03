@@ -49,7 +49,7 @@
             </svg>            
             <div>
               <p>ADDRESS:</p>
-              <p class="font-bold">095 Anchorage, Alaska, United States, 99675</p>
+              <p class="font-bold">Address PO BOX 870905 Wasilla, AK 99654</p>
             </div>
           </div>
           <div class="flex items-center gap-3">

@@ -10,7 +10,7 @@
           <div class="bg-primary text-white p-10 m-0 md:w-[45%] flex flex-col">
               <img src="{{ asset('img/logo/nwn-logo.png') }}" alt="Northwest Nurses">
               <p class="mb-3 text-xl leading-5 text-md">Conceived in 2020, Founded in 2023. Founded by Nurses for Nurses.</p>
-              <p class="mt-5 mb-3 text-lg leading-5 text-md ">Conceived in 2020 and founded in 2023, our company was created by nurses, for nurses. Having experienced the challenges of travel nursing firsthand, we understand the frustration of long wait times for recruiter responses, payroll issues, etc. We're committed to providing a personalized experience for travel nurses, ensuring they receive the respect they deserve. Our goal is to grow thoughtfully, always staying within our means so we can maintain timely communication and build strong, personalized relationships with our nurses.</p>
+              <p class="mt-5 mb-3 text-lg leading-5 text-md ">Having experienced the challenges of travel nursing firsthand, we understand the frustration of long wait times for recruiter responses, payroll issues, etc. We're committed to providing a personalized experience for travel nurses and allied health professionals, ensuring they receive the respect they deserve. Our goal is to grow thoughtfully, always staying within our means so we can maintain timely communication and build strong, personalized relationships for travel nurses and allied health professionals.</p>
           </div>
       </div>
   </div>
