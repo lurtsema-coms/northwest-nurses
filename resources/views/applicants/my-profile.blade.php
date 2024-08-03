@@ -39,13 +39,15 @@
 	</div>
 </div>
 <div class="fixed inset-0 z-10 hidden w-full h-screen p-4 overflow-y-auto bg-black bg-opacity-75 modal-center show-resume">
-	<div class="w-full max-w-lg m-auto bg-white rounded-lg shadow-lg modal-box animate-fade-in">
-		<div class="flex flex-col p-3 modal-content">
+	<div class="w-full max-w-4xl m-auto bg-white rounded-lg shadow-lg modal-box animate-fade-in">
+		<div class="flex flex-col p-10 modal-content">
 			<div class="">
 				<embed src="" id="pdfShow" width="100%" height="700px"></embed>
 			</div>
-			<div class="flex flex-row justify-center gap-10 p-2 ">
-				<button type="button" class="px-4 py-2 font-semibold text-white bg-cyan-800 btn-close-resume">Close</button>
+			<div class="mt-5">
+				<button type="button" class="border rounded-lg px-4 py-2 hover:bg-gray-200 hover:cursor-pointer btn-close-resume">
+					Close
+				</button>
 			</div>
 		</div>
 	</div>
@@ -473,7 +475,7 @@
 				location.assign(route);
 			});
 
-			$('.view-resume').on('click', function(){
+			$(document).on('click', '.view-resume', function() {
 				const resumePath = $(this).data('file-path');
 				const route = `{{ route('showResume') }}?file_path=${resumePath}`;
 				// const route = "{{ route('showResume', ':resumePath') }}".replace(':resumePath', resumePath);

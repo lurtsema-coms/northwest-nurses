@@ -15,12 +15,14 @@
     {{-- View Resume --}}
     <div class="fixed inset-0 z-10 hidden w-full h-screen p-4 overflow-y-auto bg-black bg-opacity-75 modal-center show-resume">
         <div class="w-full max-w-4xl m-auto bg-white rounded-lg shadow-lg modal-box animate-fade-in">
-            <div class="flex flex-col p-3 modal-content">
+            <div class="flex flex-col p-10 modal-content">
                 <div class="">
                     <embed src="" id="pdfShow" width="100%" height="700px"></embed>
                 </div>
-                <div class="flex flex-row justify-center gap-10 p-2 ">
-                    <button type="button" class="px-4 py-2 font-semibold text-white bg-cyan-800 btn-close-resume">Close</button>
+                <div class="mt-5">
+                    <button type="button" class="border rounded-lg px-4 py-2 hover:bg-gray-200 hover:cursor-pointer btn-close-resume">
+                        Close
+                    </button>
                 </div>
             </div>
         </div>
@@ -118,23 +120,26 @@
                                 <!-- Modal -->
                                 <div class="fixed inset-0 z-20 overflow-y-auto bg-black bg-opacity-50" x-show="showModal">
                                     <div class="flex items-center justify-center min-h-screen py-10">
-                                        <button type="button" class="absolute top-10 right-10" @click="showModal = false">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-red-500 hover:text-red-600 size-10">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                                            </svg>
-                                        </button>
                                         <template x-if="currentAttachment.endsWith('.pdf')">
-                                        <div class="w-full max-w-6xl p-10 m-auto shadow-lg rounded-2xl bg-blue-50">
-                                            <embed x-bind:src="currentAttachment" width="100%" height="700px"></embed>
-                                        </div>
+                                            <div class="w-full max-w-6xl p-10 m-auto shadow-lg rounded-2xl bg-white" @click.outside="showModal = false">
+                                                <embed x-bind:src="currentAttachment" width="100%" height="700px"></embed>
+                                                <button type="button" class="mt-5 border rounded-lg px-4 py-2 hover:bg-gray-200 hover:cursor-pointer" @click="showModal = false">
+                                                    Close
+                                                </button>
+                                            </div>
                                         </template>
                                         <template x-if="!currentAttachment.endsWith('.pdf')">
-                                        <div class="max-w-6xl p-10 m-auto shadow-lg rounded-2xl bg-blue-50">
-                                            <img x-bind:src="currentAttachment" class="object-contain w-full max-h-[700px] max-w-xl"/>
-                                            <a x-bind:href="currentAttachment" x-bind:download="currentAttachment" class="text-blue-600 hover:underline">
-                                                Download Image
-                                            </a>
-                                        </div>
+                                            <div class="max-w-6xl p-10 m-auto shadow-lg rounded-2xl bg-white" @click.outside="showModal = false">
+                                                <img x-bind:src="currentAttachment" class="object-contain w-full max-h-[500px] max-w-xl"/>
+                                                <div class="mt-5 text-center">                                                    
+                                                    <a x-bind:href="currentAttachment" x-bind:download="currentAttachment" class="text-blue-600 hover:underline">
+                                                        Download Image
+                                                    </a>
+                                                </div>
+                                                <button type="button" class="mt-5 border rounded-lg px-4 py-2 hover:bg-gray-200 hover:cursor-pointer" @click="showModal = false">
+                                                    Close
+                                                </button>
+                                            </div>
                                         </template>
                                     </div>
                                 </div>

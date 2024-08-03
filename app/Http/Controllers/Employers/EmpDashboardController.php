@@ -97,14 +97,14 @@ class EmpDashboardController extends Controller
                 'applicant_details.first_name',
                 'applicant_details.last_name',
             )
+            ->whereNull('job_postings.deleted_at')
             ->where('job_postings.created_by',$userId )
             ->where('job_applications.status','APPLIED')
             ->orderBy('job_applications.created_at', 'desc')
             ->get();
-        
+
 
         return view('components.employer.custom.employer-notification', $data);
-
     }
 
     public function countNotification(){
@@ -121,6 +121,7 @@ class EmpDashboardController extends Controller
                 'job_applications.created_by as applied_by',
                 'users.email',
             )
+            ->whereNull('job_postings.deleted_at')
             ->where('job_postings.created_by',$userId )
             ->where('job_applications.status','APPLIED')
             ->orderBy('job_applications.created_at', 'desc')
