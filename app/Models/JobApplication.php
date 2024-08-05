@@ -41,6 +41,9 @@ class JobApplication extends Model
     public function appendStatus($status)
     {
         $status_history = json_decode($this->status_history, true);
+        if (is_string($status_history)) {
+            $status_history = json_decode($status_history, true);
+        }
         $status_history[] = [date('Y-m-d H:i:s') => $status];
         $this->status_history = json_encode($status_history);
     }
