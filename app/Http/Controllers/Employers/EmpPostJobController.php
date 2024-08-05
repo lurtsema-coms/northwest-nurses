@@ -151,19 +151,16 @@ class EmpPostJobController extends Controller
         $unique_id = uniqid();
 
         $file_img = $input['img_link'];
-        $mime_type_img = $file_img->getClientMimeType();
-
-        if (!(str_starts_with($mime_type_img, 'image/'))) {
-            return redirect()->back()->with('error', 'Your app has been failed to add jobs. Upload image only');
-        }
+        $valid_locations = array_keys(config('global.us_states'));
 
         $request->validate([
             'job_title' => ['required'],
+            'location' => ['required', 'in:' . implode(',', $valid_locations)],
             'profession' => ['required'],
             'pay' => ['required'],
             'assignment_length' => ['required'],
             'schedule' => ['required'],
-            'openings' => ['required'],
+            'openings' => ['required', 'numeric'],
             'start_date' => ['required', 'date'],
             'experience' => ['required'],
             'address' => ['required'],
@@ -171,10 +168,13 @@ class EmpPostJobController extends Controller
             'job_description' => ['required'],
             'responsibilities' => ['required'],
             'requirements' => ['required'],
+            'benefits' => ['required'],
+            'img_link' => ['required', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
 
         $job_posting = new JobPosting([
             'job_title' => $input['job_title'],
+            'location' => $input['location'],
             'profession' => $input['profession'],
             'pay' => $input['pay'],
             'assignment_length' => $input['assignment_length'],
@@ -189,6 +189,7 @@ class EmpPostJobController extends Controller
             'job_description' => $input['job_description'],
             'responsibilities' => $input['responsibilities'],
             'requirements' => $input['requirements'],
+            'benefits' => $input['benefits'],
             'img_link' => 'path',
             'job_id' => $unique_id,
             'status' => 'ACTIVE',
@@ -310,8 +311,11 @@ class EmpPostJobController extends Controller
             return redirect()->back()->with('error', 'Your app has been failed to update.');
         }
 
+        $valid_locations = array_keys(config('global.us_states'));
+
         $request->validate([
             'job_title' => ['required'],
+            'location' => ['required', 'in:' . implode(',', $valid_locations)],
             'profession' => ['required'],
             'pay' => ['required'],
             'assignment_length' => ['required'],
@@ -324,6 +328,8 @@ class EmpPostJobController extends Controller
             'job_description' => ['required'],
             'responsibilities' => ['required'],
             'requirements' => ['required'],
+            'benefits' => ['required'],
+            'img_link' => ['image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
 
 
@@ -354,6 +360,7 @@ class EmpPostJobController extends Controller
 
         $job_posting->update([
             'job_title' => $input['job_title'],
+            'location' => $input['location'],
             'profession' => $input['profession'],
             'pay' => $input['pay'],
             'assignment_length' => $input['assignment_length'],
@@ -368,6 +375,7 @@ class EmpPostJobController extends Controller
             'job_description' => $input['job_description'],
             'responsibilities' => $input['responsibilities'],
             'requirements' => $input['requirements'],
+            'benefits' => $input['benefits'],
             'updated_by' => auth()->user()->id,
         ]);
 
