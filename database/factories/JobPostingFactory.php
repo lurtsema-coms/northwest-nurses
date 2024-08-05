@@ -47,6 +47,7 @@ class JobPostingFactory extends Factory
             'job_description' => $this->faker->paragraph,
             'responsibilities' => $this->faker->paragraph,
             'requirements' => $this->faker->paragraph,
+            'benefits' => $this->faker->paragraph,
             'img_link' => $this->faker->randomElement($photoLinks),
             'job_id' => uniqid(),
             'status' => 'ACTIVE',
