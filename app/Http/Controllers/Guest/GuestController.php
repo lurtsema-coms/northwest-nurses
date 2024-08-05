@@ -45,7 +45,7 @@ class GuestController extends Controller
                 });
             })
             ->when($location, function ($query, $location) {
-                return $query->where('job_postings.address', 'like', "%{$location}%");
+                return $query->where('job_postings.location', $location);
             });
         if (auth()->check() && auth()->user()->role == 'applicant') {
             $activeJobPosts = $activeJobPosts->when(!$showAppliedJobs, function ($query) {
