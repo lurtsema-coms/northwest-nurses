@@ -28,8 +28,11 @@ class JobPostingFactory extends Factory
 
         ];
 
+        $locations = array_keys(config('global.us_states'));
+
         return [
             'job_title' => $this->faker->jobTitle,
+            'location' => $this->faker->randomElement($locations),
             'profession' => $this->faker->word,
             'pay' => '$' . $this->faker->randomFloat(2, 20, 100) . ' / shift',
             'assignment_length' => $this->faker->randomElement($assignmentLength),
