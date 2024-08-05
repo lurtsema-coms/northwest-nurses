@@ -20,7 +20,7 @@
                     <embed src="" id="pdfShow" width="100%" height="700px"></embed>
                 </div>
                 <div class="mt-5">
-                    <button type="button" class="border rounded-lg px-4 py-2 hover:bg-gray-200 hover:cursor-pointer btn-close-resume">
+                    <button type="button" class="px-4 py-2 border rounded-lg hover:bg-gray-200 hover:cursor-pointer btn-close-resume">
                         Close
                     </button>
                 </div>
@@ -82,24 +82,10 @@
                                     @php
                                         $resume = $job_posts->getApplicantsPost[$i]->jobApplicationAttachments->first()->resume->file_path;
                                     @endphp
-                                    <p>Resume: <a data-file-path="{{ $resume }}" href="#" class="text-blue-600 cursor-pointer view-resume hover:underline">View Resume</a></p>
+                                    {{-- <p>Resume: <a data-file-path="{{ $resume }}" href="#" class="text-blue-600 cursor-pointer view-resume hover:underline">View Resume</a></p> --}}
+                                    <p>Resume: <a href="#" class="text-blue-600 cursor-pointer hover:underline" @click.prevent="showModal = true; currentAttachment = '{{ $resume }}'">View Resume</a></p>
                                 @endif
-                                {{-- @if ($job_posts->getApplicantsPost[$i]->jobApplicationAttachments->isNotEmpty())
-                                    @php
-                                        $attachment = explode(',', $job_posts->getApplicantsPost[$i]->jobApplicationAttachments->first()->file_paths);
-                                    @endphp
-                                    @if ($job_posts->requiredAttachment)
-                                        @foreach (explode(',', $job_posts->requiredAttachment->label) as $index => $ra)
-                                            <p>{{ $ra }}:
-                                                <a href="{{ $attachment[$index] }}" download="{{ basename($attachment[$index]) }}" class="text-blue-600 hover:underline">
-                                                    Download Attached File
-                                                </a>
-                                            </p>
-                                        @endforeach
-                                    @endif
-                                @else
-                                    <p>No attachments available.</p>
-                                @endif --}}
+
                                 @if ($job_posts->getApplicantsPost[$i]->jobApplicationAttachments->isNotEmpty())
                                     @php
                                         $attachment = explode(',', $job_posts->getApplicantsPost[$i]->jobApplicationAttachments->first()->file_paths);
@@ -121,22 +107,22 @@
                                 <div class="fixed inset-0 z-20 overflow-y-auto bg-black bg-opacity-50" x-show="showModal">
                                     <div class="flex items-center justify-center min-h-screen py-10">
                                         <template x-if="currentAttachment.endsWith('.pdf')">
-                                            <div class="w-full max-w-6xl p-10 m-auto shadow-lg rounded-2xl bg-white" @click.outside="showModal = false">
+                                            <div class="w-full max-w-6xl p-10 m-auto bg-white shadow-lg rounded-2xl" @click.outside="showModal = false">
                                                 <embed x-bind:src="currentAttachment" width="100%" height="700px"></embed>
-                                                <button type="button" class="mt-5 border rounded-lg px-4 py-2 hover:bg-gray-200 hover:cursor-pointer" @click="showModal = false">
+                                                <button type="button" class="px-4 py-2 mt-5 border rounded-lg hover:bg-gray-200 hover:cursor-pointer" @click="showModal = false">
                                                     Close
                                                 </button>
                                             </div>
                                         </template>
                                         <template x-if="!currentAttachment.endsWith('.pdf')">
-                                            <div class="max-w-6xl p-10 m-auto shadow-lg rounded-2xl bg-white" @click.outside="showModal = false">
+                                            <div class="max-w-6xl p-10 m-auto bg-white shadow-lg rounded-2xl" @click.outside="showModal = false">
                                                 <img x-bind:src="currentAttachment" class="object-contain w-full max-h-[500px] max-w-xl"/>
                                                 <div class="mt-5 text-center">                                                    
                                                     <a x-bind:href="currentAttachment" x-bind:download="currentAttachment" class="text-blue-600 hover:underline">
                                                         Download Image
                                                     </a>
                                                 </div>
-                                                <button type="button" class="mt-5 border rounded-lg px-4 py-2 hover:bg-gray-200 hover:cursor-pointer" @click="showModal = false">
+                                                <button type="button" class="px-4 py-2 mt-5 border rounded-lg hover:bg-gray-200 hover:cursor-pointer" @click="showModal = false">
                                                     Close
                                                 </button>
                                             </div>
@@ -144,10 +130,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <p class="!mt-10 text-center font-bold {{ $applicants[$i]->status == 'FOR REVIEW' ? 'text-yellow-500' : '' }} {{ $applicants[$i]->status == 'REJECTED' || $applicants[$i]->status == 'REMOVED' ? 'text-red-500' : '' }}  {{ $applicants[$i]->status == 'APPROVED' ? 'text-green-500' : '' }}">
+                            <p class="!mt-10 text-center font-bold {{ $applicants[$i]->status == 'FOR REVIEW' ? 'text-yellow-500' : '' }} {{ $applicants[$i]->status == 'REJECTED' || $applicants[$i]->status == 'REMOVED' ? 'text-red-500' : '' }}  {{ $applicants[$i]->status == 'HIRED' ? 'text-green-500' : '' }}">
                                 STATUS: {{ $applicants[$i]->status }}
                             </p>
-                            @if ($applicants[$i]->status != 'REJECTED' && $applicants[$i]->status != 'APPROVED' && $applicants[$i]->status != 'REMOVED')
+                            @if ($applicants[$i]->status != 'REJECTED' && $applicants[$i]->status != 'HIRED' && $applicants[$i]->status != 'REMOVED')
                             <div class="!mt-5 flex gap-2 flex-wrap sm:justify-center ">
                                 @if ($applicants[$i]->status != 'FOR REVIEW')                         
                                 <button class="px-4 py-2 bg-yellow-500 rounded-md shadow-md cursor-pointer text-gray-50 hover:bg-yellow-600">For Review</button>
@@ -188,7 +174,7 @@
             }else if(buttonText == 'Reject'){
                 buttonText = 'REJECTED'
             }else{
-                buttonText = 'APPROVED'
+                buttonText = 'HIRED'
             }
 
             form.find('input[name="action-btn"]').val(buttonText);
