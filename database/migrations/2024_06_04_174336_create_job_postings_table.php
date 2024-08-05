@@ -29,7 +29,7 @@ return new class extends Migration
             $table->text('job_description');
             $table->text('responsibilities');
             $table->text('requirements');
-            $table->text('benefits');
+            $table->text('benefits')->nullable();
             $table->string('job_title');
             $table->text('question_1')->nullable();
             $table->text('question_2')->nullable();
