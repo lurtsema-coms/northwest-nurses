@@ -16,6 +16,25 @@
         <form id="job-edit-form" action="{{ route('employer.job.edit-jobs', $id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="w-full">
+                <div class="hidden mb-5 bg-yellow-50 border border-yellow-200 text-sm text-yellow-800 rounded-lg p-4" role="alert" tabindex="-1" aria-labelledby="hs-with-description-label" id="alert-disabled">
+                    <div class="flex">
+                        <div class="shrink-0">
+                            <svg class="shrink-0 size-4 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+                                <path d="M12 9v4"></path>
+                                <path d="M12 17h.01"></path>
+                            </svg>
+                        </div>
+                        <div class="ms-4">
+                            <div id="hs-with-description-label" class="font-semibold">
+                                Editing Disabled
+                            </div>
+                            <div class="mt-1 text-yellow-700">
+                                This job post cannot be edited because it already has applicants.
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="mb-3 font-medium text-slate-600">Upload Image</div>
                 
                 <div class="relative flex items-center justify-center w-full overflow-hidden">
@@ -243,6 +262,7 @@
         if("{{ $hasAnyApplicantApplied > 0 }}"){
             $('#job-edit-form').find('input, textarea, button').attr('disabled', true);
             $('#job-edit-form').find('input:disabled, textarea:disabled, button:disabled').addClass('bg-slate-300 opacity-80');
+            $('#alert-disabled').removeClass('hidden');
         }
 
         $('#job-edit-form').on('submit', function(e){

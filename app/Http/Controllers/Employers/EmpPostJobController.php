@@ -416,7 +416,7 @@ class EmpPostJobController extends Controller
             'updated_at' => date('Y-m-d')
         ]);
 
-        if ($input['action-btn'] == 'APPROVED') {
+        if ($input['action-btn'] == 'HIRED') {
             $job_application->update([
                 'hired_by' => auth()->user()->id,
                 'hired_at' => date('Y-m-d')
