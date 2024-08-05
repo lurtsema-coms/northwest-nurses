@@ -10,8 +10,8 @@
                 <div class="flex flex-col justify-center form-top md:flex-row align-center">
                     <select name="location" class="p-5 py-3 min-w-[300px] text-primary text-lg font-semibold rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl border-none focus:outline-none focus:ring-0" name="" id="">
                         <option value="" selected>All Location</option>
-                        @foreach (config('global.us_states') as $location)
-                        <option value="{{ $location }}">{{ $location }}</option>
+                        @foreach (config('global.us_states') as $key => $location)
+                        <option value="{{ $key }}">{{ $location }} ({{ $key }})</option>
                         @endforeach
                     </select>
                     <input name="search" class="py-3 text-lg border-none grow focus:outline-none focus:ring-0 text-primary" type="text" placeholder="Job title or company">
@@ -122,7 +122,7 @@
     </div>
     @else
     <div class="flex items-center justify-center gap-3">
-        <h3 class="italic text-center text-slate-500">Wow so empty... </h3>
+        <h3 class="italic text-center text-slate-500">Wow such empty... </h3>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-slate-500">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 16.318A4.486 4.486 0 0 0 12.016 15a4.486 4.486 0 0 0-3.198 1.318M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
         </svg>

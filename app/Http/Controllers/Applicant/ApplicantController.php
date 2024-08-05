@@ -28,6 +28,7 @@ class ApplicantController extends Controller
         $htmxParamString = http_build_query($request->except('id'));
         $myJobs = (new JobPosting())
             ->applicationInfo()
+            ->orderBy('job_applications.created_at', 'desc')
             ->whereRaw("job_postings.id in (SELECT job_posting_id FROM job_applications WHERE created_by = $myId)")
             ->paginate(10);
 
@@ -57,9 +58,9 @@ class ApplicantController extends Controller
         $userData = User::find(Auth::user()->id)->toArray();
         $applicantDetails = Auth::user()->applicantDetail;
         $data = array_merge($userData, $applicantDetails->toArray());
-        $data['my_resumes'] = Resume::where('user_id',auth()->user()->id)
-        ->whereNull('deleted_at')
-        ->get();
+        $data['my_resumes'] = Resume::where('user_id', auth()->user()->id)
+            ->whereNull('deleted_at')
+            ->get();
 
         return view('applicants.my-profile', $data);
     }
@@ -157,25 +158,24 @@ class ApplicantController extends Controller
         $fileContents = storage_path("app/$request->file_path");
 
         return response()->file($fileContents);
-
     }
 
     public function defaultResume(Request $request, string $id)
     {
         $user_id = auth()->user()->id;
-    
+
         // Update all resumes to not default
         Resume::where('user_id', $user_id)->update(['default' => 0]);
-    
+
         // Set selected resume as default
         $selectedResume = Resume::where('user_id', $user_id)->findOrFail($id);
         $selectedResume->update(['default' => 1]);
 
         $data = [];
-        $data['my_resumes'] = Resume::where('user_id',auth()->user()->id)
-        ->whereNull('deleted_at')
-        ->get();
-        
+        $data['my_resumes'] = Resume::where('user_id', auth()->user()->id)
+            ->whereNull('deleted_at')
+            ->get();
+
         return view('components.applicant-resume.default-resume', $data);
     }
 
@@ -222,28 +222,28 @@ class ApplicantController extends Controller
 
         $data = [];
         $data['jobPost'] = JobPosting::with('requiredAttachment')->findOrFail($id);
-        $data['my_resumes'] = Resume::where('user_id',auth()->user()->id)
-        ->whereNull('deleted_at')
-        ->get();
+        $data['my_resumes'] = Resume::where('user_id', auth()->user()->id)
+            ->whereNull('deleted_at')
+            ->get();
 
         return view('components.find-job-page.question-modal', $data);
     }
 
     public function applyJob(Request $request, $id)
     {
-        
+
         $user_id = auth()->user()->id;
-        
+
         $form = $request->all();
         $attachments = $form['attachments'] ?? null;
-        
+
         $isExisting = JobApplication::where([
             'job_posting_id' => $id,
             'created_by' => $user_id
         ])->exists();
-            
+
         if ($isExisting) abort(400);
-        
+
         $application = JobApplication::create([
             'job_posting_id' => $id,
             'status' => 'APPLIED',

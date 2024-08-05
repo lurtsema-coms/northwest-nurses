@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('job_postings', function (Blueprint $table) {
             $table->id();
             $table->string('status');
+            $table->string('location')->nullable();
             $table->text('address');
             $table->text('img_link')->nullable();
             $table->text('file_name')->nullable();
@@ -28,6 +29,7 @@ return new class extends Migration
             $table->text('job_description');
             $table->text('responsibilities');
             $table->text('requirements');
+            $table->text('benefits')->nullable();
             $table->string('job_title');
             $table->text('question_1')->nullable();
             $table->text('question_2')->nullable();

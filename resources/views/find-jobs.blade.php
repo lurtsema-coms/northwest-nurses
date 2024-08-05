@@ -15,8 +15,8 @@
                 <div class="flex flex-col justify-center form-top md:flex-row align-center">
                     <select name="location" class="p-5 py-3 min-w-[300px] text-primary text-lg font-semibold rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl border-none focus:outline-none focus:ring-0" name="" id="">
                         <option value="" selected>All Location</option>
-                        @foreach (config('global.us_states') as $location)
-                        <option value="{{ $location }}" {{ $location == $request?->location ? 'selected' : '' }}>{{ $location }}</option>
+                        @foreach (config('global.us_states') as $key => $location)
+                        <option value="{{ $key }}" {{ $key == $request?->location ? 'selected' : '' }}>{{ $location }} ({{ $key }})</option>
                         @endforeach
                     </select>
                     <input name="search" value="{{ $request?->search }}" class="py-3 text-lg border-none grow focus:outline-none focus:ring-0 text-primary" type="text" placeholder="Job title or company">

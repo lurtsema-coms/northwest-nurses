@@ -27,16 +27,31 @@
                             </svg>
                             <p class="mb-2 text-gray-500><span class="font-semibold">Click to upload</span> or drag and drop</p>
                             <p class="text-xs text-gray-500">SVG, PNG, and JPG (MAX. 600x400)</p>
-                        </label>
-                    </div>
+                        </div>
+                    </label>
                 </div> 
+                @error('img_link')
+                    <div class="text-red-600">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mt-10 space-y-5 text-slate-500">
                 <div class="flex flex-wrap gap-5">
-                    <div class="flex flex-col w-full max-w-[28.9rem] space-y-2">
+                    <div class="flex flex-col flex-1 space-y-2">
                         <span class="font-medium">Job Title <span class="text-red-400">*</span></span>
                         <input class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" type="text" name="job_title" value="" placeholder="e.g., Registered Nurse" required>
                         @error('job_title')
+                            <div class="text-red-600">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="flex flex-col flex-1 space-y-2">
+                        <span class="font-medium">Location <span class="text-red-400">*</span></span>
+                        <select name="location" class="h-10 px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" id="">
+                            <option value="" selected disabled>Select Location</option>
+                            @foreach (config('global.us_states') as $key => $location)
+                            <option value="{{ $key }}">{{ $location }}</option>
+                            @endforeach
+                        </select>
+                        @error('location')
                             <div class="text-red-600">{{ $message }}</div>
                         @enderror
                     </div>
@@ -149,6 +164,15 @@
                         <span class="font-medium">Requirements <span class="text-red-400">*</span></span>
                         <textarea class="px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" name="requirements" id="" rows="7" placeholder="Insert job requirements..." required></textarea>
                         @error('requirements')
+                            <div class="text-red-600">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-5">
+                    <div class="flex flex-col flex-1 space-y-2">
+                        <span class="font-medium">Benefits <span class="text-red-400">*</span></span>
+                        <textarea class="px-2 border border-gray-300 rounded-md focus:border-1 focus:border-cyan-600 focus:ring-0 focus:outline-none" name="benefits" id="" rows="7" placeholder="Insert job benefits..." required></textarea>
+                        @error('benefits')
                             <div class="text-red-600">{{ $message }}</div>
                         @enderror
                     </div>
