@@ -8,7 +8,7 @@
             <h1 class="mb-5 text-4xl font-bold text-center text-white md:text-5xl md:mb-10">Your Gateway to Exceptional Travel Nursing Opportunities</h1>
             <form action="/find-jobs" method="GET" class="container flex flex-col justify-center max-w-screen-lg search-form align-center md:mb-5" autocomplete="off">
                 <div class="flex flex-col justify-center form-top md:flex-row align-center">
-                    <select name="location" class="p-5 py-3 min-w-[300px] text-primary text-lg font-semibold rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl border-none focus:outline-none focus:ring-0" name="" id="">
+                    <select name="location" class="p-5 py-3 lg:min-w-[300px] text-primary text-lg font-semibold rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl border-none focus:outline-none focus:ring-0" name="" id="">
                         <option value="" selected>All Location</option>
                         @foreach (config('global.us_states') as $key => $location)
                         <option value="{{ $key }}">{{ $location }} ({{ $key }})</option>
