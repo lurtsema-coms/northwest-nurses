@@ -409,6 +409,8 @@ class EmpPostJobController extends Controller
     {
         $input = $request->all();
         $job_application = JobApplication::find($id);
+        $job_posting = JobPosting::find($job_application->job_posting_id);
+        $openings = $job_posting->openings;
 
         $job_application->update([
             'status' => $input['action-btn'],
@@ -417,9 +419,18 @@ class EmpPostJobController extends Controller
         ]);
 
         if ($input['action-btn'] == 'HIRED') {
+            $new_openings = 0;
+            if($openings != 0) {
+                $new_openings = $openings-1;
+            }
+
+            $job_posting->update([
+                'openings' => $new_openings,
+            ]);
+
             $job_application->update([
                 'hired_by' => auth()->user()->id,
-                'hired_at' => date('Y-m-d')
+                'hired_at' => date('Y-m-d'),
             ]);
         }
 

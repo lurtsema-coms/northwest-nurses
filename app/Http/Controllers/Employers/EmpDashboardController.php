@@ -26,7 +26,7 @@ class EmpDashboardController extends Controller
         $job_counts = $job_posting->selectRaw("
             COUNT(*) as total,
             COUNT(CASE WHEN status = 'ACTIVE' AND deleted_at IS NULL THEN 1 END) as active,
-            COUNT(CASE WHEN deleted_at IS NOT NULL THEN 1 END) as expired
+            COUNT(CASE WHEN openings = 0 THEN 1 END) as expired
         ")->first();
 
         $data['job_total_posts'] = $job_counts->total;
