@@ -16,7 +16,7 @@
         <form id="job-edit-form" action="{{ route('employer.job.edit-jobs', $id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="w-full">
-                <div class="hidden mb-5 bg-yellow-50 border border-yellow-200 text-sm text-yellow-800 rounded-lg p-4" role="alert" tabindex="-1" aria-labelledby="hs-with-description-label" id="alert-disabled">
+                <div class="hidden p-4 mb-5 text-sm text-yellow-800 border border-yellow-200 rounded-lg bg-yellow-50" role="alert" tabindex="-1" aria-labelledby="hs-with-description-label" id="alert-disabled">
                     <div class="flex">
                         <div class="shrink-0">
                             <svg class="shrink-0 size-4 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -260,8 +260,8 @@
         })
 
         if("{{ $hasAnyApplicantApplied > 0 }}"){
-            $('#job-edit-form').find('input, textarea, button').attr('disabled', true);
-            $('#job-edit-form').find('input:disabled, textarea:disabled, button:disabled').addClass('bg-slate-300 opacity-80');
+            $('#job-edit-form').find('input, textarea, button, select').attr('disabled', true);
+            $('#job-edit-form').find('input:disabled, textarea:disabled, button:disabled, select:disabled').addClass('bg-slate-300 opacity-80');
             $('#alert-disabled').removeClass('hidden');
         }
 
