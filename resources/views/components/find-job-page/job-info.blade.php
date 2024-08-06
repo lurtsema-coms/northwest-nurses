@@ -5,10 +5,8 @@
     <div class="flex flex-col items-start justify-start flex-grow w-full px-5 pt-5 pb-2 overflow-hidden">
         <div class="w-full pb-5">
             <h2 class="text-2xl font-bold">{{ $selectedJobPost->job_title }}</h2>
-            <div class="flex items-center gap-2">
-                <h4 class="text-xl font-semibold">{{ $selectedJobPost->address }}</h4>
-                <p class="text-gray-400">{{ $selectedJobPost->location }}</p>
-            </div>
+            <h4 class="text-xl font-semibold">{{ $selectedJobPost->address }}</h4>
+            <p class="text-sm text-gray-400">{{ $selectedJobPost->location }}</p>
             <h2 class="text-xl font-bold text-primary">{{ $selectedJobPost->pay }}</h2>
             <div class="flex flex-col justify-between gap-5 mt-5 sm:flex-row">
                 <p class="text-gray-500">Job ID: {{ $selectedJobPost->job_id }}</p>
@@ -91,23 +89,23 @@
                 <hr class="border-t-2 border-gray-300">
                 <div class="my-5">
                     <h1 class="text-2xl font-extrabold">Full Job Description</h1>
-                    <p class="my-5">{!! nl2br(e($selectedJobPost->job_description)) !!}</p>
+                    <p class="mb-5">{!! nl2br(e($selectedJobPost->job_description)) !!}</p>
                 </div>
                 <div class="mt-8">
                     <h1 class="text-xl font-extrabold">Responsibilities:</h1>
-                    <p class="my-5">{!! nl2br(e($selectedJobPost->responsibilities)) !!}</p>
+                    <p class="mb-5">{!! nl2br(e($selectedJobPost->responsibilities)) !!}</p>
                 </div>
                 <div class="mt-8">
                     <h1 class="text-xl font-extrabold">Requirements:</h1>
-                    <p class="my-5">{!! nl2br(e($selectedJobPost->requirements)) !!}</p>
+                    <p class="mb-5">{!! nl2br(e($selectedJobPost->requirements)) !!}</p>
                 </div>
                 <div class="mt-8">
                     <h1 class="text-xl font-extrabold">Benefits:</h1>
-                    <p class="my-5">{!! nl2br(e($selectedJobPost->benefits)) !!}</p>
+                    <p class="mb-5">{!! nl2br(e($selectedJobPost->benefits)) !!}</p>
                 </div>
                 <div class="mt-8">
                     <h1 class="text-xl font-extrabold">Questions:</h1>
-                    <ul class="my-5">
+                    <ul class="mb-5">
                         @if ($selectedJobPost->question_1)
                         <li class="mb-3">
                             <div class="flex items-center">
