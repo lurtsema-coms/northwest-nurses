@@ -242,6 +242,10 @@ class ApplicantController extends Controller
             'created_by' => $user_id
         ])->exists();
 
+        $jobPost = JobPosting::with('requiredAttachment')->applicationInfo()->findOrFail($id);
+
+        if ($jobPost->openings <= 0) abort(400);
+
         if ($isExisting) abort(400);
 
         $application = JobApplication::create([
