@@ -45,7 +45,7 @@
 				<embed src="" id="pdfShow" width="100%" height="700px"></embed>
 			</div>
 			<div class="mt-5">
-				<button type="button" class="border rounded-lg px-4 py-2 hover:bg-gray-200 hover:cursor-pointer btn-close-resume">
+				<button type="button" class="px-4 py-2 border rounded-lg hover:bg-gray-200 hover:cursor-pointer btn-close-resume">
 					Close
 				</button>
 			</div>
@@ -326,7 +326,7 @@
 						</label>
 					</div>
 					<div class="mt-5">
-						<p class="text-justify indent-4">Safeguard your privacy by sharing only essential details. Avoid including content from identity documents, financial data, or other sensitive information like religious beliefs or ethnicity. By uploading, you consent to our <span class="cursor-pointer text-cyan-600 underline italic  hover:text-cyan-400 show-policy-modal">Privacy Policy</span>.</p>
+						<p class="text-justify indent-4">Safeguard your privacy by sharing only essential details. Avoid including content from identity documents, financial data, or other sensitive information like religious beliefs or ethnicity. By uploading, you consent to our <span class="italic underline cursor-pointer text-cyan-600 hover:text-cyan-400 show-policy-modal">Privacy Policy</span>.</p>
 					</div>
 					<div class="flex items-center justify-end mt-4">
 						<x-primary-button class="ms-4 submit-applicant">
@@ -480,7 +480,7 @@
 				const route = `{{ route('showResume') }}?file_path=${resumePath}`;
 				// const route = "{{ route('showResume', ':resumePath') }}".replace(':resumePath', resumePath);
 				$('#pdfShow').attr('src', route);
-				console.log(resumePath);
+				console.log(resumePath, route);
 				$('.show-resume').show();
 			});
 

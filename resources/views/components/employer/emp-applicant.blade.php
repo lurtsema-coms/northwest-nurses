@@ -76,14 +76,20 @@
                                 <p>Answer: {{ $applicants[$i]->answer_3 }}</p>
                             </div>
                             @endif
-                            <div x-data="{ showModal: false, currentAttachment: '' }" x-init="console.log(showModal)">
+                            <div x-data="{ showModal: false, currentAttachment: '' }">
                                 <p class="font-medium text-slate-600">Attachments:</p>
                                 @if ($job_posts->getApplicantsPost[$i]->jobApplicationAttachments->first())                                    
                                     @php
                                         $resume = $job_posts->getApplicantsPost[$i]->jobApplicationAttachments->first()->resume->file_path;
                                     @endphp
-                                    {{-- <p>Resume: <a data-file-path="{{ $resume }}" href="#" class="text-blue-600 cursor-pointer view-resume hover:underline">View Resume</a></p> --}}
-                                    <p>Resume: <a href="#" class="text-blue-600 cursor-pointer hover:underline" @click.prevent="showModal = true; currentAttachment = '{{ $resume }}'">View Resume</a></p>
+                                    <p>Resume: 
+                                        <a href="#" 
+                                            class="text-blue-600 cursor-pointer hover:underline" 
+                                            @click.prevent="showModal = true; currentAttachment = '{{ route('showResume') }}?file_path=' + encodeURIComponent('{{ $resume }}')">
+                                            View Resume
+                                        </a>
+                                    </p>
+
                                 @endif
 
                                 @if ($job_posts->getApplicantsPost[$i]->jobApplicationAttachments->isNotEmpty())
