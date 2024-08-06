@@ -160,7 +160,7 @@ class EmpPostJobController extends Controller
             'pay' => ['required'],
             'assignment_length' => ['required'],
             'schedule' => ['required'],
-            'openings' => ['required', 'numeric'],
+            'openings' => ['required', 'numeric', 'min:1'],
             'start_date' => ['required', 'date'],
             'experience' => ['required'],
             'address' => ['required'],
@@ -320,7 +320,7 @@ class EmpPostJobController extends Controller
             'pay' => ['required'],
             'assignment_length' => ['required'],
             'schedule' => ['required'],
-            'openings' => ['required'],
+            'openings' => ['required', 'numeric', 'min:1'],
             'start_date' => ['required', 'date'],
             'experience' => ['required'],
             'address' => ['required'],
@@ -420,8 +420,8 @@ class EmpPostJobController extends Controller
 
         if ($input['action-btn'] == 'HIRED') {
             $new_openings = 0;
-            if($openings != 0) {
-                $new_openings = $openings-1;
+            if ($openings != 0) {
+                $new_openings = $openings - 1;
             }
 
             $job_posting->update([
