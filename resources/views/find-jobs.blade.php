@@ -13,7 +13,7 @@
         <div class="flex flex-col items-center justify-end px-4 top-search-bar md:px-5 md:mt-16 md:pb-10">
             <form action="/find-jobs" class="container flex flex-col justify-center max-w-screen-lg search-form align-center md:mb-5" autocomplete="off">
                 <div class="flex flex-col justify-center form-top md:flex-row align-center">
-                    <select name="location" class="p-5 py-3 min-w-[300px] text-primary text-lg font-semibold rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl border-none focus:outline-none focus:ring-0" name="" id="">
+                    <select name="location" class="p-5 py-3 lg:min-w-[300px] text-primary text-lg font-semibold rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl border-none focus:outline-none focus:ring-0" name="" id="">
                         <option value="" selected>All Location</option>
                         @foreach (config('global.us_states') as $key => $location)
                         <option value="{{ $key }}" {{ $key == $request?->location ? 'selected' : '' }}>{{ $location }} ({{ $key }})</option>

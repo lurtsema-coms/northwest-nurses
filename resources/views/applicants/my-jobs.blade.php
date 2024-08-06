@@ -11,7 +11,7 @@
         @endforeach ()
         {{ $myJobs->links('vendor.pagination.custom-pagination') }}
     @else
-        <h3 class="italic text-center text-slate-500">Wow, so empty... :((</h3>
+        <h3 class="italic text-center text-slate-500">Wow, such empty... :((</h3>
         <h1 class="italic text-center text-slate-500">Click Find Jobs and start applying now</h1>
     @endif
 

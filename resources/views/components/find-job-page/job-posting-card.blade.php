@@ -2,10 +2,8 @@
   <div class="flex flex-row justify-between gap-5 pb-3 job-list-card-header grow">
       <div>
         <h2 class="text-2xl font-bold">{{ $jobPost->job_title }}</h2>
-        <div class="flex items-center gap-2">
-            <h4 class="text-xl font-semibold">{{ $jobPost->address }}</h4>
-            <p class="text-gray-400">{{ $jobPost->location }}</p>
-        </div>
+        <h4 class="text-xl font-semibold">{{ $jobPost->address }}</h4>
+        <p class="text-sm text-gray-400">{{ $jobPost->location }}</p>
           @auth
           @role('applicant' && $jobPost->applied_date)
           <p class="mt-2 italic text-gray-500">Applied <span class="timeago" datetime="{{ $jobPost->applied_date }} {{ config('app.timezone') }}">{{ $jobPost->applied_date }}</span></p>
