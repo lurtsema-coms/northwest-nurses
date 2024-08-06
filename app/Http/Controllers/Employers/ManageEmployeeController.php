@@ -37,7 +37,7 @@ class ManageEmployeeController extends Controller
                 'applicant_details.sex',
             )
             ->where('job_postings.created_by', $userId)
-            ->where('job_applications.status', 'APPROVED')
+            ->where('job_applications.status', 'HIRED')
             ->orderBy('job_applications.created_at', 'desc');
 
         if ($request->has('paginate')) {
