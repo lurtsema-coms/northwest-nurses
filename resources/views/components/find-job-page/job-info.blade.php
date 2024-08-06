@@ -78,7 +78,7 @@
                         </div>
                         <div class="flex gap-3 text-gray-600">
                             <span class="material-symbols-outlined">calendar_month</span>
-                            <p>Expected Start Date: <span class="font-semibold">{{ $selectedJobPost->start_date }}</span></p>
+                            <p>Expected Start Date: <span class="font-semibold">{{ $selectedJobPost->start_date ?  date("F j, Y", strtotime($selectedJobPost->start_date)) : ''}}</span></p>
                         </div>
                         <div class="flex gap-3 text-gray-600">
                             <span class="material-symbols-outlined">badge</span>
@@ -109,7 +109,7 @@
                         @if ($selectedJobPost->question_1)
                         <li class="mb-3">
                             <div class="flex items-center">
-                                <p class="mr-3 text-lg font-bolder">•</p><p class="inline-flex">{!! nl2br(e($selectedJobPost->question_1)) !!}</p>
+                                <p class="mr-3 text-lg place-self-start font-bolder">•</p><p class="inline-flex">{!! nl2br(e($selectedJobPost->question_1)) !!}</p>
                             </div>
                             @if ($selectedJobPost->answer_1)
                             <p class="pl-3 italic text-gray-400">- {!! nl2br(e($selectedJobPost->answer_1)) !!}</p>
@@ -119,7 +119,7 @@
                         @if ($selectedJobPost->question_2)
                         <li class="mb-3">
                             <div class="flex items-center">
-                                <p class="mr-3 text-lg font-bolder">•</p><p class="inline-flex">{!! nl2br(e($selectedJobPost->question_2)) !!}</p>
+                                <p class="mr-3 text-lg place-self-start font-bolder">•</p><p class="inline-flex">{!! nl2br(e($selectedJobPost->question_2)) !!}</p>
                             </div>
                             @if ($selectedJobPost->answer_2)
                             <p class="pl-3 italic text-gray-400">- {!! nl2br(e($selectedJobPost->answer_2)) !!}</p>
@@ -129,7 +129,7 @@
                         @if ($selectedJobPost->question_3)
                         <li class="mb-3">
                             <div class="flex items-center">
-                                <p class="mr-3 text-lg font-bolder">•</p><p class="inline-flex">{!! nl2br(e($selectedJobPost->question_3)) !!}</p>
+                                <p class="mr-3 text-lg place-self-start font-bolder">•</p><p class="inline-flex">{!! nl2br(e($selectedJobPost->question_3)) !!}</p>
                             </div>
                             @if ($selectedJobPost->answer_3)
                             <p class="pl-3 italic text-gray-400">- {!! nl2br(e($selectedJobPost->answer_3)) !!}</p>
