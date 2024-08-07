@@ -43,7 +43,7 @@ class DatabaseBackup extends Command
 
         $path = storage_path() . $ds . 'backups' . $ds . date('Y', $ts) . $ds . date('m', $ts) . $ds . date('d', $ts) . $ds;
         $file = date('Y-m-d-His', $ts) . '-dump-' . $database . '.sql';
-        $command = "mysqldump -h $host -u $username -p $database > $path$ds$file --password=$password --skip-comments --skip-add-locks";
+        $command = "mysqldump -h $host -u $username -p $database > $path$ds$file --password='$password' --skip-comments --skip-add-locks";
 
         if (!is_dir($path)) {
             mkdir($path, 0755, true);
