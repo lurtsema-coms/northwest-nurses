@@ -86,8 +86,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-10">
+                <div class="flex flex-row flex-wrap items-center gap-5 mt-10">
                     <p class="text-gray-500">All rights reserve <span>{{ date('Y') }}</span></p>
+                    <p class="text-gray-500 underline cursor-pointer privacy-policy-button">Privacy Policy</p>
                 </div>
             </div>
         </footer>
@@ -134,5 +135,6 @@
 		});
         </script>
         @yield('scripts')
+        @include('components.privacy-policy-modal')
     </body>
 </html>
