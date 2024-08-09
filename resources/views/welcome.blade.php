@@ -70,7 +70,7 @@
 <div class="container flex flex-col gap-5 py-10 mx-auto">
     <div class="photo-carousel"></div>
     <div class="flex flex-col items-center">
-        <h2 class="text-3xl font-extrabold text-center">At Northwest Nurses, we offer an extensive array of services tailored to meet the unique needs of healthcare professionals like you.</h2>
+        <h2 class="max-w-screen-lg mb-5 text-3xl font-extrabold text-center">At Northwest Nurses, we offer an extensive array of services tailored to meet the unique needs of healthcare professionals like you.</h2>
         <div class="flex flex-col items-start justify-center w-full gap-5 mt-5 mb-10 md:flex-row">
             <p class="w-full text-left"><span class="font-bold">Travel Nursing</span>: Explore new horizons and advance your career with Northwest Nurses' travel nursing opportunities. Travel nurses enjoy competitive pay, comprehensive benefits, and the excitement of working in diverse healthcare settings across the country. Whether you're seeking adventure or professional growth, our travel nursing positions offer the perfect blend of flexibility and stability.</p>
             <p class="w-full text-left"><span class="font-bold">Allied Health</span>: Join the forefront of healthcare innovation as an allied health professional. From radiologic technologists to physical therapists, our allied health positions allow you to utilize your specialized skills in diverse settings.</p>
