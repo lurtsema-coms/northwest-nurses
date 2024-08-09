@@ -76,7 +76,7 @@
             <p class="w-full text-left"><span class="font-bold">Allied Health</span>: Join the forefront of healthcare innovation as an allied health professional. From radiologic technologists to physical therapists, our allied health positions allow you to utilize your specialized skills in diverse settings.</p>
             <p class="w-full text-left"><span class="font-bold">Per Diem Jobs</span>: Enjoy the flexibility of per diem work with Northwest Nurses. Whether you're looking to supplement your income or prefer a more flexible schedule, our per diem positions offer rewarding experiences without long-term commitment. </p>
         </div>
-        <button class="px-5 py-2 text-white rounded-full bg-primary hover:opacity-75 whitespace-nowrap">See All Services</button>
+        <a href="{{ route('about-us') }}" class="px-5 py-2 text-white rounded-full bg-primary hover:opacity-75 whitespace-nowrap">Learn More About Us</a>
     </div>
 </div>
 <div class="bg-primary">
