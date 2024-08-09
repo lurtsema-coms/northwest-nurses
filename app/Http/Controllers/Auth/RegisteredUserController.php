@@ -36,28 +36,32 @@ class RegisteredUserController extends Controller
     // public function store(Request $request, $role): RedirectResponse
     public function store(Request $request, $role)
     {
-        $request->validate([
+        $validatorRules = [
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'address' => ['required'],
             'contact_number' => ['required'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+            'terms' => ['required'],
+        ];
 
-        if ($role == 'applicant') {
-            $request->validate([
+        if ($role === 'applicant') {
+            $validatorRules = array_merge($validatorRules, [
                 'first_name' => ['required'],
                 'last_name' => ['required'],
                 'sex' => ['required', 'in:male,female'],
                 'birthdate' => ['required', 'date'],
                 'resume' => ['required', 'file', 'mimes:pdf', 'max:2048'],
             ]);
-        } else if ($role == 'employer') {
-            $request->validate([
+        } else if ($role === 'employer') {
+            $validatorRules = array_merge($validatorRules, [
                 'company_name' => ['required'],
+                'company_website' => ['url']
             ]);
         } else {
             abort(404);
         }
+
+        $request->validateWithBag($role, $validatorRules);
 
         $user = User::create([
             'email' => $request->email,

@@ -100,31 +100,31 @@
                   <div class="flex-grow">
                       <x-input-label for="first_name" :value="__('First Name')" />
                       <x-text-input id="first_name" class="block w-full mt-1" type="text" name="first_name" required autofocus/>
-                      <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
+                      <x-input-error :messages="$errors->applicant->get('first_name')" class="mt-2" />
                   </div>
                   <div class="flex-grow mt-4 sm:mt-0">
                       <x-input-label for="last_name" :value="__(' Last Name')" />
                       <x-text-input id="last_name" class="block w-full mt-1" type="text" name="last_name"  required autofocus/>
-                      <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
+                      <x-input-error :messages="$errors->applicant->get('last_name')" class="mt-2" />
                   </div>
               </div>
               <div class="flex flex-col sm:flex-row sm:gap-5">
                   <div class="flex-grow mt-4">
                       <x-input-label for="contact_number" :value="__('Contact Number')" />
                       <x-text-input id="contact_number" class="block w-full mt-1" oninput="this.value = this.value.replace(/\D/gi, '')" type="text" name="contact_number" required/>
-                      <x-input-error :messages="$errors->get('contact_number')" class="mt-2" />
+                      <x-input-error :messages="$errors->applicant->get('contact_number')" class="mt-2" />
                   </div>
                   <div class="flex-grow mt-4">
                       <x-input-label for="email" :value="__('Email')" />
                       <x-text-input id="email" class="block w-full mt-1" type="email" name="email" :value="old('email')" required/>
-                      <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                      <x-input-error :messages="$errors->applicant->get('email')" class="mt-2" />
                   </div>
               </div>
               <div class="flex flex-col sm:flex-row sm:gap-5">
                   <div class="flex-grow mt-4">
                       <x-input-label for="home_address" :value="__('Home Address')" />
                       <x-text-input id="home_address" class="block w-full mt-1" type="text" name="address"  required/>
-                      <x-input-error :messages="$errors->get('address')" class="mt-2" />
+                      <x-input-error :messages="$errors->applicant->get('address')" class="mt-2" />
                   </div>
               </div>
               <div class="flex flex-col sm:flex-row sm:gap-5">
@@ -135,12 +135,12 @@
                           <option value="male">Male</option>
                           <option value="female">Female</option>
                       </select>
-                      <x-input-error :messages="$errors->get('sex')" class="mt-2" />
+                      <x-input-error :messages="$errors->applicant->get('sex')" class="mt-2" />
                   </div>
                   <div class="flex-grow mt-4 ">
                     <x-input-label for="birthdate" :value="__('Date of Birth')" />
                     <x-text-input id="birthdate" class="block w-full mt-1" type="date" name="birthdate"  required/>
-                    <x-input-error :messages="$errors->get('birthdate')" class="mt-2" />
+                    <x-input-error :messages="$errors->applicant->get('birthdate')" class="mt-2" />
                   </div>
               </div>
               <div class="flex flex-col sm:flex-row sm:gap-5">
@@ -150,14 +150,14 @@
                                     type="password"
                                     name="password"
                                     required autocomplete="new-password" />
-                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                    <x-input-error :messages="$errors->applicant->get('password')" class="mt-2" />
                   </div>
                   <div class="flex-col flex-grow mt-4 sm:flex-row ">
                     <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
                     <x-text-input class="block w-full mt-1"
                                     type="password"
                                     name="password_confirmation" required autocomplete="new-password" />
-                    <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                    <x-input-error :messages="$errors->applicant->get('password_confirmation')" class="mt-2" />
                   </div>
               </div>
               <div class="mt-4 mb-2">
@@ -173,14 +173,15 @@
                       <p class="text-xs text-gray-500">PDF only (MAX. 2MB)</p>
                     </div>
                   </label>
-                  <x-input-error :messages="$errors->get('resume')" class="mt-2" />
+                  <x-input-error :messages="$errors->applicant->get('resume')" class="mt-2" />
                 </div>
               </div>
               <div class="mt-4">
                 <label class="flex items-center space-x-2">
-                  <input type="checkbox" class="form-checkbox text-cyan-600 border-cyan-600 dark:text-cyan-400 focus:ring-cyan-500 dark:focus:ring-cyan-500" required>
+                  <input type="checkbox" name="terms" class="form-checkbox text-cyan-600 border-cyan-600 dark:text-cyan-400 focus:ring-cyan-500 dark:focus:ring-cyan-500" required>
                   <span class="text-sm rounded-md cursor-pointer show-policy-modal text-cyan-600 dark:text-cyan-400 hover:text-cyan-900 dark:hover:text-cyan-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 dark:focus:ring-offset-cyan-500 ms-4 privacy-policy-button">I agree to the terms</span>
                 </label>
+                <x-input-error :messages="$errors->applicant->get('terms')" class="mt-2" />
               </div>
             </div>
           </form>
@@ -191,31 +192,31 @@
                 <div class="flex-grow">
                   <x-input-label for="company_name" :value="__('Company Name')" />
                   <x-text-input id="company_name" class="block w-full mt-1" type="text" name="company_name" required autofocus/>
-                  <x-input-error :messages="$errors->get('company_name')" class="mt-2" />
+                  <x-input-error :messages="$errors->employer->get('company_name')" class="mt-2" />
                 </div>
                 <div class="flex-grow mt-4 sm:mt-0">
                   <x-input-label for="company_website" :value="__('Company Website Link')" />
                   <x-text-input id="company_website" class="block w-full mt-1" type="text" name="company_website" placeholder="Optional" autofocus/>
-                  <x-input-error :messages="$errors->get('company_website')" class="mt-2" />
+                  <x-input-error :messages="$errors->employer->get('company_website')" class="mt-2" />
                 </div>
               </div>
               <div class="flex flex-col sm:flex-row lg:flex-col xl:flex-row sm:gap-5">
                   <div class="flex-grow mt-4">
                     <x-input-label for="company_number" :value="__('Company Contact Number')" />
                     <x-text-input id="company_number" oninput="this.value = this.value.replace(/\D/gi, '')" class="block w-full mt-1" type="text" name="contact_number" required/>
-                    <x-input-error :messages="$errors->get('company_number')" class="mt-2" />
+                    <x-input-error :messages="$errors->employer->get('company_number')" class="mt-2" />
                   </div>
                   <div class="flex-grow mt-4">
                     <x-input-label for="contact_email" :value="__('Contact Email')" /> 
                     <x-text-input id="contact_email" class="block w-full mt-1" type="email" name="email"  required/>
-                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                    <x-input-error :messages="$errors->employer->get('email')" class="mt-2" />
                   </div>
               </div>
               <div>
                 <div class="flex-grow mt-4">
                   <x-input-label for="company_address" :value="__(' Company Address')" />
                   <x-text-input id="company_address" class="block w-full mt-1" type="text" name="address" required autofocus/>
-                  <x-input-error :messages="$errors->get('address')" class="mt-2" />
+                  <x-input-error :messages="$errors->employer->get('address')" class="mt-2" />
                 </div>
               </div>
               <div class="flex flex-col sm:flex-row sm:gap-5">
@@ -225,7 +226,7 @@
                                       type="password"
                                       name="password"
                                       required autocomplete="new-password" />
-                      <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                      <x-input-error :messages="$errors->employer->get('password')" class="mt-2" />
                   </div>
                   <!-- Confirm Password -->
                   <div class="flex-col flex-grow mt-4 sm:flex-row ">
@@ -233,14 +234,15 @@
                       <x-text-input class="block w-full mt-1"
                                       type="password"
                                       name="password_confirmation" required autocomplete="new-password" />
-                      <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                      <x-input-error :messages="$errors->employer->get('password_confirmation')" class="mt-2" />
                   </div>
               </div>
               <div class="mt-4">
                 <label class="flex items-center space-x-2">
-                  <input type="checkbox" class="form-checkbox text-cyan-600 border-cyan-600 dark:text-cyan-400 focus:ring-cyan-500 dark:focus:ring-cyan-500" required>
+                  <input type="checkbox" name="terms" class="form-checkbox text-cyan-600 border-cyan-600 dark:text-cyan-400 focus:ring-cyan-500 dark:focus:ring-cyan-500" required>
                   <span class="text-sm rounded-md cursor-pointer show-policy-modal text-cyan-600 dark:text-cyan-400 hover:text-cyan-900 dark:hover:text-cyan-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 dark:focus:ring-offset-cyan-500 ms-4 privacy-policy-button">I agree to the terms</span>
                 </label>
+                <x-input-error :messages="$errors->employer->get('terms')" class="mt-2" />
               </div>
             </div>
           </form>
@@ -294,9 +296,16 @@
 
         });
 
+        @php
+            $role = 'applicant';
+          if ($errors->employer->any()) {
+            $role = 'employer';
+          }
+        @endphp
+
         document.addEventListener('alpine:init', () => {
           Alpine.data('formData', () => ({
-              role: 'applicant', 
+              role: '{{ $role }}', 
               modalIsOpen: false, 
               isSubmitting: false,
               handleSubmit() {
