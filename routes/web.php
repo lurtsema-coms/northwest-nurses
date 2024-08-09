@@ -30,11 +30,11 @@ Route::get('/find-jobs', [GuestController::class, 'findJobs'])->name('find-jobs'
 
 Route::get('/contact-us', function () {
     return view('contact-us');
-});
+})->name('contact-us');
 
 Route::get('/about-us', function () {
     return view('about-us');
-});
+})->name('about-us');
 
 Route::post('/contact-us', [GuestController::class, 'submitContactUsResponse'])->name('contact-us.submit');
 
