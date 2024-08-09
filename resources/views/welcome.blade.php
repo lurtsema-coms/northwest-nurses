@@ -1,4 +1,5 @@
 @extends('layouts.applicant')
+@section('title', 'Home')
 @section('content')
 <div class="relative overflow-hidden search-section">
     <div class="z-[-1] bg-custom-gradient-x md:bg-custom-gradient-y absolute inset-0"></div>

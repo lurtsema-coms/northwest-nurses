@@ -1,4 +1,5 @@
 @extends('layouts.applicant')
+@section('title', 'Find Jobs')
 @section('content')
 <div 
     id="modal-center" 

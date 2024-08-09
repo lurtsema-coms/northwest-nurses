@@ -1,4 +1,5 @@
 @extends('layouts.applicant')
+@section('title', 'About Us')
 @section('content')
 <div class="bg-primary">
   <div class="container mx-auto">

@@ -1,4 +1,5 @@
 @extends('layouts.applicant')
+@section('title', 'Contact Us')
 @section('content')
 
 <div class="px-3 bg-primary">
