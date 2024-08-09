@@ -49,7 +49,7 @@ class JobPosting extends Model
     public function scopeApplicationInfo($query)
     {
         if (auth()->check()) {
-            return $query->select(
+            $query->select(
                 'job_postings.*',
                 'job_applications.id as job_application_id',
                 'job_applications.answer_1',
@@ -63,6 +63,11 @@ class JobPosting extends Model
                         ->where('job_applications.created_by', auth()->user()->id);
                 });
         }
+        $query->leftJoin('employer_details', 'employer_details.user_id', 'job_postings.created_by')
+            ->addSelect(
+                'job_postings.*',
+                'employer_details.name as employer_name',
+            );
         return $query;
     }
 }

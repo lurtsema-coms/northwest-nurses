@@ -31,13 +31,11 @@ class GuestController extends Controller
         $data = [];
         $data['htmxParamString'] = $htmxParamString;
         $data['request'] = $request;
-        $activeJobPosts = (new JobPosting())->getActiveJobPostings()
-            ->applicationInfo()
-            ->leftJoin('employer_details', 'employer_details.user_id', 'job_postings.created_by')
-            ->addSelect(
-                'job_postings.*',
-                'employer_details.name'
-            )
+        $activeJobPostQuery = (new JobPosting())
+            ->getActiveJobPostings()
+            ->applicationInfo();
+
+        $activeJobPosts = (clone $activeJobPostQuery)
             ->when($search, function ($query, $search) {
                 return $query->where(function ($query) use ($search) {
                     $query->where('employer_details.name', 'like', "%{$search}%")
@@ -58,9 +56,7 @@ class GuestController extends Controller
             ->withQueryString();
 
 
-        $selectedJobPost = (new JobPosting())
-            ->getActiveJobPostings()
-            ->applicationInfo()
+        $selectedJobPost = (clone $activeJobPostQuery)
             ->where('job_postings.id', $jobPostingId)
             ->first() ?? (clone $activeJobPosts)->first();
 

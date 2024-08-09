@@ -26,15 +26,16 @@ class ApplicantController extends Controller
         $jobPostingId = $request->id;
 
         $htmxParamString = http_build_query($request->except('id'));
-        $myJobs = (new JobPosting())
+        $myJobsQuery = (new JobPosting())
             ->applicationInfo()
-            ->orderBy('job_applications.created_at', 'desc')
-            ->whereRaw("job_postings.id in (SELECT job_posting_id FROM job_applications WHERE created_by = $myId)")
-            ->paginate(10);
+            ->whereRaw("job_postings.id in (SELECT job_posting_id FROM job_applications WHERE created_by = $myId)");
 
-        $selectedJobPost = (new JobPosting())
-            ->applicationInfo()
-            ->whereRaw("job_postings.id in (SELECT job_posting_id FROM job_applications WHERE created_by = $myId)")
+        $myJobs = (clone $myJobsQuery)
+            ->orderBy('job_applications.created_at', 'desc')
+            ->paginate(10)
+            ->withQueryString();
+
+        $selectedJobPost = (clone $myJobsQuery)
             ->where('job_postings.id', $jobPostingId)
             ->first() ?? (clone $myJobs)->first();
 
