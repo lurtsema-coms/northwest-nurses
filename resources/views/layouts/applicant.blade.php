@@ -77,7 +77,7 @@
                     <div class="flex flex-col gap-8 grow md:flex-row md:justify-between">
                         <div class="md:flex-1">
                             <h3 class="font-bold">For Employers</h3>
-                            <p class="mt-2">Northwest Nurses empowers healthcare leaders by providing them with the necessary tools and data to enhance their management of workforce.</p>
+                            <p class="mt-2">Northwest Nurses empowers healthcare leaders by offering comprehensive staffing services, along with the necessary tools and data, to optimize their workforce management. Our specialized staffing solutions ensure that healthcare facilities are always equipped with the right professionals, enhancing efficiency, patient care, and overall operational success.</p>
                         </div>
                         <div class="md:flex-1">
                             <h3 class="font-bold">For Applicants</h3>
