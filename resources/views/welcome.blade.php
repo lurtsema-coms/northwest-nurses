@@ -154,7 +154,14 @@
                 </p>
             </div>
         </div>
-    <a href="#" class="px-5 py-2 mt-3 font-bold bg-white rounded-full hover:opacity-75 text-primary whitespace-nowrap">Search Jobs Now</a>
+    @auth
+    @role('applicant')
+    <a href="{{ route('find-jobs') }}" class="px-5 py-2 mt-3 font-bold bg-white rounded-full hover:opacity-75 text-primary whitespace-nowrap">Apply With Your Resume Now</a>   
+    @endrole
+    @endauth
+    @guest
+    <a href="{{ route('register') }}" class="px-5 py-2 mt-3 font-bold bg-white rounded-full hover:opacity-75 text-primary whitespace-nowrap">Apply With Your Resume Now</a>   
+    @endguest
     </div>
 
 </div>
