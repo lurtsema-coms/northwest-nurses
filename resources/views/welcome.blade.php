@@ -3,7 +3,7 @@
 @section('content')
 <div class="relative overflow-hidden search-section">
     <div class="z-[-1] bg-custom-gradient-x md:bg-custom-gradient-y absolute inset-0"></div>
-    <img class="absolute z-[-2] min-h-full min-w-full object-cover md:translate-y-[-25%]" src="{{ asset('img/landing-page/image-no-filter.jpg') }}" alt="">
+    <img class="absolute z-[-2] min-h-full min-w-full object-cover md:translate-y-[-25%]" src="{{ asset('img/landing-page/1.webp') }}" alt="">
     <div class="search-section-container min-h-96 md:min-h-[500px] relative flex flex-col justify-center md:justify-end">
         <div class="flex flex-col items-center justify-end px-4 top-search-bar md:px-5 md:mb-8">
             <h1 class="mb-5 text-4xl font-bold text-center text-white md:text-5xl md:mb-10">Gateway to Exceptional Travel Nursing & Allied Health</h1>
