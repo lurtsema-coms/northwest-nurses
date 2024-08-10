@@ -250,7 +250,7 @@ class EmpPostJobController extends Controller
     public function show(Request $request, string $id)
     {
         $user = Auth::user();
-        $jobPost = JobPosting::find($id);
+        $jobPost = JobPosting::where('job_postings.id', $id)->applicationInfo()->first();
 
         // Check if the authenticated user is the creator of the job posting
         if (!$jobPost || $user->id !== $jobPost->created_by) {

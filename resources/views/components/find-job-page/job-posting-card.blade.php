@@ -3,7 +3,7 @@
       <div>
         <h2 class="text-2xl font-bold">{{ $jobPost->job_title }}</h2>
         <h4 class="text-xl font-semibold">{{ $jobPost->address }}</h4>
-        <p class="text-sm text-gray-400">{{ $jobPost->employer_name }}, {{ $jobPost->location }}</p>
+        <p class="text-sm text-gray-400">{{ $jobPost->employer_name }} • {{ $jobPost->location }}</p>
           @auth
           @role('applicant' && $jobPost->applied_date)
           <p class="mt-2 italic text-gray-500">Applied <span class="timeago" datetime="{{ $jobPost->applied_date }} {{ config('app.timezone') }}">{{ $jobPost->applied_date }}</span></p>

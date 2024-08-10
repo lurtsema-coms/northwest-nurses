@@ -6,7 +6,7 @@
         <div class="w-full pb-5">
             <h2 class="text-2xl font-bold">{{ $selectedJobPost->job_title }}</h2>
             <h4 class="text-xl font-semibold">{{ $selectedJobPost->address }}</h4>
-            <p class="text-sm text-gray-400">{{ $selectedJobPost->employer_name }}, {{ $selectedJobPost->location }}</p>
+            <p class="text-sm text-gray-400">{{ $selectedJobPost->employer_name }} • {{ $selectedJobPost->location }}</p>
             <h2 class="text-xl font-bold text-primary">{{ $selectedJobPost->pay }}</h2>
             <div class="flex flex-col justify-between gap-5 mt-5 sm:flex-row">
                 <p class="text-gray-500">Job ID: {{ $selectedJobPost->job_id }}</p>
