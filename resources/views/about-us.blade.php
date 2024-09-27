@@ -42,7 +42,7 @@
     <h1 class="text-3xl font-extrabold text-center">Founders</h1>
     <div class="flex flex-col items-center justify-around gap-16 mt-10 lg:gap-10 lg:flex-row lg:items-start">
       <div class="flex flex-col items-center justify-center basis-1/3">
-        <img src="{{ asset('img/founders/garey.png') }}" class="w-56 mb-3 border-2 border-gray-600 rounded-full aspect-square" alt="">
+        <img src="{{ asset('img/founders/garey.jpeg') }}" class="w-56 mb-3 border-2 border-gray-600 rounded-full aspect-square" alt="">
         <h3 class="text-xl font-semibold text-center">Garey Robinson</h3>
         <p class="text-lg italic text-center text-slate-600">Founder, General Operations Manager</p> 
       </div>
