@@ -49,7 +49,7 @@
       <div class="flex flex-col items-center justify-center basis-1/3">
         <img src="{{ asset('img/founders/enrico.png') }}" class="w-56 mb-3 border-2 border-gray-600 rounded-full aspect-square" alt="">
         <h3 class="text-xl font-semibold text-center">Enrico Faraci</h3>
-        <p class="text-lg italic text-center text-slate-600">Operations Manager, Co-Founder - Allied Health</p> 
+        <p class="text-lg italic text-center text-slate-600">Operations Manager - Allied Health, Co-Founder</p> 
       </div>
       <div class="flex flex-col items-center justify-center basis-1/3">
         <img src="{{ asset('img/founders/brandon.png') }}" class="w-56 mb-3 border-2 border-gray-600 rounded-full aspect-square" alt="">
