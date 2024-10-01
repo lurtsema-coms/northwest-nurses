@@ -55,7 +55,7 @@ class RegisteredUserController extends Controller
         } else if ($role === 'employer') {
             $validatorRules = array_merge($validatorRules, [
                 'company_name' => ['required'],
-                'company_website' => ['url']
+                'company_website' => ['url', 'nullable'],
             ]);
         } else {
             abort(404);
