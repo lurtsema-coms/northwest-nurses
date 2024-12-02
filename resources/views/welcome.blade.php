@@ -28,38 +28,38 @@
     <div class="swiper">
         <div class="swiper-wrapper">
             <div class="swiper-slide opacity-75 hover:opacity-100 cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
-                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-01.jpg') }}" alt="">
+                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-12.jpg') }}" alt="">
             </div>
             <div class="swiper-slide opacity-75 hover:opacity-100 cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
-                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-02.jpg') }}" alt="">
+                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-13.jpg') }}" alt="">
             </div>
             <div class="swiper-slide opacity-75 hover:opacity-100 cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
-                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-03.jpg') }}" alt="">
+                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-14.jpg') }}" alt="">
             </div>
             <div class="swiper-slide opacity-75 hover:opacity-100 cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
-                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-04.jpg') }}" alt="">
+                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-15.jpg') }}" alt="">
             </div>
             <div class="swiper-slide opacity-75 hover:opacity-100 cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
-                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-05.jpg') }}" alt="">
+                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-16.jpg') }}" alt="">
             </div>
             <div class="swiper-slide opacity-75 hover:opacity-100 cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
-                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-06.jpg') }}" alt="">
+                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-17.jpg') }}" alt="">
             </div>
             <div class="swiper-slide opacity-75 hover:opacity-100 cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
-                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-07.jpg') }}" alt="">
+                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-18.jpg') }}" alt="">
             </div>
             <div class="swiper-slide opacity-75 hover:opacity-100 cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
-                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-08.jpg') }}" alt="">
+                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-19.jpg') }}" alt="">
             </div>
             <div class="swiper-slide opacity-75 hover:opacity-100 cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
-                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-09.jpg') }}" alt="">
+                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-20.jpg') }}" alt="">
             </div>
             <div class="swiper-slide opacity-75 hover:opacity-100 cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
-                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-10.jpg') }}" alt="">
+                <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-21.png') }}" alt="">
             </div>
-            <div class="swiper-slide opacity-75 hover:opacity-100 cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
+            {{-- <div class="swiper-slide opacity-75 hover:opacity-100 cursor-default hover:scale-[1.2] transition-all min-w-fit aspect-[4/3] relative flex pb-2 justify-center items-end">
                 <img class="object-cover min-h-full min-w-full absolute top-0 z-[-1]" src="{{ asset('img/stock/landing-11.jpg') }}" alt="">
-            </div>
+            </div> --}}
         </div>
     
         <!-- If we need navigation buttons -->
