@@ -31,7 +31,7 @@
             </svg>            
             <div>
               <p>CONTACT NUMBER:</p>
-              <p class="font-bold">+1 (907) 000 0000</p>
+              <p class="font-bold">907-600-3030</p>
             </div>
           </div>
           <div class="flex items-center gap-3">
