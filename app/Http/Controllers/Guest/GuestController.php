@@ -89,8 +89,9 @@ class GuestController extends Controller
         } catch (\Exception $e) {
             //
             Log::error("Error sending mail: " . $e->getMessage());
+            return redirect(route('contact-us'))->with('error', "Something went wrong. Please try again later.");
         }
 
-        return redirect(url('/'))->with('success', 'form-response-success');
+        return redirect(route('contact-us'))->with('success', "Thank you for reaching out! We'll get back to you soon.");
     }
 }
