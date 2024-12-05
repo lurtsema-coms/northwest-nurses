@@ -25,6 +25,8 @@ class RedirectIfAuthenticated
                     return redirect()->intended(RouteServiceProvider::HOME_APPLICANT);
                 } else if ($request->user()->hasVerifiedEmail() && $request->user()->role == 'employer') {
                     return redirect()->intended(RouteServiceProvider::HOME_EMPLOYER);
+                } else if ($request->user()->hasVerifiedEmail() && $request->user()->role == 'admin') {
+                    return redirect()->intended(RouteServiceProvider::HOME_ADMIN);
                 }
             }
         }

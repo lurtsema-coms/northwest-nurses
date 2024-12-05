@@ -60,14 +60,17 @@
         
         <script>
             $(document).ready(function() {
-
+                
                 window.addEventListener("popstate", (event) => {
+                    console.log('hello world')
                     const dashboard_url = '{{ route('employer.dashboard') }}';
                     const jobs_url = '{{ route('employer.job') }}';
                     const profile_url = '{{ route('employer.profile', auth()->user()->id) }}';
                     const manage_employee_url = '{{ route('employer.m-employee') }}';
                     const location = document.location;
-                    
+
+                    const admin_dashboard_url = '{{ route('admin.dashboard') }}';
+
                     // Sidebar active links
                     if(getSecondUrlSegment(location) == getSecondUrlSegment(dashboard_url)){
                         removeBgColor();
@@ -83,6 +86,12 @@
                         $('#m-employee-link').addClass('bg-slate-300')
                     }else if (getSecondUrlSegment(location) == getSecondUrlSegment(profile_url)){
                         removeBgColor();
+                    }
+
+                    if(getSecondUrlSegment(location) == getSecondUrlSegment(admin_dashboard_url)){
+                        removeBgColor();
+                        $('#dashboard-link').removeClass('bg-white')
+                        $('#dashboard-link').addClass('bg-slate-300')
                     }
                 });
 

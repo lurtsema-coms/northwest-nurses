@@ -17,7 +17,7 @@ class JobPosting extends Model
         return $this->belongsTo(User::class, 'id', 'created_by');
     }
 
-    public function getActiveJobPostings()
+    public static function getActiveJobPostings()
     {
         return self::query()
             ->whereNull('job_postings.deleted_at')
@@ -69,5 +69,21 @@ class JobPosting extends Model
                 'employer_details.name as employer_name',
             );
         return $query;
+    }
+
+    public static function countActiveJobPosting()
+    {
+        return self::getActiveJobPostings()->count();
+    }
+
+    public static function totalJobPost()
+    {
+        return self::query()
+            ->count();
+    }
+
+    public static function totalDeletedJobPost()
+    {
+        return self::onlyTrashed()->count();
     }
 }

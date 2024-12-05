@@ -9,13 +9,13 @@
     </div>
     {{-- Settings Button --}}
     <div class="flex">
-        <div class="bg-white rounded-md px-3 py-2 shadow-sm mr-3 relative hover:cursor-pointer hover:shadow-md" id="profile-button">
+        <div class="relative px-3 py-2 mr-3 bg-white rounded-md shadow-sm hover:cursor-pointer hover:shadow-md" id="profile-button">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 text-slate-600">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
             </svg>
             <div class="hidden" id="profile-setting">
-                <div class="flex flex-col absolute w-48 top-12 right-0 bg-white text-slate-500 shadow-md transition-all z-10">
-                    <a class="flex items-center text-sm px-5 py-2 hover:bg-slate-300 space-x-2"
+                <div class="absolute right-0 z-10 flex flex-col w-48 transition-all bg-white shadow-md top-12 text-slate-500">
+                    <a class="flex items-center px-5 py-2 space-x-2 text-sm hover:bg-slate-300"
                         hx-get="{{ route('employer.profile', auth()->user()->id) }}" hx-target="#target-content" hx-push-url="true" hx-on:click="removeBgColor(event)"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -25,7 +25,7 @@
                     </a>
                     <form class="flex" action="{{ route('logout') }}" method="POST">
                     @csrf
-                        <button class="flex items-center flex-1 text-sm px-5 py-2 hover:bg-slate-300 space-x-2">
+                        <button class="flex items-center flex-1 px-5 py-2 space-x-2 text-sm hover:bg-slate-300">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
                             </svg>
@@ -35,20 +35,19 @@
                 </div>
             </div>
         </div>
-        <div class="bg-white rounded-md px-3 py-2 shadow-sm mr-7 hover:cursor-pointer hover:shadow-md" id="notification-button">
+        {{-- <div class="px-3 py-2 bg-white rounded-md shadow-sm mr-7 hover:cursor-pointer hover:shadow-md" id="notification-button">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 text-slate-600">
             <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"/>
             </svg>
             <div class="hidden" id="notification-setting">
-                <div class="flex flex-col absolute w-80 sm:w-96 top-14 right-7 bg-white text-slate-500 border shadow-sm transition-all z-10" hx-get="{{ route('employer.notification') }}" hx-trigger="load" hx-target="#notification-content" >
+                <div class="absolute z-10 flex flex-col transition-all bg-white border shadow-sm w-80 sm:w-96 top-14 right-7 text-slate-500" hx-get="{{ route('employer.notification') }}" hx-trigger="load" hx-target="#notification-content" >
                     <div>
-                        <h1 class="text-xl font-bold text-start p-2 pl-4 shadow-sm">Job Notifications:</h1>
+                        <h1 class="p-2 pl-4 text-xl font-bold shadow-sm text-start">Job Notifications:</h1>
                     </div>
-                    <div id="notification-content" class="overflow-y-auto  max-h-96 scrollbar-thin scrollbar-thumb-cyan scrollbar-thumb-rounded" >
-                        {{-- employer-notification --}}
+                    <div id="notification-content" class="overflow-y-auto max-h-96 scrollbar-thin scrollbar-thumb-cyan scrollbar-thumb-rounded" >
                     </div>
-                    <div class="shadow-custom flex justify-center">
-                        <a href="/employer-job" class="p-4 pl-4 text-start font-bold text-cyan-600 ">Go to Jobs</a>
+                    <div class="flex justify-center shadow-custom">
+                        <a href="/employer-job" class="p-4 pl-4 font-bold text-start text-cyan-600 ">Go to Jobs</a>
                     </div>
                 </div>
             </div>
@@ -56,6 +55,6 @@
                 <div id="notification-bell" >
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>

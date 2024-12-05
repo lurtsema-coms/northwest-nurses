@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdmDashboardController;
 use App\Http\Controllers\Applicant\ApplicantController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Employers\EmpDashboardController;
@@ -89,9 +90,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/job-info/apply-job/{id}', [ApplicantController::class, 'applyJob'])->name('applicant.apply-job');
     });
 
+    //admin route group
+    Route::middleware('role:admin')->group(function () {
+        Route::get('/admin-dashboard', [AdmDashboardController::class, 'index'])->name('admin.dashboard');
+    });
+
     Route::get('/my-profile/download', [ApplicantController::class, 'downloadResume'])->name('applicant.profile.download-resume');
     Route::get('/my-profile/show-resume', [ApplicantController::class, 'showResume'])->name('showResume');
 });
+
 
 Route::get('/email/verify', [EmailVerificationPromptController::class, '__invoke'])
     ->middleware('auth')

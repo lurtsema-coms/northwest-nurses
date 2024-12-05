@@ -64,4 +64,18 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(JobApplication::class, 'created_by', 'id');
     }
+
+    public static function countApplicants()
+    {
+        return self::query()
+            ->where('role', 'applicant')
+            ->count();
+    }
+
+    public static function countEmployer()
+    {
+        return self::query()
+            ->where('role', 'employer')
+            ->count();
+    }
 }
