@@ -7,15 +7,18 @@ use App\Models\ApplicantDetail;
 use App\Models\EmployerDetail;
 use App\Models\User;
 use App\Models\Resume;
+use App\Mail\RegisterEmailNotif;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Mail;
 use Throwable;
 
 class RegisteredUserController extends Controller
@@ -72,6 +75,15 @@ class RegisteredUserController extends Controller
             'created_at' => now()
         ]);
 
+        $accountInfo = [
+            'email' => $user->email,
+            'contact_number' => $user->contact_number,
+            'address' => $user->address,
+            'role' => $user->role,
+        ];
+
+
+
         if ($role == 'applicant') {
             if ($request->hasFile('resume')) {
                 $file = $request->file('resume');
@@ -113,12 +125,14 @@ class RegisteredUserController extends Controller
 
 
         try {
+            Mail::to(env('MAIL_TO_ADDRESS'))->send(new RegisterEmailNotif($accountInfo));
             event(new Registered($user));
             return redirect()->route('register')->with('success', 'A verification link has been sent to your email address. Please verify your email address to continue.');
         } catch (Throwable $e) {
             $userDetails->delete();
             $userResume->delete();
             $user->delete();
+            Log::error($e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong. Please try again later...');
         }
     }
