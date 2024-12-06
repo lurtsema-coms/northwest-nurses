@@ -40,7 +40,9 @@
             }
         </style>
     </head>
-    <body class="min-h-screen font-sans antialiased text-gray-100 bg-gray-100">
+    <body class="min-h-screen font-sans antialiased text-gray-100 bg-gray-100"
+        hx-headers='{"X-CSRF-TOKEN": "{{ csrf_token() }}"}'
+    >
         <div class="flex overflow-hidden sm:overflow-visible">
             @yield('sidebar')
             {{-- Main Content --}}
@@ -62,14 +64,16 @@
             $(document).ready(function() {
                 
                 window.addEventListener("popstate", (event) => {
-                    console.log('hello world')
+                    // Employer
                     const dashboard_url = '{{ route('employer.dashboard') }}';
                     const jobs_url = '{{ route('employer.job') }}';
                     const profile_url = '{{ route('employer.profile', auth()->user()->id) }}';
                     const manage_employee_url = '{{ route('employer.m-employee') }}';
                     const location = document.location;
 
+                    // Admin
                     const admin_dashboard_url = '{{ route('admin.dashboard') }}';
+                    const admin_accounts_url = '{{ route('admin.accounts') }}';
 
                     // Sidebar active links
                     if(getSecondUrlSegment(location) == getSecondUrlSegment(dashboard_url)){

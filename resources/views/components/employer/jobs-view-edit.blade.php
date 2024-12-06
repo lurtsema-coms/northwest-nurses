@@ -2,7 +2,7 @@
     {{ $module_title }}
 </div>
 <div class="h-[50rem] mx-auto max-w-5xl relative bg-white py-7 shadow-sm border rounded-2xl">
-    <div class="h-full px-5 overflow-auto sm:px-10"">
+    <div class="h-full px-5 overflow-auto sm:px-10">
         <div class="absolute left-0 flex font-medium text-sky-600 -top-9">
             <span class="flex items-center space-x-2 cursor-pointer hover:opacity-70"
                 hx-get="{{ route('employer.job') }}" hx-target="#target-content" hx-push-url="true" hx-on::after-request="$('input').val()"

@@ -55,7 +55,7 @@
     </table>
 </div>
 <div class="mt-5">
-{{ $jobs->appends(request()->query())->links('vendor.pagination.custom-pagination-backend') }}
+    {{ $jobs->appends(request()->query())->links('vendor.pagination.custom-pagination-backend') }}
 </div>
 
 @php

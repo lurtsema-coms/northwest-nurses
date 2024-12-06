@@ -9,5 +9,5 @@
 @endsection
 
 @section('main-section')
-    @include('admin.main-page.accounts')
+    @include('admin.main-page.accounts-show')
 @endsection

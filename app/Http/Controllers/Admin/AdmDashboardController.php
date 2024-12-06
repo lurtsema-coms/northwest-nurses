@@ -19,13 +19,10 @@ class AdmDashboardController extends Controller
         $data['total_applicant'] = User::countApplicants();
         $data['total_employer'] = User::countEmployer();
 
-        
         if ($request->header('HX-Request')) {
-            $renderedView = view('admin.dashboard', $data)->render();
-            $renderedModuleTitle = view('components.employer.module-title', ['module_title' => 'Dashboard'])->render();
-            $combinedContent = $renderedModuleTitle . $renderedView;
+            $renderedView = view('admin.main-page.dashboard', $data)->render();
 
-            return response($combinedContent)
+            return response($renderedView)
                 ->header('HX-Current-URL', 'admin-dashboard');
         } else {
             return view('admin.admin-dashboard', $data);

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdmAccountsController;
 use App\Http\Controllers\Admin\AdmDashboardController;
 use App\Http\Controllers\Applicant\ApplicantController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -93,6 +94,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //admin route group
     Route::middleware('role:admin')->group(function () {
         Route::get('/admin-dashboard', [AdmDashboardController::class, 'index'])->name('admin.dashboard');
+        Route::get('/admin-accounts', [AdmAccountsController::class, 'index'])->name('admin.accounts');
+        Route::post('/admin-accounts', [AdmAccountsController::class, 'search'])->name('admin.accounts.search');
+        Route::get('/admin-show/{id}', [AdmAccountsController::class, 'show'])->name('admin.accounts.show');
     });
 
     Route::get('/my-profile/download', [ApplicantController::class, 'downloadResume'])->name('applicant.profile.download-resume');

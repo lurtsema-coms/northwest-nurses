@@ -38,7 +38,7 @@
     </table>
 </div>
 <div class="mt-5">
-{{ $applicants->appends(request()->query())->links('vendor.pagination.custom-pagination-backend') }}
+    {{ $applicants->appends(request()->query())->links('vendor.pagination.custom-pagination-backend') }}
 </div>
 
 @php

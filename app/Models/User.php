@@ -78,4 +78,12 @@ class User extends Authenticatable implements MustVerifyEmail
             ->where('role', 'employer')
             ->count();
     }
+
+    public function resume()
+    {
+        return $this->hasMany(Resume::class)
+        ->orderByDesc('default') // Prioritize default resumes
+        ->orderByDesc('created_at') // Then by the latest uploaded
+        ->first(); // Get a single record
+    }
 }

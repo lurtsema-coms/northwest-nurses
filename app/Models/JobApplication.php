@@ -47,4 +47,9 @@ class JobApplication extends Model
         $status_history[] = [date('Y-m-d H:i:s') => $status];
         $this->status_history = json_encode($status_history);
     }
+
+    public function details()
+    {
+        return $this->belongsTo(JobPosting::class, 'job_posting_id', 'id');
+    }
 }
