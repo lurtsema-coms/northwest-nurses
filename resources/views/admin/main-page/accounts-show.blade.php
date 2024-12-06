@@ -20,11 +20,14 @@
                 <p class="font-medium">
                     @if ($user->role === 'employer')
                         {{ $user->employerDetail->name }}
+                        <p class="text-sm">
+                            {{ $user->employerDetail->website }}
+                        </p>
                     @else
                         {{ $user->applicantDetail->first_name.' '.$user->applicantDetail->last_name }}
                     @endif
                 </p>
-                <span class="relative">
+                <span class="relative text-sm">
                     {{ ucfirst($user->role) }}
                 </span>
             </div>
@@ -61,29 +64,29 @@
 
         <div class="grid mt-8 xl:grid-cols-2 gap-y-2 gap-x-8">
             <div class="flex flex-col sm:gap-8 sm:flex-row">
-                <div class="w-full font-medium max-w-36 shrink-0">Email:</div>
+                <strong class="w-full max-w-36 shrink-0">Email:</strong>
                 <div>{{ $user->email }}</div>
             </div>
             <div class="flex flex-col sm:gap-8 sm:flex-row">
-                <div class="w-full font-medium max-w-36 shrink-0">Contact Number:</div>
+                <strong class="w-full max-w-36 shrink-0">Contact Number:</strong>
                 <div>{{ $user->contact_number }}</div>
             </div>
             @if ($user->role === 'applicant')
                 <div class="flex flex-col sm:gap-8 sm:flex-row">
-                    <div class="w-full font-medium max-w-36 shrink-0">Birth Date:</div>
+                    <strong class="w-full max-w-36 shrink-0">Birth Date:</strong>
                     <div>{{ $user->applicantDetail->birthdate }}</div>
                 </div>
                 <div class="flex flex-col sm:gap-8 sm:flex-row">
-                    <div class="w-full font-medium max-w-36 shrink-0">Sex:</div>
-                    <div>{{ $user->applicantDetail->sex }}</div>
+                    <strong class="w-full max-w-36 shrink-0">Sex:</strong>
+                    <div>{{ ucfirst($user->applicantDetail->sex) }}</div>
                 </div>
             @endif
             <div class="flex flex-col sm:gap-8 sm:flex-row">
-                <div class="w-full font-medium max-w-36 shrink-0">Address:</div>
+                <strong class="w-full max-w-36 shrink-0">Address:</strong>
                 <div>{{ $user->address }}</div>
             </div>
             <div class="flex flex-col sm:gap-8 sm:flex-row">
-                <div class="w-full font-medium max-w-36 shrink-0">Date Joined:</div>
+                <strong class="w-full max-w-36 shrink-0">Date Joined:</strong>
                 <div>
                     @php
                         use Carbon\Carbon;
@@ -95,39 +98,24 @@
     </div>
 </div>
 
-@php
-    $job_applications = $user->jobApplications()->with('details')->orderBy('id', 'desc')->paginate(5);
-@endphp
-
 @if (!$job_applications->isEmpty())
-    <div class="relative h-auto max-w-2xl mx-auto mt-8 bg-white border shadow-sm py-7 rounded-2xl">
+    <div class="relative h-auto max-w-5xl mx-auto mt-8 bg-white border shadow-sm py-7 rounded-2xl">
         <div class="h-full px-5 overflow-auto sm:px-10">
-            <p class="font-medium text-cyan-600">Job Application History</p>
-            @foreach ($job_applications as $job_application)
-                <div class="mt-4">
-                    <!-- Job Title -->
-                    <p class="font-medium">{{ $job_application->details->job_title }}</p>
-                    
-                    <!-- Status History -->
-                    <ul class="pl-10 mt-2 space-y-2 list-disc">
-                        @php
-                            $status_history = json_decode($job_application->status_history, true); // Decode JSON string into an array
-                        @endphp
-                        @if (!empty($status_history))
-                            @foreach ($status_history as $status)
-                                <li class="text-sm text-gray-600">
-                                    <strong>{{ $status[key($status)] }}</strong>: {{ Carbon::parse(key($status))->format('D, F j, Y') }}
-                                </li>
-                            @endforeach
-                        @else
-                            <li class="text-sm text-gray-600">No status history available.</li>
-                        @endif
-                    </ul>
-                </div>
-            @endforeach
-            <div class="mt-5">
-                {{ $job_applications->appends(request()->query())->links('vendor.pagination.custom-pagination-backend') }}
+            <div class="flex flex-wrap justify-between gap-4">
+                <p class="font-medium text-cyan-600">Job Application History</p>
+                <input class="h-10 border border-gray-200 rounded-lg max-w-72 focus:border-slate-400 focus:ring-0 focus:outline-none placeholder:text-slate-400" id="search-btn" type="text" placeholder="Search..."
+                    name="search"
+                    hx-trigger="keyup changed delay:500ms" 
+                    hx-post="{{ route('admin.accounts.history.search', $user->id) }}" 
+                    hx-target="#history-table"
+                    hx-swap="innerHTML"
+                >
+
             </div>
+            <div id="history-table">
+                @include('admin.custom.accounts-history-table')
+            </div>
+
         </div>
     </div>
 @endif

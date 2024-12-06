@@ -79,6 +79,7 @@ class JobPosting extends Model
     public static function totalJobPost()
     {
         return self::query()
+            ->withTrashed()
             ->count();
     }
 

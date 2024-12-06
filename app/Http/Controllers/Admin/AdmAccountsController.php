@@ -63,11 +63,34 @@ class AdmAccountsController extends Controller
         }
     }    
 
+    public function historySearch(Request $request, $id)
+    {
+        $data = [];
+        $search = $request->input('search');
+        $user = User::findOrFail($id);
+    
+        $data['job_applications'] = $user->jobApplications()
+            ->whereHas('details', function ($query) use ($search) {
+                $query->where('job_title', 'like', "%{$search}%");
+            })
+            ->orderBy('id', 'desc')
+            ->paginate(5);
+    
+        if ($request->header('HX-Request')) {
+            return view('admin.custom.accounts-history-table', $data)->render();
+        }
+    
+        return view('admin.custom.accounts-history', $data);
+    }
+    
+    
+
     public function show(Request $request, int $id)
     {
         $data = [];
         $data['user'] = User::find($id);
         $data['module_title'] = 'Accounts';
+        $data['job_applications'] = $data['user']->jobApplications()->with('details')->orderBy('id', 'desc')->paginate(5);
 
         if ($request->header('HX-Request')) {
             $renderedView = view('admin.main-page.accounts-show', $data)->render();

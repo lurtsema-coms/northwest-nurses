@@ -97,6 +97,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/admin-accounts', [AdmAccountsController::class, 'index'])->name('admin.accounts');
         Route::post('/admin-accounts', [AdmAccountsController::class, 'search'])->name('admin.accounts.search');
         Route::get('/admin-show/{id}', [AdmAccountsController::class, 'show'])->name('admin.accounts.show');
+        Route::post('/admin-show/{id}', [AdmAccountsController::class, 'historySearch'])->name('admin.accounts.history.search');
     });
 
     Route::get('/my-profile/download', [ApplicantController::class, 'downloadResume'])->name('applicant.profile.download-resume');
