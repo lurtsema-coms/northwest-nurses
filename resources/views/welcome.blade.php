@@ -70,11 +70,11 @@
 <div class="container flex flex-col gap-5 py-10 mx-auto">
     <div class="photo-carousel"></div>
     <div class="flex flex-col items-center">
-        <h2 class="max-w-screen-lg mb-5 text-3xl font-extrabold text-center">At Northwest Nurses, we offer an extensive array of services tailored to meet the unique needs of healthcare professionals like you.</h2>
+        <h2 class="max-w-screen-lg mb-5 text-3xl font-extrabold text-center">At Northwest Nurses and Allied Health LLC, we offer an extensive array of services tailored to meet the unique needs of healthcare professionals like you.</h2>
         <div class="flex flex-col items-start justify-center w-full gap-5 mt-5 mb-10 md:flex-row">
-            <p class="w-full text-left"><span class="font-bold">Travel Nursing</span>: Explore new horizons and advance your career with Northwest Nurses' travel nursing opportunities. Travel nurses enjoy competitive pay, comprehensive benefits, and the excitement of working in diverse healthcare settings across the country. Whether you're seeking adventure or professional growth, our travel nursing positions offer the perfect blend of flexibility and stability.</p>
+            <p class="w-full text-left"><span class="font-bold">Travel Nursing</span>: Explore new horizons and advance your career with Northwest Nurses and Allied Health LLC' travel nursing opportunities. Travel nurses enjoy competitive pay, comprehensive benefits, and the excitement of working in diverse healthcare settings across the country. Whether you're seeking adventure or professional growth, our travel nursing positions offer the perfect blend of flexibility and stability.</p>
             <p class="w-full text-left"><span class="font-bold">Allied Health</span>: Join the forefront of healthcare innovation as an allied health professional. From radiologic technologists to physical therapists, our allied health positions allow you to utilize your specialized skills in diverse settings.</p>
-            <p class="w-full text-left"><span class="font-bold">Per Diem Jobs</span>: Enjoy the flexibility of per diem work with Northwest Nurses. Whether you're looking to supplement your income or prefer a more flexible schedule, our per diem positions offer rewarding experiences without long-term commitment. </p>
+            <p class="w-full text-left"><span class="font-bold">Per Diem Jobs</span>: Enjoy the flexibility of per diem work with Northwest Nurses and Allied Health LLC. Whether you're looking to supplement your income or prefer a more flexible schedule, our per diem positions offer rewarding experiences without long-term commitment. </p>
         </div>
         <a href="{{ route('about-us') }}" class="px-5 py-2 text-white rounded-full bg-primary hover:opacity-75 whitespace-nowrap">Learn More About Us</a>
     </div>
@@ -88,15 +88,15 @@
             </div>
             <div class="flex flex-col p-10 m-0 text-white bg-primary md:w-1/2">
                 <h2 class="mb-3 text-4xl font-bold">Why Us?</h2>
-                <p class="mb-3 leading-5 text-md">When you choose Northwest Nurses, you're joining a community of satisfied healthcare professionals who trust us for:</p>
+                <p class="mb-3 leading-5 text-md">When you choose Northwest Nurses and Allied Health LLC, you're joining a community of satisfied healthcare professionals who trust us for:</p>
                 <div class="flex flex-col gap-5 xl:flex-row">
                     <div class="my-2">
                         <p class="pb-3 font-bold">Industry-Leading Technology:</p>
-                        <p>Northwest Nurses uses cutting-edge technology to streamline processes and enhance your experience. Our user-friendly platform makes it easy to search for jobs, submit applications, and communicate with your recruiter, all from the convenience of your computer or mobile device.</p>
+                        <p>Northwest Nurses and Allied Health LLC uses cutting-edge technology to streamline processes and enhance your experience. Our user-friendly platform makes it easy to search for jobs, submit applications, and communicate with your recruiter, all from the convenience of your computer or mobile device.</p>
                     </div>
                     <div class="my-2">
                         <p class="pb-3 font-bold">Personalized Support:</p>
-                        <p>At Northwest Nurses, your success is our top priority. Our team of experienced recruiters provides personalized support every step of the way, from matching you with the perfect job to assisting with onboarding and beyond.</p>
+                        <p>At Northwest Nurses and Allied Health LLC, your success is our top priority. Our team of experienced recruiters provides personalized support every step of the way, from matching you with the perfect job to assisting with onboarding and beyond.</p>
                     </div>
                 </div>
             </div>
@@ -138,7 +138,7 @@
             <div class="flex flex-col items-center justify-start flex-1 gap-5">
                 <h4 class="px-5 py-1 border rounded-full border-slate-50">Step 1: Register</h4>
                 <p class="text-center">
-                    Begin your journey by completing your profile with Northwest Nurses. The more detailed your profile, the better we can match you with opportunities that suit your preferences and qualifications.
+                    Begin your journey by completing your profile with Northwest Nurses and Allied Health LLC. The more detailed your profile, the better we can match you with opportunities that suit your preferences and qualifications.
                 </p>
             </div>
             <div class="flex flex-col items-center justify-start flex-1 gap-5">

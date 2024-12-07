@@ -71,17 +71,17 @@
                 <div class="flex flex-col gap-10 mt-3 lg:flex-row lg:justify-start lg:items-start">
                     <div class="md:min-w-96">
                         <h1 class="text-xl font-extrabold">Ready to take the next step in your nursing career?</h1>
-                        <p class="text-lg">Reach out to Northwest Nurses today to learn more about our exciting opportunities.</p>
+                        <p class="text-lg">Reach out to Northwest Nurses and Allied Health LLC today to learn more about our exciting opportunities.</p>
                         <p class="mt-5">info@northwestnursesllc.com</p>
                     </div>
                     <div class="flex flex-col gap-8 grow md:flex-row md:justify-between">
                         <div class="md:flex-1">
                             <h3 class="font-bold">For Employers</h3>
-                            <p class="mt-2">Northwest Nurses specialize in reliable staffing solutions ensure that your operations run smoothly even during peak times, unexpected absences, or long-term needs. You can maintain the highest standards of patient care with our provided top-tier nurses and allied health staff.</p>
+                            <p class="mt-2">Northwest Nurses and Allied Health LLC specialize in reliable staffing solutions ensure that your operations run smoothly even during peak times, unexpected absences, or long-term needs. You can maintain the highest standards of patient care with our provided top-tier nurses and allied health staff.</p>
                         </div>
                         <div class="md:flex-1">
                             <h3 class="font-bold">For Applicants</h3>
-                            <p class="mt-2">Northwest Nurses provides the opportunity for Travel Nursing, Allied Health & Per Diem Jobs with ease - directly connecting you with the best healthcare facilities.
+                            <p class="mt-2">Northwest Nurses and Allied Health LLC provides the opportunity for Travel Nursing, Allied Health & Per Diem Jobs with ease - directly connecting you with the best healthcare facilities.
                             </p>
                         </div>
                     </div>
