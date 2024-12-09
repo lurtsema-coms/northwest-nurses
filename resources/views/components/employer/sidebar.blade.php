@@ -1,6 +1,10 @@
 <div class="hidden min-h-dvh w-72 shrink-0 md:block" id="sidebar">
     <div class="relative flex w-full h-16">
-        <a class="m-auto text-lg font-bold text-slate-600 hover:opacity-70" id="logo" href="/">Northwest Nurses</a>
+        <a class="m-auto py-5 text-lg font-bold text-slate-600 hover:opacity-70" id="logo" href="/">
+            <span>Northwest Nurses</span>
+            <br>
+            <span>Allied Health LLC</span>
+        </a>
     </div>
     <div class="py-10 pl-7" id="sidebar-links">
         <div class="space-y-3">
