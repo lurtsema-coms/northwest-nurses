@@ -7,7 +7,8 @@
 
         <div class="mb-6">
             <h1 class="text-2xl text-center text-cyan-600 sm:text-start">WELCOME TO</h1>
-            <h1 class="mb-5 text-5xl font-bold text-center text-cyan-600 sm:text-start">Northwest Nurses</h1>
+            <h1 class=" text-5xl font-bold text-center text-cyan-600 sm:text-start">Northwest Nurses</h1>
+            <h1 class="mb-5 text-5xl font-bold text-center text-cyan-600 sm:text-start">Allied Health LLC</h1>
             <span class="font-bold">Doesn't have an account yet? <a href="/register" class="font-bold underline text-cyan-600">Sign Up</a></span>
         </div>
         
