@@ -7,7 +7,7 @@
       <div class="px-8 text-justify">
         <strong class="text-lg">Introduction</strong>
         <p class="mb-4">
-          NORTHWEST NURSES, LLC and its subsidiaries <i class="text-gray-700 ">(collectively “Northwest Nurses” or “we”)</i> is committed to protecting your online privacy while providing you with a useful and enjoyable web experience. This Privacy Policy outlines our policies and practices regarding the collection and use of information <i class="text-gray-700">(defined below)</i> through our websites, including northwestnursesllc.com. 
+          NORTHWEST NURSES & ALLIED HEALTH LLC, and its subsidiaries <i class="text-gray-700 ">(collectively “Northwest Nurses & Allied Health LLC” or “we”)</i> is committed to protecting your online privacy while providing you with a useful and enjoyable web experience. This Privacy Policy outlines our policies and practices regarding the collection and use of information <i class="text-gray-700">(defined below)</i> through our websites, including northwestnursesllc.com. 
         </p>
         <strong class="text-lg">Overview</strong>
         <p class="mb-2">
@@ -15,7 +15,7 @@
         </p>
         <div class="pl-5 mb-4">
           <ul class="pl-5 list-disc">
-            <li>We will not disclose information you provide through the NORTHWEST NURSES, LLC Site unless authorized by you, needed to deliver a service or product, for legitimate business purposes, or under the circumstances set forth in this Privacy Policy.</li>
+            <li>We will not disclose information you provide through the NORTHWEST NURSES & ALLIED HEALTH LLC, LLC Site unless authorized by you, needed to deliver a service or product, for legitimate business purposes, or under the circumstances set forth in this Privacy Policy.</li>
             <li>You can access and correct your information at any time as required by applicable laws.</li>
             <li>Unless you ask us not to, we may use your information to contact you regarding our services or changes to this Privacy Policy.</li>
           </ul>
@@ -28,8 +28,8 @@
           <ol class="pl-5 list-decimal">
             <li><strong>Contact Information:</strong> Name, address, telephone number, email address, and emergency contact details.</li>
             <li><strong>Employment and Demographic Information:</strong> Licensure, certifications, education, employment history, identification numbers, and health information.</li>
-            <li><strong>Location Information:</strong> IP address from which you accessed the NORTHWEST NURSES, LLC Site.</li>
-            <li><strong>Communications:</strong> Written communications between you and NORTHWEST NURSES, LLC Site.</li>
+            <li><strong>Location Information:</strong> IP address from which you accessed the NORTHWEST NURSES & ALLIED HEALTH LLC, LLC Site.</li>
+            <li><strong>Communications:</strong> Written communications between you and NORTHWEST NURSES & ALLIED HEALTH LLC, LLC Site.</li>
             <li><strong>Advertising Information:</strong> Preferences and abilities to improve your user experience.</li>
             <li><strong>Site Activity Information:</strong> Information collected through “cookies” and similar technologies.</li>
           </ol>
@@ -48,7 +48,7 @@
         </p>
         <div class="pl-5 mb-4">
           <ol class="pl-5 list-decimal" start="7">
-            <li><strong>NORTHWEST NURSES, LLC and Its Subsidiaries:</strong> Our family of companies, including parent, subsidiary, and related companies.</li>
+            <li><strong>NORTHWEST NURSES & ALLIED HEALTH LLC, LLC and Its Subsidiaries:</strong> Our family of companies, including parent, subsidiary, and related companies.</li>
             <li><strong>Service Providers:</strong> Third-party providers for hosting, marketing, payment processing, and customer service.</li>
             <li><strong>Clients and Business Partners:</strong> Clients, customers, and vendors for employment-related purposes.</li>
             <li><strong>As Required by Law:</strong> In response to legal requests and compliance needs.</li>
