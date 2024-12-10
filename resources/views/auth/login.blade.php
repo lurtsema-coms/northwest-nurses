@@ -47,5 +47,10 @@
                 {{ __('LOGIN') }}
             </x-primary-button>
         </div>
+        <div class="flex items-center justify-center mt-2">
+            <a href="/" class="w-full border-2 text-lg px-4 py-2 rounded-md font-semibold text-cyan-800 border-cyan-800 text-center inline-block">
+                RETURN HOME
+            </a>
+        </div>
     </form>
 </x-guest-layout>
